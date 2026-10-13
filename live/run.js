@@ -276,7 +276,7 @@ async function main() {
     '</details>',
     '',
     ...(notes.length ? ['> ' + notes.join(' · '), ''] : []),
-    `_Argent virtuel uniquement, aucun ordre réel. Mis à jour le ${parisTime(now)} (toutes les 30 min environ)._`,
+    `_Argent virtuel uniquement, aucun ordre réel. Mis à jour le ${parisTime(now)} (toutes les 5 min environ)._`,
     '',
   ].join('\n');
   fs.writeFileSync(path.join(DIR, 'PORTEFEUILLE.md'), md);
@@ -337,7 +337,7 @@ function dashboard({ now, st, total, valEur, cz, czValue }) {
   const day = Math.min(7, Math.floor((now - st.start) / DAY) + 1);
   y = 28;
   out.push(`<text x="${P}" y="${y + 36}" font-size="38" font-weight="800" fill="${C.text}">Mes portefeuilles virtuels</text>`);
-  out.push(`<text x="${P}" y="${y + 72}" font-size="22" fill="${C.muted}">Mis à jour ${esc(parisTime(now))} · jour ${day}/7 · toutes les 30 min</text>`);
+  out.push(`<text x="${P}" y="${y + 72}" font-size="22" fill="${C.muted}">Mis à jour ${esc(parisTime(now))} · jour ${day}/7 · toutes les 5 min</text>`);
   y += 104;
 
   const b = st.sleeves.btc, s = st.sleeves.sol, m = st.sleeves.meme;
