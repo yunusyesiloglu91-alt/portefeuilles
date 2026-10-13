@@ -213,8 +213,10 @@ async function publish() {
   } catch (e) { log('publication impossible :', e.message); }
 }
 
-// ---------- Démarrage
-(async () => {
+// ---------- Démarrage (une seule copie à la fois : la tâche Windows le relance toutes les 5 min s'il s'est arrêté)
+const guard = require('net').createServer().on('error', () => process.exit(0));
+guard.listen(47123, '127.0.0.1', () => start());
+async function start() {
   await refreshSol();
   log(`Sniper seconde démarré · SOL ${solUsd} $`);
   connect();
@@ -222,4 +224,4 @@ async function publish() {
   setInterval(() => checkExits(null, false), 10000); // sorties sur durée même sans trade
   setInterval(publish, 2 * MIN);
   setTimeout(publish, 15000);
-})();
+}
