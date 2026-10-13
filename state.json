@@ -63,71 +63,78 @@
    40,
    29.97,
    29.97
+  ],
+  [
+   1791891470454,
+   99.75,
+   39.82,
+   29.96,
+   29.96
   ]
  ],
  "watch": [
   {
    "name": "TROLL",
    "score": 80,
-   "mcap": 39288784.4152127,
-   "ageDays": 540.5929833217592,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "BOME",
-   "score": 75,
-   "mcap": 54907678.8336125,
-   "ageDays": 943.0516175810185,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "arc",
-   "score": 65,
-   "mcap": 32115256.1012678,
-   "ageDays": 671.4788282291667,
+   "mcap": 38865741.7605391,
+   "ageDays": 540.7134774768518,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANTFUN",
    "score": 65,
-   "mcap": 18825213.3811946,
-   "ageDays": 95.17665230324074,
+   "mcap": 18431062.3050889,
+   "ageDays": 95.29714645833333,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "STONK",
+   "score": 62,
+   "mcap": 94067355.130244,
+   "ageDays": 62.032065439814815,
+   "ok": false,
+   "why": "liquidité très faible"
+  },
+  {
+   "name": "arc",
+   "score": 60,
+   "mcap": 26298034.7000187,
+   "ageDays": 671.5993223842593,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "baton",
-   "score": 62,
-   "mcap": 14508720.8706577,
-   "ageDays": 33.50838841435185,
+   "score": 57,
+   "mcap": 12879035.3121034,
+   "ageDays": 33.62888256944444,
    "ok": false,
    "why": "bien plus de vendeurs que d’acheteurs"
   },
   {
-   "name": "JEANPHIL",
-   "score": 60,
-   "mcap": 7063779.0246798,
-   "ageDays": 23.567601377314816,
+   "name": "SPCX",
+   "score": 32,
+   "mcap": 8029508.8815706,
+   "ageDays": 122.8198895138889,
    "ok": false,
-   "why": "pas à un nouveau record"
+   "why": "rotation 52 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1791881059759,
- "lastRun": 1791881059759,
+ "lastScan": 1791891470454,
+ "lastRun": 1791891470454,
  "casino": {
   "start": 1791871130814,
-  "cash": 12.120302683999263,
+  "cash": 0,
   "positions": [
    {
     "name": "PQC",
     "addr": "7K52aYQW9rWGjwZmQ7o2d1P6E7bji6hSMsqaLy5EcxLh",
     "t": 1791871130814,
     "entry": 0.00036475370700767733,
-    "last": 0.0003636470784705812,
+    "last": 0.0003288546534660144,
     "qty": 54009.04671158107,
     "cost": 20
    },
@@ -136,7 +143,7 @@
     "addr": "7jNwX4Me9zGEjmWY7zARDG2LYjVs1WXD6DZ1JvSfpump",
     "t": 1791871130814,
     "entry": 0.004938006291740259,
-    "last": 0.004561913032978259,
+    "last": 0.004230509933403502,
     "qty": 3989.4643376522104,
     "cost": 20
    },
@@ -146,7 +153,7 @@
     "pool": "9dsiuydk5EFRCLk6VEywY95Nn3jjGbdWNijuACf1PXuA",
     "t": 1791881059759,
     "entry": 0.0004080669441752599,
-    "last": 0.0004080669441752599,
+    "last": 0.0004437170735566799,
     "qty": 40198.24273875863,
     "cost": 16.653374696061487
    },
@@ -156,9 +163,19 @@
     "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
     "t": 1791881059759,
     "entry": 0.0010044825832740145,
-    "last": 0.0010044825832740145,
+    "last": 0.0010019505624205734,
     "qty": 16330.371824023758,
     "cost": 16.653374696061487
+   },
+   {
+    "name": "HIRE",
+    "addr": "98AG3zJUawbvDnpgbDhmxpMKva43vtgPLLPSXqo1pump",
+    "pool": "2U5kdozDrdgYzyGRNbTdBejGLYEeRt1FkERQmyPbV85P",
+    "t": 1791891470454,
+    "entry": 0.001035659257987307,
+    "last": 0.001035659257987307,
+    "qty": 11527.438249275603,
+    "cost": 12.120302683999263
    }
   ],
   "trades": [
@@ -210,6 +227,14 @@
     "price": 0.0010044825832740145,
     "usd": 16.653374696061487,
     "reason": "7 j, 1.0 M$, +1 % sur 6 h"
+   },
+   {
+    "t": 1791891470454,
+    "side": "achat",
+    "name": "HIRE",
+    "price": 0.001035659257987307,
+    "usd": 12.120302683999263,
+    "reason": "22 h, 1.0 M$, +123 % sur 6 h"
    }
   ],
   "history": [
@@ -224,55 +249,59 @@
    [
     1791881059759,
     82.77
+   ],
+   [
+    1791891470454,
+    80.78
    ]
   ],
   "watch": [
    {
     "name": "HIRE",
-    "mcap": 407454.684599593,
-    "ageDays": 0.7905296180555555,
-    "ch1": 0.0259,
-    "ch24": 8.75253,
-    "ok": false
-   },
-   {
-    "name": "CRAWLER",
-    "mcap": 17863664.35,
-    "ageDays": 0.506524988425926,
-    "ch1": -0.10418,
-    "ch24": 66.68205,
-    "ok": false
+    "mcap": 1011967.65799899,
+    "ageDays": 0.9110237731481482,
+    "ch1": 0.8581300000000001,
+    "ch24": 23.22169,
+    "ok": true
    },
    {
     "name": "LOAD",
-    "mcap": 7681998.35654601,
-    "ageDays": 0.5715828587962963,
-    "ch1": -0.05788,
-    "ch24": 36.12103,
+    "mcap": 8936962.79495586,
+    "ageDays": 0.6920770138888889,
+    "ch1": 0.10728,
+    "ch24": 42.185469999999995,
     "ok": false
    },
    {
     "name": "MarsX",
-    "mcap": 397218.571433261,
-    "ageDays": 0.6289439699074074,
-    "ch1": 0.25516,
-    "ch24": 10.81959,
-    "ok": true
+    "mcap": 447546.939011484,
+    "ageDays": 0.749438125,
+    "ch1": -0.10862,
+    "ch24": 12.31716,
+    "ok": false
    },
    {
     "name": "HUMPH",
-    "mcap": 4566995.27508752,
-    "ageDays": 0.9097888773148148,
-    "ch1": 0.0691,
-    "ch24": 9.44177,
-    "ok": true
+    "mcap": 4261111.98479258,
+    "ageDays": 1.0302830324074075,
+    "ch1": -0.06472,
+    "ch24": 6.81189,
+    "ok": false
    },
    {
     "name": "VEIL",
-    "mcap": 2459808.38700175,
-    "ageDays": 0.5715134143518519,
-    "ch1": 0.10061,
-    "ch24": 47.65022,
+    "mcap": 2790752.9997591,
+    "ageDays": 0.6920075694444444,
+    "ch1": -0.07158,
+    "ch24": 54.19566,
+    "ok": false
+   },
+   {
+    "name": "CLAUDIA",
+    "mcap": 3606444.85895417,
+    "ageDays": 6.412042291666666,
+    "ch1": -0.044219999999999995,
+    "ch24": -0.5260900000000001,
     "ok": false
    }
   ]
@@ -281,17 +310,50 @@
   "start": 1791881059759,
   "variants": {
    "qualite": {
-    "cash": 95,
+    "cash": 76.37884199475066,
     "positions": [
      {
-      "name": "nonce",
-      "addr": "noncenHRyNbg5EWHmCwcZhHXdTLXQa6gFMyTyjGhZdd",
-      "pair": "Cd9T3SPXKWwqeps2NjC7wVjeS6v5RvZDzpjQXJdqKrzU",
-      "t": 1791881059759,
-      "entry": 0.0001143,
-      "last": 0.0001143,
-      "peak": 0.0001143,
-      "qty": 42869.64129483815,
+      "name": "Jellyfish",
+      "addr": "oJaWbm23knB1xk6uV8Mkc5dK9dQnFPojBWbRTJ2pump",
+      "pair": "AejaBDA9QCAbKML6ZP6x6BapbVtM9rsgLYeMPo8PsLZp",
+      "t": 1791891470454,
+      "entry": 0.00006005,
+      "last": 0.00006005,
+      "peak": 0.00006005,
+      "qty": 81598.66777685263,
+      "cost": 5
+     },
+     {
+      "name": "Jamie",
+      "addr": "ACfj29FkvtkpAuzWhcV3xWbVCaF1n625qYssYWxopump",
+      "pair": "3T2TEh4uCmMfh5BvJ9JBKwgHsgSDTtemfxWzeXhm9nda",
+      "t": 1791891470454,
+      "entry": 0.00003625,
+      "last": 0.00003625,
+      "peak": 0.00003625,
+      "qty": 135172.41379310345,
+      "cost": 5
+     },
+     {
+      "name": "SEALS",
+      "addr": "3sKaoPryg4KrXubLWtoqF7MznLT7QNqKRxMMkkxTpump",
+      "pair": "HvYfFr8nm6bn9V93TDDMgqWwS2D2LsMn1Y3rDCToqeAB",
+      "t": 1791891470454,
+      "entry": 0.00005949,
+      "last": 0.00005949,
+      "peak": 0.00005949,
+      "qty": 82366.78433350143,
+      "cost": 5
+     },
+     {
+      "name": "Revolut",
+      "addr": "2v52Jo1yC5MVaJxa6ZzESEvcdbs6yUhjgNefXLmvpump",
+      "pair": "EtY35iYEu9YRMbiw6mCrFt4PrEnvAdBqtcTLW8GAqmED",
+      "t": 1791891470454,
+      "entry": 0.00003307,
+      "last": 0.00003307,
+      "peak": 0.00003307,
+      "qty": 148170.54732385848,
       "cost": 5
      }
     ],
@@ -303,27 +365,105 @@
       "price": 0.0001143,
       "usd": 5,
       "reason": "82 min, 110 k$, créateur 0.0 %, top 10 24 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "vente",
+      "name": "nonce",
+      "price": 0.00003282,
+      "usd": 1.3788419947506563,
+      "ret": -0.7242316010498687,
+      "reason": "stop −35 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "Jellyfish",
+      "price": 0.00006005,
+      "usd": 5,
+      "reason": "21 min, 60 k$, créateur 0.0 %, top 10 19 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "Jamie",
+      "price": 0.00003625,
+      "usd": 5,
+      "reason": "71 min, 34 k$, créateur 0.0 %, top 10 20 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "SEALS",
+      "price": 0.00005949,
+      "usd": 5,
+      "reason": "104 min, 55 k$, créateur 0.0 %, top 10 22 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "Revolut",
+      "price": 0.00003307,
+      "usd": 5,
+      "reason": "115 min, 32 k$, créateur 0.0 %, top 10 21 %"
      }
     ],
     "history": [
      [
       1791881059759,
       99.9
+     ],
+     [
+      1791891470454,
+      95.98
      ]
     ]
    },
    "eclair": {
-    "cash": 95,
+    "cash": 76.37884199475066,
     "positions": [
      {
-      "name": "nonce",
-      "addr": "noncenHRyNbg5EWHmCwcZhHXdTLXQa6gFMyTyjGhZdd",
-      "pair": "Cd9T3SPXKWwqeps2NjC7wVjeS6v5RvZDzpjQXJdqKrzU",
-      "t": 1791881059759,
-      "entry": 0.0001143,
-      "last": 0.0001143,
-      "peak": 0.0001143,
-      "qty": 42869.64129483815,
+      "name": "Jellyfish",
+      "addr": "oJaWbm23knB1xk6uV8Mkc5dK9dQnFPojBWbRTJ2pump",
+      "pair": "AejaBDA9QCAbKML6ZP6x6BapbVtM9rsgLYeMPo8PsLZp",
+      "t": 1791891470454,
+      "entry": 0.00006005,
+      "last": 0.00006005,
+      "peak": 0.00006005,
+      "qty": 81598.66777685263,
+      "cost": 5
+     },
+     {
+      "name": "Jamie",
+      "addr": "ACfj29FkvtkpAuzWhcV3xWbVCaF1n625qYssYWxopump",
+      "pair": "3T2TEh4uCmMfh5BvJ9JBKwgHsgSDTtemfxWzeXhm9nda",
+      "t": 1791891470454,
+      "entry": 0.00003625,
+      "last": 0.00003625,
+      "peak": 0.00003625,
+      "qty": 135172.41379310345,
+      "cost": 5
+     },
+     {
+      "name": "SEALS",
+      "addr": "3sKaoPryg4KrXubLWtoqF7MznLT7QNqKRxMMkkxTpump",
+      "pair": "HvYfFr8nm6bn9V93TDDMgqWwS2D2LsMn1Y3rDCToqeAB",
+      "t": 1791891470454,
+      "entry": 0.00005949,
+      "last": 0.00005949,
+      "peak": 0.00005949,
+      "qty": 82366.78433350143,
+      "cost": 5
+     },
+     {
+      "name": "Revolut",
+      "addr": "2v52Jo1yC5MVaJxa6ZzESEvcdbs6yUhjgNefXLmvpump",
+      "pair": "EtY35iYEu9YRMbiw6mCrFt4PrEnvAdBqtcTLW8GAqmED",
+      "t": 1791891470454,
+      "entry": 0.00003307,
+      "last": 0.00003307,
+      "peak": 0.00003307,
+      "qty": 148170.54732385848,
       "cost": 5
      }
     ],
@@ -335,27 +475,105 @@
       "price": 0.0001143,
       "usd": 5,
       "reason": "82 min, 110 k$, créateur 0.0 %, top 10 24 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "vente",
+      "name": "nonce",
+      "price": 0.00003282,
+      "usd": 1.3788419947506563,
+      "ret": -0.7242316010498687,
+      "reason": "stop −25 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "Jellyfish",
+      "price": 0.00006005,
+      "usd": 5,
+      "reason": "21 min, 60 k$, créateur 0.0 %, top 10 19 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "Jamie",
+      "price": 0.00003625,
+      "usd": 5,
+      "reason": "71 min, 34 k$, créateur 0.0 %, top 10 20 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "SEALS",
+      "price": 0.00005949,
+      "usd": 5,
+      "reason": "104 min, 55 k$, créateur 0.0 %, top 10 22 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "Revolut",
+      "price": 0.00003307,
+      "usd": 5,
+      "reason": "115 min, 32 k$, créateur 0.0 %, top 10 21 %"
      }
     ],
     "history": [
      [
       1791881059759,
       99.9
+     ],
+     [
+      1791891470454,
+      95.98
      ]
     ]
    },
    "moonshot": {
-    "cash": 95,
+    "cash": 76.37884199475066,
     "positions": [
      {
-      "name": "nonce",
-      "addr": "noncenHRyNbg5EWHmCwcZhHXdTLXQa6gFMyTyjGhZdd",
-      "pair": "Cd9T3SPXKWwqeps2NjC7wVjeS6v5RvZDzpjQXJdqKrzU",
-      "t": 1791881059759,
-      "entry": 0.0001143,
-      "last": 0.0001143,
-      "peak": 0.0001143,
-      "qty": 42869.64129483815,
+      "name": "Jellyfish",
+      "addr": "oJaWbm23knB1xk6uV8Mkc5dK9dQnFPojBWbRTJ2pump",
+      "pair": "AejaBDA9QCAbKML6ZP6x6BapbVtM9rsgLYeMPo8PsLZp",
+      "t": 1791891470454,
+      "entry": 0.00006005,
+      "last": 0.00006005,
+      "peak": 0.00006005,
+      "qty": 81598.66777685263,
+      "cost": 5
+     },
+     {
+      "name": "Jamie",
+      "addr": "ACfj29FkvtkpAuzWhcV3xWbVCaF1n625qYssYWxopump",
+      "pair": "3T2TEh4uCmMfh5BvJ9JBKwgHsgSDTtemfxWzeXhm9nda",
+      "t": 1791891470454,
+      "entry": 0.00003625,
+      "last": 0.00003625,
+      "peak": 0.00003625,
+      "qty": 135172.41379310345,
+      "cost": 5
+     },
+     {
+      "name": "SEALS",
+      "addr": "3sKaoPryg4KrXubLWtoqF7MznLT7QNqKRxMMkkxTpump",
+      "pair": "HvYfFr8nm6bn9V93TDDMgqWwS2D2LsMn1Y3rDCToqeAB",
+      "t": 1791891470454,
+      "entry": 0.00005949,
+      "last": 0.00005949,
+      "peak": 0.00005949,
+      "qty": 82366.78433350143,
+      "cost": 5
+     },
+     {
+      "name": "Revolut",
+      "addr": "2v52Jo1yC5MVaJxa6ZzESEvcdbs6yUhjgNefXLmvpump",
+      "pair": "EtY35iYEu9YRMbiw6mCrFt4PrEnvAdBqtcTLW8GAqmED",
+      "t": 1791891470454,
+      "entry": 0.00003307,
+      "last": 0.00003307,
+      "peak": 0.00003307,
+      "qty": 148170.54732385848,
       "cost": 5
      }
     ],
@@ -367,49 +585,138 @@
       "price": 0.0001143,
       "usd": 5,
       "reason": "82 min, 110 k$, créateur 0.0 %, top 10 24 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "vente",
+      "name": "nonce",
+      "price": 0.00003282,
+      "usd": 1.3788419947506563,
+      "ret": -0.7242316010498687,
+      "reason": "stop −50 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "Jellyfish",
+      "price": 0.00006005,
+      "usd": 5,
+      "reason": "21 min, 60 k$, créateur 0.0 %, top 10 19 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "Jamie",
+      "price": 0.00003625,
+      "usd": 5,
+      "reason": "71 min, 34 k$, créateur 0.0 %, top 10 20 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "SEALS",
+      "price": 0.00005949,
+      "usd": 5,
+      "reason": "104 min, 55 k$, créateur 0.0 %, top 10 22 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "Revolut",
+      "price": 0.00003307,
+      "usd": 5,
+      "reason": "115 min, 32 k$, créateur 0.0 %, top 10 21 %"
      }
     ],
     "history": [
      [
       1791881059759,
       99.9
+     ],
+     [
+      1791891470454,
+      95.98
      ]
     ]
    },
    "temoin": {
-    "cash": 85,
+    "cash": 58.65986042530358,
     "positions": [
-     {
-      "name": "nonce",
-      "addr": "noncenHRyNbg5EWHmCwcZhHXdTLXQa6gFMyTyjGhZdd",
-      "pair": "Cd9T3SPXKWwqeps2NjC7wVjeS6v5RvZDzpjQXJdqKrzU",
-      "t": 1791881059759,
-      "entry": 0.0001143,
-      "last": 0.0001143,
-      "peak": 0.0001143,
-      "qty": 42869.64129483815,
-      "cost": 5
-     },
-     {
-      "name": "TELEPUMP",
-      "addr": "DQvFU8q4fH7PM2uCqSm56dHjcyaW5z3CEEE5tERWpump",
-      "pair": "BhkfSRHT328CRoeGqRXvzJ5NPrVSR8UYWW5hVeB35e1P",
-      "t": 1791881059759,
-      "entry": 0.00005263,
-      "last": 0.00005263,
-      "peak": 0.00005263,
-      "qty": 93102.79308379251,
-      "cost": 5
-     },
      {
       "name": "sanctuary",
       "addr": "7hDr2fvmp62yVqqeUQRFsjcvJeHUG6eWR6xsiMdcpump",
       "pair": "8gSh8VZCdQod93YjATYax7UEpLcevo1LKdmfbHEaewvf",
       "t": 1791881059759,
       "entry": 0.00007362,
-      "last": 0.00007362,
-      "peak": 0.00007362,
+      "last": 0.00009626,
+      "peak": 0.00009626,
       "qty": 66558.00054333062,
+      "cost": 5
+     },
+     {
+      "name": "shard",
+      "addr": "4ArbtYq4oAhxBmQGdd3rc4Eph8TTjDRoChL4cRtkpump",
+      "pair": "DmJdEnceavUQMLnHFcSjmpJLdGpLCSUywpxViazBi2bg",
+      "t": 1791891470454,
+      "entry": 0.00005477,
+      "last": 0.00005477,
+      "peak": 0.00005477,
+      "qty": 89465.03560343254,
+      "cost": 5
+     },
+     {
+      "name": "Jellyfish",
+      "addr": "oJaWbm23knB1xk6uV8Mkc5dK9dQnFPojBWbRTJ2pump",
+      "pair": "AejaBDA9QCAbKML6ZP6x6BapbVtM9rsgLYeMPo8PsLZp",
+      "t": 1791891470454,
+      "entry": 0.00006005,
+      "last": 0.00006005,
+      "peak": 0.00006005,
+      "qty": 81598.66777685263,
+      "cost": 5
+     },
+     {
+      "name": "Jamie",
+      "addr": "ACfj29FkvtkpAuzWhcV3xWbVCaF1n625qYssYWxopump",
+      "pair": "3T2TEh4uCmMfh5BvJ9JBKwgHsgSDTtemfxWzeXhm9nda",
+      "t": 1791891470454,
+      "entry": 0.00003625,
+      "last": 0.00003625,
+      "peak": 0.00003625,
+      "qty": 135172.41379310345,
+      "cost": 5
+     },
+     {
+      "name": "YILONGMA",
+      "addr": "GU5NkUVLzmJQxJKuho5dG4d1owChpcSQnhARrjYQpump",
+      "pair": "8KUSA63myw4NQjQQojk41YdEE5FgrgPPNxaoYuDSPYU2",
+      "t": 1791891470454,
+      "entry": 0.0002854,
+      "last": 0.0002854,
+      "peak": 0.0002854,
+      "qty": 17168.885774351787,
+      "cost": 5
+     },
+     {
+      "name": "SEALS",
+      "addr": "3sKaoPryg4KrXubLWtoqF7MznLT7QNqKRxMMkkxTpump",
+      "pair": "HvYfFr8nm6bn9V93TDDMgqWwS2D2LsMn1Y3rDCToqeAB",
+      "t": 1791891470454,
+      "entry": 0.00005949,
+      "last": 0.00005949,
+      "peak": 0.00005949,
+      "qty": 82366.78433350143,
+      "cost": 5
+     },
+     {
+      "name": "Revolut",
+      "addr": "2v52Jo1yC5MVaJxa6ZzESEvcdbs6yUhjgNefXLmvpump",
+      "pair": "EtY35iYEu9YRMbiw6mCrFt4PrEnvAdBqtcTLW8GAqmED",
+      "t": 1791891470454,
+      "entry": 0.00003307,
+      "last": 0.00003307,
+      "peak": 0.00003307,
+      "qty": 148170.54732385848,
       "cost": 5
      }
     ],
@@ -437,12 +744,82 @@
       "price": 0.00007362,
       "usd": 5,
       "reason": "179 min, 71 k$, créateur 0.0 %, top 10 18 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "vente",
+      "name": "nonce",
+      "price": 0.00003282,
+      "usd": 1.3788419947506563,
+      "ret": -0.7242316010498687,
+      "reason": "stop −35 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "vente",
+      "name": "TELEPUMP",
+      "price": 0.000025,
+      "usd": 2.2810184305529164,
+      "ret": -0.5437963138894167,
+      "reason": "stop −35 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "shard",
+      "price": 0.00005477,
+      "usd": 5,
+      "reason": "0 min, 55 k$, créateur 0.0 %, top 10 18 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "Jellyfish",
+      "price": 0.00006005,
+      "usd": 5,
+      "reason": "21 min, 60 k$, créateur 0.0 %, top 10 19 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "Jamie",
+      "price": 0.00003625,
+      "usd": 5,
+      "reason": "71 min, 34 k$, créateur 0.0 %, top 10 20 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "YILONGMA",
+      "price": 0.0002854,
+      "usd": 5,
+      "reason": "93 min, 283 k$, créateur 0.0 %, top 10 11 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "SEALS",
+      "price": 0.00005949,
+      "usd": 5,
+      "reason": "104 min, 55 k$, créateur 0.0 %, top 10 22 %"
+     },
+     {
+      "t": 1791891470454,
+      "side": "achat",
+      "name": "Revolut",
+      "price": 0.00003307,
+      "usd": 5,
+      "reason": "115 min, 32 k$, créateur 0.0 %, top 10 21 %"
      }
     ],
     "history": [
      [
       1791881059759,
       99.7
+     ],
+     [
+      1791891470454,
+      94.47
      ]
     ]
    }
@@ -486,32 +863,134 @@
      "danger": [],
      "rugged": false
     }
+   },
+   "4ArbtYq4oAhxBmQGdd3rc4Eph8TTjDRoChL4cRtkpump": {
+    "t": 1791891470454,
+    "rc": {
+     "creatorPct": 0,
+     "mintAuth": false,
+     "freezeAuth": false,
+     "top10": 17.695634501662468,
+     "insiders": 4,
+     "holders": 915,
+     "danger": [],
+     "rugged": false
+    }
+   },
+   "oJaWbm23knB1xk6uV8Mkc5dK9dQnFPojBWbRTJ2pump": {
+    "t": 1791891470454,
+    "rc": {
+     "creatorPct": 0,
+     "mintAuth": false,
+     "freezeAuth": false,
+     "top10": 18.712762485032087,
+     "insiders": 0,
+     "holders": 1689,
+     "danger": [],
+     "rugged": false
+    }
+   },
+   "ACfj29FkvtkpAuzWhcV3xWbVCaF1n625qYssYWxopump": {
+    "t": 1791891470454,
+    "rc": {
+     "creatorPct": 0,
+     "mintAuth": false,
+     "freezeAuth": false,
+     "top10": 20.180660098062308,
+     "insiders": 0,
+     "holders": 1433,
+     "danger": [],
+     "rugged": false
+    }
+   },
+   "GU5NkUVLzmJQxJKuho5dG4d1owChpcSQnhARrjYQpump": {
+    "t": 1791891470454,
+    "rc": {
+     "creatorPct": 0,
+     "mintAuth": false,
+     "freezeAuth": false,
+     "top10": 11.360676689805288,
+     "insiders": 10,
+     "holders": 970,
+     "danger": [],
+     "rugged": false
+    }
+   },
+   "3sKaoPryg4KrXubLWtoqF7MznLT7QNqKRxMMkkxTpump": {
+    "t": 1791891470454,
+    "rc": {
+     "creatorPct": 0,
+     "mintAuth": false,
+     "freezeAuth": false,
+     "top10": 22.084853810240954,
+     "insiders": 0,
+     "holders": 1319,
+     "danger": [],
+     "rugged": false
+    }
+   },
+   "2v52Jo1yC5MVaJxa6ZzESEvcdbs6yUhjgNefXLmvpump": {
+    "t": 1791891470454,
+    "rc": {
+     "creatorPct": 0,
+     "mintAuth": false,
+     "freezeAuth": false,
+     "top10": 21.211869886528206,
+     "insiders": 0,
+     "holders": 1990,
+     "danger": [],
+     "rugged": false
+    }
    }
   },
   "watch": [
    {
-    "name": "nonce",
-    "ageMin": 82,
-    "mcap": 109926,
+    "name": "shard",
+    "ageMin": 0,
+    "mcap": 54774,
+    "twitter": true,
+    "ok": false,
+    "why": "réseau d’insiders détecté"
+   },
+   {
+    "name": "Jellyfish",
+    "ageMin": 21,
+    "mcap": 60055,
     "twitter": true,
     "ok": true,
     "why": "tous les critères"
    },
    {
-    "name": "TELEPUMP",
-    "ageMin": 18,
-    "mcap": 52640,
+    "name": "Jamie",
+    "ageMin": 71,
+    "mcap": 34277,
+    "twitter": true,
+    "ok": true,
+    "why": "tous les critères"
+   },
+   {
+    "name": "YILONGMA",
+    "ageMin": 93,
+    "mcap": 282895,
     "twitter": true,
     "ok": false,
     "why": "réseau d’insiders détecté"
    },
    {
-    "name": "sanctuary",
-    "ageMin": 179,
-    "mcap": 70510,
+    "name": "SEALS",
+    "ageMin": 104,
+    "mcap": 55155,
     "twitter": true,
-    "ok": false,
-    "why": "réseau d’insiders détecté"
+    "ok": true,
+    "why": "tous les critères"
+   },
+   {
+    "name": "Revolut",
+    "ageMin": 115,
+    "mcap": 31750,
+    "twitter": true,
+    "ok": true,
+    "why": "tous les critères"
    }
   ]
  }
