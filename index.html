@@ -88,7 +88,7 @@
   const STATE_RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/data/state.json`;
   const CASINO_CAPITAL = 100, DAY = 86400000;
   let st = null, rt = null, px = {}, memePx = {}, pairPx = {}, rtPx = {}, lastPx = 0, filter = 'all';
-  const RTLAB = { createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
+  const RTLAB = { diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
   const rp = (p) => { const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry; };
   const rVal = (v) => v.cash + v.positions.reduce((a, p) => a + p.qty * rp(p), 0);
   const LAB = { qualite: '🎯 Sniper qualité', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)' };
@@ -253,6 +253,7 @@
         board.map((r, k) => `<div class="row"><div class="ico" style="background:var(--bg);color:${k === 0 ? 'var(--amber)' : 'var(--muted)'}">${k + 1}</div>
           <div class="main"><div class="t">${r.name}</div><div class="s">${r.n ? `${r.win}/${r.n} trades gagnés` : 'aucun trade fermé'} · ${r.open} en cours</div></div>
           <div class="r"><b class="${cls(r.val / 100 - 1)}">${pct(r.val / 100 - 1)}</b><span>${num(r.val)} $</span></div></div>`).join('') +
+        (rt.recentGrad && rt.recentGrad.length ? `<div class="empty" style="margin-top:8px">Derniers diplômés (sortis de pump.fun) : ${rt.recentGrad.slice(-8).reverse().map((r) => `${esc(r.symbol || "?")} ${r.ok ? "✅" : `❌ <span style="opacity:.8">(${esc(r.why)})</span>`}`).join(" · ")}</div>` : `<div class="empty" style="margin-top:8px">🎓 ${rt.migrations || 0} diplômé(s) vu(s) pour l’instant (≈ 1 toutes les 10 min).</div>`) +
         (rt.recent && rt.recent.length ? `<div class="empty" style="margin-top:8px">Dernières créations : ${rt.recent.slice(-10).reverse().map((r) => `${esc(r.symbol || '?')} ${r.ok ? '✅' + (r.ai ? ` <span style="opacity:.8">(IA ${r.ai.note}/10)</span>` : '') : `❌ <span style="opacity:.8">(${esc(r.why)})</span>`}`).join(' · ')}</div>` : '');
     }
     $('rt').innerHTML = rtHtml;

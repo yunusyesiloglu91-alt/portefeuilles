@@ -18,6 +18,8 @@ const STAKE = 5, CAPITAL = 100, COST = 0.03, MAX_OPEN = 10;
 const MIN = 60000;
 
 const VARIANTS = {
+  diplome: { name: "🎓 Diplômé + sécurité", delay: 0, filtered: true, maxMs: 6 * 3600000 },
+  diplomeTemoin: { name: "🎓 Diplômé témoin", delay: 0, filtered: false, maxMs: 6 * 3600000 },
   createur: { name: '🔍 Analyse créateur', delay: 0, filtered: true },
   ia: { name: '🤖 IA Claude Opus 5.5', delay: 0, filtered: true },
   seconde: { name: '⚡ Seconde filtrée', delay: 0, filtered: true },
@@ -213,7 +215,8 @@ function sell(v, p, part, reason) {
 }
 
 function checkExits(mint, devSold) {
-  for (const v of Object.values(st.variants)) {
+  for (const [vid, v] of Object.entries(st.variants)) {
+    const maxMs = (VARIANTS[vid] && VARIANTS[vid].maxMs) || EXIT.maxMs;
     for (const p of [...v.positions]) {
       if (p.mint !== mint && mint) continue;
       const tok = tokens.get(p.mint);
@@ -223,7 +226,7 @@ function checkExits(mint, devSold) {
       else if (!p.tp1Done && p.last <= p.entry * (1 - EXIT.sl)) sell(v, p, 1, `stop −${EXIT.sl * 100} %`);
       else if (!p.tp1Done && p.last >= p.entry * (1 + EXIT.tp1)) { sell(v, p, EXIT.tp1Part, '×2 atteint'); if (v.positions.includes(p)) p.tp1Done = true; }
       else if (p.tp1Done && p.last <= p.peak * (1 - EXIT.trail)) sell(v, p, 1, `stop suiveur −${EXIT.trail * 100} %`);
-      else if (Date.now() - p.t >= EXIT.maxMs) sell(v, p, 1, '30 min écoulées');
+      else if (Date.now() - p.t >= maxMs) sell(v, p, 1, `${Math.round(maxMs / MIN) >= 60 ? Math.round(maxMs / 3600000) + ' h' : Math.round(maxMs / MIN) + ' min'} écoulées`);
     }
   }
 }
@@ -238,6 +241,54 @@ function scheduleConfirm(tok) {
     if (ok) buy('confirme', tok, `60 s : ${tok.buys} achats / ${tok.sells} ventes, ${gain >= 0 ? '+' : ''}${Math.round(gain * 100)} %`);
     unsubscribe(tok.mint);
   }, VARIANTS.confirme.delay));
+}
+
+// ---------- Diplômés : tokens qui sortent de la courbe pump.fun (≈ 1 % des lancements)
+async function rugReport(mint) {
+  try {
+    const r = await (await fetch(`https://api.rugcheck.xyz/v1/tokens/${mint}/report`)).json();
+    const supply = r.token && r.token.supply;
+    const pools = new Set((r.markets || []).flatMap((m) => [m.pubkey, m.liquidityA, m.liquidityB, m.liquidityAAccount, m.liquidityBAccount].filter(Boolean)));
+    const holders = (r.topHolders || []).filter((h) => !pools.has(h.address) && !pools.has(h.owner));
+    return {
+      creatorPct: supply && r.creatorBalance ? (r.creatorBalance / supply) * 100 : 0,
+      top10: holders.slice(0, 10).reduce((a, h) => a + (h.pct || 0), 0),
+      insiders: r.graphInsidersDetected || 0, holders: r.totalHolders || 0,
+      mintAuth: !!r.mintAuthority, freezeAuth: !!r.freezeAuthority, rugged: !!r.rugged,
+      danger: (r.risks || []).filter((x) => x.level === 'danger').map((x) => x.name),
+    };
+  } catch { return null; }
+}
+async function onMigration(d) {
+  st.migrations = (st.migrations || 0) + 1;
+  await new Promise((r) => setTimeout(r, 75000)); // laisser le nouveau marché s'ouvrir et être indexé
+  const [pairs, rc] = await Promise.all([
+    fetch(`https://api.dexscreener.com/tokens/v1/solana/${d.mint}`).then((r) => r.json()).catch(() => []),
+    rugReport(d.mint),
+  ]);
+  const p = (pairs || []).filter((x) => +x.priceUsd > 0).sort((a, b) => ((b.liquidity && b.liquidity.usd) || 0) - ((a.liquidity && a.liquidity.usd) || 0))[0];
+  if (!p) return;
+  const tok = { mint: d.mint, name: p.baseToken.name, symbol: p.baseToken.symbol, t0: Date.now(), last: +p.priceUsd, p0: +p.priceUsd, buys: 0, sells: 0, buyers: new Set() };
+  tokens.set(d.mint, tok);
+  buy('diplomeTemoin', tok, 'sortie de pump.fun');
+  const liq = (p.liquidity && p.liquidity.usd) || 0;
+  const m5 = (p.txns && p.txns.m5) || {};
+  const twitter = ((p.info && p.info.socials) || []).some((x) => x.type === 'twitter');
+  let why = null;
+  if (!rc) why = 'RugCheck indisponible';
+  else if (rc.rugged || rc.danger.length) why = rc.rugged ? 'rug détecté' : rc.danger[0];
+  else if (rc.mintAuth || rc.freezeAuth) why = 'autorisations dangereuses';
+  else if (rc.creatorPct > 5) why = `créateur ${rc.creatorPct.toFixed(0)} %`;
+  else if (rc.top10 > 30) why = `top 10 : ${rc.top10.toFixed(0)} %`;
+  else if (rc.insiders > 0) why = 'réseau d’insiders';
+  else if (rc.holders < 200) why = `${rc.holders} détenteurs`;
+  else if (!twitter) why = 'pas de Twitter';
+  else if (liq < 20000) why = `liquidité ${Math.round(liq / 1000)} k$`;
+  else if (!((m5.buys || 0) > (m5.sells || 0))) why = 'plus de ventes que d’achats';
+  st.recentGrad = (st.recentGrad || []).concat([{ t: Date.now(), symbol: tok.symbol, ok: !why, why: why || 'tous les critères' }]).slice(-30);
+  if (!why) buy('diplome', tok, `diplômé, ${rc.holders} détenteurs, top 10 ${rc.top10.toFixed(0)} %, liquidité ${Math.round(liq / 1000)} k$`);
+  subscribe(d.mint);
+  unsubscribe(d.mint);
 }
 
 // ---------- Flux temps réel
@@ -292,6 +343,7 @@ function connect() {
   ws.onopen = () => {
     log('connecté au flux temps réel');
     send({ method: 'subscribeNewToken' });
+    send({ method: 'subscribeMigration' });
     const held = new Set(Object.values(st.variants).flatMap((v) => v.positions.map((p) => p.mint)));
     subscribed.clear();
     for (const m of held) { if (!tokens.has(m)) tokens.set(m, { mint: m, last: 0, buyers: new Set(), buys: 0, sells: 0 }); subscribe(m); }
@@ -299,8 +351,10 @@ function connect() {
   ws.onmessage = (e) => {
     let d;
     try { d = JSON.parse(e.data); } catch { return; }
-    if (!d.mint || !solUsd) return;
+    if (!d.mint) return;
+    if (!solUsd && d.txType === 'create') return;
     if (d.txType === 'create') onCreate(d).catch(() => {});
+    else if (d.txType === 'migrate' || d.txType === 'migration' || (d.pool && !d.txType && d.mint)) onMigration(d).catch((e) => log('diplômé :', e.message));
     else if (d.txType === 'buy' || d.txType === 'sell') onTrade(d);
   };
   ws.onclose = () => { log('flux coupé, reconnexion dans 5 s'); setTimeout(connect, 5000); };
