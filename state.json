@@ -560,6 +560,13 @@
    39.68,
    29.93,
    29.93
+  ],
+  [
+   1791915244158,
+   99.52,
+   39.66,
+   29.93,
+   29.93
   ]
  ],
  "watch": [
@@ -616,28 +623,18 @@
   "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
  ],
  "lastScan": 1791913744302,
- "lastRun": 1791914944126,
+ "lastRun": 1791915244158,
  "casino": {
   "start": 1791871130814,
-  "cash": 35.37637822557608,
+  "cash": 44.987160227567934,
   "positions": [
-   {
-    "name": "MarsX",
-    "addr": "Fak3rJEBfR4Vb8DoFpecf6yoxbkkr1gGUH5tdj2rpump",
-    "pool": "9dsiuydk5EFRCLk6VEywY95Nn3jjGbdWNijuACf1PXuA",
-    "t": 1791881059759,
-    "entry": 0.0004080669441752599,
-    "last": 0.00025453261779146026,
-    "qty": 40198.24273875863,
-    "cost": 16.653374696061487
-   },
    {
     "name": "SI276",
     "addr": "HMYd9tosnUXuNHmq7pXmoePRVBLBBjA3JBfydq6upump",
     "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
     "t": 1791881059759,
     "entry": 0.0010044825832740145,
-    "last": 0.0009785920291685017,
+    "last": 0.0009817279028697583,
     "qty": 16330.371824023758,
     "cost": 16.653374696061487
    }
@@ -742,6 +739,15 @@
     "price": 0.002566879504097444,
     "usd": 10.086867127037436,
     "ret": -0.4956566436481282,
+    "reason": "stop −40 %"
+   },
+   {
+    "t": 1791915244158,
+    "side": "vente",
+    "name": "MarsX",
+    "price": 0.0002427255129465869,
+    "usd": 9.610782001991852,
+    "ret": -0.4228928263852253,
     "reason": "stop −40 %"
    }
   ],
@@ -1041,6 +1047,10 @@
    [
     1791914944126,
     61.59
+   ],
+   [
+    1791915244158,
+    61.02
    ]
   ],
   "watch": [
