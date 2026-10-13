@@ -364,6 +364,13 @@
    39.88,
    29.95,
    29.95
+  ],
+  [
+   1791904143934,
+   99.77,
+   39.86,
+   29.95,
+   29.95
   ]
  ],
  "watch": [
@@ -418,7 +425,7 @@
  ],
  "notes": [],
  "lastScan": 1791902044292,
- "lastRun": 1791903844359,
+ "lastRun": 1791904143934,
  "casino": {
   "start": 1791871130814,
   "cash": 0,
@@ -428,7 +435,7 @@
     "addr": "7K52aYQW9rWGjwZmQ7o2d1P6E7bji6hSMsqaLy5EcxLh",
     "t": 1791871130814,
     "entry": 0.00036475370700767733,
-    "last": 0.00024392733280323195,
+    "last": 0.00022600912549318968,
     "qty": 54009.04671158107,
     "cost": 20
    },
@@ -437,7 +444,7 @@
     "addr": "7jNwX4Me9zGEjmWY7zARDG2LYjVs1WXD6DZ1JvSfpump",
     "t": 1791871130814,
     "entry": 0.004938006291740259,
-    "last": 0.004082055848099959,
+    "last": 0.003998219878812293,
     "qty": 3989.4643376522104,
     "cost": 20
    },
@@ -447,7 +454,7 @@
     "pool": "9dsiuydk5EFRCLk6VEywY95Nn3jjGbdWNijuACf1PXuA",
     "t": 1791881059759,
     "entry": 0.0004080669441752599,
-    "last": 0.0004245442655539677,
+    "last": 0.00036917579794559774,
     "qty": 40198.24273875863,
     "cost": 16.653374696061487
    },
@@ -457,7 +464,7 @@
     "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
     "t": 1791881059759,
     "entry": 0.0010044825832740145,
-    "last": 0.0010309017285776054,
+    "last": 0.0010401302362044356,
     "qty": 16330.371824023758,
     "cost": 16.653374696061487
    },
@@ -467,7 +474,7 @@
     "pool": "4MWjp1aBQqE9Y6iC5cd3NrVvWWcHsN2LgpjWYMDK7u7E",
     "t": 1791902044292,
     "entry": 0.004029833779212947,
-    "last": 0.005940374503045718,
+    "last": 0.005798769771186357,
     "qty": 1701.1789993987124,
     "cost": 6.9598665951925005
    }
@@ -732,55 +739,59 @@
    [
     1791903844359,
     73.47
+   ],
+   [
+    1791904143934,
+    69.85
    ]
   ],
   "watch": [
    {
     "name": "CRAWLER",
-    "mcap": 17097790.21,
-    "ageDays": 0.7702356365740741,
-    "ch1": -0.06234,
-    "ch24": 63.7803,
+    "mcap": 17325824.13,
+    "ageDays": 0.7737029398148149,
+    "ch1": -0.029009999999999998,
+    "ch24": 64.64428,
     "ok": false
    },
    {
     "name": "HIRE",
-    "mcap": 626310.534,
-    "ageDays": 1.0542402662037038,
-    "ch1": -0.11602,
-    "ch24": 0.13158,
+    "mcap": 634507.7266,
+    "ageDays": 1.0577075694444444,
+    "ch1": -0.036629999999999996,
+    "ch24": -0.05884,
     "ok": false
    },
    {
     "name": "LOAD",
-    "mcap": 9167138.9898359,
-    "ageDays": 0.8352935069444445,
-    "ch1": -0.19885000000000003,
-    "ch24": 43.30085,
+    "mcap": 8831342.56561721,
+    "ageDays": 0.8387608101851852,
+    "ch1": -0.12174,
+    "ch24": 41.678090000000005,
     "ok": false
    },
    {
     "name": "MarsX",
-    "mcap": 419419.715879336,
-    "ageDays": 0.8926546180555556,
-    "ch1": -0.0259,
-    "ch24": 11.46876,
+    "mcap": 414315.570352655,
+    "ageDays": 0.8961219212962963,
+    "ch1": -0.01544,
+    "ch24": 11.328330000000001,
     "ok": false
    },
    {
     "name": "SEALS",
-    "mcap": 653092.1224,
-    "ageDays": 0.21561758101851852,
-    "ch1": -0.33055,
-    "ch24": 14.11457,
+    "mcap": 725389.693,
+    "ageDays": 0.21908488425925926,
+    "ch1": -0.13862,
+    "ch24": 15.78776,
     "ok": false
    },
    {
     "name": "VEIL",
-    "mcap": 5846196.32883285,
-    "ageDays": 0.8352240625,
-    "ch1": 0.74361,
-    "ch24": 114.87190000000001,
+    "mcap": 5182634.29687649,
+    "ageDays": 0.8386913657407408,
+    "ch1": 0.58202,
+    "ch24": 101.72005999999999,
     "ok": true
    }
   ],
@@ -790,8 +801,20 @@
   "start": 1791881059759,
   "variants": {
    "qualite": {
-    "cash": 142.21783613880308,
-    "positions": [],
+    "cash": 137.21783613880308,
+    "positions": [
+     {
+      "name": "OSPREY",
+      "addr": "FCVohFrokwz6rELLNgnQT426RbRjXQMy4RY6zrUjpump",
+      "pair": "41RfVWj5SMhaqGzCvzX1ZozizkfAf14rWg3P7PGQPNDz",
+      "t": 1791904143934,
+      "entry": 0.00003981,
+      "last": 0.00003981,
+      "peak": 0.00003981,
+      "qty": 122582.26576237126,
+      "cost": 5
+     }
+    ],
     "trades": [
      {
       "t": 1791881059759,
@@ -1092,6 +1115,14 @@
       "usd": 5.478260433099098,
       "ret": 1.1616919546823463,
       "reason": "stop suiveur −30 % après le sommet"
+     },
+     {
+      "t": 1791904143934,
+      "side": "achat",
+      "name": "OSPREY",
+      "price": 0.00003981,
+      "usd": 5,
+      "reason": "1 min, 40 k$, créateur 0.0 %, top 10 19 %"
      }
     ],
     "history": [
@@ -1270,12 +1301,29 @@
      [
       1791903844359,
       142.22
+     ],
+     [
+      1791904143934,
+      142.1
      ]
-    ]
+    ],
+    "fees": 0.1200000000000001
    },
    "eclair": {
-    "cash": 97.16634195566257,
-    "positions": [],
+    "cash": 92.16634195566257,
+    "positions": [
+     {
+      "name": "OSPREY",
+      "addr": "FCVohFrokwz6rELLNgnQT426RbRjXQMy4RY6zrUjpump",
+      "pair": "41RfVWj5SMhaqGzCvzX1ZozizkfAf14rWg3P7PGQPNDz",
+      "t": 1791904143934,
+      "entry": 0.00003981,
+      "last": 0.00003981,
+      "peak": 0.00003981,
+      "qty": 122582.26576237126,
+      "cost": 5
+     }
+    ],
     "trades": [
      {
       "t": 1791881059759,
@@ -1531,6 +1579,14 @@
       "usd": 0.059592059319177625,
       "ret": -0.9880815881361644,
       "reason": "stop −25 %"
+     },
+     {
+      "t": 1791904143934,
+      "side": "achat",
+      "name": "OSPREY",
+      "price": 0.00003981,
+      "usd": 5,
+      "reason": "1 min, 40 k$, créateur 0.0 %, top 10 19 %"
      }
     ],
     "history": [
@@ -1709,11 +1765,16 @@
      [
       1791903844359,
       97.17
+     ],
+     [
+      1791904143934,
+      97.05
      ]
-    ]
+    ],
+    "fees": 0.1200000000000001
    },
    "moonshot": {
-    "cash": 93.34145146910438,
+    "cash": 88.34145146910438,
     "positions": [
      {
       "name": "SAMM",
@@ -1721,7 +1782,7 @@
       "pair": "AFsbUZmM69DLKsFLGd8z2aCHuieEJTjJFDaXusARwEcr",
       "t": 1791897543859,
       "entry": 0.00003712,
-      "last": 0.00006838,
+      "last": 0.00009122,
       "peak": 0.0001668,
       "qty": 132004.3103448276,
       "cost": 5
@@ -1732,7 +1793,7 @@
       "pair": "BW2xVjhKr3LhFdcm4mS1pNdfthzSvJB5rMsKz2Lt4he2",
       "t": 1791897843686,
       "entry": 0.00005235,
-      "last": 0.0001048,
+      "last": 0.00009739,
       "peak": 0.0001559,
       "qty": 93600.76408787012,
       "cost": 5
@@ -1743,7 +1804,7 @@
       "pair": "Hgz6n2m8c4MH4dqG1HZmL5JoEwphSQFppnCHM6CSnMKE",
       "t": 1791901144163,
       "entry": 0.00006973,
-      "last": 0.0002261,
+      "last": 0.0002015,
       "peak": 0.0002304,
       "qty": 70271.04546106412,
       "cost": 5
@@ -1754,9 +1815,20 @@
       "pair": "CXjGQnWQEZMnf7LiZkU8428urcAxhmbBMsDZJueDnkK5",
       "t": 1791901743735,
       "entry": 0.00007525,
-      "last": 0.00005046,
+      "last": 0.00005597,
       "peak": 0.00007525,
       "qty": 65116.27906976745,
+      "cost": 5
+     },
+     {
+      "name": "OSPREY",
+      "addr": "FCVohFrokwz6rELLNgnQT426RbRjXQMy4RY6zrUjpump",
+      "pair": "41RfVWj5SMhaqGzCvzX1ZozizkfAf14rWg3P7PGQPNDz",
+      "t": 1791904143934,
+      "entry": 0.00003981,
+      "last": 0.00003981,
+      "peak": 0.00003981,
+      "qty": 122582.26576237126,
       "cost": 5
      }
     ],
@@ -1979,6 +2051,14 @@
       "usd": 0.059592059319177625,
       "ret": -0.9880815881361644,
       "reason": "stop −50 %"
+     },
+     {
+      "t": 1791904143934,
+      "side": "achat",
+      "name": "OSPREY",
+      "price": 0.00003981,
+      "usd": 5,
+      "reason": "1 min, 40 k$, créateur 0.0 %, top 10 19 %"
      }
     ],
     "history": [
@@ -2157,11 +2237,16 @@
      [
       1791903844359,
       131.35
+     ],
+     [
+      1791904143934,
+      132.18
      ]
-    ]
+    ],
+    "fees": 0.1200000000000001
    },
    "temoin": {
-    "cash": 64.65976761152481,
+    "cash": 59.91396453430659,
     "positions": [
      {
       "name": "YILONGMA",
@@ -2169,7 +2254,7 @@
       "pair": "8KUSA63myw4NQjQQojk41YdEE5FgrgPPNxaoYuDSPYU2",
       "t": 1791891470454,
       "entry": 0.0002854,
-      "last": 0.0003912,
+      "last": 0.0004054,
       "peak": 0.0004229,
       "qty": 17168.885774351787,
       "cost": 5
@@ -2180,20 +2265,20 @@
       "pair": "BvkVQqZhkn9b1NH8LwgntB2pu91Jk4Nh3gpKnomi6Nbv",
       "t": 1791892144222,
       "entry": 0.00008948,
-      "last": 0.0001464,
-      "peak": 0.0001467,
+      "last": 0.0001509,
+      "peak": 0.0001509,
       "qty": 54760.84041126509,
       "cost": 5
      },
      {
-      "name": "薄肌理论",
-      "addr": "GgbYuY6fT25UNwZ1iR7UbYxT7tkuEmxj7GLHfSNZpump",
-      "pair": "6e9MWeoxdW3YHKdFf6uKERKLn9KHWhDc2oM35W9C5a9t",
-      "t": 1791903244476,
-      "entry": 0.0000417,
-      "last": 0.0000423,
-      "peak": 0.0000423,
-      "qty": 117026.3788968825,
+      "name": "OSPREY",
+      "addr": "FCVohFrokwz6rELLNgnQT426RbRjXQMy4RY6zrUjpump",
+      "pair": "41RfVWj5SMhaqGzCvzX1ZozizkfAf14rWg3P7PGQPNDz",
+      "t": 1791904143934,
+      "entry": 0.00003981,
+      "last": 0.00003981,
+      "peak": 0.00003981,
+      "qty": 122582.26576237126,
       "cost": 5
      }
     ],
@@ -2646,6 +2731,23 @@
       "usd": 2.819392432432432,
       "ret": -0.4361215135135136,
       "reason": "stop −35 %"
+     },
+     {
+      "t": 1791904143934,
+      "side": "vente",
+      "name": "薄肌理论",
+      "price": 0.000002473,
+      "usd": 0.25419692278177464,
+      "ret": -0.949160615443645,
+      "reason": "stop −35 %"
+     },
+     {
+      "t": 1791904143934,
+      "side": "achat",
+      "name": "OSPREY",
+      "price": 0.00003981,
+      "usd": 5,
+      "reason": "1 min, 40 k$, créateur 0.0 %, top 10 19 %"
      }
     ],
     "history": [
@@ -2824,12 +2926,16 @@
      [
       1791903844359,
       84.34
+     ],
+     [
+      1791904143934,
+      80.02
      ]
     ],
-    "fees": 0.3222291891891893
+    "fees": 0.4774385014194052
    },
    "cerveau": {
-    "cash": 90,
+    "cash": 85,
     "positions": [
      {
       "name": "WILDCAT",
@@ -2837,7 +2943,7 @@
       "pair": "CXjGQnWQEZMnf7LiZkU8428urcAxhmbBMsDZJueDnkK5",
       "t": 1791903064187,
       "entry": 0.00004523,
-      "last": 0.00005046,
+      "last": 0.00005597,
       "peak": 0.000056,
       "qty": 107892.99137740438,
       "cost": 5
@@ -2848,9 +2954,20 @@
       "pair": "Hgz6n2m8c4MH4dqG1HZmL5JoEwphSQFppnCHM6CSnMKE",
       "t": 1791903064187,
       "entry": 0.0001603,
-      "last": 0.0002261,
+      "last": 0.0002015,
       "peak": 0.0002261,
       "qty": 30442.91952588896,
+      "cost": 5
+     },
+     {
+      "name": "OSPREY",
+      "addr": "FCVohFrokwz6rELLNgnQT426RbRjXQMy4RY6zrUjpump",
+      "pair": "41RfVWj5SMhaqGzCvzX1ZozizkfAf14rWg3P7PGQPNDz",
+      "t": 1791904143934,
+      "entry": 0.00003981,
+      "last": 0.00003981,
+      "peak": 0.00003981,
+      "qty": 122582.26576237126,
       "cost": 5
      }
     ],
@@ -2870,6 +2987,14 @@
       "price": 0.0001603,
       "usd": 5,
       "reason": "38 min, 154 k$, créateur 0.0 %, top 10 24 %"
+     },
+     {
+      "t": 1791904143934,
+      "side": "achat",
+      "name": "OSPREY",
+      "price": 0.00003981,
+      "usd": 5,
+      "reason": "1 min, 40 k$, créateur 0.0 %, top 10 19 %"
      }
     ],
     "history": [
@@ -2888,9 +3013,13 @@
      [
       1791903844359,
       102.33
+     ],
+     [
+      1791904143934,
+      102.05
      ]
     ],
-    "fees": 0.2400000000000002
+    "fees": 0.3600000000000003
    }
   },
   "seen": {
@@ -3270,37 +3399,50 @@
      "danger": [],
      "rugged": false
     }
+   },
+   "FCVohFrokwz6rELLNgnQT426RbRjXQMy4RY6zrUjpump": {
+    "t": 1791904143934,
+    "rc": {
+     "creatorPct": 0,
+     "mintAuth": false,
+     "freezeAuth": false,
+     "top10": 18.823174070220237,
+     "insiders": 0,
+     "holders": 1031,
+     "danger": [],
+     "rugged": false
+    }
    }
   },
   "watch": [
    {
+    "name": "OSPREY",
+    "ageMin": 1,
+    "mcap": 39747,
+    "twitter": true,
+    "ok": true,
+    "why": "tous les critères"
+   },
+   {
     "name": "WILDCAT",
-    "ageMin": 45,
-    "mcap": 50466,
+    "ageMin": 50,
+    "mcap": 55923,
     "twitter": true,
     "ok": true,
     "why": "tous les critères"
    },
    {
     "name": "ROUTE",
-    "ageMin": 51,
-    "mcap": 229127,
+    "ageMin": 56,
+    "mcap": 211026,
     "twitter": true,
     "ok": true,
     "why": "tous les critères"
-   },
-   {
-    "name": "Lion",
-    "ageMin": 158,
-    "mcap": 35675,
-    "twitter": true,
-    "ok": false,
-    "why": "réseau d’insiders détecté"
    }
   ],
   "brain": {
-   "n": 1,
-   "pending": 4,
+   "n": 3,
+   "pending": 3,
    "rate": 0,
    "avg": -0.348,
    "ready": false,
