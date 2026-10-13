@@ -511,6 +511,13 @@
    39.69,
    29.96,
    29.96
+  ],
+  [
+   1791913144171,
+   99.61,
+   39.69,
+   29.96,
+   29.96
   ]
  ],
  "watch": [
@@ -567,7 +574,7 @@
   "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
  ],
  "lastScan": 1791910444017,
- "lastRun": 1791912844150,
+ "lastRun": 1791913144171,
  "casino": {
   "start": 1791871130814,
   "cash": 25.289511098538647,
@@ -577,7 +584,7 @@
     "addr": "7jNwX4Me9zGEjmWY7zARDG2LYjVs1WXD6DZ1JvSfpump",
     "t": 1791871130814,
     "entry": 0.004938006291740259,
-    "last": 0.00328245227878323,
+    "last": 0.003122580239978293,
     "qty": 3989.4643376522104,
     "cost": 20
    },
@@ -587,7 +594,7 @@
     "pool": "9dsiuydk5EFRCLk6VEywY95Nn3jjGbdWNijuACf1PXuA",
     "t": 1791881059759,
     "entry": 0.0004080669441752599,
-    "last": 0.0002542048952786713,
+    "last": 0.0002647421110623862,
     "qty": 40198.24273875863,
     "cost": 16.653374696061487
    },
@@ -597,7 +604,7 @@
     "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
     "t": 1791881059759,
     "entry": 0.0010044825832740145,
-    "last": 0.0009692327201670282,
+    "last": 0.0010036852505771166,
     "qty": 16330.371824023758,
     "cost": 16.653374696061487
    }
@@ -964,6 +971,10 @@
    [
     1791912844150,
     64.43
+   ],
+   [
+    1791913144171,
+    64.78
    ]
   ],
   "watch": [
