@@ -4,7 +4,24 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-const { runSniper } = require('./sniper.js');
+const { runSniper, apiUsage } = require('./sniper.js');
+
+// Flux temps réel gratuit (PumpPortal) : chaque token qui sort de pump.fun nous est signalé à la seconde,
+// sans rien demander à personne, donc sans limite. On le garde 3 h dans la liste à analyser.
+const pushed = [];
+let wsOk = false;
+function stream() {
+  const ws = new WebSocket('wss://pumpportal.fun/api/data');
+  ws.onopen = () => { wsOk = true; ws.send(JSON.stringify({ method: 'subscribeMigration' })); log('flux temps réel pump.fun connecté'); };
+  ws.onmessage = (e) => {
+    try {
+      const d = JSON.parse(e.data);
+      if (d.mint && !pushed.some((x) => x.mint === d.mint)) pushed.push({ mint: d.mint, t: Date.now() });
+    } catch { /* message de service */ }
+  };
+  ws.onclose = () => { wsOk = false; setTimeout(stream, 5000); };
+  ws.onerror = () => { try { ws.close(); } catch { /* déjà fermé */ } };
+}
 
 const REPO = 'yunusyesiloglu91-alt/portefeuilles';
 const FILE = path.join(__dirname, 'sniper5-state.json');
@@ -41,12 +58,15 @@ guard.listen(47125, '127.0.0.1', async () => {
   token = execSync('gh auth token', { encoding: 'utf8' }).trim();
   const st = await bootstrap();
   log('sniper en continu démarré');
+  stream();
   let lastScan = 0, lastPub = 0;
   for (;;) {
     const now = Date.now();
     const scan = now - lastScan >= SCAN;
     try {
-      const notes = await runSniper(st, now, { exitsOnly: !scan });
+      while (pushed.length && now - pushed[0].t > 3 * 3600000) pushed.shift();
+      const notes = await runSniper(st, now, { exitsOnly: !scan, pushed });
+      st.sniper.live = { stream: wsOk, pushed: pushed.length, api: apiUsage(), t: now };
       if (scan) lastScan = now;
       const shown = notes.filter((n) => !/aucun lancement/.test(n));
       if (shown.length) log(shown.join(' · '));

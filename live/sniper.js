@@ -21,17 +21,37 @@ const STAKE = 5, CAPITAL = 100, MAX_OPEN = 15;
 const FEES = { tool: 0.01, dex: 0.003, slip: 0.005, fixed: 0.03 };
 const COST = FEES.tool + FEES.dex + FEES.slip;
 
+// Budget d'appels par minute pour chaque site gratuit, gardé sous leurs limites officielles.
+// Si le budget est épuisé ou si le site répond « trop de requêtes », on saute l'appel au lieu d'attendre.
+const BUDGET = [
+  [/dexscreener\.com\/(token-profiles|token-boosts)/, 50],
+  [/dexscreener\.com/, 240],
+  [/geckoterminal\.com/, 20],
+  [/rugcheck\.xyz/, 40],
+];
+const calls = {}, pauseUntil = {};
+function allowed(url) {
+  const i = BUDGET.findIndex(([re]) => re.test(url));
+  if (i < 0) return { ok: true };
+  const now = Date.now();
+  if (pauseUntil[i] > now) return { ok: false };
+  calls[i] = (calls[i] || []).filter((t) => now - t < 60000);
+  if (calls[i].length >= BUDGET[i][1]) return { ok: false };
+  calls[i].push(now);
+  return { ok: true, i };
+}
 async function json(url) {
-  for (let k = 0; k < 2; k++) {
-    try {
-      const r = await fetch(url, { headers: { accept: 'application/json' } });
-      if (r.ok) return await r.json();
-      if (r.status === 429) await sleep(5000);
-    } catch { /* réseau */ }
-    await sleep(1000);
-  }
+  const a = allowed(url);
+  if (!a.ok) return null;
+  try {
+    const r = await fetch(url, { headers: { accept: 'application/json' }, signal: AbortSignal.timeout(4000) });
+    if (r.ok) return await r.json();
+    if (r.status === 429 && a.i != null) pauseUntil[a.i] = Date.now() + 15000; // le site demande de ralentir : pause de 15 s pour lui seul
+  } catch { /* réseau */ }
   return null;
 }
+const API_NAMES = ['DexScreener (nouveautés)', 'DexScreener (prix)', 'GeckoTerminal', 'RugCheck'];
+const apiUsage = () => Object.fromEntries(BUDGET.map(([, max], i) => [API_NAMES[i], { used: (calls[i] || []).filter((t) => Date.now() - t < 60000).length, max, paused: pauseUntil[i] > Date.now() }]));
 
 // Analyse RugCheck réduite à ce qui compte
 async function rugcheck(addr) {
@@ -122,6 +142,7 @@ async function runSniper(st, now, opts = {}) {
   // GeckoTerminal limite à 30 appels/min : nouveaux pools au plus toutes les 20 s (le robot Prudent l'utilise aussi)
   if (!S.gtT || now - S.gtT >= 20000) { S.gtT = now; S.gtNp = await json(`${GT}/networks/solana/new_pools?page=1&include=base_token`); }
   const np = S.gtNp;
+  for (const x of opts.pushed || []) if (!fresh.has(x.mint)) fresh.set(x.mint, { twitter: null });
   for (const p of (np && np.data) || []) {
     const a = p.relationships.base_token.data.id.replace('solana_', '');
     if (!fresh.has(a)) fresh.set(a, { twitter: null });
@@ -147,18 +168,15 @@ async function runSniper(st, now, opts = {}) {
   }
   const base = cands.filter((c) => c.ageH <= FILTER_BASE.maxAgeH && c.mcap >= FILTER_BASE.minMcap && c.mcap <= FILTER_BASE.maxMcap && c.liq >= FILTER_BASE.minLiq && c.price > 0);
 
-  // 4. Analyse RugCheck (une fois par token, max 8 par passage)
-  let checks = 0;
+  // 4. Analyse RugCheck (une fois par token, jusqu'à 6 en parallèle)
+  const todo = [];
   for (const c of base) {
     const s = S.seen[c.addr];
-    if (s && s.rc !== undefined) { c.rc = s.rc; continue; }
-    if (checks >= 8) continue;
-    checks++;
-    c.rc = await rugcheck(c.addr);
-    S.seen[c.addr] = { t: now, rc: c.rc };
-    await sleep(800);
+    if (s && s.rc) c.rc = s.rc;
+    else if (todo.length < 6) todo.push(c);
   }
-  for (const c of base) if (!S.seen[c.addr]) S.seen[c.addr] = { t: now, rc: c.rc };
+  await Promise.all(todo.map(async (c) => { c.rc = await rugcheck(c.addr); if (c.rc) S.seen[c.addr] = { t: (S.seen[c.addr] || {}).t || now, rc: c.rc }; }));
+  for (const c of base) if (!S.seen[c.addr]) S.seen[c.addr] = { t: now, rc: null };
   for (const a in S.seen) if (now - S.seen[a].t > 24 * H) delete S.seen[a];
 
   // 5. Cerveau : mémorise chaque lancement, suit les anciens, met à jour les leçons
@@ -211,4 +229,4 @@ async function runSniper(st, now, opts = {}) {
   return notes;
 }
 
-module.exports = { runSniper, VARIANTS, CAPITAL };
+module.exports = { runSniper, VARIANTS, CAPITAL, apiUsage };

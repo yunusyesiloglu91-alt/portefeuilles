@@ -301,7 +301,7 @@
     if (rt && rt.variants.temoin) rows2 += line('⚡ À la seconde', 'achète tout à la création (impossible à la main)', rVal(rt.variants.temoin), 100, '$', stats(rt.variants.temoin.trades), rt.variants.temoin.positions.length);
     $('recap').innerHTML = `<div class="name" style="margin-bottom:10px">📊 Récapitulatif</div>
       <table class="recap"><thead><tr><th>Portefeuille</th><th>Valeur</th><th>Gagnés</th><th>Meilleur</th></tr></thead><tbody>${rows2}</tbody></table>
-      <div class="empty" style="padding:10px 0 0">⭐ = la stratégie suivie par la carte Sniper. « Gagnés » = trades fermés en gain. Frais déjà déduits.</div>`;
+      ${sn && sn.live ? `<div class="empty" style="padding:10px 0 0">📡 Flux temps réel pump.fun : <b style="color:${sn.live.stream ? "var(--up)" : "var(--down)"}">${sn.live.stream ? "connecté" : "coupé"}</b> · ${sn.live.pushed} tokens signalés (3 h) · appels/min : ${Object.entries(sn.live.api).map(([k, x]) => `${esc(k)} ${x.used}/${x.max}${x.paused ? " ⏸" : ""}`).join(" · ")}</div>` : ""}<div class="empty" style="padding:10px 0 0">⭐ = la stratégie suivie par la carte Sniper. « Gagnés » = trades fermés en gain. Frais déjà déduits.</div>`;
 
     // ---------- Cerveau
     const br = sn && sn.brain;
