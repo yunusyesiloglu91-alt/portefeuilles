@@ -5,6 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 const { runSniper, manualSell, apiUsage } = require('./sniper.js');
+const Rapport = require('./rapport.js');
+const REPORTED = ['qualite', 'cerveau'];
 
 // Notifications et bouton « Vendre » via ntfy.sh (service gratuit de messages, sans compte).
 // NOTIF : le PC annonce chaque achat / vente (le site et l'appli ntfy du téléphone l'affichent).
@@ -90,6 +92,8 @@ guard.listen(47125, '127.0.0.1', async () => {
   commands();
   let lastScan = 0, lastPub = 0;
   let seenT = Math.max(0, ...st.sniper.variants[MAIN].trades.map((t) => t.t));
+  const repT = {};
+  for (const id of REPORTED) repT[id] = Math.max(0, ...((st.sniper.variants[id] || { trades: [] }).trades.map((t) => t.t)));
   for (;;) {
     const now = Date.now();
     const scan = now - lastScan >= SCAN;
@@ -101,6 +105,15 @@ guard.listen(47125, '127.0.0.1', async () => {
         if (t) { log(`vente à la main : ${t.name}`); lastPub = 0; }
       }
       for (const t of st.sniper.variants[MAIN].trades) if (t.t > seenT) { seenT = t.t; notify(t); }
+      for (const id of REPORTED) {
+        const v = st.sniper.variants[id];
+        if (!v) continue;
+        for (const t of v.trades) if (t.t > repT[id]) {
+          repT[id] = t.t;
+          if (t.side === 'vente' && !/moitié/.test(t.reason || '')) Rapport.report(st.sniper, id, t);
+        }
+      }
+      st.sniper.advice = Rapport.advice(st.sniper);
       st.sniper.live = { stream: wsOk, pushed: pushed.length, api: apiUsage(), t: now, notif: NOTIF, cmd: CMD };
       if (scan) lastScan = now;
       const shown = notes.filter((n) => !/aucun lancement/.test(n));

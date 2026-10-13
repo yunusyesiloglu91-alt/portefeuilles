@@ -113,6 +113,7 @@ async function runSniper(st, now, opts = {}) {
       if (!(price > 0)) { if (now - p.t > (V.maxH + 6) * H) { v.positions.splice(v.positions.indexOf(p), 1); v.trades.push({ t: now, side: 'vente', name: p.name, price: 0, usd: 0, ret: -1, reason: 'plus de cotation (token mort)' }); } continue; }
       p.last = price;
       p.peak = Math.max(p.peak || p.entry, price);
+      p.low = Math.min(p.low || p.entry, price);
       const sell = (part, reason) => {
         const qty = p.qty * part;
         const gross = qty * price;
@@ -122,7 +123,8 @@ async function runSniper(st, now, opts = {}) {
         p.qty -= qty;
         p.realized = (p.realized || 0) + usd;
         const done = p.qty <= 1e-12 || part >= 1;
-        v.trades.push({ t: now, side: 'vente', name: p.name, price, usd, ret: done ? p.realized / p.cost - 1 : usd / (p.cost * part) - 1, reason: done ? reason : `${reason} (moitié)` });
+        v.trades.push({ t: now, side: 'vente', name: p.name, price, usd, ret: done ? p.realized / p.cost - 1 : usd / (p.cost * part) - 1, reason: done ? reason : `${reason} (moitié)`,
+          ...(done ? { f: p.f, held: now - p.t, peak: (p.peak || p.entry) / p.entry, low: (p.low || p.entry) / p.entry } : {}) });
         if (done) v.positions.splice(v.positions.indexOf(p), 1);
       };
       if (price <= p.entry * (1 - V.sl) && !p.tp1Done) sell(1, `stop −${V.sl * 100} %`);
@@ -221,7 +223,9 @@ async function runSniper(st, now, opts = {}) {
       v.cash -= STAKE;
       const net = STAKE * (1 - COST) - FEES.fixed;
       v.fees = (v.fees || 0) + (STAKE - net);
-      v.positions.push({ name: c.name, addr: c.addr, pair: c.pair, t: now, entry: c.price, last: c.price, peak: c.price, qty: net / c.price, cost: STAKE });
+      const f = { ageMin: Math.round(c.ageH * 60), mcap: c.mcap, liq: c.liq, buys: c.buys1h, sells: c.sells1h, twitter: !!c.twitter,
+        creatorPct: c.rc ? c.rc.creatorPct : null, top10: c.rc ? c.rc.top10 : null, holders: c.rc ? c.rc.holders : null, brain: V.brain ? c.brainWhy || 'filtres Qualité' : undefined };
+      v.positions.push({ name: c.name, addr: c.addr, pair: c.pair, t: now, entry: c.price, last: c.price, peak: c.price, qty: net / c.price, cost: STAKE, f });
       v.trades.push({ t: now, side: 'achat', name: c.name, price: c.price, usd: STAKE, reason: `${Math.round(c.ageH * 60)} min, ${Math.round(c.mcap / 1e3)} k$` + (c.rc ? `, créateur ${c.rc.creatorPct.toFixed(1)} %, top 10 ${c.rc.top10.toFixed(0)} %` : '') + (V.brain && c.brainWhy ? `, ${c.brainWhy}` : '') });
     }
   }
@@ -251,7 +255,7 @@ function manualSell(st, id, addr) {
   v.fees = (v.fees || 0) + (gross - usd);
   v.cash += usd;
   p.realized = (p.realized || 0) + usd;
-  const t = { t: Date.now(), side: 'vente', name: p.name, price, usd, ret: p.realized / p.cost - 1, reason: 'vendu à la main' };
+  const t = { t: Date.now(), side: 'vente', name: p.name, price, usd, ret: p.realized / p.cost - 1, reason: 'vendu à la main', f: p.f, held: Date.now() - p.t, peak: (p.peak || p.entry) / p.entry };
   v.trades.push(t);
   v.positions.splice(v.positions.indexOf(p), 1);
   return t;

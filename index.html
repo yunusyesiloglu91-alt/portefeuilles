@@ -93,6 +93,8 @@
   <div id="last"></div>
   <h2>🧠 Le cerveau apprend</h2>
   <div class="card" id="brain"></div>
+  <h2>📋 Rapports après chaque trade</h2>
+  <div id="reports"></div>
   <button class="big" id="detailsBtn" aria-expanded="false">Détails</button>
   <div id="details" hidden>
     <div class="card" id="recap"></div>
@@ -344,6 +346,16 @@
       ${br.exit ? `<div class="lesson"><span>🎯 Meilleure sortie apprise</span><b>+${Math.round(br.exit.tp * 100)} % / stop −${Math.round(br.exit.sl * 100)} %</b></div><div class="empty" style="padding:0 0 6px">Trade moyen après frais : ${pct(br.exit.avg)} sur ${br.exit.n} tokens suivis 24 h. Le Cerveau l’applique tout seul.</div>` : ""}
       ${br.good.length ? '<div style="font-weight:700;margin-top:6px">✅ Ce qui marche</div>' + br.good.map((l) => les(l, true)).join('') : ''}
       ${br.bad.length ? '<div style="font-weight:700;margin-top:10px">❌ À éviter</div>' + br.bad.map((l) => les(l, false)).join('') : ''}`;
+
+    // ---------- Rapports automatiques
+    const reps = (sn && sn.reports ? sn.reports.slice(-6).reverse() : []);
+    const RLAB = { qualite: '⭐ Qualité', cerveau: '🧠 Cerveau' };
+    $('reports').innerHTML = (sn && sn.advice ? `<div class="card" style="padding:14px"><b>💡 Ce que le robot en conclut</b><div class="empty" style="padding:6px 0 0;color:var(--text)">${esc(sn.advice)}</div></div>` : '')
+      + (reps.length ? reps.map((r) => `<div class="row" style="align-items:flex-start"><div class="bar" style="background:${r.ret > 0 ? 'var(--up)' : 'var(--down)'}"></div>
+        <div class="main"><div class="t">${r.ret > 0 ? '✅' : '❌'} ${esc(r.name)} <span class="${cls(r.ret)}">${pct(r.ret)}</span></div>
+          <div class="s" style="white-space:normal">${RLAB[r.id] || r.id} · ${time(r.t)} · ${esc(r.txt)}</div>
+          <div class="s" style="white-space:normal;color:var(--text)">👉 ${esc(r.fix)}</div></div></div>`).join('')
+        : '<div class="empty">Le premier rapport arrivera à la prochaine vente.</div>');
 
     // ---------- Frais
     const fz = sn && sn.fees;
