@@ -6,3 +6,7 @@ live/sniper-rt.log
 live/robot-pc.log
 node_modules/
 live/.env
+live/cerveau-obs.json
+live/cerveau-obs.json.tmp
+live/state.json.tmp
+cerveau/

@@ -57,6 +57,10 @@
   .recap td { padding: 9px 4px; border-top: 1px solid var(--line); text-align: right; white-space: nowrap; }
   .recap td:first-child { white-space: normal; font-weight: 700; }
   .recap td small { display: block; color: var(--muted); font-weight: 500; font-size: 11px; }
+  .lesson { display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 13px; }
+  .lesson b { white-space: nowrap; }
+  .progress { height: 8px; border-radius: 99px; background: var(--bg); overflow: hidden; margin: 10px 0 4px; }
+  .progress i { display: block; height: 100%; background: #c084fc; }
   .recap tr.grp td { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .05em; padding-top: 14px; border-top: none; }
   details > summary { cursor: pointer; font-size: 16px; font-weight: 700; padding: 12px 0; color: var(--blue); }
   footer { color: var(--muted); font-size: 12px; text-align: center; margin-top: 24px; line-height: 1.5; }
@@ -73,15 +77,18 @@
     <div class="live off" id="live"><i></i><span>…</span></div>
   </header>
   <div id="err"></div>
-  <div class="card" id="recap"></div>
   <div id="cards"></div>
-  <details><summary>Voir le détail de chaque stratégie</summary>
+  <div class="card" id="recap"></div>
+  <div class="card" id="brain"></div>
+  <div class="card" id="fees"></div>
+  <h2>Positions en cours</h2>
+  <div id="positions"></div>
+  <details><summary>Autres portefeuilles et détails</summary>
+  <div id="others"></div>
   <div id="lab"></div>
   <div id="rt"></div>
   </details>
-  <h2>Positions en cours</h2>
-  <div id="positions"></div>
-  <h2>Achats et ventes</h2>
+  <details><summary>Historique des achats et ventes</summary>
   <div class="seg" id="filter">
     <button data-f="all" aria-pressed="true">Tout</button>
     <button data-f="Casino" aria-pressed="false">🎰 Casino</button>
@@ -90,7 +97,8 @@
     <button data-f="Seconde" aria-pressed="false">⚡ Seconde</button>
   </div>
   <div id="trades"></div>
-  <footer>Argent virtuel uniquement · aucun ordre réel n'est passé.<br>Prix : Binance et DexScreener, recalculés toutes les 15 s. Le robot décide toutes les 5 min. Sniping : nouveaux tokens via DexScreener, sécurité via RugCheck.</footer>
+  </details>
+  <footer>Argent virtuel uniquement · aucun ordre réel n'est passé.<br>Prix : Binance et DexScreener, recalculés toutes les 15 s. Le robot décide toutes les 5 min. Sniping : nouveaux tokens via DexScreener, sécurité via RugCheck. Frais réalistes inclus dans tous les résultats.</footer>
 </div>
 <script>
 (() => {
@@ -102,7 +110,7 @@
   const RTLAB = { diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
   const rp = (p) => { const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry; };
   const rVal = (v) => v.cash + v.positions.reduce((a, p) => a + p.qty * rp(p), 0);
-  const LAB = { qualite: '🎯 Sniper qualité', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)' };
+  const LAB = { qualite: '🎯 Sniper qualité', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)', cerveau: '🧠 Cerveau (apprend tout seul)' };
 
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -208,14 +216,14 @@
     $('live').querySelector('span').textContent = fresh ? `EN DIRECT · ${ago(lastPx)}` : 'hors ligne';
 
     const czClosed = cz.trades.filter((t) => t.side === 'vente');
-    $('cards').innerHTML =
+    $('others').innerHTML =
       card('🛡️ Prudent', 'BTC · SOL · MEMES', 'var(--blue)', `${num(total)} €`, total / 100 - 1, 'depuis le départ',
         [...st.history.map((h) => [h[0], h[1]]), [now, total]], 100, [
           [`Bitcoin · ${b.qty > 0 ? 'investi' : 'attente'}`, `${num(vBtc / eurusd)} €`, b.qty > 0 ? 'var(--up)' : 'var(--muted)'],
           [`Solana · ${s.qty > 0 ? 'investi' : 'attente'}`, `${num(vSol / eurusd)} €`, s.qty > 0 ? 'var(--up)' : 'var(--muted)'],
           ['Memecoins', `${num(vMeme / eurusd)} € · ${m.positions.length}/3`],
         ]) +
-      card('🎰 Casino', 'TRÈS RISQUÉ', 'var(--amber)', `${num(czVal)} $`, czVal / CASINO_CAPITAL - 1, 'depuis le départ',
+      card('🎰 Casino', cz.paused ? 'EN PAUSE' : 'TRÈS RISQUÉ', cz.paused ? 'var(--muted)' : 'var(--amber)', `${num(czVal)} $`, czVal / CASINO_CAPITAL - 1, 'depuis le départ',
         [...cz.history, [now, czVal]], CASINO_CAPITAL, [
           ['Positions', `${cz.positions.length} sur 5`],
           ['Cash', `${num(cz.cash)} $`],
@@ -227,7 +235,7 @@
     const snq = sn && sn.variants.qualite;
     if (snq) {
       const v = vVal(snq), closed = snq.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
-      $('cards').innerHTML += card('🎯 Sniper', '5 $ PAR TRADE', '#c084fc', `${num(v)} $`, v / 100 - 1, 'depuis le départ',
+      $('cards').innerHTML = card('🎯 Sniper', 'PORTEFEUILLE PRINCIPAL', '#c084fc', `${num(v)} $`, v / 100 - 1, 'depuis le départ',
         [...snq.history, [now, v]], 100, [
           ['Positions', `${snq.positions.length} ouvertes`],
           ['Cash', `${num(snq.cash)} $`],
@@ -282,25 +290,40 @@
         <td>${sx.n ? `${sx.win}/${sx.n}` : '—'}<small>${open} en cours</small></td>
         <td class="${sx.best > -Infinity ? cls(sx.best) : 'flat'}">${sx.best > -Infinity ? pct(sx.best) : '—'}</td></tr>`;
     };
-    let rows2 = '<tr class="grp"><td colspan="4">LES 4 PORTEFEUILLES</td></tr>';
-    rows2 += line('🛡️ Prudent', 'Bitcoin, Solana, quelques memes', total, 100, '€', stats(st.trades), (b.qty > 0) + (s.qty > 0) + m.positions.length);
-    rows2 += line('🎰 Casino', 'memecoins jeunes qui montent', czVal, CASINO_CAPITAL, '$', stats(cz.trades), cz.positions.length);
-    if (snq) rows2 += line('🎯 Sniper 5 min', 'nouveaux tokens, vérifiés toutes les 5 min', vVal(snq), 100, '$', stats(snq.trades), snq.positions.length);
-    if (rts) rows2 += line('🔍 Sniper créateur', 'à la seconde, créateur analysé', rVal(rts), 100, '$', stats(rts.trades), rts.positions.length);
-    if (rt) {
-      rows2 += '<tr class="grp"><td colspan="4">TESTS « À LA SECONDE »</td></tr>';
-      for (const [id, x] of Object.entries(rt.variants).sort((a, c) => rVal(c[1]) - rVal(a[1]))) {
-        if (id === 'createur') continue;
-        rows2 += line(RTLAB[id] || id, /emoin/i.test(id) ? 'achète tout, sert de comparaison' : id === 'ia' && !rt.aiEnabled ? 'inactive : pas de clé API' : 'avec filtres de sécurité', rVal(x), 100, '$', stats(x.trades), x.positions.length);
-      }
-    }
-    if (sn) {
-      rows2 += '<tr class="grp"><td colspan="4">TESTS « 5 MIN »</td></tr>';
-      for (const [id, x] of Object.entries(sn.variants).sort((a, c) => vVal(c[1]) - vVal(a[1]))) if (id !== 'qualite') rows2 += line(LAB[id] || id, '5 $ par trade', vVal(x), 100, '$', stats(x.trades), x.positions.length);
-    }
+    const SUB = { qualite: 'Twitter, créateur ≤ 5 %, sécurité · vend ½ à ×2', eclair: 'mêmes filtres · vend tout à +50 %', moonshot: 'mêmes filtres · vise ×5', temoin: 'achète tout · sert de comparaison', cerveau: 'achète ce qui a le mieux marché · vend ½ à +50 %' };
+    let rows2 = '<tr class="grp"><td colspan="4">🎯 SNIPER · STRATÉGIES EN TEST</td></tr>';
+    if (sn) for (const [id, x] of Object.entries(sn.variants).sort((a, c) => vVal(c[1]) - vVal(a[1]))) rows2 += line((id === 'qualite' ? '⭐ ' : '') + (LAB[id] || id), SUB[id] || '', vVal(x), 100, '$', stats(x.trades), x.positions.length);
+    rows2 += '<tr class="grp"><td colspan="4">AUTRES PORTEFEUILLES</td></tr>';
+    rows2 += line('🛡️ Prudent', 'Bitcoin, Solana', total, 100, '€', stats(st.trades), (b.qty > 0) + (s.qty > 0) + m.positions.length);
+    rows2 += line('🎰 Casino', cz.paused ? 'en pause : plus d’achats' : 'memecoins jeunes', czVal, CASINO_CAPITAL, '$', stats(cz.trades), cz.positions.length);
+    if (rt && rt.variants.temoin) rows2 += line('⚡ À la seconde', 'achète tout à la création (impossible à la main)', rVal(rt.variants.temoin), 100, '$', stats(rt.variants.temoin.trades), rt.variants.temoin.positions.length);
     $('recap').innerHTML = `<div class="name" style="margin-bottom:10px">📊 Récapitulatif</div>
       <table class="recap"><thead><tr><th>Portefeuille</th><th>Valeur</th><th>Gagnés</th><th>Meilleur</th></tr></thead><tbody>${rows2}</tbody></table>
-      <div class="empty" style="padding:10px 0 0">« Gagnés » = trades fermés en gain. « Meilleur » = meilleure vente. Les ventes à +500 % et plus viennent de tokens achetés à la seconde de leur création : en vrai, on obtiendrait rarement ce prix-là.</div>`;
+      <div class="empty" style="padding:10px 0 0">⭐ = la stratégie suivie par la carte Sniper. « Gagnés » = trades fermés en gain. Frais déjà déduits.</div>`;
+
+    // ---------- Cerveau
+    const br = sn && sn.brain;
+    const les = (l, good) => `<div class="lesson"><span>${esc(l.feat)} : <b>${esc(l.k)}</b></span><b class="${good ? 'pos' : 'neg'}">${Math.round(l.rate * 100)} % de réussite</b></div>`;
+    $('brain').innerHTML = !br ? '<div class="name">🧠 Cerveau</div><div class="empty">En démarrage…</div>' : `<div class="name">🧠 Ce que le cerveau a appris</div>
+      <div class="empty" style="padding:6px 0 0">Il note chaque nouveau token (acheté ou non), puis regarde s'il a pris +50 % avant de perdre 30 %.</div>
+      ${br.ready ? '' : `<div class="progress"><i style="width:${Math.min(100, (br.n / br.min) * 100).toFixed(0)}%"></i></div>
+      <div class="empty" style="padding:0">Apprentissage : ${br.n} / ${br.min} tokens suivis jusqu'au bout · ${br.pending} en observation</div>`}
+      ${br.n ? `<div class="empty" style="padding:8px 0">Réussite moyenne : <b style="color:var(--text)">${Math.round(br.rate * 100)} %</b></div>` : ''}
+      ${br.good.length ? '<div style="font-weight:700;margin-top:6px">✅ Ce qui marche</div>' + br.good.map((l) => les(l, true)).join('') : ''}
+      ${br.bad.length ? '<div style="font-weight:700;margin-top:10px">❌ À éviter</div>' + br.bad.map((l) => les(l, false)).join('') : ''}`;
+
+    // ---------- Frais
+    const fz = sn && sn.fees;
+    if (fz) {
+      const paid = Object.values(sn.variants).reduce((a, v) => a + (v.fees || 0), 0);
+      const rowF = (k, v) => `<div class="lesson"><span>${k}</span><b>${v}</b></div>`;
+      $('fees').innerHTML = `<div class="name">💸 Ce que coûte un trade</div>
+        <div class="empty" style="padding:6px 0 4px">Pour un ordre de 5 $ (achat ou vente) :</div>
+        ${rowF('Robot de trading', num(fz.tool * 100, 1) + ' %')}${rowF('Plateforme d’échange', num(fz.dex * 100, 1) + ' %')}
+        ${rowF('Glissement de prix', num(fz.slip * 100, 1) + ' %')}${rowF('Réseau Solana', num(fz.fixed, 2) + ' $')}
+        ${rowF('<b>Aller-retour (achat + vente)</b>', '≈ ' + num(2 * fz.perOrder * 100, 1) + ' %')}
+        <div class="empty" style="padding:8px 0 0">Un token doit monter d'environ ${Math.round(2 * fz.perOrder * 100)} % juste pour rembourser les frais. Frais déjà payés (nouveau calcul depuis le 13/10 16 h 50) : ${num(paid)} $.</div>`;
+    } else $('fees').style.display = 'none';
 
     // Positions
     const rows = [];

@@ -13,8 +13,13 @@ const VARIANTS = {
   eclair: { name: '⚡ Sniper éclair', quality: true, tp1: 0.5, tp1Part: 1, sl: 0.25, maxH: 6 },
   moonshot: { name: '🚀 Moonshot', quality: true, tp1: 4, tp1Part: 1, sl: 0.5, maxH: 72 },
   temoin: { name: '🎲 Sans filtre (témoin)', quality: false, tp1: 1, tp1Part: 1, sl: 0.35, maxH: 24 },
+  cerveau: { name: '🧠 Cerveau', quality: true, brain: true, tp1: 0.5, tp1Part: 0.5, trail: 0.25, sl: 0.3, maxH: 24 },
 };
-const STAKE = 5, CAPITAL = 100, COST = 0.02, MAX_OPEN = 15; // 2 % par ordre : frais + glissement sur tokens très jeunes
+const Brain = require('./cerveau.js');
+const STAKE = 5, CAPITAL = 100, MAX_OPEN = 15;
+// Frais réalistes d'un ordre de 5 $ sur Solana : outil de trading 1 %, DEX 0,3 %, glissement 0,5 %, réseau + priorité 0,03 $
+const FEES = { tool: 0.01, dex: 0.003, slip: 0.005, fixed: 0.03 };
+const COST = FEES.tool + FEES.dex + FEES.slip;
 
 async function json(url) {
   for (let k = 0; k < 2; k++) {
@@ -66,6 +71,7 @@ async function runSniper(st, now) {
     for (const id in VARIANTS) st.sniper.variants[id] = { cash: CAPITAL, positions: [], trades: [], history: [] };
   }
   const S = st.sniper;
+  for (const id in VARIANTS) if (!S.variants[id]) S.variants[id] = { cash: CAPITAL, positions: [], trades: [], history: [], fees: 0 };
   const notes = [];
 
   // 1. Prix des positions ouvertes (DexScreener, par paire achetée)
@@ -87,7 +93,9 @@ async function runSniper(st, now) {
       p.peak = Math.max(p.peak || p.entry, price);
       const sell = (part, reason) => {
         const qty = p.qty * part;
-        const usd = qty * price * (1 - COST);
+        const gross = qty * price;
+        const usd = Math.max(0, gross * (1 - COST) - FEES.fixed);
+        v.fees = (v.fees || 0) + (gross - usd);
         v.cash += usd;
         p.qty -= qty;
         p.realized = (p.realized || 0) + usd;
@@ -149,22 +157,39 @@ async function runSniper(st, now) {
   for (const c of base) if (!S.seen[c.addr]) S.seen[c.addr] = { t: now, rc: c.rc };
   for (const a in S.seen) if (now - S.seen[a].t > 24 * H) delete S.seen[a];
 
-  // 5. Entrées
+  // 5. Cerveau : mémorise chaque lancement, suit les anciens, met à jour les leçons
+  let B = null;
+  try {
+    Brain.observe(base, now);
+    await Brain.track(now, json);
+    B = Brain.stats(2 * Brain.perOrder(FEES));
+    Brain.writeVault(B, S, FEES, now);
+    S.brain = Brain.summary(B);
+  } catch (e) { notes.push(`cerveau : ${e.message}`); }
+  S.fees = { ...FEES, perOrder: Brain.perOrder(FEES) };
+
+  // 6. Entrées
   for (const c of base) {
     c.q = qualityOk(c);
+    const sc = Brain.score(c, B, now);
+    const safe = c.rc && !c.rc.rugged && !c.rc.mintAuth && !c.rc.freezeAuth && !c.rc.danger.length;
+    c.brainOk = sc ? safe && sc.mult >= 1.5 : c.q.ok;
+    c.brainWhy = sc ? `note cerveau ×${sc.mult.toFixed(1)}${sc.why.length ? ' : ' + sc.why.slice(0, 2).join(', ') : ''}` : '';
     for (const [id, v] of Object.entries(S.variants)) {
       const V = VARIANTS[id];
-      if (V.quality && !c.q.ok) continue;
+      if (V.brain ? !c.brainOk : V.quality && !c.q.ok) continue;
       if (v.positions.length >= MAX_OPEN || v.cash < STAKE) continue;
       if (v.positions.some((p) => p.addr === c.addr) || v.trades.some((t) => t.name === c.name && t.side === 'achat' && now - t.t < 24 * H)) continue;
       v.cash -= STAKE;
-      v.positions.push({ name: c.name, addr: c.addr, pair: c.pair, t: now, entry: c.price, last: c.price, peak: c.price, qty: (STAKE * (1 - COST)) / c.price, cost: STAKE });
-      v.trades.push({ t: now, side: 'achat', name: c.name, price: c.price, usd: STAKE, reason: `${Math.round(c.ageH * 60)} min, ${Math.round(c.mcap / 1e3)} k$` + (c.rc ? `, créateur ${c.rc.creatorPct.toFixed(1)} %, top 10 ${c.rc.top10.toFixed(0)} %` : '') });
+      const net = STAKE * (1 - COST) - FEES.fixed;
+      v.fees = (v.fees || 0) + (STAKE - net);
+      v.positions.push({ name: c.name, addr: c.addr, pair: c.pair, t: now, entry: c.price, last: c.price, peak: c.price, qty: net / c.price, cost: STAKE });
+      v.trades.push({ t: now, side: 'achat', name: c.name, price: c.price, usd: STAKE, reason: `${Math.round(c.ageH * 60)} min, ${Math.round(c.mcap / 1e3)} k$` + (c.rc ? `, créateur ${c.rc.creatorPct.toFixed(1)} %, top 10 ${c.rc.top10.toFixed(0)} %` : '') + (V.brain && c.brainWhy ? `, ${c.brainWhy}` : '') });
     }
   }
   S.watch = base.slice(0, 8).map((c) => ({ name: c.name, ageMin: Math.round(c.ageH * 60), mcap: c.mcap, twitter: c.twitter, ok: c.q.ok, why: c.q.why }));
 
-  // 6. Valeurs
+  // 7. Valeurs
   for (const v of Object.values(S.variants)) {
     const val = v.cash + v.positions.reduce((a, p) => a + p.qty * (p.last || p.entry), 0);
     v.history.push([now, +val.toFixed(2)]);

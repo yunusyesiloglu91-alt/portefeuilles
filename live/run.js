@@ -171,7 +171,8 @@ async function main() {
     // 3. Casino : jeunes tokens en pleine accélération
     const casinoOk = (c) => c.ageDays * 24 >= CASINO.minAgeH && c.ageDays <= CASINO.maxAgeD && c.mcap >= CASINO.minMcap && c.mcap <= CASINO.maxMcap &&
       c.liq >= CASINO.minLiq && c.liq / c.mcap >= 0.03 && c.ch1 > 0 && c.ch6 > 0 && c.ch6 <= 2 && c.buyers24 > c.sellers24;
-    const hot = all.filter(casinoOk).sort((x, y) => y.ch1 - x.ch1);
+    cz.paused = true; // arrêté le 13/10 : perd ~27 %, on se concentre sur le sniper (les positions ouvertes finissent leur vie)
+    const hot = cz.paused ? [] : all.filter(casinoOk).sort((x, y) => y.ch1 - x.ch1);
     cz.watch = all.filter((c) => c.ageDays <= CASINO.maxAgeD && c.mcap >= CASINO.minMcap && c.mcap <= CASINO.maxMcap).sort((x, y) => y.vol24 - x.vol24).slice(0, 6)
       .map((c) => ({ name: c.name, mcap: c.mcap, ageDays: c.ageDays, ch1: c.ch1, ch24: c.ch24, ok: casinoOk(c) }));
     const czEquity = cz.cash + cz.positions.reduce((t, p) => t + p.qty * (p.last || p.entry), 0);
