@@ -14,11 +14,14 @@ const REPORTED = ['qualite', 'cerveau'];
 const MAIN = 'qualite';
 const NOTIF = 'sniper-97f143460ae09334d6';
 const CMD = 'sniper-97f143460ae09334d6-cmd';
+const DATA = 'sniper-97f143460ae09334d6-data';
+const mc = (x) => (!x ? '' : x >= 1e6 ? `${(x / 1e6).toFixed(1).replace('.', ',')} M$` : `${Math.max(5, Math.round(x / 5e3) * 5)} k$`);
 const fmt = (p) => (p >= 1 ? p.toFixed(2) : Number(p.toPrecision(3)).toString());
 async function notify(t) {
   const buy = t.side === 'achat';
   const title = buy ? `🟢 Achat ${t.name}` : `${t.ret >= 0 ? '💰' : '🔴'} Vente ${t.name} ${t.ret >= 0 ? '+' : ''}${Math.round(t.ret * 100)} %`;
-  const message = buy ? `5 $ à ${fmt(t.price)} $ le jeton` : `${t.usd.toFixed(2)} $ reçus · ${t.reason}`;
+  const message = buy ? `5 $ · market cap ≈ ${mc(t.mcap)} · ${fmt(t.price)} $ le jeton` : `${t.usd.toFixed(2)} $ reçus · market cap ≈ ${mc(t.mcap)} · ${t.reason}`;
+  try { await fetch('https://ntfy.sh/', { method: 'POST', body: JSON.stringify({ topic: DATA, message: JSON.stringify({ ...t, f: undefined }) }) }); } catch { /* pas grave */ }
   try { await fetch('https://ntfy.sh/', { method: 'POST', body: JSON.stringify({ topic: NOTIF, title, message, tags: [buy ? 'chart_with_upwards_trend' : 'moneybag'] }) }); } catch { /* pas grave */ }
 }
 const orders = [];
