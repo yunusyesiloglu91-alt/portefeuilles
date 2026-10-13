@@ -4,7 +4,35 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-const { runSniper, apiUsage } = require('./sniper.js');
+const { runSniper, manualSell, apiUsage } = require('./sniper.js');
+
+// Notifications et bouton « Vendre » via ntfy.sh (service gratuit de messages, sans compte).
+// NOTIF : le PC annonce chaque achat / vente (le site et l'appli ntfy du téléphone l'affichent).
+// CMD : le site envoie « vendre tel token », le PC exécute.
+const MAIN = 'qualite';
+const NOTIF = 'sniper-97f143460ae09334d6';
+const CMD = 'sniper-97f143460ae09334d6-cmd';
+const fmt = (p) => (p >= 1 ? p.toFixed(2) : Number(p.toPrecision(3)).toString());
+async function notify(t) {
+  const buy = t.side === 'achat';
+  const title = buy ? `🟢 Achat ${t.name}` : `${t.ret >= 0 ? '💰' : '🔴'} Vente ${t.name} ${t.ret >= 0 ? '+' : ''}${Math.round(t.ret * 100)} %`;
+  const message = buy ? `5 $ à ${fmt(t.price)} $ le jeton` : `${t.usd.toFixed(2)} $ reçus · ${t.reason}`;
+  try { await fetch('https://ntfy.sh/', { method: 'POST', body: JSON.stringify({ topic: NOTIF, title, message, tags: [buy ? 'chart_with_upwards_trend' : 'moneybag'] }) }); } catch { /* pas grave */ }
+}
+const orders = [];
+function commands() {
+  const ws = new WebSocket(`wss://ntfy.sh/${CMD}/ws`);
+  ws.onmessage = (e) => {
+    try {
+      const m = JSON.parse(e.data);
+      if (m.event !== 'message') return;
+      const c = JSON.parse(m.message);
+      if (c.action === 'sell' && c.addr && Date.now() - m.time * 1000 < 120000) orders.push(c.addr);
+    } catch { /* message ignoré */ }
+  };
+  ws.onclose = () => setTimeout(commands, 5000);
+  ws.onerror = () => { try { ws.close(); } catch { /* déjà fermé */ } };
+}
 
 // Flux temps réel gratuit (PumpPortal) : chaque token qui sort de pump.fun nous est signalé à la seconde,
 // sans rien demander à personne, donc sans limite. On le garde 3 h dans la liste à analyser.
@@ -59,14 +87,21 @@ guard.listen(47125, '127.0.0.1', async () => {
   const st = await bootstrap();
   log('sniper en continu démarré');
   stream();
+  commands();
   let lastScan = 0, lastPub = 0;
+  let seenT = Math.max(0, ...st.sniper.variants[MAIN].trades.map((t) => t.t));
   for (;;) {
     const now = Date.now();
     const scan = now - lastScan >= SCAN;
     try {
       while (pushed.length && now - pushed[0].t > 3 * 3600000) pushed.shift();
       const notes = await runSniper(st, now, { exitsOnly: !scan, pushed });
-      st.sniper.live = { stream: wsOk, pushed: pushed.length, api: apiUsage(), t: now };
+      while (orders.length) {
+        const t = manualSell(st, MAIN, orders.shift());
+        if (t) { log(`vente à la main : ${t.name}`); lastPub = 0; }
+      }
+      for (const t of st.sniper.variants[MAIN].trades) if (t.t > seenT) { seenT = t.t; notify(t); }
+      st.sniper.live = { stream: wsOk, pushed: pushed.length, api: apiUsage(), t: now, notif: NOTIF, cmd: CMD };
       if (scan) lastScan = now;
       const shown = notes.filter((n) => !/aucun lancement/.test(n));
       if (shown.length) log(shown.join(' · '));

@@ -63,6 +63,14 @@
   .progress i { display: block; height: 100%; background: #c084fc; }
   .recap tr.grp td { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .05em; padding-top: 14px; border-top: none; }
   details > summary { cursor: pointer; font-size: 16px; font-weight: 700; padding: 12px 0; color: var(--blue); }
+  #toasts { position: fixed; top: max(12px, env(safe-area-inset-top)); left: 12px; right: 12px; z-index: 10; display: grid; gap: 8px; max-width: 536px; margin: 0 auto; pointer-events: none; }
+  .toast { background: #1f2430; border: 1px solid var(--line); border-left: 4px solid var(--up); border-radius: 14px; padding: 12px 14px; box-shadow: 0 10px 30px rgba(0,0,0,.45); animation: drop .25s ease-out; }
+  .toast b { display: block; font-size: 15px; } .toast span { color: var(--muted); font-size: 13px; }
+  .toast.sell { border-left-color: var(--amber); } .toast.loss { border-left-color: var(--down); }
+  @keyframes drop { from { transform: translateY(-12px); opacity: 0; } }
+  button.big { width: 100%; font: inherit; font-size: 16px; font-weight: 700; color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin: 18px 0 8px; cursor: pointer; }
+  button.sellbtn { font: inherit; font-size: 13px; font-weight: 800; color: #fff; background: var(--down); border: 0; border-radius: 10px; padding: 9px 14px; margin-left: 10px; cursor: pointer; flex: none; }
+  button.sellbtn:disabled { opacity: .5; }
   footer { color: var(--muted); font-size: 12px; text-align: center; margin-top: 24px; line-height: 1.5; }
   .err { background: rgba(239,68,68,.12); color: #fca5a5; border-radius: 12px; padding: 10px 12px; font-size: 13px; margin-bottom: 12px; }
 </style>
@@ -77,27 +85,32 @@
     <div class="live off" id="live"><i></i><span>…</span></div>
   </header>
   <div id="err"></div>
+  <div id="toasts" aria-live="polite"></div>
   <div id="cards"></div>
-  <div class="card" id="recap"></div>
-  <div class="card" id="brain"></div>
-  <div class="card" id="fees"></div>
   <h2>Positions en cours</h2>
   <div id="positions"></div>
-  <details><summary>Autres portefeuilles et détails</summary>
-  <div id="others"></div>
-  <div id="lab"></div>
-  <div id="rt"></div>
-  </details>
-  <details><summary>Historique des achats et ventes</summary>
-  <div class="seg" id="filter">
-    <button data-f="all" aria-pressed="true">Tout</button>
-    <button data-f="Casino" aria-pressed="false">🎰 Casino</button>
-    <button data-f="Prudent" aria-pressed="false">🛡️ Prudent</button>
-    <button data-f="Sniper" aria-pressed="false">🎯 Sniper</button>
-    <button data-f="Seconde" aria-pressed="false">⚡ Seconde</button>
+  <h2>Dernières opérations</h2>
+  <div id="last"></div>
+  <button class="big" id="detailsBtn" aria-expanded="false">Détails</button>
+  <div id="details" hidden>
+    <div class="card" id="recap"></div>
+    <div class="card" id="brain"></div>
+    <div class="card" id="fees"></div>
+    <h2>Toutes les positions</h2>
+    <div id="allpos"></div>
+    <div id="others"></div>
+    <div id="lab"></div>
+    <div id="rt"></div>
+    <h2>Historique complet</h2>
+    <div class="seg" id="filter">
+      <button data-f="all" aria-pressed="true">Tout</button>
+      <button data-f="Sniper" aria-pressed="false">🎯 Sniper</button>
+      <button data-f="Prudent" aria-pressed="false">🛡️ Prudent</button>
+      <button data-f="Casino" aria-pressed="false">🎰 Casino</button>
+      <button data-f="Seconde" aria-pressed="false">⚡ Seconde</button>
+    </div>
+    <div id="trades"></div>
   </div>
-  <div id="trades"></div>
-  </details>
   <footer>Argent virtuel uniquement · aucun ordre réel n'est passé.<br>Prix : Binance et DexScreener, recalculés toutes les 15 s. Le Sniper surveille les prix toutes les 15 s et cherche de nouveaux tokens chaque minute. Sniping : nouveaux tokens via DexScreener, sécurité via RugCheck. Frais réalistes inclus dans tous les résultats.</footer>
 </div>
 <script>
@@ -106,6 +119,7 @@
   const STATE_API = `https://api.github.com/repos/${OWNER}/${REPO}/contents/state.json?ref=data`;
   const STATE_RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/data/state.json`;
   const CASINO_CAPITAL = 100, DAY = 86400000;
+  const NOTIF = 'sniper-97f143460ae09334d6', CMD = 'sniper-97f143460ae09334d6-cmd'; // messages via ntfy.sh
   let st = null, rt = null, px = {}, memePx = {}, pairPx = {}, rtPx = {}, lastPx = 0, filter = 'all';
   const RTLAB = { diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
   const rp = (p) => { const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry; };
@@ -124,14 +138,19 @@
 
   async function getJson(url, opts) { const r = await fetch(url, opts); if (!r.ok) throw new Error(r.status); return r.json(); }
 
+  // GitHub limite à 60 lectures/heure par téléphone : le Sniper principal est relu à chaque fois,
+  // le reste (Prudent, Casino, sniper à la seconde) seulement toutes les 5 min.
+  let slowT = 0, s5 = null;
+  const ghRaw = (path, branch) => getJson(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${branch}&t=${Date.now()}`, { headers: { Accept: 'application/vnd.github.raw+json' }, cache: 'no-store' })
+    .catch(() => getJson(`https://raw.githubusercontent.com/${OWNER}/${REPO}/${branch}/${path}?t=${Date.now()}`, { cache: 'no-store' }));
   async function loadState() {
-    try { st = await getJson(`${STATE_API}&t=${Date.now()}`, { headers: { Accept: 'application/vnd.github.raw+json' }, cache: 'no-store' }); }
-    catch { st = await getJson(`${STATE_RAW}?t=${Date.now()}`, { cache: 'no-store' }); }
-    // Sniper en continu (PC, branche "sniper", fichier sniper5.json) : remplace celui du robot 5 min
-    try { const s5 = await getJson(`https://api.github.com/repos/${OWNER}/${REPO}/contents/sniper5.json?ref=sniper&t=${Date.now()}`, { headers: { Accept: "application/vnd.github.raw+json" }, cache: "no-store" }); if (s5 && s5.variants) st.sniper = s5; } catch { /* ancien sniper */ }
-    // Sniper à la seconde (tourne sur le PC, branche "sniper")
-    try { rt = await getJson(`https://api.github.com/repos/${OWNER}/${REPO}/contents/sniper.json?ref=sniper&t=${Date.now()}`, { headers: { Accept: 'application/vnd.github.raw+json' }, cache: 'no-store' }); }
-    catch { try { rt = await getJson(`https://raw.githubusercontent.com/${OWNER}/${REPO}/sniper/sniper.json?t=${Date.now()}`, { cache: 'no-store' }); } catch { /* absent */ } }
+    if (!st || Date.now() - slowT > 300000) {
+      slowT = Date.now();
+      st = await ghRaw('state.json', 'data');
+      try { rt = await ghRaw('sniper.json', 'sniper'); } catch { /* absent */ }
+    }
+    try { const x = await ghRaw('sniper5.json', 'sniper'); if (x && x.variants) s5 = x; } catch { /* on garde le précédent */ }
+    if (s5) st.sniper = s5;
   }
 
   async function loadPrices() {
@@ -336,7 +355,25 @@
     for (const p of cz.positions) rows.push({ pf: 'Casino', col: 'var(--amber)', name: p.name, t: p.t, ret: (p.qty * mp(p)) / p.cost - 1, val: `${num(p.qty * mp(p))} $`, px: mp(p) });
     if (snq) for (const p of snq.positions) rows.push({ pf: 'Sniper', col: '#c084fc', name: p.name, t: p.t, ret: (p.qty * sp(p) + (p.realized || 0)) / p.cost - 1, val: `${num(p.qty * sp(p))} $`, px: sp(p) });
     if (rts) for (const p of rts.positions) rows.push({ pf: 'Seconde', col: 'var(--up)', name: p.name, t: p.t, ret: (p.qty * rp(p) + (p.realized || 0)) / p.cost - 1, val: `${num(p.qty * rp(p))} $`, px: rp(p) });
-    $('positions').innerHTML = rows.length ? rows.map((r) => `<div class="row"><div class="bar" style="background:${r.col}"></div>
+    // Sniper principal : positions avec bouton Vendre
+    const mine = snq ? snq.positions : [];
+    $('positions').innerHTML = mine.length ? mine.map((p) => {
+      const val = p.qty * sp(p), ret = (val + (p.realized || 0)) / p.cost - 1;
+      return `<div class="row"><div class="bar" style="background:#c084fc"></div>
+        <div class="main"><div class="t">${esc(p.name)}</div><div class="s">acheté il y a ${ago(p.t)} à ${fmtPx(p.entry)} $${p.tp1Done ? ' · moitié déjà vendue' : ''}</div></div>
+        <div class="r"><b class="${cls(ret)}">${pct(ret)}</b><span>${num(val)} $</span></div>
+        <button class="sellbtn" data-addr="${esc(p.addr)}" data-name="${esc(p.name)}" ${pending[p.addr] ? 'disabled' : ''}>${pending[p.addr] ? 'Envoyé…' : 'Vendre'}</button></div>`;
+    }).join('') : '<div class="empty">Aucune position : le robot attend un bon lancement.</div>';
+    // Dernières opérations du Sniper principal
+    const lastT = snq ? snq.trades.slice(-8).reverse() : [];
+    $('last').innerHTML = lastT.length ? lastT.map((t) => {
+      const buy = t.side === 'achat', half = /moitié/.test(t.reason || '');
+      return `<div class="row"><div class="ico" style="color:${buy ? 'var(--up)' : 'var(--down)'};background:${buy ? 'rgba(34,197,94,.14)' : 'rgba(239,68,68,.14)'}">${buy ? '↑' : '↓'}</div>
+        <div class="main"><div class="t">${buy ? 'Achat' : half ? 'Vente moitié' : 'Vente'} ${esc(t.name)}</div><div class="s">${time(t.t)} · ${buy ? `à ${fmtPx(t.price)} $` : esc(String(t.reason || '').replace(' (moitié)', ''))}</div></div>
+        <div class="r">${buy ? `<b>5,00 $</b>` : `<b class="${cls(t.ret)}">${pct(t.ret)}</b><span>${num(t.usd)} $ reçus</span>`}</div></div>`;
+    }).join('') : '<div class="empty">Aucune opération pour l’instant.</div>';
+
+    $('allpos').innerHTML = rows.length ? rows.map((r) => `<div class="row"><div class="bar" style="background:${r.col}"></div>
       <div class="main"><div class="t">${esc(r.name)}</div><div class="s">${r.pf} · acheté il y a ${r.t ? ago(r.t) : '?'} · ${fmtPx(r.px)} $</div></div>
       <div class="r"><b class="${cls(r.ret)}">${pct(r.ret)}</b><span>${r.val}</span></div></div>`).join('') : '<div class="empty">Aucune position : tout est en stablecoin.</div>';
 
@@ -361,6 +398,46 @@
     }).join('') : '<div class="empty">Aucun ordre pour l\'instant.</div>';
   }
 
+  const pending = {};
+  $('detailsBtn').addEventListener('click', () => {
+    const open = $('details').hidden;
+    $('details').hidden = !open;
+    $('detailsBtn').setAttribute('aria-expanded', String(open));
+    $('detailsBtn').textContent = open ? 'Masquer les détails' : 'Détails';
+  });
+  $('positions').addEventListener('click', async (e) => {
+    const btn = e.target.closest('.sellbtn');
+    if (!btn || !confirm(`Vendre ${btn.dataset.name} maintenant ?`)) return;
+    pending[btn.dataset.addr] = Date.now();
+    render();
+    try {
+      await fetch(`https://ntfy.sh/${CMD}`, { method: 'POST', body: JSON.stringify({ action: 'sell', addr: btn.dataset.addr }) });
+      toast('Ordre envoyé', `Le robot vend ${btn.dataset.name} dans la seconde.`, 'sell');
+    } catch { delete pending[btn.dataset.addr]; toast('Échec', 'Ordre non envoyé, réessaie.', 'loss'); render(); }
+  });
+  function toast(title, msg, kind = '') {
+    const el = document.createElement('div');
+    el.className = `toast ${kind}`;
+    el.innerHTML = `<b>${esc(title)}</b><span>${esc(msg)}</span>`;
+    $('toasts').prepend(el);
+    setTimeout(() => el.remove(), 7000);
+  }
+  // Notifications en direct : le PC annonce chaque achat / vente sur ntfy.sh
+  function listen() {
+    const es = new EventSource(`https://ntfy.sh/${NOTIF}/sse`);
+    es.onmessage = (e) => {
+      try {
+        const m = JSON.parse(e.data);
+        if (m.event && m.event !== 'message') return;
+        const t = m.title || '';
+        toast(t, m.message || '', /Achat/.test(t) ? '' : /🔴/.test(t) ? 'loss' : 'sell');
+        if (navigator.vibrate) navigator.vibrate(80);
+        setTimeout(refreshState, 4000);
+      } catch { /* ignoré */ }
+    };
+  }
+  listen();
+
   document.querySelectorAll('#filter button').forEach((btn) => btn.addEventListener('click', () => {
     filter = btn.dataset.f;
     document.querySelectorAll('#filter button').forEach((x) => x.setAttribute('aria-pressed', String(x === btn)));
@@ -374,7 +451,7 @@
     try { await loadState(); } catch { $('err').innerHTML = '<div class="err">Impossible de charger les portefeuilles. Recharge dans un instant.</div>'; return; }
     await refreshPrices();
     setInterval(refreshPrices, 15000);
-    setInterval(refreshState, 120000);
+    setInterval(refreshState, 75000);
     setInterval(render, 1000);
     document.addEventListener('visibilitychange', () => { if (!document.hidden) { refreshState(); refreshPrices(); } });
   })();

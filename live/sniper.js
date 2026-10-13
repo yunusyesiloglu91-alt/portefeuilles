@@ -229,4 +229,21 @@ async function runSniper(st, now, opts = {}) {
   return notes;
 }
 
-module.exports = { runSniper, VARIANTS, CAPITAL, apiUsage };
+// Vente à la main depuis le site (bouton « Vendre ») : au dernier prix connu, mêmes frais qu'une vente du robot
+function manualSell(st, id, addr) {
+  const v = st.sniper && st.sniper.variants[id];
+  const p = v && v.positions.find((x) => x.addr === addr);
+  if (!p) return null;
+  const price = p.last || p.entry;
+  const gross = p.qty * price;
+  const usd = Math.max(0, gross * (1 - COST) - FEES.fixed);
+  v.fees = (v.fees || 0) + (gross - usd);
+  v.cash += usd;
+  p.realized = (p.realized || 0) + usd;
+  const t = { t: Date.now(), side: 'vente', name: p.name, price, usd, ret: p.realized / p.cost - 1, reason: 'vendu à la main' };
+  v.trades.push(t);
+  v.positions.splice(v.positions.indexOf(p), 1);
+  return t;
+}
+
+module.exports = { runSniper, manualSell, VARIANTS, CAPITAL, apiUsage };
