@@ -97,6 +97,8 @@ async function pollPrices() {
         const tok = tokens.get(a);
         if (!tok) continue;
         // Garde-fou : un saut de plus de ×20 en 10 s est une erreur de cotation, on l'ignore
+        // Premier prix du vrai marché très loin du prix de création : l'achat simulé n'était pas réalisable, on l'annule
+        if (!tok.seenDs && tok.p0 > 0 && Math.abs(Math.log(b.price / tok.p0)) > Math.log(5)) { cancelToken(tok); continue; }
         if (tok.last > 0 && Math.abs(Math.log(b.price / tok.last)) > Math.log(20)) continue;
         // Saut de plus de ×3 en 10 s : on attend qu'un 2e relevé le confirme avant d'y croire
         if (tok.last > 0 && Math.abs(Math.log(b.price / tok.last)) > Math.log(3)) {
@@ -210,6 +212,19 @@ function buy(id, tok, why) {
   subscribe(tok.mint);
 }
 
+function cancelToken(tok) {
+  for (const v of Object.values(st.variants)) {
+    const p = v.positions.find((x) => x.mint === tok.mint);
+    if (!p) continue;
+    v.cash += p.cost; // remboursement de la mise : rien n'a encore été vendu
+    v.positions.splice(v.positions.indexOf(p), 1);
+    v.trades = v.trades.filter((t) => t.mint !== tok.mint);
+  }
+  tok.seenDs = true;
+  unsubscribe(tok.mint);
+  log('achat annulé, prix de départ faux :', tok.symbol || tok.mint);
+}
+
 function sell(v, p, part, reason) {
   const qty = p.qty * part;
   const usd = qty * p.last * (1 - COST);
@@ -303,6 +318,8 @@ async function onMigration(d) {
 
 // ---------- Flux temps réel
 async function onCreate(d) {
+  // Seuls les vrais lancements pump.fun (adresse en "...pump", nom et symbole présents) ont un prix de départ fiable
+  if (!/pump$/.test(d.mint) || !d.symbol || !d.name) return;
   st.seen++;
   const tok = {
     mint: d.mint, creator: d.traderPublicKey, name: d.name, symbol: d.symbol, t0: Date.now(),
