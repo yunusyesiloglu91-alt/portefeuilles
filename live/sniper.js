@@ -119,8 +119,8 @@ async function runSniper(st, now, opts = {}) {
   for (const list of [await json(`${DS}/token-profiles/latest/v1`), await json(`${DS}/token-boosts/latest/v1`)]) {
     for (const x of list || []) if (x.chainId === 'solana') fresh.set(x.tokenAddress, { twitter: (x.links || []).some((l) => l.type === 'twitter' || /x\.com|twitter\.com/.test(l.url || '')) });
   }
-  // GeckoTerminal limite à 30 appels/min : nouveaux pools au plus toutes les 10 s
-  if (!S.gtT || now - S.gtT >= 10000) { S.gtT = now; S.gtNp = await json(`${GT}/networks/solana/new_pools?page=1&include=base_token`); }
+  // GeckoTerminal limite à 30 appels/min : nouveaux pools au plus toutes les 20 s (le robot Prudent l'utilise aussi)
+  if (!S.gtT || now - S.gtT >= 20000) { S.gtT = now; S.gtNp = await json(`${GT}/networks/solana/new_pools?page=1&include=base_token`); }
   const np = S.gtNp;
   for (const p of (np && np.data) || []) {
     const a = p.relationships.base_token.data.id.replace('solana_', '');
