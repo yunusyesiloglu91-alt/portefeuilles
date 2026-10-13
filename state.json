@@ -413,6 +413,13 @@
    39.8,
    29.95,
    29.95
+  ],
+  [
+   1791908943988,
+   99.77,
+   39.85,
+   29.96,
+   29.96
   ]
  ],
  "watch": [
@@ -469,26 +476,17 @@
   "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
  ],
  "lastScan": 1791902044292,
- "lastRun": 1791907744186,
+ "lastRun": 1791908943988,
  "casino": {
   "start": 1791871130814,
-  "cash": 0,
+  "cash": 11.43092401062275,
   "positions": [
-   {
-    "name": "PQC",
-    "addr": "7K52aYQW9rWGjwZmQ7o2d1P6E7bji6hSMsqaLy5EcxLh",
-    "t": 1791871130814,
-    "entry": 0.00036475370700767733,
-    "last": 0.00022994888818788747,
-    "qty": 54009.04671158107,
-    "cost": 20
-   },
    {
     "name": "HUMPH",
     "addr": "7jNwX4Me9zGEjmWY7zARDG2LYjVs1WXD6DZ1JvSfpump",
     "t": 1791871130814,
     "entry": 0.004938006291740259,
-    "last": 0.0032960844870439875,
+    "last": 0.0032492182366511933,
     "qty": 3989.4643376522104,
     "cost": 20
    },
@@ -498,7 +496,7 @@
     "pool": "9dsiuydk5EFRCLk6VEywY95Nn3jjGbdWNijuACf1PXuA",
     "t": 1791881059759,
     "entry": 0.0004080669441752599,
-    "last": 0.0003340321024601227,
+    "last": 0.00030364372996250893,
     "qty": 40198.24273875863,
     "cost": 16.653374696061487
    },
@@ -508,7 +506,7 @@
     "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
     "t": 1791881059759,
     "entry": 0.0010044825832740145,
-    "last": 0.0010864228747555133,
+    "last": 0.0011113868110145988,
     "qty": 16330.371824023758,
     "cost": 16.653374696061487
    },
@@ -518,7 +516,7 @@
     "pool": "4MWjp1aBQqE9Y6iC5cd3NrVvWWcHsN2LgpjWYMDK7u7E",
     "t": 1791902044292,
     "entry": 0.004029833779212947,
-    "last": 0.006461754265717822,
+    "last": 0.007487412606508479,
     "qty": 1701.1789993987124,
     "cost": 6.9598665951925005
    }
@@ -597,6 +595,15 @@
     "price": 0.004029833779212947,
     "usd": 6.9598665951925005,
     "reason": "20 h, 3.9 M$, +58 % sur 6 h"
+   },
+   {
+    "t": 1791908943988,
+    "side": "vente",
+    "name": "PQC",
+    "price": 0.00021487139103804347,
+    "usd": 11.43092401062275,
+    "ret": -0.42845379946886253,
+    "reason": "stop −40 %"
    }
   ],
   "history": [
@@ -811,6 +818,10 @@
    [
     1791907744186,
     67.73
+   ],
+   [
+    1791908943988,
+    67.49
    ]
   ],
   "watch": [
