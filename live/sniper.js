@@ -195,6 +195,14 @@ async function runSniper(st, now, opts = {}) {
     }
     B = S.brainCache;
     S.brain = Brain.summary(B);
+    // Courbe d'apprentissage : un point toutes les 5 min (tokens appris, réussite, valeur de la stratégie Cerveau)
+    S.brainHist = S.brainHist || [];
+    const lastH = S.brainHist[S.brainHist.length - 1];
+    if (!lastH || now - lastH[0] >= 300000) {
+      const cv = S.variants.cerveau;
+      S.brainHist.push([now, S.brain.n, S.brain.rate, cv ? +(cv.cash + cv.positions.reduce((a, p) => a + p.qty * (p.last || p.entry), 0)).toFixed(2) : 100]);
+      if (S.brainHist.length > 2000) S.brainHist = S.brainHist.filter((_, i) => i % 2 === 0);
+    }
   } catch (e) { notes.push(`cerveau : ${e.message}`); }
   S.fees = { ...FEES, perOrder: Brain.perOrder(FEES) };
 

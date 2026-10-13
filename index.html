@@ -91,10 +91,11 @@
   <div id="positions"></div>
   <h2>Dernières opérations</h2>
   <div id="last"></div>
+  <h2>🧠 Le cerveau apprend</h2>
+  <div class="card" id="brain"></div>
   <button class="big" id="detailsBtn" aria-expanded="false">Détails</button>
   <div id="details" hidden>
     <div class="card" id="recap"></div>
-    <div class="card" id="brain"></div>
     <div class="card" id="fees"></div>
     <h2>Toutes les positions</h2>
     <div id="allpos"></div>
@@ -330,6 +331,16 @@
       ${br.ready ? '' : `<div class="progress"><i style="width:${Math.min(100, (br.n / br.min) * 100).toFixed(0)}%"></i></div>
       <div class="empty" style="padding:0">Apprentissage : ${br.n} / ${br.min} tokens suivis jusqu'au bout · ${br.pending} en observation</div>`}
       ${br.n ? `<div class="empty" style="padding:8px 0">Réussite moyenne : <b style="color:var(--text)">${Math.round(br.rate * 100)} %</b></div>` : ''}
+      ${(() => {
+        // Courbes d'apprentissage : [t, tokens appris, réussite, valeur de la stratégie Cerveau]
+        const h = (sn.brainHist || []).concat([[now, br.n, br.rate, sn.variants.cerveau ? vVal(sn.variants.cerveau) : 100]]);
+        if (h.length < 2) return '<div class="empty">La courbe apparaîtra dans quelques minutes.</div>';
+        const lastV = h[h.length - 1][3];
+        const block = (title, val, pts, base, col, note) => `<div style="margin-top:12px"><div class="lesson" style="border:0;padding:0"><span>${title}</span><b>${val}</b></div>${spark(pts, base, col)}<div class="empty" style="padding:0">${note}</div></div>`;
+        return block('📚 Tokens appris', `${br.n} / ${br.min}`, h.map((x) => [x[0], x[1]]), br.min, '#c084fc', 'Ligne pointillée : objectif pour qu’il se fasse confiance.')
+          + block('🎯 Taux de réussite mesuré', `${Math.round(br.rate * 100)} %`, h.map((x) => [x[0], x[2] * 100]), h[0][2] * 100, 'var(--blue)', 'Part des tokens qui ont pris +50 % avant de perdre 30 %.')
+          + block('💵 Stratégie Cerveau', `${num(lastV)} $`, h.map((x) => [x[0], x[3]]), 100, color(lastV / 100 - 1), 'Ses 100 $ de départ : la preuve que l’apprentissage paie (ou non).');
+      })()}
       ${br.exit ? `<div class="lesson"><span>🎯 Meilleure sortie apprise</span><b>+${Math.round(br.exit.tp * 100)} % / stop −${Math.round(br.exit.sl * 100)} %</b></div><div class="empty" style="padding:0 0 6px">Trade moyen après frais : ${pct(br.exit.avg)} sur ${br.exit.n} tokens suivis 24 h. Le Cerveau l’applique tout seul.</div>` : ""}
       ${br.good.length ? '<div style="font-weight:700;margin-top:6px">✅ Ce qui marche</div>' + br.good.map((l) => les(l, true)).join('') : ''}
       ${br.bad.length ? '<div style="font-weight:700;margin-top:10px">❌ À éviter</div>' + br.bad.map((l) => les(l, false)).join('') : ''}`;
