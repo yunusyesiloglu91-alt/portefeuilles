@@ -98,6 +98,13 @@
    39.77,
    29.97,
    29.97
+  ],
+  [
+   1791893043775,
+   99.66,
+   39.73,
+   29.96,
+   29.96
   ]
  ],
  "watch": [
@@ -152,7 +159,7 @@
  ],
  "notes": [],
  "lastScan": 1791891470454,
- "lastRun": 1791892744211,
+ "lastRun": 1791893043775,
  "casino": {
   "start": 1791871130814,
   "cash": 0,
@@ -162,7 +169,7 @@
     "addr": "7K52aYQW9rWGjwZmQ7o2d1P6E7bji6hSMsqaLy5EcxLh",
     "t": 1791871130814,
     "entry": 0.00036475370700767733,
-    "last": 0.00034417281534037075,
+    "last": 0.0003147716304168488,
     "qty": 54009.04671158107,
     "cost": 20
    },
@@ -171,7 +178,7 @@
     "addr": "7jNwX4Me9zGEjmWY7zARDG2LYjVs1WXD6DZ1JvSfpump",
     "t": 1791871130814,
     "entry": 0.004938006291740259,
-    "last": 0.004301737918988459,
+    "last": 0.00430296957810854,
     "qty": 3989.4643376522104,
     "cost": 20
    },
@@ -181,7 +188,7 @@
     "pool": "9dsiuydk5EFRCLk6VEywY95Nn3jjGbdWNijuACf1PXuA",
     "t": 1791881059759,
     "entry": 0.0004080669441752599,
-    "last": 0.00043633977542010177,
+    "last": 0.00043684483788450113,
     "qty": 40198.24273875863,
     "cost": 16.653374696061487
    },
@@ -191,7 +198,7 @@
     "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
     "t": 1791881059759,
     "entry": 0.0010044825832740145,
-    "last": 0.0012907993839603726,
+    "last": 0.0012399284040721106,
     "qty": 16330.371824023758,
     "cost": 16.653374696061487
    },
@@ -201,7 +208,7 @@
     "pool": "2U5kdozDrdgYzyGRNbTdBejGLYEeRt1FkERQmyPbV85P",
     "t": 1791891470454,
     "entry": 0.001035659257987307,
-    "last": 0.0008566747185522427,
+    "last": 0.000842187172219069,
     "qty": 11527.438249275603,
     "cost": 12.120302683999263
    }
@@ -297,55 +304,59 @@
    [
     1791892744211,
     84.24
+   ],
+   [
+    1791893043775,
+    81.68
    ]
   ],
   "watch": [
    {
     "name": "HIRE",
-    "mcap": 859548.07749914,
-    "ageDays": 0.9257663310185186,
-    "ch1": 0.17997,
-    "ch24": 19.57349,
+    "mcap": 831002.455999169,
+    "ageDays": 0.9292335069444444,
+    "ch1": 0.11318,
+    "ch24": 18.89024,
     "ok": true
    },
    {
     "name": "LOAD",
-    "mcap": 8898847.5166604,
-    "ageDays": 0.7068195717592592,
-    "ch1": 0.09281,
-    "ch24": 42.001509999999996,
+    "mcap": 8887223.01379997,
+    "ageDays": 0.7102867476851852,
+    "ch1": 0.09939999999999999,
+    "ch24": 41.945339999999995,
     "ok": false
    },
    {
     "name": "MarsX",
-    "mcap": 436169.972638298,
-    "ageDays": 0.7641806828703703,
-    "ch1": -0.14093,
-    "ch24": 11.97863,
-    "ok": false
-   },
-   {
-    "name": "HUMPH",
-    "mcap": 4317193.64426111,
-    "ageDays": 1.0450255902777779,
-    "ch1": 0.02492,
-    "ch24": 5.81726,
+    "mcap": 431835.264353067,
+    "ageDays": 0.7676478587962963,
+    "ch1": -0.13208,
+    "ch24": 11.849639999999999,
     "ok": false
    },
    {
     "name": "VEIL",
-    "mcap": 2689353.79916758,
-    "ageDays": 0.7067501273148148,
-    "ch1": 0.01348,
-    "ch24": 52.19018,
+    "mcap": 2698916.49993773,
+    "ageDays": 0.7102173032407407,
+    "ch1": 0.037919999999999995,
+    "ch24": 52.37932,
     "ok": true
    },
    {
     "name": "CLAUDIA",
-    "mcap": 3518540.5091689,
-    "ageDays": 6.426784849537037,
-    "ch1": -0.03662,
-    "ch24": -0.47651000000000004,
+    "mcap": 3540304.75707278,
+    "ageDays": 6.430252025462963,
+    "ch1": 0.00464,
+    "ch24": -0.47009999999999996,
+    "ok": false
+   },
+   {
+    "name": "DOPE",
+    "mcap": 741427.206637339,
+    "ageDays": 1.9381455439814814,
+    "ch1": 0.060700000000000004,
+    "ch24": -0.19106,
     "ok": false
    }
   ]
@@ -354,27 +365,16 @@
   "start": 1791881059759,
   "variants": {
    "qualite": {
-    "cash": 76.14736375382799,
+    "cash": 78.83984235499368,
     "positions": [
-     {
-      "name": "Jellyfish",
-      "addr": "oJaWbm23knB1xk6uV8Mkc5dK9dQnFPojBWbRTJ2pump",
-      "pair": "AejaBDA9QCAbKML6ZP6x6BapbVtM9rsgLYeMPo8PsLZp",
-      "t": 1791891470454,
-      "entry": 0.00006005,
-      "last": 0.0000394,
-      "peak": 0.00007997,
-      "qty": 81598.66777685263,
-      "cost": 5
-     },
      {
       "name": "Jamie",
       "addr": "ACfj29FkvtkpAuzWhcV3xWbVCaF1n625qYssYWxopump",
       "pair": "3T2TEh4uCmMfh5BvJ9JBKwgHsgSDTtemfxWzeXhm9nda",
       "t": 1791891470454,
       "entry": 0.00003625,
-      "last": 0.00003732,
-      "peak": 0.00003732,
+      "last": 0.00004009,
+      "peak": 0.00004009,
       "qty": 135172.41379310345,
       "cost": 5
      },
@@ -384,7 +384,7 @@
       "pair": "HvYfFr8nm6bn9V93TDDMgqWwS2D2LsMn1Y3rDCToqeAB",
       "t": 1791891470454,
       "entry": 0.00005949,
-      "last": 0.00008839,
+      "last": 0.00008126,
       "peak": 0.00008839,
       "qty": 82366.78433350143,
       "cost": 5
@@ -465,6 +465,15 @@
       "usd": 1.7177198237885465,
       "ret": -0.6564560352422907,
       "reason": "stop −35 %"
+     },
+     {
+      "t": 1791893043775,
+      "side": "vente",
+      "name": "Jellyfish",
+      "price": 0.00003367,
+      "usd": 2.6924786011656954,
+      "ret": -0.4615042797668609,
+      "reason": "stop −35 %"
      }
     ],
     "history": [
@@ -491,6 +500,10 @@
      [
       1791892744211,
       91.69
+     ],
+     [
+      1791893043775,
+      90.95
      ]
     ]
    },
@@ -503,7 +516,7 @@
       "pair": "HvYfFr8nm6bn9V93TDDMgqWwS2D2LsMn1Y3rDCToqeAB",
       "t": 1791891470454,
       "entry": 0.00005949,
-      "last": 0.00008839,
+      "last": 0.00008126,
       "peak": 0.00008839,
       "qty": 82366.78433350143,
       "cost": 5
@@ -628,6 +641,10 @@
      [
       1791892744211,
       90.28
+     ],
+     [
+      1791893043775,
+      89.7
      ]
     ]
    },
@@ -640,7 +657,7 @@
       "pair": "AejaBDA9QCAbKML6ZP6x6BapbVtM9rsgLYeMPo8PsLZp",
       "t": 1791891470454,
       "entry": 0.00006005,
-      "last": 0.0000394,
+      "last": 0.00003367,
       "peak": 0.00007997,
       "qty": 81598.66777685263,
       "cost": 5
@@ -651,8 +668,8 @@
       "pair": "3T2TEh4uCmMfh5BvJ9JBKwgHsgSDTtemfxWzeXhm9nda",
       "t": 1791891470454,
       "entry": 0.00003625,
-      "last": 0.00003732,
-      "peak": 0.00003732,
+      "last": 0.00004009,
+      "peak": 0.00004009,
       "qty": 135172.41379310345,
       "cost": 5
      },
@@ -662,7 +679,7 @@
       "pair": "HvYfFr8nm6bn9V93TDDMgqWwS2D2LsMn1Y3rDCToqeAB",
       "t": 1791891470454,
       "entry": 0.00005949,
-      "last": 0.00008839,
+      "last": 0.00008126,
       "peak": 0.00008839,
       "qty": 82366.78433350143,
       "cost": 5
@@ -673,7 +690,7 @@
       "pair": "EtY35iYEu9YRMbiw6mCrFt4PrEnvAdBqtcTLW8GAqmED",
       "t": 1791891470454,
       "entry": 0.00003307,
-      "last": 0.00002101,
+      "last": 0.00002471,
       "peak": 0.00004163,
       "qty": 148170.54732385848,
       "cost": 5
@@ -771,11 +788,15 @@
      [
       1791892744211,
       91.75
+     ],
+     [
+      1791893043775,
+      91.62
      ]
     ]
    },
    "temoin": {
-    "cash": 55.64044097569002,
+    "cash": 53.332919576855716,
     "positions": [
      {
       "name": "sanctuary",
@@ -783,20 +804,9 @@
       "pair": "8gSh8VZCdQod93YjATYax7UEpLcevo1LKdmfbHEaewvf",
       "t": 1791881059759,
       "entry": 0.00007362,
-      "last": 0.00008878,
+      "last": 0.00008897,
       "peak": 0.00009962,
       "qty": 66558.00054333062,
-      "cost": 5
-     },
-     {
-      "name": "Jellyfish",
-      "addr": "oJaWbm23knB1xk6uV8Mkc5dK9dQnFPojBWbRTJ2pump",
-      "pair": "AejaBDA9QCAbKML6ZP6x6BapbVtM9rsgLYeMPo8PsLZp",
-      "t": 1791891470454,
-      "entry": 0.00006005,
-      "last": 0.0000394,
-      "peak": 0.00007997,
-      "qty": 81598.66777685263,
       "cost": 5
      },
      {
@@ -805,8 +815,8 @@
       "pair": "3T2TEh4uCmMfh5BvJ9JBKwgHsgSDTtemfxWzeXhm9nda",
       "t": 1791891470454,
       "entry": 0.00003625,
-      "last": 0.00003732,
-      "peak": 0.00003732,
+      "last": 0.00004009,
+      "peak": 0.00004009,
       "qty": 135172.41379310345,
       "cost": 5
      },
@@ -816,7 +826,7 @@
       "pair": "8KUSA63myw4NQjQQojk41YdEE5FgrgPPNxaoYuDSPYU2",
       "t": 1791891470454,
       "entry": 0.0002854,
-      "last": 0.0002856,
+      "last": 0.0002986,
       "peak": 0.0003197,
       "qty": 17168.885774351787,
       "cost": 5
@@ -827,7 +837,7 @@
       "pair": "HvYfFr8nm6bn9V93TDDMgqWwS2D2LsMn1Y3rDCToqeAB",
       "t": 1791891470454,
       "entry": 0.00005949,
-      "last": 0.00008839,
+      "last": 0.00008126,
       "peak": 0.00008839,
       "qty": 82366.78433350143,
       "cost": 5
@@ -838,9 +848,20 @@
       "pair": "BvkVQqZhkn9b1NH8LwgntB2pu91Jk4Nh3gpKnomi6Nbv",
       "t": 1791892144222,
       "entry": 0.00008948,
-      "last": 0.0000745,
+      "last": 0.00007963,
       "peak": 0.00008948,
       "qty": 54760.84041126509,
+      "cost": 5
+     },
+     {
+      "name": "PUTBACK",
+      "addr": "CENZ5FtB1qVKz9cSvYFeSiUCfmF3jrqCi6U9Je5Qpump",
+      "pair": "BGiqtbQENNuduagiT1FFyQPHBKTxemPoNwuTZau5SULb",
+      "t": 1791893043775,
+      "entry": 0.00003855,
+      "last": 0.00003855,
+      "peak": 0.00003855,
+      "qty": 127107.6523994812,
       "cost": 5
      }
     ],
@@ -977,6 +998,23 @@
       "usd": 1.7177198237885465,
       "ret": -0.6564560352422907,
       "reason": "stop −35 %"
+     },
+     {
+      "t": 1791893043775,
+      "side": "vente",
+      "name": "Jellyfish",
+      "price": 0.00003367,
+      "usd": 2.6924786011656954,
+      "ret": -0.4615042797668609,
+      "reason": "stop −35 %"
+     },
+     {
+      "t": 1791893043775,
+      "side": "achat",
+      "name": "PUTBACK",
+      "price": 0.00003855,
+      "usd": 5,
+      "reason": "1 min, 39 k$, créateur 1.1 %, top 10 20 %"
      }
     ],
     "history": [
@@ -1003,6 +1041,10 @@
      [
       1791892744211,
       86.07
+     ],
+     [
+      1791893043775,
+      85.75
      ]
     ]
    }
@@ -1150,40 +1192,61 @@
      "danger": [],
      "rugged": false
     }
+   },
+   "CENZ5FtB1qVKz9cSvYFeSiUCfmF3jrqCi6U9Je5Qpump": {
+    "t": 1791893043775,
+    "rc": {
+     "creatorPct": 1.1431634433215963,
+     "mintAuth": false,
+     "freezeAuth": false,
+     "top10": 20.079497840198773,
+     "insiders": 0,
+     "holders": 747,
+     "danger": [],
+     "rugged": false
+    }
    }
   },
   "watch": [
    {
     "name": "Jellyfish",
-    "ageMin": 42,
-    "mcap": 38511,
+    "ageMin": 47,
+    "mcap": 36499,
     "twitter": true,
     "ok": true,
     "why": "tous les critères"
    },
    {
     "name": "Jamie",
-    "ageMin": 93,
-    "mcap": 34539,
+    "ageMin": 98,
+    "mcap": 40227,
     "twitter": true,
     "ok": true,
     "why": "tous les critères"
    },
    {
     "name": "YILONGMA",
-    "ageMin": 114,
-    "mcap": 283168,
+    "ageMin": 119,
+    "mcap": 288551,
     "twitter": true,
     "ok": false,
     "why": "réseau d’insiders détecté"
    },
    {
     "name": "SEALS",
-    "ageMin": 125,
-    "mcap": 81948,
+    "ageMin": 130,
+    "mcap": 75334,
     "twitter": true,
     "ok": true,
     "why": "tous les critères"
+   },
+   {
+    "name": "PUTBACK",
+    "ageMin": 1,
+    "mcap": 38558,
+    "twitter": false,
+    "ok": false,
+    "why": "pas de Twitter"
    }
   ]
  }
