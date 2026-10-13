@@ -86,11 +86,16 @@ async function pollPrices() {
         const a = p.baseToken && p.baseToken.address;
         if (!a || !(+p.priceUsd > 0)) continue;
         const liq = (p.liquidity && p.liquidity.usd) || 0;
-        if (!best[a] || /pump/.test(p.dexId || '') || liq > best[a].liq) best[a] = { price: +p.priceUsd, liq, m5: (p.txns && p.txns.m5) || {} };
+        // Priorité aux paires pump.fun / PumpSwap, puis à la plus liquide
+        const pump = /pump/.test(p.dexId || '');
+        const cur = best[a];
+        if (!cur || (pump && !cur.pump) || (pump === cur.pump && liq > cur.liq)) best[a] = { price: +p.priceUsd, liq, pump, m5: (p.txns && p.txns.m5) || {} };
       }
       for (const [a, b] of Object.entries(best)) {
         const tok = tokens.get(a);
         if (!tok) continue;
+        // Garde-fou : un saut de plus de ×20 en 10 s est une erreur de cotation, on l'ignore
+        if (tok.last > 0 && Math.abs(Math.log(b.price / tok.last)) > Math.log(20)) continue;
         tok.last = b.price;
         tok.buys = b.m5.buys || 0;
         tok.sells = b.m5.sells || 0;
