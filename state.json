@@ -525,6 +525,13 @@
    39.71,
    29.96,
    29.96
+  ],
+  [
+   1791913744302,
+   99.59,
+   39.68,
+   29.95,
+   29.95
   ]
  ],
  "watch": [
@@ -578,10 +585,10 @@
   }
  ],
  "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/J3b6dvheS2Y1cbMtVz5TCWXNegSjJDbUKxdUVDPoqmS7/ohlcv/day), positions conservées"
  ],
- "lastScan": 1791910444017,
- "lastRun": 1791913444296,
+ "lastScan": 1791913744302,
+ "lastRun": 1791913744302,
  "casino": {
   "start": 1791871130814,
   "cash": 25.289511098538647,
@@ -591,7 +598,7 @@
     "addr": "7jNwX4Me9zGEjmWY7zARDG2LYjVs1WXD6DZ1JvSfpump",
     "t": 1791871130814,
     "entry": 0.004938006291740259,
-    "last": 0.003212808494377653,
+    "last": 0.0031863936040991895,
     "qty": 3989.4643376522104,
     "cost": 20
    },
@@ -601,7 +608,7 @@
     "pool": "9dsiuydk5EFRCLk6VEywY95Nn3jjGbdWNijuACf1PXuA",
     "t": 1791881059759,
     "entry": 0.0004080669441752599,
-    "last": 0.00027315681091784507,
+    "last": 0.00026018587081369585,
     "qty": 40198.24273875863,
     "cost": 16.653374696061487
    },
@@ -611,7 +618,7 @@
     "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
     "t": 1791881059759,
     "entry": 0.0010044825832740145,
-    "last": 0.0010015044661178367,
+    "last": 0.0009931183087919066,
     "qty": 16330.371824023758,
     "cost": 16.653374696061487
    }
@@ -986,55 +993,59 @@
    [
     1791913444296,
     65.44
+   ],
+   [
+    1791913744302,
+    64.68
    ]
   ],
   "watch": [
    {
+    "name": "CRAWLER",
+    "mcap": 17734622.37,
+    "ageDays": 0.8848183101851852,
+    "ch1": -0.20165,
+    "ch24": 66.19313,
+    "ok": false
+   },
+   {
     "name": "LOAD",
-    "mcap": 8475677.90421117,
-    "ageDays": 0.922095,
-    "ch1": -0.0616,
-    "ch24": 39.96009,
-    "ok": false
-   },
-   {
-    "name": "SEALS",
-    "mcap": 598501.2973,
-    "ageDays": 0.3024190740740741,
-    "ch1": -0.08071999999999999,
-    "ch24": 12.85117,
-    "ok": false
-   },
-   {
-    "name": "VEIL",
-    "mcap": 7090652.69855586,
-    "ageDays": 0.9220255555555555,
-    "ch1": 0.17550000000000002,
-    "ch24": 139.53709999999998,
-    "ok": true
-   },
-   {
-    "name": "HIRE",
-    "mcap": 578990.2018,
-    "ageDays": 1.1410417592592592,
-    "ch1": -0.01697,
-    "ch24": -0.33360999999999996,
+    "mcap": 7842195.60617666,
+    "ageDays": 0.9498761805555556,
+    "ch1": -0.0892,
+    "ch24": 36.89916,
     "ok": false
    },
    {
     "name": "SFL",
-    "mcap": 542613.425195836,
-    "ageDays": 0.03966444444444445,
-    "ch1": 9.19097,
-    "ch24": 9.19097,
+    "mcap": 555314.763549579,
+    "ageDays": 0.067445625,
+    "ch1": 0.1723,
+    "ch24": 9.42952,
     "ok": false
    },
    {
-    "name": "DOPE",
-    "mcap": 1635445.70562648,
-    "ageDays": 2.1499537962962965,
-    "ch1": -0.17562999999999998,
-    "ch24": 0.91215,
+    "name": "SEALS",
+    "mcap": 629258.6755,
+    "ageDays": 0.33020025462962965,
+    "ch1": 0.23401,
+    "ch24": 13.56299,
+    "ok": false
+   },
+   {
+    "name": "VEIL",
+    "mcap": 793252.3022,
+    "ageDays": 0.9498067361111111,
+    "ch1": 0.02511,
+    "ch24": 152.45022,
+    "ok": true
+   },
+   {
+    "name": "HIRE",
+    "mcap": 508757.9942,
+    "ageDays": 1.1688229398148149,
+    "ch1": 0.10164,
+    "ch24": -0.41479999999999995,
     "ok": false
    }
   ],
