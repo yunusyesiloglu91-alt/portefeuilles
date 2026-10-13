@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0f14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Mes portefeuilles</title>
+<style>
+  :root {
+    --bg: #0d0f14; --card: #171a21; --line: #262b36; --text: #f2f4f8; --muted: #8b93a7;
+    --up: #22c55e; --down: #ef4444; --blue: #60a5fa; --amber: #fbbf24;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); padding: 16px 16px 40px; padding-top: max(16px, env(safe-area-inset-top)); }
+  .wrap { max-width: 560px; margin: 0 auto; }
+  header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+  h1 { font-size: 24px; margin: 0; font-weight: 800; }
+  .sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .live { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--up); background: rgba(34,197,94,.12); padding: 6px 10px; border-radius: 999px; white-space: nowrap; }
+  .live i { width: 8px; height: 8px; border-radius: 50%; background: var(--up); animation: pulse 1.6s infinite; }
+  .live.off { color: var(--muted); background: var(--card); } .live.off i { background: var(--muted); animation: none; }
+  @keyframes pulse { 50% { opacity: .25; } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 18px; margin-bottom: 14px; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .name { font-size: 18px; font-weight: 700; }
+  .tag { font-size: 11px; font-weight: 800; letter-spacing: .04em; padding: 5px 10px; border-radius: 999px; }
+  .value { font-size: 44px; font-weight: 800; margin: 10px 0 6px; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .chg { display: inline-block; font-size: 15px; font-weight: 700; padding: 4px 12px; border-radius: 999px; font-variant-numeric: tabular-nums; }
+  .chg small { font-weight: 600; opacity: .8; margin-left: 6px; }
+  svg.spark { width: 100%; height: 90px; display: block; margin: 14px 0 12px; }
+  .chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .chip { background: var(--bg); border-radius: 12px; padding: 8px 10px; min-width: 0; }
+  .chip span { display: block; color: var(--muted); font-size: 11px; }
+  .chip b { display: block; font-size: 13px; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+  h2 { font-size: 18px; margin: 22px 0 10px; }
+  .row { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; margin-bottom: 8px; position: relative; overflow: hidden; }
+  .row .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+  .row .main { flex: 1; min-width: 0; }
+  .row .t { font-weight: 700; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row .s { color: var(--muted); font-size: 12px; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row .r { text-align: right; font-variant-numeric: tabular-nums; }
+  .row .r b { display: block; font-size: 17px; }
+  .row .r span { color: var(--muted); font-size: 12px; }
+  .ico { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex: none; font-size: 15px; font-weight: 800; }
+  .pos { color: var(--up); } .neg { color: var(--down); } .flat { color: var(--muted); }
+  .empty { color: var(--muted); font-size: 14px; padding: 6px 2px 10px; }
+  .seg { display: flex; gap: 6px; margin-bottom: 10px; }
+  .seg button { flex: 1; font: inherit; font-size: 13px; font-weight: 700; color: var(--muted); background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 8px; }
+  .seg button[aria-pressed="true"] { color: var(--text); border-color: var(--muted); }
+  footer { color: var(--muted); font-size: 12px; text-align: center; margin-top: 24px; line-height: 1.5; }
+  .err { background: rgba(239,68,68,.12); color: #fca5a5; border-radius: 12px; padding: 10px 12px; font-size: 13px; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Mes portefeuilles</h1>
+      <div class="sub" id="sub">Chargement…</div>
+    </div>
+    <div class="live off" id="live"><i></i><span>…</span></div>
+  </header>
+  <div id="err"></div>
+  <div id="cards"></div>
+  <h2>Positions en cours</h2>
+  <div id="positions"></div>
+  <h2>Achats et ventes</h2>
+  <div class="seg" id="filter">
+    <button data-f="all" aria-pressed="true">Tout</button>
+    <button data-f="Casino" aria-pressed="false">🎰 Casino</button>
+    <button data-f="Prudent" aria-pressed="false">🛡️ Prudent</button>
+  </div>
+  <div id="trades"></div>
+  <footer>Argent virtuel uniquement · aucun ordre réel n'est passé.<br>Prix : Binance et DexScreener, recalculés toutes les 15 s. Le robot décide toutes les 5 min.</footer>
+</div>
+<script>
+(() => {
+  const OWNER = 'yunusyesiloglu91-alt', REPO = 'portefeuilles';
+  const STATE_API = `https://api.github.com/repos/${OWNER}/${REPO}/contents/state.json?ref=data`;
+  const STATE_RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/data/state.json`;
+  const CASINO_CAPITAL = 100, DAY = 86400000;
+  let st = null, px = {}, memePx = {}, lastPx = 0, filter = 'all';
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const num = (x, d = 2) => x.toLocaleString('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const pct = (x) => `${x > 0 ? '+' : x < 0 ? '−' : ''}${num(Math.abs(x * 100), 1)} %`;
+  const cls = (x) => (x > 0.0005 ? 'pos' : x < -0.0005 ? 'neg' : 'flat');
+  const color = (x) => (x > 0.0005 ? 'var(--up)' : x < -0.0005 ? 'var(--down)' : 'var(--muted)');
+  const ago = (t) => { const s = Math.max(0, Math.round((Date.now() - t) / 1000)); if (s < 60) return `${s} s`; const m = Math.round(s / 60); if (m < 60) return `${m} min`; const h = Math.floor(m / 60); return h < 48 ? `${h} h ${String(m % 60).padStart(2, '0')}` : `${Math.floor(h / 24)} j`; };
+  const time = (t) => new Date(t).toLocaleString('fr-FR', { weekday: 'short', hour: '2-digit', minute: '2-digit' });
+  const fmtPx = (p) => (p >= 1 ? num(p, p >= 1000 ? 0 : 2) : Number(p.toPrecision(3)).toString().replace('.', ','));
+
+  async function getJson(url, opts) { const r = await fetch(url, opts); if (!r.ok) throw new Error(r.status); return r.json(); }
+
+  async function loadState() {
+    try { st = await getJson(`${STATE_API}&t=${Date.now()}`, { headers: { Accept: 'application/vnd.github.raw+json' }, cache: 'no-store' }); }
+    catch { st = await getJson(`${STATE_RAW}?t=${Date.now()}`, { cache: 'no-store' }); }
+  }
+
+  async function loadPrices() {
+    const tick = await getJson(`https://data-api.binance.vision/api/v3/ticker/price?symbols=${encodeURIComponent(JSON.stringify(['BTCUSDT', 'SOLUSDT', 'EURUSDT']))}`);
+    for (const t of tick) px[t.symbol] = +t.price;
+    const addrs = [...new Set([...(st.sleeves.meme.positions || []), ...((st.casino && st.casino.positions) || [])].map((p) => p.addr))];
+    if (addrs.length) {
+      try {
+        const pairs = await getJson(`https://api.dexscreener.com/tokens/v1/solana/${addrs.join(',')}`);
+        const best = {};
+        for (const p of pairs) {
+          const a = p.baseToken && p.baseToken.address, liq = (p.liquidity && p.liquidity.usd) || 0;
+          if (a && p.priceUsd && (!best[a] || liq > best[a].liq)) best[a] = { liq, price: +p.priceUsd };
+        }
+        for (const a in best) memePx[a] = best[a].price;
+      } catch { /* on garde le dernier prix connu du robot */ }
+    }
+    lastPx = Date.now();
+  }
+
+  const mp = (p) => memePx[p.addr] || p.last || p.entry;
+
+  function spark(points, base, col) {
+    if (points.length < 2) points = [[0, base], [1, points.length ? points[0][1] : base]];
+    const vals = points.map((p) => p[1]);
+    let lo = Math.min(base, ...vals), hi = Math.max(base, ...vals);
+    const pad = Math.max(base * 0.004, (hi - lo) * 0.15); lo -= pad; hi += pad;
+    const t0 = points[0][0], t1 = points[points.length - 1][0];
+    const X = (t) => ((t - t0) / Math.max(1, t1 - t0)) * 300, Y = (v) => 4 + (1 - (v - lo) / (hi - lo)) * 82;
+    const line = points.map((p) => `${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(' ');
+    return `<svg class="spark" viewBox="0 0 300 90" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="0" x2="300" y1="${Y(base)}" y2="${Y(base)}" stroke="#8b93a7" stroke-dasharray="4 4" opacity=".5" vector-effect="non-scaling-stroke"/>
+      <polygon points="0,90 ${line} 300,90" fill="${col}" opacity=".12"/>
+      <polyline points="${line}" fill="none" stroke="${col}" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>`;
+  }
+
+  function card(title, tag, tagCol, value, change, sinceTxt, points, base, chips) {
+    const c = color(change);
+    return `<div class="card">
+      <div class="top"><div class="name">${title}</div><div class="tag" style="color:${tagCol};background:${tagCol}22">${tag}</div></div>
+      <div class="value">${value}</div>
+      <div class="chg ${cls(change)}" style="background:${c}22">${pct(change)}<small>${sinceTxt}</small></div>
+      ${spark(points, base, c)}
+      <div class="chips">${chips.map((x) => `<div class="chip"><span>${x[0]}</span><b style="color:${x[2] || 'var(--text)'}">${x[1]}</b></div>`).join('')}</div>
+    </div>`;
+  }
+
+  function render() {
+    if (!st || !px.EURUSDT) return;
+    const eurusd = px.EURUSDT, b = st.sleeves.btc, s = st.sleeves.sol, m = st.sleeves.meme, cz = st.casino || { cash: CASINO_CAPITAL, positions: [], trades: [], history: [] };
+    const vBtc = b.cash + b.qty * px.BTCUSDT, vSol = s.cash + s.qty * px.SOLUSDT;
+    const vMeme = m.cash + m.positions.reduce((a, p) => a + p.qty * mp(p), 0);
+    const total = (vBtc + vSol + vMeme) / eurusd;
+    const czVal = cz.cash + cz.positions.reduce((a, p) => a + p.qty * mp(p), 0);
+    const now = Date.now();
+    const day = Math.min(7, Math.floor((now - st.start) / DAY) + 1);
+
+    $('sub').textContent = `Jour ${day}/7 · robot passé il y a ${ago(st.lastRun)}`;
+    const fresh = now - lastPx < 60000;
+    $('live').className = `live ${fresh ? '' : 'off'}`;
+    $('live').querySelector('span').textContent = fresh ? `EN DIRECT · ${ago(lastPx)}` : 'hors ligne';
+
+    const czClosed = cz.trades.filter((t) => t.side === 'vente');
+    $('cards').innerHTML =
+      card('🛡️ Prudent', 'BTC · SOL · MEMES', 'var(--blue)', `${num(total)} €`, total / 100 - 1, 'depuis le départ',
+        [...st.history.map((h) => [h[0], h[1]]), [now, total]], 100, [
+          ['Bitcoin', `${num(vBtc / eurusd)} € ${b.qty > 0 ? '· investi' : '· attente'}`, b.qty > 0 ? 'var(--up)' : 'var(--muted)'],
+          ['Solana', `${num(vSol / eurusd)} € ${s.qty > 0 ? '· investi' : '· attente'}`, s.qty > 0 ? 'var(--up)' : 'var(--muted)'],
+          ['Memecoins', `${num(vMeme / eurusd)} € · ${m.positions.length}/3`],
+        ]) +
+      card('🎰 Casino', 'TRÈS RISQUÉ', 'var(--amber)', `${num(czVal)} $`, czVal / CASINO_CAPITAL - 1, 'depuis le départ',
+        [...cz.history, [now, czVal]], CASINO_CAPITAL, [
+          ['Positions', `${cz.positions.length}/5 ouvertes`],
+          ['Cash', `${num(cz.cash)} $`],
+          ['Trades fermés', czClosed.length ? `${czClosed.length} · ${czClosed.filter((t) => t.ret > 0).length} gagnés` : 'aucun'],
+        ]);
+
+    // Positions
+    const rows = [];
+    const lastBuy = (k) => (st.trades.filter((t) => t.sleeve === k && t.side === 'achat').pop() || {}).t;
+    if (b.qty > 0 && b.entry) rows.push({ pf: 'Prudent', col: 'var(--blue)', name: 'Bitcoin', t: lastBuy('btc'), ret: (b.qty * px.BTCUSDT) / b.entry.usd - 1, val: `${num((b.qty * px.BTCUSDT) / eurusd)} €`, px: px.BTCUSDT });
+    if (s.qty > 0 && s.entry) rows.push({ pf: 'Prudent', col: 'var(--blue)', name: 'Solana', t: lastBuy('sol'), ret: (s.qty * px.SOLUSDT) / s.entry.usd - 1, val: `${num((s.qty * px.SOLUSDT) / eurusd)} €`, px: px.SOLUSDT });
+    for (const p of m.positions) rows.push({ pf: 'Prudent', col: 'var(--blue)', name: p.name, t: p.t, ret: (p.qty * mp(p)) / p.cost - 1, val: `${num((p.qty * mp(p)) / eurusd)} €`, px: mp(p) });
+    for (const p of cz.positions) rows.push({ pf: 'Casino', col: 'var(--amber)', name: p.name, t: p.t, ret: (p.qty * mp(p)) / p.cost - 1, val: `${num(p.qty * mp(p))} $`, px: mp(p) });
+    $('positions').innerHTML = rows.length ? rows.map((r) => `<div class="row"><div class="bar" style="background:${r.col}"></div>
+      <div class="main"><div class="t">${esc(r.name)}</div><div class="s">${r.pf} · acheté il y a ${r.t ? ago(r.t) : '?'} · ${fmtPx(r.px)} $</div></div>
+      <div class="r"><b class="${cls(r.ret)}">${pct(r.ret)}</b><span>${r.val}</span></div></div>`).join('') : '<div class="empty">Aucune position : tout est en stablecoin.</div>';
+
+    // Ordres
+    const trades = [...st.trades.map((t) => ({ ...t, pf: 'Prudent', amount: `${num(t.usd / eurusd)} €` })), ...cz.trades.map((t) => ({ ...t, pf: 'Casino', amount: `${num(t.usd)} $` }))]
+      .filter((t) => filter === 'all' || t.pf === filter).sort((x, y) => y.t - x.t).slice(0, 60);
+    $('trades').innerHTML = trades.length ? trades.map((t) => {
+      const buy = t.side === 'achat';
+      return `<div class="row"><div class="ico" style="color:${buy ? 'var(--up)' : 'var(--down)'};background:${buy ? 'rgba(34,197,94,.14)' : 'rgba(239,68,68,.14)'}">${buy ? '↑' : '↓'}</div>
+        <div class="main"><div class="t">${buy ? 'Achat' : 'Vente'} ${esc(t.name)}</div><div class="s">${t.pf} · ${time(t.t)}${t.reason ? ' · ' + esc(t.reason) : ''}</div></div>
+        <div class="r">${t.ret != null ? `<b class="${cls(t.ret)}">${pct(t.ret)}</b><span>${t.amount}</span>` : `<b>${t.amount}</b><span>${fmtPx(t.price)} $</span>`}</div></div>`;
+    }).join('') : '<div class="empty">Aucun ordre pour l\'instant.</div>';
+  }
+
+  document.querySelectorAll('#filter button').forEach((btn) => btn.addEventListener('click', () => {
+    filter = btn.dataset.f;
+    document.querySelectorAll('#filter button').forEach((x) => x.setAttribute('aria-pressed', String(x === btn)));
+    render();
+  }));
+
+  async function refreshPrices() { try { await loadPrices(); $('err').innerHTML = ''; } catch { $('err').innerHTML = '<div class="err">Prix momentanément indisponibles, nouvel essai dans 15 s.</div>'; } render(); }
+  async function refreshState() { try { await loadState(); } catch { /* on garde l'état précédent */ } render(); }
+
+  (async () => {
+    try { await loadState(); } catch { $('err').innerHTML = '<div class="err">Impossible de charger les portefeuilles. Recharge dans un instant.</div>'; return; }
+    await refreshPrices();
+    setInterval(refreshPrices, 15000);
+    setInterval(refreshState, 120000);
+    setInterval(render, 1000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) { refreshState(); refreshPrices(); } });
+  })();
+})();
+</script>
+</body>
+</html>

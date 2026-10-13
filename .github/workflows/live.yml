@@ -1,0 +1,38 @@
+name: Robot portefeuilles
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: robot
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Récupérer l'état (branche data)
+        run: |
+          git fetch -q origin data && git show origin/data:state.json > live/state.json || echo "pas d'état : départ"
+      - name: Passage du robot
+        run: node live/run.js
+      - name: Enregistrer l'état (branche data, sans reconstruire le site)
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir ../d && cp live/state.json live/PORTEFEUILLE.md live/tableau-de-bord.svg ../d/ && cd ../d
+          git init -q && git checkout -q -b data
+          git config user.name "robot-portefeuilles"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -q -m "Mise à jour $(date -u +%H:%M)"
+          git push -q -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
