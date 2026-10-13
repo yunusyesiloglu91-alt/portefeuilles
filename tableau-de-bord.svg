@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 2132" width="800" height="2132" font-family="-apple-system, system-ui, 'Segoe UI', Roboto, sans-serif">
+<rect width="800" height="2132" fill="#0d0f14"/>
+<text x="24" y="64" font-size="38" font-weight="800" fill="#f2f4f8">Mes portefeuilles virtuels</text>
+<text x="24" y="100" font-size="22" fill="#8b93a7">Mis à jour 13/10 10:44 · jour 1/7 · toutes les 5 min</text>
+<rect x="24" y="132" width="752" height="400" rx="24" fill="#171a21" stroke="#262b36"/>
+<text x="52" y="184" font-size="28" font-weight="700" fill="#f2f4f8">🛡️ Prudent</text>
+<rect x="499" y="156" width="249" height="40" rx="20" fill="#60a5fa" opacity=".18"/>
+<text x="623.5" y="183" font-size="20" font-weight="700" text-anchor="middle" fill="#60a5fa">BTC · SOL · MEMES</text>
+<text x="52" y="264" font-size="68" font-weight="800" fill="#f2f4f8">99,94 €</text>
+<rect x="52" y="282" width="170" height="44" rx="22" fill="#ef4444" opacity=".18"/>
+<text x="137" y="312" font-size="26" font-weight="700" text-anchor="middle" fill="#ef4444">−0,1 %</text>
+<line x1="52" x2="748" y1="388.0" y2="388.0" stroke="#8b93a7" stroke-dasharray="6 6" opacity=".6"/>
+<polygon points="52.0,444.0 52.0,394.5 108.5,393.5 135.4,400.0 748.0,394.5 748.0,444.0" fill="#ef4444" opacity=".12"/>
+<polyline points="52.0,394.5 108.5,393.5 135.4,400.0 748.0,394.5" fill="none" stroke="#ef4444" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="748.0" cy="394.5" r="7" fill="#ef4444"/>
+<rect x="52" y="460" width="224" height="52" rx="14" fill="#0d0f14"/>
+<text x="68" y="484" font-size="17" fill="#8b93a7">Bitcoin</text>
+<text x="68" y="505" font-size="19" font-weight="700" fill="#22c55e">40,00 € · investi</text>
+<rect x="288" y="460" width="224" height="52" rx="14" fill="#0d0f14"/>
+<text x="304" y="484" font-size="17" fill="#8b93a7">Solana</text>
+<text x="304" y="505" font-size="19" font-weight="700" fill="#8b93a7">29,97 € · attente</text>
+<rect x="524" y="460" width="224" height="52" rx="14" fill="#0d0f14"/>
+<text x="540" y="484" font-size="17" fill="#8b93a7">Memecoins</text>
+<text x="540" y="505" font-size="19" font-weight="700" fill="#f2f4f8">29,97 € · 0/3</text>
+<rect x="24" y="556" width="752" height="400" rx="24" fill="#171a21" stroke="#262b36"/>
+<text x="52" y="608" font-size="28" font-weight="700" fill="#f2f4f8">🎰 Casino</text>
+<rect x="577" y="580" width="171" height="40" rx="20" fill="#fbbf24" opacity=".18"/>
+<text x="662.5" y="607" font-size="20" font-weight="700" text-anchor="middle" fill="#fbbf24">TRÈS RISQUÉ</text>
+<text x="52" y="688" font-size="68" font-weight="800" fill="#f2f4f8">82,77 $</text>
+<rect x="52" y="706" width="170" height="44" rx="22" fill="#ef4444" opacity=".18"/>
+<text x="137" y="736" font-size="26" font-weight="700" text-anchor="middle" fill="#ef4444">−17,2 %</text>
+<line x1="52" x2="748" y1="779.5" y2="779.5" stroke="#8b93a7" stroke-dasharray="6 6" opacity=".6"/>
+<polygon points="52.0,868.0 52.0,782.2 81.3,788.1 748.0,856.5 748.0,868.0" fill="#ef4444" opacity=".12"/>
+<polyline points="52.0,782.2 81.3,788.1 748.0,856.5" fill="none" stroke="#ef4444" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="748.0" cy="856.5" r="7" fill="#ef4444"/>
+<rect x="52" y="884" width="224" height="52" rx="14" fill="#0d0f14"/>
+<text x="68" y="908" font-size="17" fill="#8b93a7">Positions</text>
+<text x="68" y="929" font-size="19" font-weight="700" fill="#f2f4f8">4/5 ouvertes</text>
+<rect x="288" y="884" width="224" height="52" rx="14" fill="#0d0f14"/>
+<text x="304" y="908" font-size="17" fill="#8b93a7">Cash</text>
+<text x="304" y="929" font-size="19" font-weight="700" fill="#f2f4f8">12,12 $</text>
+<rect x="524" y="884" width="224" height="52" rx="14" fill="#0d0f14"/>
+<text x="540" y="908" font-size="17" fill="#8b93a7">Trades fermés</text>
+<text x="540" y="929" font-size="19" font-weight="700" fill="#f2f4f8">1 · 0 gagnants</text>
+<text x="24" y="1010" font-size="28" font-weight="800" fill="#f2f4f8">Positions en cours</text>
+<rect x="24" y="1030" width="752" height="84" rx="18" fill="#171a21" stroke="#262b36"/>
+<rect x="24" y="1030" width="8" height="84" rx="4" fill="#60a5fa"/>
+<text x="52" y="1067" font-size="26" font-weight="700" fill="#f2f4f8">Bitcoin</text>
+<text x="52" y="1096" font-size="18" fill="#8b93a7">Prudent · acheté il y a 3 h</text>
+<text x="752" y="1068" font-size="28" font-weight="800" text-anchor="end" fill="#22c55e">+0,1 %</text>
+<text x="752" y="1096" font-size="18" text-anchor="end" fill="#8b93a7">40,00 €</text>
+<rect x="24" y="1126" width="752" height="84" rx="18" fill="#171a21" stroke="#262b36"/>
+<rect x="24" y="1126" width="8" height="84" rx="4" fill="#fbbf24"/>
+<text x="52" y="1163" font-size="26" font-weight="700" fill="#f2f4f8">PQC</text>
+<text x="52" y="1192" font-size="18" fill="#8b93a7">Casino · acheté il y a 2 h</text>
+<text x="752" y="1164" font-size="28" font-weight="800" text-anchor="end" fill="#ef4444">−1,8 %</text>
+<text x="752" y="1192" font-size="18" text-anchor="end" fill="#8b93a7">19,64 $</text>
+<rect x="24" y="1222" width="752" height="84" rx="18" fill="#171a21" stroke="#262b36"/>
+<rect x="24" y="1222" width="8" height="84" rx="4" fill="#fbbf24"/>
+<text x="52" y="1259" font-size="26" font-weight="700" fill="#f2f4f8">HUMPH</text>
+<text x="52" y="1288" font-size="18" fill="#8b93a7">Casino · acheté il y a 2 h</text>
+<text x="752" y="1260" font-size="28" font-weight="800" text-anchor="end" fill="#ef4444">−9,0 %</text>
+<text x="752" y="1288" font-size="18" text-anchor="end" fill="#8b93a7">18,20 $</text>
+<rect x="24" y="1318" width="752" height="84" rx="18" fill="#171a21" stroke="#262b36"/>
+<rect x="24" y="1318" width="8" height="84" rx="4" fill="#fbbf24"/>
+<text x="52" y="1355" font-size="26" font-weight="700" fill="#f2f4f8">MarsX</text>
+<text x="52" y="1384" font-size="18" fill="#8b93a7">Casino · acheté il y a 0 min</text>
+<text x="752" y="1356" font-size="28" font-weight="800" text-anchor="end" fill="#ef4444">−1,5 %</text>
+<text x="752" y="1384" font-size="18" text-anchor="end" fill="#8b93a7">16,40 $</text>
+<rect x="24" y="1414" width="752" height="84" rx="18" fill="#171a21" stroke="#262b36"/>
+<rect x="24" y="1414" width="8" height="84" rx="4" fill="#fbbf24"/>
+<text x="52" y="1451" font-size="26" font-weight="700" fill="#f2f4f8">SI276</text>
+<text x="52" y="1480" font-size="18" fill="#8b93a7">Casino · acheté il y a 0 min</text>
+<text x="752" y="1452" font-size="28" font-weight="800" text-anchor="end" fill="#ef4444">−1,5 %</text>
+<text x="752" y="1480" font-size="18" text-anchor="end" fill="#8b93a7">16,40 $</text>
+<text x="24" y="1556" font-size="28" font-weight="800" fill="#f2f4f8">Derniers achats et ventes</text>
+<circle cx="50" cy="1608" r="22" fill="#ef4444" opacity=".18"/>
+<path d="M50 1620 l10 -14 h-20 z" fill="#ef4444"/>
+<text x="86" y="1604" font-size="23" font-weight="700" fill="#f2f4f8">Vente ALLOX</text>
+<text x="86" y="1630" font-size="17" fill="#8b93a7">Casino · 13/10 10:44 · stop −40 %</text>
+<text x="776" y="1604" font-size="22" font-weight="700" text-anchor="end" fill="#ef4444">−74,1 %</text>
+<text x="776" y="1630" font-size="17" text-anchor="end" fill="#8b93a7">5,10 $</text>
+<circle cx="50" cy="1680" r="22" fill="#22c55e" opacity=".18"/>
+<path d="M50 1668 l10 14 h-20 z" fill="#22c55e"/>
+<text x="86" y="1676" font-size="23" font-weight="700" fill="#f2f4f8">Achat MarsX</text>
+<text x="86" y="1702" font-size="17" fill="#8b93a7">Casino · 13/10 10:44 · 15 h, 0.4 M$, +92 % sur 6 h</text>
+<text x="776" y="1676" font-size="22" font-weight="700" text-anchor="end" fill="#f2f4f8">16,65 $</text>
+<circle cx="50" cy="1752" r="22" fill="#22c55e" opacity=".18"/>
+<path d="M50 1740 l10 14 h-20 z" fill="#22c55e"/>
+<text x="86" y="1748" font-size="23" font-weight="700" fill="#f2f4f8">Achat SI276</text>
+<text x="86" y="1774" font-size="17" fill="#8b93a7">Casino · 13/10 10:44 · 7 j, 1.0 M$, +1 % sur 6 h</text>
+<text x="776" y="1748" font-size="22" font-weight="700" text-anchor="end" fill="#f2f4f8">16,65 $</text>
+<circle cx="50" cy="1824" r="22" fill="#22c55e" opacity=".18"/>
+<path d="M50 1812 l10 14 h-20 z" fill="#22c55e"/>
+<text x="86" y="1820" font-size="23" font-weight="700" fill="#f2f4f8">Achat ALLOX</text>
+<text x="86" y="1846" font-size="17" fill="#8b93a7">Casino · 13/10 08:05 · 14 h, 2.7 M$, +53 % sur 6 h</text>
+<text x="776" y="1820" font-size="22" font-weight="700" text-anchor="end" fill="#f2f4f8">19,68 $</text>
+<circle cx="50" cy="1896" r="22" fill="#22c55e" opacity=".18"/>
+<path d="M50 1884 l10 14 h-20 z" fill="#22c55e"/>
+<text x="86" y="1892" font-size="23" font-weight="700" fill="#f2f4f8">Achat PQC</text>
+<text x="86" y="1918" font-size="17" fill="#8b93a7">Casino · 13/10 07:58 · 5 j, 0.3 M$, +14 % sur 6 h</text>
+<text x="776" y="1892" font-size="22" font-weight="700" text-anchor="end" fill="#f2f4f8">20,00 $</text>
+<circle cx="50" cy="1968" r="22" fill="#22c55e" opacity=".18"/>
+<path d="M50 1956 l10 14 h-20 z" fill="#22c55e"/>
+<text x="86" y="1964" font-size="23" font-weight="700" fill="#f2f4f8">Achat HUMPH</text>
+<text x="86" y="1990" font-size="17" fill="#8b93a7">Casino · 13/10 07:58 · 19 h, 4.9 M$, +63 % sur 6 h</text>
+<text x="776" y="1964" font-size="22" font-weight="700" text-anchor="end" fill="#f2f4f8">20,00 $</text>
+<circle cx="50" cy="2040" r="22" fill="#22c55e" opacity=".18"/>
+<path d="M50 2028 l10 14 h-20 z" fill="#22c55e"/>
+<text x="86" y="2036" font-size="23" font-weight="700" fill="#f2f4f8">Achat BTC</text>
+<text x="86" y="2062" font-size="17" fill="#8b93a7">Prudent · 13/10 07:44 · prix au-dessus de sa moyenne 50 j</text>
+<text x="776" y="2036" font-size="22" font-weight="700" text-anchor="end" fill="#f2f4f8">39,96 €</text>
+<text x="400" y="2104" font-size="17" text-anchor="middle" fill="#8b93a7">Argent virtuel · aucun ordre réel n'est passé</text>
+</svg>

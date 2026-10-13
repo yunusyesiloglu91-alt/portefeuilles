@@ -1,0 +1,518 @@
+{
+ "start": 1791870254104,
+ "eurusdStart": 1.1186,
+ "sleeves": {
+  "btc": {
+   "symbol": "BTCUSDT",
+   "cash": 0,
+   "qty": 0.0005343817595940212,
+   "entry": {
+    "price": 83646.67243499999,
+    "usd": 44.744
+   },
+   "signal": "au-dessus de la moyenne 50 j"
+  },
+  "sol": {
+   "symbol": "SOLUSDT",
+   "cash": 33.558,
+   "qty": 0,
+   "entry": null,
+   "signal": "sous la moyenne 50 j"
+  },
+  "meme": {
+   "cash": 33.558,
+   "positions": []
+  }
+ },
+ "trades": [
+  {
+   "t": 1791870254104,
+   "sleeve": "btc",
+   "side": "achat",
+   "name": "BTC",
+   "price": 83646.67243499999,
+   "usd": 44.744,
+   "reason": "prix au-dessus de sa moyenne 50 j"
+  }
+ ],
+ "history": [
+  [
+   1791870254104,
+   99.94,
+   39.94,
+   30,
+   30
+  ],
+  [
+   1791871130814,
+   99.95,
+   39.97,
+   29.99,
+   29.99
+  ],
+  [
+   1791871549062,
+   99.89,
+   39.92,
+   29.99,
+   29.99
+  ],
+  [
+   1791881059759,
+   99.94,
+   40,
+   29.97,
+   29.97
+  ]
+ ],
+ "watch": [
+  {
+   "name": "TROLL",
+   "score": 80,
+   "mcap": 39288784.4152127,
+   "ageDays": 540.5929833217592,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "BOME",
+   "score": 75,
+   "mcap": 54907678.8336125,
+   "ageDays": 943.0516175810185,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "arc",
+   "score": 65,
+   "mcap": 32115256.1012678,
+   "ageDays": 671.4788282291667,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "ANTFUN",
+   "score": 65,
+   "mcap": 18825213.3811946,
+   "ageDays": 95.17665230324074,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "baton",
+   "score": 62,
+   "mcap": 14508720.8706577,
+   "ageDays": 33.50838841435185,
+   "ok": false,
+   "why": "bien plus de vendeurs que d’acheteurs"
+  },
+  {
+   "name": "JEANPHIL",
+   "score": 60,
+   "mcap": 7063779.0246798,
+   "ageDays": 23.567601377314816,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  }
+ ],
+ "notes": [],
+ "lastScan": 1791881059759,
+ "lastRun": 1791881059759,
+ "casino": {
+  "start": 1791871130814,
+  "cash": 12.120302683999263,
+  "positions": [
+   {
+    "name": "PQC",
+    "addr": "7K52aYQW9rWGjwZmQ7o2d1P6E7bji6hSMsqaLy5EcxLh",
+    "t": 1791871130814,
+    "entry": 0.00036475370700767733,
+    "last": 0.0003636470784705812,
+    "qty": 54009.04671158107,
+    "cost": 20
+   },
+   {
+    "name": "HUMPH",
+    "addr": "7jNwX4Me9zGEjmWY7zARDG2LYjVs1WXD6DZ1JvSfpump",
+    "t": 1791871130814,
+    "entry": 0.004938006291740259,
+    "last": 0.004561913032978259,
+    "qty": 3989.4643376522104,
+    "cost": 20
+   },
+   {
+    "name": "MarsX",
+    "addr": "Fak3rJEBfR4Vb8DoFpecf6yoxbkkr1gGUH5tdj2rpump",
+    "pool": "9dsiuydk5EFRCLk6VEywY95Nn3jjGbdWNijuACf1PXuA",
+    "t": 1791881059759,
+    "entry": 0.0004080669441752599,
+    "last": 0.0004080669441752599,
+    "qty": 40198.24273875863,
+    "cost": 16.653374696061487
+   },
+   {
+    "name": "SI276",
+    "addr": "HMYd9tosnUXuNHmq7pXmoePRVBLBBjA3JBfydq6upump",
+    "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
+    "t": 1791881059759,
+    "entry": 0.0010044825832740145,
+    "last": 0.0010044825832740145,
+    "qty": 16330.371824023758,
+    "cost": 16.653374696061487
+   }
+  ],
+  "trades": [
+   {
+    "t": 1791871130814,
+    "side": "achat",
+    "name": "PQC",
+    "price": 0.00036475370700767733,
+    "usd": 20,
+    "reason": "5 j, 0.3 M$, +14 % sur 6 h"
+   },
+   {
+    "t": 1791871130814,
+    "side": "achat",
+    "name": "HUMPH",
+    "price": 0.004938006291740259,
+    "usd": 20,
+    "reason": "19 h, 4.9 M$, +63 % sur 6 h"
+   },
+   {
+    "t": 1791871549062,
+    "side": "achat",
+    "name": "ALLOX",
+    "price": 0.00002650922590178566,
+    "usd": 19.676020650551653,
+    "reason": "14 h, 2.7 M$, +53 % sur 6 h"
+   },
+   {
+    "t": 1791881059759,
+    "side": "vente",
+    "name": "ALLOX",
+    "price": 0.0000070862924741915944,
+    "usd": 5.1030727266738865,
+    "ret": -0.7406450817822854,
+    "reason": "stop −40 %"
+   },
+   {
+    "t": 1791881059759,
+    "side": "achat",
+    "name": "MarsX",
+    "price": 0.0004080669441752599,
+    "usd": 16.653374696061487,
+    "reason": "15 h, 0.4 M$, +92 % sur 6 h"
+   },
+   {
+    "t": 1791881059759,
+    "side": "achat",
+    "name": "SI276",
+    "price": 0.0010044825832740145,
+    "usd": 16.653374696061487,
+    "reason": "7 j, 1.0 M$, +1 % sur 6 h"
+   }
+  ],
+  "history": [
+   [
+    1791871130814,
+    99.4
+   ],
+   [
+    1791871549062,
+    98.08
+   ],
+   [
+    1791881059759,
+    82.77
+   ]
+  ],
+  "watch": [
+   {
+    "name": "HIRE",
+    "mcap": 407454.684599593,
+    "ageDays": 0.7905296180555555,
+    "ch1": 0.0259,
+    "ch24": 8.75253,
+    "ok": false
+   },
+   {
+    "name": "CRAWLER",
+    "mcap": 17863664.35,
+    "ageDays": 0.506524988425926,
+    "ch1": -0.10418,
+    "ch24": 66.68205,
+    "ok": false
+   },
+   {
+    "name": "LOAD",
+    "mcap": 7681998.35654601,
+    "ageDays": 0.5715828587962963,
+    "ch1": -0.05788,
+    "ch24": 36.12103,
+    "ok": false
+   },
+   {
+    "name": "MarsX",
+    "mcap": 397218.571433261,
+    "ageDays": 0.6289439699074074,
+    "ch1": 0.25516,
+    "ch24": 10.81959,
+    "ok": true
+   },
+   {
+    "name": "HUMPH",
+    "mcap": 4566995.27508752,
+    "ageDays": 0.9097888773148148,
+    "ch1": 0.0691,
+    "ch24": 9.44177,
+    "ok": true
+   },
+   {
+    "name": "VEIL",
+    "mcap": 2459808.38700175,
+    "ageDays": 0.5715134143518519,
+    "ch1": 0.10061,
+    "ch24": 47.65022,
+    "ok": false
+   }
+  ]
+ },
+ "sniper": {
+  "start": 1791881059759,
+  "variants": {
+   "qualite": {
+    "cash": 95,
+    "positions": [
+     {
+      "name": "nonce",
+      "addr": "noncenHRyNbg5EWHmCwcZhHXdTLXQa6gFMyTyjGhZdd",
+      "pair": "Cd9T3SPXKWwqeps2NjC7wVjeS6v5RvZDzpjQXJdqKrzU",
+      "t": 1791881059759,
+      "entry": 0.0001143,
+      "last": 0.0001143,
+      "peak": 0.0001143,
+      "qty": 42869.64129483815,
+      "cost": 5
+     }
+    ],
+    "trades": [
+     {
+      "t": 1791881059759,
+      "side": "achat",
+      "name": "nonce",
+      "price": 0.0001143,
+      "usd": 5,
+      "reason": "82 min, 110 k$, créateur 0.0 %, top 10 24 %"
+     }
+    ],
+    "history": [
+     [
+      1791881059759,
+      99.9
+     ]
+    ]
+   },
+   "eclair": {
+    "cash": 95,
+    "positions": [
+     {
+      "name": "nonce",
+      "addr": "noncenHRyNbg5EWHmCwcZhHXdTLXQa6gFMyTyjGhZdd",
+      "pair": "Cd9T3SPXKWwqeps2NjC7wVjeS6v5RvZDzpjQXJdqKrzU",
+      "t": 1791881059759,
+      "entry": 0.0001143,
+      "last": 0.0001143,
+      "peak": 0.0001143,
+      "qty": 42869.64129483815,
+      "cost": 5
+     }
+    ],
+    "trades": [
+     {
+      "t": 1791881059759,
+      "side": "achat",
+      "name": "nonce",
+      "price": 0.0001143,
+      "usd": 5,
+      "reason": "82 min, 110 k$, créateur 0.0 %, top 10 24 %"
+     }
+    ],
+    "history": [
+     [
+      1791881059759,
+      99.9
+     ]
+    ]
+   },
+   "moonshot": {
+    "cash": 95,
+    "positions": [
+     {
+      "name": "nonce",
+      "addr": "noncenHRyNbg5EWHmCwcZhHXdTLXQa6gFMyTyjGhZdd",
+      "pair": "Cd9T3SPXKWwqeps2NjC7wVjeS6v5RvZDzpjQXJdqKrzU",
+      "t": 1791881059759,
+      "entry": 0.0001143,
+      "last": 0.0001143,
+      "peak": 0.0001143,
+      "qty": 42869.64129483815,
+      "cost": 5
+     }
+    ],
+    "trades": [
+     {
+      "t": 1791881059759,
+      "side": "achat",
+      "name": "nonce",
+      "price": 0.0001143,
+      "usd": 5,
+      "reason": "82 min, 110 k$, créateur 0.0 %, top 10 24 %"
+     }
+    ],
+    "history": [
+     [
+      1791881059759,
+      99.9
+     ]
+    ]
+   },
+   "temoin": {
+    "cash": 85,
+    "positions": [
+     {
+      "name": "nonce",
+      "addr": "noncenHRyNbg5EWHmCwcZhHXdTLXQa6gFMyTyjGhZdd",
+      "pair": "Cd9T3SPXKWwqeps2NjC7wVjeS6v5RvZDzpjQXJdqKrzU",
+      "t": 1791881059759,
+      "entry": 0.0001143,
+      "last": 0.0001143,
+      "peak": 0.0001143,
+      "qty": 42869.64129483815,
+      "cost": 5
+     },
+     {
+      "name": "TELEPUMP",
+      "addr": "DQvFU8q4fH7PM2uCqSm56dHjcyaW5z3CEEE5tERWpump",
+      "pair": "BhkfSRHT328CRoeGqRXvzJ5NPrVSR8UYWW5hVeB35e1P",
+      "t": 1791881059759,
+      "entry": 0.00005263,
+      "last": 0.00005263,
+      "peak": 0.00005263,
+      "qty": 93102.79308379251,
+      "cost": 5
+     },
+     {
+      "name": "sanctuary",
+      "addr": "7hDr2fvmp62yVqqeUQRFsjcvJeHUG6eWR6xsiMdcpump",
+      "pair": "8gSh8VZCdQod93YjATYax7UEpLcevo1LKdmfbHEaewvf",
+      "t": 1791881059759,
+      "entry": 0.00007362,
+      "last": 0.00007362,
+      "peak": 0.00007362,
+      "qty": 66558.00054333062,
+      "cost": 5
+     }
+    ],
+    "trades": [
+     {
+      "t": 1791881059759,
+      "side": "achat",
+      "name": "nonce",
+      "price": 0.0001143,
+      "usd": 5,
+      "reason": "82 min, 110 k$, créateur 0.0 %, top 10 24 %"
+     },
+     {
+      "t": 1791881059759,
+      "side": "achat",
+      "name": "TELEPUMP",
+      "price": 0.00005263,
+      "usd": 5,
+      "reason": "18 min, 53 k$, créateur 0.3 %, top 10 24 %"
+     },
+     {
+      "t": 1791881059759,
+      "side": "achat",
+      "name": "sanctuary",
+      "price": 0.00007362,
+      "usd": 5,
+      "reason": "179 min, 71 k$, créateur 0.0 %, top 10 18 %"
+     }
+    ],
+    "history": [
+     [
+      1791881059759,
+      99.7
+     ]
+    ]
+   }
+  },
+  "seen": {
+   "noncenHRyNbg5EWHmCwcZhHXdTLXQa6gFMyTyjGhZdd": {
+    "t": 1791881059759,
+    "rc": {
+     "creatorPct": 0,
+     "mintAuth": false,
+     "freezeAuth": false,
+     "top10": 23.717196977149,
+     "insiders": 0,
+     "holders": 2718,
+     "danger": [],
+     "rugged": false
+    }
+   },
+   "DQvFU8q4fH7PM2uCqSm56dHjcyaW5z3CEEE5tERWpump": {
+    "t": 1791881059759,
+    "rc": {
+     "creatorPct": 0.2725967996173279,
+     "mintAuth": false,
+     "freezeAuth": false,
+     "top10": 24.44695416357498,
+     "insiders": 9,
+     "holders": 796,
+     "danger": [],
+     "rugged": false
+    }
+   },
+   "7hDr2fvmp62yVqqeUQRFsjcvJeHUG6eWR6xsiMdcpump": {
+    "t": 1791881059759,
+    "rc": {
+     "creatorPct": 0,
+     "mintAuth": false,
+     "freezeAuth": false,
+     "top10": 18.458992233088694,
+     "insiders": 12,
+     "holders": 5488,
+     "danger": [],
+     "rugged": false
+    }
+   }
+  },
+  "watch": [
+   {
+    "name": "nonce",
+    "ageMin": 82,
+    "mcap": 109926,
+    "twitter": true,
+    "ok": true,
+    "why": "tous les critères"
+   },
+   {
+    "name": "TELEPUMP",
+    "ageMin": 18,
+    "mcap": 52640,
+    "twitter": true,
+    "ok": false,
+    "why": "réseau d’insiders détecté"
+   },
+   {
+    "name": "sanctuary",
+    "ageMin": 179,
+    "mcap": 70510,
+    "twitter": true,
+    "ok": false,
+    "why": "réseau d’insiders détecté"
+   }
+  ]
+ }
+}
