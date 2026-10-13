@@ -65,6 +65,7 @@
   </header>
   <div id="err"></div>
   <div id="cards"></div>
+  <div id="lab"></div>
   <h2>Positions en cours</h2>
   <div id="positions"></div>
   <h2>Achats et ventes</h2>
@@ -72,9 +73,10 @@
     <button data-f="all" aria-pressed="true">Tout</button>
     <button data-f="Casino" aria-pressed="false">🎰 Casino</button>
     <button data-f="Prudent" aria-pressed="false">🛡️ Prudent</button>
+    <button data-f="Sniper" aria-pressed="false">🎯 Sniper</button>
   </div>
   <div id="trades"></div>
-  <footer>Argent virtuel uniquement · aucun ordre réel n'est passé.<br>Prix : Binance et DexScreener, recalculés toutes les 15 s. Le robot décide toutes les 5 min.</footer>
+  <footer>Argent virtuel uniquement · aucun ordre réel n'est passé.<br>Prix : Binance et DexScreener, recalculés toutes les 15 s. Le robot décide toutes les 5 min. Sniping : nouveaux tokens via DexScreener, sécurité via RugCheck.</footer>
 </div>
 <script>
 (() => {
@@ -82,7 +84,8 @@
   const STATE_API = `https://api.github.com/repos/${OWNER}/${REPO}/contents/state.json?ref=data`;
   const STATE_RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/data/state.json`;
   const CASINO_CAPITAL = 100, DAY = 86400000;
-  let st = null, px = {}, memePx = {}, lastPx = 0, filter = 'all';
+  let st = null, px = {}, memePx = {}, pairPx = {}, lastPx = 0, filter = 'all';
+  const LAB = { qualite: '🎯 Sniper qualité', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)' };
 
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -104,8 +107,15 @@
   async function loadPrices() {
     const tick = await getJson(`https://data-api.binance.vision/api/v3/ticker/price?symbols=${encodeURIComponent(JSON.stringify(['BTCUSDT', 'SOLUSDT', 'EURUSDT']))}`);
     for (const t of tick) px[t.symbol] = +t.price;
+    const snHeld = st.sniper ? Object.values(st.sniper.variants).flatMap((v) => v.positions) : [];
     const held = [...(st.sleeves.meme.positions || []), ...((st.casino && st.casino.positions) || [])];
-    const addrs = [...new Set(held.map((p) => p.addr))];
+    const addrs = [...new Set([...held, ...snHeld].map((p) => p.addr))].slice(0, 30);
+    if (snHeld.length) {
+      try {
+        const pairs = await getJson(`https://api.dexscreener.com/tokens/v1/solana/${[...new Set(snHeld.map((p) => p.addr))].slice(0, 30).join(',')}`);
+        for (const p of pairs) if (p.pairAddress && +p.priceUsd > 0) pairPx[p.pairAddress] = +p.priceUsd;
+      } catch { /* dernier prix du robot */ }
+    }
     if (addrs.length) {
       try {
         const pairs = await getJson(`https://api.dexscreener.com/tokens/v1/solana/${addrs.join(',')}`);
@@ -123,6 +133,8 @@
   }
 
   const mp = (p) => memePx[p.addr] || p.last || p.entry;
+  const sp = (p) => pairPx[p.pair] || p.last || p.entry;
+  const vVal = (v) => v.cash + v.positions.reduce((a, p) => a + p.qty * sp(p), 0);
 
   function spark(points, base, col) {
     if (points.length < 2) points = [[0, base], [1, points.length ? points[0][1] : base]];
@@ -157,9 +169,9 @@
     const total = (vBtc + vSol + vMeme) / eurusd;
     const czVal = cz.cash + cz.positions.reduce((a, p) => a + p.qty * mp(p), 0);
     const now = Date.now();
-    const day = Math.min(7, Math.floor((now - st.start) / DAY) + 1);
+    const day = Math.floor((now - st.start) / DAY) + 1;
 
-    $('sub').textContent = `Jour ${day}/7 · robot passé il y a ${ago(st.lastRun)}`;
+    $('sub').textContent = `Jour ${day} · robot passé il y a ${ago(st.lastRun)}`;
     const fresh = now - lastPx < 60000;
     $('live').className = `live ${fresh ? '' : 'off'}`;
     $('live').querySelector('span').textContent = fresh ? `EN DIRECT · ${ago(lastPx)}` : 'hors ligne';
@@ -179,6 +191,28 @@
           ['Gagnés', czClosed.length ? `${czClosed.filter((t) => t.ret > 0).length} sur ${czClosed.length}` : 'aucun'],
         ]);
 
+    // Sniper : la stratégie retenue en carte, les 4 dans le classement
+    const sn = st.sniper;
+    const snq = sn && sn.variants.qualite;
+    if (snq) {
+      const v = vVal(snq), closed = snq.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
+      $('cards').innerHTML += card('🎯 Sniper', '5 $ PAR TRADE', '#c084fc', `${num(v)} $`, v / 100 - 1, 'depuis le départ',
+        [...snq.history, [now, v]], 100, [
+          ['Positions', `${snq.positions.length} ouvertes`],
+          ['Cash', `${num(snq.cash)} $`],
+          ['Gagnés', closed.length ? `${closed.filter((t) => t.ret > 0).length} sur ${closed.length}` : 'aucun'],
+        ]);
+      const board = Object.entries(sn.variants).map(([id, x]) => {
+        const val = vVal(x), cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
+        return { id, name: LAB[id] || id, val, n: cl.length, win: cl.filter((t) => t.ret > 0).length, open: x.positions.length };
+      }).sort((a, b) => b.val - a.val);
+      $('lab').innerHTML = `<h2>🧪 Laboratoire sniping</h2><div class="empty" style="padding-top:0">4 stratégies testées en même temps sur les mêmes lancements (100 $ chacune, 5 $ par trade). La carte 🎯 Sniper suit la « qualité ».</div>` +
+        board.map((r, k) => `<div class="row"><div class="ico" style="background:var(--bg);color:${k === 0 ? 'var(--amber)' : 'var(--muted)'}">${k + 1}</div>
+          <div class="main"><div class="t">${r.name}</div><div class="s">${r.n ? `${r.win}/${r.n} trades gagnés` : 'aucun trade fermé'} · ${r.open} en cours</div></div>
+          <div class="r"><b class="${cls(r.val / 100 - 1)}">${pct(r.val / 100 - 1)}</b><span>${num(r.val)} $</span></div></div>`).join('') +
+        (sn.watch && sn.watch.length ? `<div class="empty" style="margin-top:8px">Derniers lancements analysés : ${sn.watch.map((w) => `${esc(w.name)} ${w.ok ? '✅' : `❌ <span style="opacity:.8">(${esc(w.why)})</span>`}`).join(' · ')}</div>` : '');
+    }
+
     // Positions
     const rows = [];
     const lastBuy = (k) => (st.trades.filter((t) => t.sleeve === k && t.side === 'achat').pop() || {}).t;
@@ -186,12 +220,14 @@
     if (s.qty > 0 && s.entry) rows.push({ pf: 'Prudent', col: 'var(--blue)', name: 'Solana', t: lastBuy('sol'), ret: (s.qty * px.SOLUSDT) / s.entry.usd - 1, val: `${num((s.qty * px.SOLUSDT) / eurusd)} €`, px: px.SOLUSDT });
     for (const p of m.positions) rows.push({ pf: 'Prudent', col: 'var(--blue)', name: p.name, t: p.t, ret: (p.qty * mp(p)) / p.cost - 1, val: `${num((p.qty * mp(p)) / eurusd)} €`, px: mp(p) });
     for (const p of cz.positions) rows.push({ pf: 'Casino', col: 'var(--amber)', name: p.name, t: p.t, ret: (p.qty * mp(p)) / p.cost - 1, val: `${num(p.qty * mp(p))} $`, px: mp(p) });
+    if (snq) for (const p of snq.positions) rows.push({ pf: 'Sniper', col: '#c084fc', name: p.name, t: p.t, ret: (p.qty * sp(p) + (p.realized || 0)) / p.cost - 1, val: `${num(p.qty * sp(p))} $`, px: sp(p) });
     $('positions').innerHTML = rows.length ? rows.map((r) => `<div class="row"><div class="bar" style="background:${r.col}"></div>
       <div class="main"><div class="t">${esc(r.name)}</div><div class="s">${r.pf} · acheté il y a ${r.t ? ago(r.t) : '?'} · ${fmtPx(r.px)} $</div></div>
       <div class="r"><b class="${cls(r.ret)}">${pct(r.ret)}</b><span>${r.val}</span></div></div>`).join('') : '<div class="empty">Aucune position : tout est en stablecoin.</div>';
 
     // Ordres
-    const trades = [...st.trades.map((t) => ({ ...t, pf: 'Prudent', amount: `${num(t.usd / eurusd)} €` })), ...cz.trades.map((t) => ({ ...t, pf: 'Casino', amount: `${num(t.usd)} $` }))]
+    const trades = [...st.trades.map((t) => ({ ...t, pf: 'Prudent', amount: `${num(t.usd / eurusd)} €` })), ...cz.trades.map((t) => ({ ...t, pf: 'Casino', amount: `${num(t.usd)} $` })),
+      ...(snq ? snq.trades.map((t) => ({ ...t, pf: 'Sniper', amount: `${num(t.usd)} $` })) : [])]
       .filter((t) => filter === 'all' || t.pf === filter).sort((x, y) => y.t - x.t).slice(0, 60);
     $('trades').innerHTML = trades.length ? trades.map((t) => {
       const buy = t.side === 'achat';

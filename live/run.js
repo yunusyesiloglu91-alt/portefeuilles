@@ -8,6 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const I = require('../src/indicators.js');
 const Rules = require('../src/meme-rules.js');
+const { runSniper } = require('./sniper.js');
 
 const DIR = __dirname;
 const STATE = path.join(DIR, 'state.json');
@@ -70,7 +71,7 @@ async function main() {
     };
   }
   // Test d'une semaine : après 7 jours, le robot s'arrête (et ne consomme plus de minutes GitHub)
-  if (now - st.start > 7 * DAY && !process.argv.includes('--continuer')) {
+  if (process.env.ROBOT_STOP === '1') {
     if (!st.finished) {
       st.finished = now;
       fs.writeFileSync(STATE, JSON.stringify(st, null, 1));
@@ -227,6 +228,9 @@ async function main() {
   const czValue = cz.cash + cz.positions.reduce((t, p) => t + p.qty * (p.last || p.entry), 0);
   cz.history.push([now, +czValue.toFixed(2)]);
   cz.trades = cz.trades.slice(-200);
+
+  // ---------- Laboratoire de sniping
+  try { notes.push(...(await runSniper(st, now))); } catch (e) { notes.push(`sniper : ${e.message}`); }
 
   // ---------- Valorisation
   const val = {
