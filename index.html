@@ -87,6 +87,8 @@
   <div id="err"></div>
   <div id="toasts" aria-live="polite"></div>
   <div id="cards"></div>
+  <h2>Les 3 Snipers en test</h2>
+  <div id="trio"></div>
   <h2>Positions en cours</h2>
   <div id="positions"></div>
   <h2>Dernières opérations</h2>
@@ -129,7 +131,7 @@
   const RTLAB = { diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
   const rp = (p) => { const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry; };
   const rVal = (v) => v.cash + v.positions.reduce((a, p) => a + p.qty * rp(p), 0);
-  const LAB = { qualite: '🎯 Sniper qualité', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)', cerveau: '🧠 Cerveau (apprend tout seul)', origine: '💾 Recette d’origine (sauvegarde)' };
+  const LAB = { qualite: '2️⃣ Assoupli', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)', cerveau: '🧠 Cerveau (apprend tout seul)', origine: '1️⃣ Recette origine', tres: '3️⃣ Très assoupli' };
 
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -281,7 +283,7 @@
     const snq = sn && sn.variants.qualite;
     if (snq) {
       const v = vVal(snq), closed = snq.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
-      $('cards').innerHTML = card('🎯 Sniper', 'PORTEFEUILLE PRINCIPAL', '#c084fc', `${num(v)} $`, v / 100 - 1, 'depuis le départ',
+      $('cards').innerHTML = card('🎯 Sniper · 2️⃣ Assoupli', 'PRINCIPAL', '#c084fc', `${num(v)} $`, v / 100 - 1, 'depuis le départ',
         [...snq.history, [now, v]], 100, [
           ['Positions', `${snq.positions.length} ouvertes`],
           ['Cash', `${num(snq.cash)} $`],
@@ -336,7 +338,7 @@
         <td>${sx.n ? `${sx.win}/${sx.n}` : '—'}<small>${open} en cours</small></td>
         <td class="${sx.best > -Infinity ? cls(sx.best) : 'flat'}">${sx.best > -Infinity ? pct(sx.best) : '—'}</td></tr>`;
     };
-    const SUB = { qualite: 'critères assouplis (test) · vend ½ à ×2', origine: 'recette qui a trouvé SEALS · sauvegarde', eclair: 'mêmes filtres · vend tout à +50 %', moonshot: 'mêmes filtres · vise ×5', temoin: 'achète tout · sert de comparaison', cerveau: 'achète ce qui a le mieux marché · vend ½ à +50 %' };
+    const SUB = { origine: 'Twitter obligatoire, créateur ≤ 5 %, top 10 ≤ 30 %, 0 insider', qualite: 'créateur ≤ 10 %, top 10 ≤ 40 %, ≤ 2 insiders', tres: 'créateur ≤ 15 %, top 10 ≤ 50 %, ≤ 5 insiders', eclair: 'mêmes filtres · vend tout à +50 %', moonshot: 'mêmes filtres · vise ×5', temoin: 'achète tout · sert de comparaison', cerveau: 'achète ce qui a le mieux marché · vend ½ à +50 %' };
     let rows2 = '<tr class="grp"><td colspan="4">🎯 SNIPER · STRATÉGIES EN TEST</td></tr>';
     if (sn) for (const [id, x] of Object.entries(sn.variants).sort((a, c) => vVal(c[1]) - vVal(a[1]))) rows2 += line((id === 'qualite' ? '⭐ ' : '') + (LAB[id] || id), SUB[id] || '', vVal(x), 100, '$', stats(x.trades), x.positions.length);
     rows2 += '<tr class="grp"><td colspan="4">AUTRES PORTEFEUILLES</td></tr>';
@@ -368,6 +370,17 @@
       ${br.exit ? `<div class="lesson"><span>🎯 Meilleure sortie apprise</span><b>+${Math.round(br.exit.tp * 100)} % / stop −${Math.round(br.exit.sl * 100)} %</b></div><div class="empty" style="padding:0 0 6px">Trade moyen après frais : ${pct(br.exit.avg)} sur ${br.exit.n} tokens suivis 24 h. Le Cerveau l’applique tout seul.</div>` : ""}
       ${br.good.length ? '<div style="font-weight:700;margin-top:6px">✅ Ce qui marche</div>' + br.good.map((l) => les(l, true)).join('') : ''}
       ${br.bad.length ? '<div style="font-weight:700;margin-top:10px">❌ À éviter</div>' + br.bad.map((l) => les(l, false)).join('') : ''}`;
+
+    // ---------- Les 3 Snipers côte à côte
+    const TRIO = [['origine', '1️⃣ Recette origine', 'la recette qui a trouvé SEALS'], ['qualite', '2️⃣ Assoupli', 'critères un peu baissés · carte du haut'], ['tres', '3️⃣ Très assoupli', 'critères encore plus baissés']];
+    $('trio').innerHTML = sn ? TRIO.map(([id, name, sub]) => {
+      const x = sn.variants[id];
+      if (!x) return `<div class="row"><div class="main"><div class="t">${name}</div><div class="s">démarre au prochain passage du robot</div></div></div>`;
+      const val = vVal(x), cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
+      return `<div class="row"><div class="bar" style="background:${color(val / 100 - 1)}"></div>
+        <div class="main"><div class="t">${name}</div><div class="s">${sub} · ${cl.length ? `${cl.filter((t) => t.ret > 0).length}/${cl.length} gagnés` : 'aucune vente'} · ${x.positions.length} en cours</div></div>
+        <div class="r"><b class="${cls(val / 100 - 1)}">${pct(val / 100 - 1)}</b><span>${num(val)} $</span></div></div>`;
+    }).join('') : '';
 
     // ---------- Rapports automatiques
     const reps = (sn && sn.reports ? sn.reports.slice(-6).reverse() : []);

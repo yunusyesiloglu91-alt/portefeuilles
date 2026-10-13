@@ -9,10 +9,11 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const FILTER_BASE = { maxAgeH: 3, minMcap: 30e3, maxMcap: 300e3, minLiq: 8e3 };
 const VARIANTS = {
-  qualite: { name: '🎯 Sniper qualité', quality: true, tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.35, maxH: 24, chosen: true },
+  qualite: { name: '2️⃣ Assoupli', quality: true, tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.35, maxH: 24, chosen: true },
   eclair: { name: '⚡ Sniper éclair', quality: true, tp1: 0.5, tp1Part: 1, sl: 0.25, maxH: 6 },
   moonshot: { name: '🚀 Moonshot', quality: true, tp1: 4, tp1Part: 1, sl: 0.5, maxH: 72 },
-  origine: { name: '💾 Recette d’origine (sauvegarde)', quality: true, origine: true, tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.35, maxH: 24 },
+  origine: { name: '1️⃣ Recette origine', quality: true, origine: true, tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.35, maxH: 24 },
+  tres: { name: '3️⃣ Très assoupli', quality: true, tres: true, tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.35, maxH: 24 },
   temoin: { name: '🎲 Sans filtre (témoin)', quality: false, tp1: 1, tp1Part: 1, sl: 0.35, maxH: 24 },
   cerveau: { name: '🧠 Cerveau', quality: true, brain: true, tp1: 0.5, tp1Part: 0.5, trail: 0.25, sl: 0.3, maxH: 24 },
 };
@@ -76,6 +77,8 @@ async function rugcheck(addr) {
 const CRITERES = {
   origine: { twitter: true, creatorMax: 5, top10Max: 30, insidersMax: 0, holdersMin: 100, buyRatioMin: 1 },
   souple: { twitter: false, creatorMax: 10, top10Max: 40, insidersMax: 2, holdersMin: 50, buyRatioMin: 0.9 },
+  // TRÈS SOUPLE = encore plus permissif (test du 13/10/2026 19 h 35)
+  tres: { twitter: false, creatorMax: 15, top10Max: 50, insidersMax: 5, holdersMin: 25, buyRatioMin: 0.7 },
 };
 const CRITERES_ACTIFS = 'souple';
 
@@ -234,13 +237,14 @@ async function runSniper(st, now, opts = {}) {
   for (const c of base) {
     c.q = qualityOk(c);
     c.q0 = qualityOk(c, CRITERES.origine);
+    c.q2 = qualityOk(c, CRITERES.tres);
     const sc = Brain.score(c, B, now);
     const safe = c.rc && !c.rc.rugged && !c.rc.mintAuth && !c.rc.freezeAuth && !c.rc.danger.length;
     c.brainOk = sc ? safe && sc.mult >= 1.5 : c.q.ok;
     c.brainWhy = sc ? `note cerveau ×${sc.mult.toFixed(1)}${sc.why.length ? ' : ' + sc.why.slice(0, 2).join(', ') : ''}` : '';
     for (const [id, v] of Object.entries(S.variants)) {
       const V = VARIANTS[id];
-      if (V.brain ? !c.brainOk : V.origine ? !c.q0.ok : V.quality && !c.q.ok) continue;
+      if (V.brain ? !c.brainOk : V.origine ? !c.q0.ok : V.tres ? !c.q2.ok : V.quality && !c.q.ok) continue;
       if (v.positions.length >= MAX_OPEN || v.cash < STAKE) continue;
       if (v.positions.some((p) => p.addr === c.addr) || v.trades.some((t) => t.name === c.name && t.side === 'achat' && now - t.t < 24 * H)) continue;
       v.cash -= STAKE;
