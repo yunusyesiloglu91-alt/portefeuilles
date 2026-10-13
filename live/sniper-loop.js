@@ -89,6 +89,8 @@ async function publish(st) {
 
 const guard = require('net').createServer().on('error', () => process.exit(0));
 guard.listen(47125, '127.0.0.1', async () => {
+  // Pause volontaire (pendant une recherche, par exemple) : créer le fichier live/PAUSE
+  if (fs.existsSync(path.join(__dirname, 'PAUSE'))) process.exit(0);
   token = execSync('gh auth token', { encoding: 'utf8' }).trim();
   const st = await bootstrap();
   log('sniper en continu démarré');

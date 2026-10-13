@@ -9,11 +9,11 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const FILTER_BASE = { maxAgeH: 3, minMcap: 30e3, maxMcap: 300e3, minLiq: 8e3 };
 const VARIANTS = {
-  qualite: { name: '2️⃣ Assoupli', quality: true, tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.35, maxH: 24, chosen: true },
+  qualite: { name: '2️⃣ Anti-arnaque + 30 min', quality: true, crit: 'anti30', tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.4, maxH: 24, chosen: true },
   eclair: { name: '⚡ Sniper éclair', quality: true, tp1: 0.5, tp1Part: 1, sl: 0.25, maxH: 6 },
   moonshot: { name: '🚀 Moonshot', quality: true, tp1: 4, tp1Part: 1, sl: 0.5, maxH: 72 },
-  origine: { name: '1️⃣ Recette origine', quality: true, origine: true, tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.35, maxH: 24 },
-  tres: { name: '3️⃣ Très assoupli', quality: true, tres: true, tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.35, maxH: 24 },
+  origine: { name: '1️⃣ Anti-arnaque', quality: true, crit: 'anti', tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.4, maxH: 24 },
+  tres: { name: '3️⃣ Jackpot ×5', quality: true, crit: 'anti', tp1: 4, tp1Part: 0.5, trail: 0.3, sl: 0.4, maxH: 24 },
   temoin: { name: '🎲 Sans filtre (témoin)', quality: false, tp1: 1, tp1Part: 1, sl: 0.35, maxH: 24 },
   cerveau: { name: '🧠 Cerveau', quality: true, brain: true, tp1: 0.5, tp1Part: 0.5, trail: 0.25, sl: 0.3, maxH: 24 },
 };
@@ -80,6 +80,11 @@ const CRITERES = {
   souple: { twitter: false, creatorMax: 10, top10Max: 40, insidersMax: 2, holdersMin: 50, buyRatioMin: 0.9 },
   // TRÈS SOUPLE = encore plus permissif (test du 13/10/2026 19 h 35)
   tres: { twitter: false, creatorMax: 15, top10Max: 50, insidersMax: 5, holdersMin: 25, buyRatioMin: 0.7 },
+  // Recherche du 14/10 (363 tokens suivis + 88 trades réels) : les arnaques se repèrent surtout à une liquidité
+  // faible (< 35 % de la market cap) et à des ventes presque aussi nombreuses que les achats. Twitter n'aide pas.
+  anti: { twitter: false, creatorMax: 10, top10Max: 35, insidersMax: 2, holdersMin: 50, buyRatioMin: 1.3, liqRatioMin: 0.35 },
+  // Même chose, mais seulement des tokens qui ont survécu 30 minutes (la plupart des arnaques tombent avant)
+  anti30: { twitter: false, creatorMax: 10, top10Max: 35, insidersMax: 2, holdersMin: 50, buyRatioMin: 1.3, liqRatioMin: 0.35, ageMin: 30 },
 };
 const CRITERES_ACTIFS = 'souple';
 
@@ -87,6 +92,8 @@ function qualityOk(c, K = CRITERES[CRITERES_ACTIFS]) {
   const q = c.rc;
   if (!q) return { ok: false, why: 'analyse RugCheck indisponible' };
   if (K.twitter && !c.twitter) return { ok: false, why: 'pas de Twitter' };
+  if (K.ageMin && c.ageH * 60 < K.ageMin) return { ok: false, why: `trop jeune (${Math.round(c.ageH * 60)} min)` };
+  if (K.liqRatioMin && c.liq / Math.max(1, c.mcap) < K.liqRatioMin) return { ok: false, why: `liquidité faible (${Math.round((c.liq / Math.max(1, c.mcap)) * 100)} % de la market cap)` };
   if (q.rugged) return { ok: false, why: 'rug détecté' };
   if (q.mintAuth || q.freezeAuth) return { ok: false, why: 'le créateur peut encore imprimer ou bloquer' };
   if (q.creatorPct > K.creatorMax) return { ok: false, why: `créateur détient ${q.creatorPct.toFixed(0)} %` };
@@ -247,7 +254,7 @@ async function runSniper(st, now, opts = {}) {
       const V = VARIANTS[id];
       // Départ équitable : après une remise à zéro, les 3 Snipers n'achètent que des tokens découverts après ce moment
       if (S.resetAt && TRIO_IDS.includes(id) && S.pool && S.pool[c.addr] && S.pool[c.addr].t < S.resetAt) continue;
-      if (V.brain ? !c.brainOk : V.origine ? !c.q0.ok : V.tres ? !c.q2.ok : V.quality && !c.q.ok) continue;
+      if (V.brain ? !c.brainOk : V.crit ? !qualityOk(c, CRITERES[V.crit]).ok : V.quality && !c.q.ok) continue;
       if (v.positions.length >= MAX_OPEN || v.cash < STAKE) continue;
       if (v.positions.some((p) => p.addr === c.addr) || v.trades.some((t) => t.name === c.name && t.side === 'achat' && now - t.t < 24 * H)) continue;
       v.cash -= STAKE;
