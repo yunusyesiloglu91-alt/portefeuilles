@@ -180,7 +180,7 @@ async function main() {
       const size = Math.min(czEquity / CASINO.slots, cz.cash);
       if (size < 1) break;
       cz.cash -= size;
-      cz.positions.push({ name: c.name, addr: c.addr, t: now, entry: c.price, last: c.price, qty: (size * (1 - CASINO.cost)) / c.price, cost: size });
+      cz.positions.push({ name: c.name, addr: c.addr, pool: c.pool, t: now, entry: c.price, last: c.price, qty: (size * (1 - CASINO.cost)) / c.price, cost: size });
       clog('achat', c.name, c.price, size, { reason: `${c.ageDays < 2 ? Math.round(c.ageDays * 24) + ' h' : Math.round(c.ageDays) + ' j'}, ${(c.mcap / 1e6).toFixed(1)} M$, +${Math.round(c.ch6 * 100)} % sur 6 h` });
     }
 
@@ -217,7 +217,7 @@ async function main() {
         const size = Math.min(equity / MEME_SLOTS, m.cash);
         if (size < 1) break;
         m.cash -= size;
-        m.positions.push({ name: c.name, addr: c.addr, t: now, entry: c.price, last: c.price, peak: c.price, qty: (size * (1 - Rules.PARAMS.cost)) / c.price, cost: size });
+        m.positions.push({ name: c.name, addr: c.addr, pool: c.pool, t: now, entry: c.price, last: c.price, peak: c.price, qty: (size * (1 - Rules.PARAMS.cost)) / c.price, cost: size });
         log('meme', 'achat', c.name, c.price, size, { reason: `note ${c.score} : ${c.reasons.join(', ')}` });
       }
     }
