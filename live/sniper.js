@@ -105,7 +105,9 @@ async function runSniper(st, now, opts = {}) {
 
   // 2. Sorties
   for (const [id, v] of Object.entries(S.variants)) {
-    const V = VARIANTS[id];
+    // La stratégie Cerveau utilise la sortie qu'il a apprise lui-même (dès 50 tokens suivis 24 h)
+    const ex = S.brain && S.brain.exit;
+    const V = VARIANTS[id].brain && ex && ex.avg > -0.05 ? { ...VARIANTS[id], tp1: ex.tp, sl: ex.sl, tp1Part: 1, trail: 0 } : VARIANTS[id];
     for (const p of [...v.positions]) {
       const price = priceOf[p.pair];
       if (!(price > 0)) { if (now - p.t > (V.maxH + 6) * H) { v.positions.splice(v.positions.indexOf(p), 1); v.trades.push({ t: now, side: 'vente', name: p.name, price: 0, usd: 0, ret: -1, reason: 'plus de cotation (token mort)' }); } continue; }
@@ -182,7 +184,8 @@ async function runSniper(st, now, opts = {}) {
   // 5. Cerveau : mémorise chaque lancement, suit les anciens, met à jour les leçons
   let B = null;
   try {
-    Brain.observe(base, now);
+    // Le cerveau observe large (tous les jeunes tokens cotés), pas seulement ceux qui passent les filtres : il apprend plus vite
+    Brain.observe(cands.filter((c) => c.ageH <= 6 && c.mcap >= 10e3 && c.mcap <= 1e6 && c.liq >= 3e3 && c.price > 0), now);
     // Suivi du cerveau et écriture du coffre Obsidian : une fois par minute suffit
     if (!S.brainT || now - S.brainT >= 60000 || !S.brainCache) {
       S.brainT = now;

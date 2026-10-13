@@ -11,6 +11,30 @@ const OBS = path.join(__dirname, 'cerveau-obs.json');
 const VAULT = path.join(__dirname, '..', 'cerveau');
 const WIN = 0.5, LOSS = 0.3, HORIZON = 24 * H;
 const MIN_RESOLVED = 150; // en dessous, le cerveau ne se fait pas encore confiance
+const UPS = [0.3, 0.5, 1, 2, 4];       // paliers de prise de gain testés : +30 %, +50 %, ×2, ×3, ×5
+const DOWNS = [0.2, 0.3, 0.4, 0.5];   // paliers de stop testés : −20 % … −50 %
+
+// Auto-réglage de la sortie : sur les tokens suivis 24 h, quelle combinaison prise de gain / stop
+// aurait rapporté le plus après frais ? (le premier palier touché gagne)
+function bestExit(obs, fees) {
+  const full = obs.filter((o) => o.done && o.hit);
+  if (full.length < 50) return null;
+  let best = null;
+  const all = [];
+  for (const tp of UPS) for (const sl of DOWNS) {
+    let sum = 0, wins = 0;
+    for (const o of full) {
+      const up = o.hit[`u${tp}`], dn = o.hit[`d${sl}`];
+      let r;
+      if (up && (!dn || up <= dn)) { r = tp; wins++; } else if (dn) r = -sl; else r = Math.max(-sl, Math.min(tp, o.ret24 || 0));
+      sum += r - fees;
+    }
+    const x = { tp, sl, avg: sum / full.length, rate: wins / full.length, n: full.length };
+    all.push(x);
+    if (!best || x.avg > best.avg) best = x;
+  }
+  return { ...best, all: all.sort((a, b) => b.avg - a.avg).slice(0, 5) };
+}
 
 const load = () => { try { return JSON.parse(fs.readFileSync(OBS, 'utf8')); } catch { return { obs: {} }; } };
 const save = (b) => { fs.writeFileSync(`${OBS}.tmp`, JSON.stringify(b)); fs.renameSync(`${OBS}.tmp`, OBS); };
@@ -50,7 +74,8 @@ function observe(cands, now) {
 // Suivi des prix (≤ 5 appels DexScreener par passage)
 async function track(now, json) {
   const b = load();
-  const open = Object.entries(b.obs).filter(([, o]) => !o.out).sort((x, y) => (x[1].checked || 0) - (y[1].checked || 0)).slice(0, 150);
+  // On suit chaque token 24 h complètes (même après +50 % ou −30 %) pour comparer toutes les sorties possibles
+  const open = Object.entries(b.obs).filter(([, o]) => !o.done).sort((x, y) => (x[1].checked || 0) - (y[1].checked || 0)).slice(0, 300);
   for (let k = 0; k < open.length; k += 30) {
     const chunk = open.slice(k, k + 30);
     const pairs = (await json(`https://api.dexscreener.com/tokens/v1/solana/${chunk.map(([a]) => a).join(',')}`)) || [];
@@ -61,11 +86,21 @@ async function track(now, json) {
       const p = px[o.pair];
       if (p > 0 && Math.abs(Math.log(p / (o.last || o.p0))) < Math.log(20)) {
         o.last = p; o.max = Math.max(o.max, p); o.min = Math.min(o.min, p);
-        if (o.max >= o.p0 * (1 + WIN)) o.out = 'win';
-        else if (o.min <= o.p0 * (1 - LOSS)) o.out = 'loss';
-      } else if (!p && now - o.t > 6 * H) o.out = 'loss'; // plus coté : token mort
-      if (!o.out && now - o.t >= HORIZON) { o.out = 'flat'; o.ret24 = (o.last || o.p0) / o.p0 - 1; }
-      if (o.out) o.tOut = now;
+        // Premier moment où chaque palier de hausse / baisse est touché (sert à trouver la meilleure sortie)
+        o.hit = o.hit || {};
+        for (const u of UPS) if (!o.hit[`u${u}`] && p >= o.p0 * (1 + u)) o.hit[`u${u}`] = now;
+        for (const d of DOWNS) if (!o.hit[`d${d}`] && p <= o.p0 * (1 - d)) o.hit[`d${d}`] = now;
+        if (!o.out && o.max >= o.p0 * (1 + WIN)) o.out = 'win';
+        else if (!o.out && o.min <= o.p0 * (1 - LOSS)) o.out = 'loss';
+      } else if (!p && now - o.t > 6 * H) { // plus coté : token mort
+        if (!o.out) o.out = 'loss';
+        o.hit = o.hit || {};
+        for (const d of DOWNS) if (!o.hit[`d${d}`]) o.hit[`d${d}`] = now;
+        o.done = true;
+      }
+      if (!o.out && now - o.t >= HORIZON) o.out = 'flat';
+      if (now - o.t >= HORIZON) { o.done = true; o.ret24 = (o.last || o.p0) / o.p0 - 1; }
+      if (o.out && !o.tOut) o.tOut = now;
     }
   }
   for (const a in b.obs) if (now - b.obs[a].t > 14 * 24 * H) delete b.obs[a]; // mémoire glissante de 14 jours
@@ -89,7 +124,7 @@ function stats(fees) {
     }
     table[feat] = Object.entries(g).map(([k, x]) => ({ k, n: x.n, rate: x.win / x.n, avg: x.sum / x.n }));
   }
-  return { base, table };
+  return { base, table, exit: bestExit(all, fees) };
 }
 
 // Note d'un lancement : produit des rapports « réussite de sa tranche / réussite moyenne » (lissés)
@@ -136,6 +171,8 @@ Mis à jour le ${when}.
 - [[Leçons]] : ce qui marche et ce qui ne marche pas, mesuré sur ${S.base.n} lancements suivis jusqu'au bout (${S.base.pending} en cours de suivi).
 - [[Stratégies]] : résultats de chaque stratégie de test.
 - [[Frais]] : ce que coûte un trade.
+
+**Meilleure sortie apprise** : ${S.exit ? `vendre à +${Math.round(S.exit.tp * 100)} %, stop à −${Math.round(S.exit.sl * 100)} % → trade moyen ${pct(S.exit.avg)} après frais (${S.exit.n} tokens suivis 24 h). Top 5 : ${S.exit.all.map((x) => `+${Math.round(x.tp * 100)}/−${Math.round(x.sl * 100)} : ${pct(x.avg)}`).join(" · ")}` : "pas encore assez de tokens suivis 24 h (il en faut 50)."}
 - Journal : un fichier par jour dans \`Journal/\`.
 
 **Règle du jeu.** Un lancement est une **réussite** s'il prend +${WIN * 100} % avant de perdre ${LOSS * 100} %. C'est la sortie du sniper : moitié vendue à +50 %, stop à −30 %.
@@ -208,6 +245,7 @@ function summary(S) {
   const slim = (l) => ({ feat: l.feat, k: l.k, n: l.n, rate: +l.rate.toFixed(3), avg: +l.avg.toFixed(3) });
   return {
     n: S.base.n, pending: S.base.pending, rate: +S.base.rate.toFixed(3), avg: +S.base.avg.toFixed(3),
+    exit: S.exit ? { tp: S.exit.tp, sl: S.exit.sl, avg: +S.exit.avg.toFixed(3), rate: +S.exit.rate.toFixed(3), n: S.exit.n } : null,
     ready: S.base.n >= MIN_RESOLVED, min: MIN_RESOLVED, good: good.slice(0, 4).map(slim), bad: bad.slice(0, 4).map(slim),
   };
 }

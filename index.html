@@ -330,6 +330,7 @@
       ${br.ready ? '' : `<div class="progress"><i style="width:${Math.min(100, (br.n / br.min) * 100).toFixed(0)}%"></i></div>
       <div class="empty" style="padding:0">Apprentissage : ${br.n} / ${br.min} tokens suivis jusqu'au bout · ${br.pending} en observation</div>`}
       ${br.n ? `<div class="empty" style="padding:8px 0">Réussite moyenne : <b style="color:var(--text)">${Math.round(br.rate * 100)} %</b></div>` : ''}
+      ${br.exit ? `<div class="lesson"><span>🎯 Meilleure sortie apprise</span><b>+${Math.round(br.exit.tp * 100)} % / stop −${Math.round(br.exit.sl * 100)} %</b></div><div class="empty" style="padding:0 0 6px">Trade moyen après frais : ${pct(br.exit.avg)} sur ${br.exit.n} tokens suivis 24 h. Le Cerveau l’applique tout seul.</div>` : ""}
       ${br.good.length ? '<div style="font-weight:700;margin-top:6px">✅ Ce qui marche</div>' + br.good.map((l) => les(l, true)).join('') : ''}
       ${br.bad.length ? '<div style="font-weight:700;margin-top:10px">❌ À éviter</div>' + br.bad.map((l) => les(l, false)).join('') : ''}`;
 
