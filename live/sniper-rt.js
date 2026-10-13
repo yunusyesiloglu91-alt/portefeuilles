@@ -50,15 +50,41 @@ const priceUsd = (mcapSol) => (mcapSol * solUsd) / SUPPLY;
 
 // ---------- Suivi des tokens (créateur, acheteurs, dernier prix)
 const tokens = new Map(); // mint -> { creator, name, symbol, t0, p0, last, buyers:Set, buys, sells, devSold, meta }
+// Le flux des trades de PumpPortal est payant : les prix des tokens suivis viennent de DexScreener toutes les 10 s
 const subscribed = new Set();
 let ws = null;
 const send = (o) => { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); };
-const subscribe = (mint) => { if (!subscribed.has(mint)) { subscribed.add(mint); send({ method: 'subscribeTokenTrade', keys: [mint] }); } };
+const subscribe = (mint) => { subscribed.add(mint); };
 const unsubscribe = (mint) => {
   const stillHeld = Object.values(st.variants).some((v) => v.positions.some((p) => p.mint === mint));
   const pending = pendingConfirm.has(mint);
-  if (!stillHeld && !pending && subscribed.has(mint)) { subscribed.delete(mint); send({ method: 'unsubscribeTokenTrade', keys: [mint] }); tokens.delete(mint); }
+  if (!stillHeld && !pending) { subscribed.delete(mint); tokens.delete(mint); }
 };
+async function pollPrices() {
+  const mints = [...subscribed];
+  for (let k = 0; k < mints.length; k += 30) {
+    try {
+      const r = await fetch(`https://api.dexscreener.com/tokens/v1/solana/${mints.slice(k, k + 30).join(',')}`);
+      const pairs = await r.json();
+      const best = {};
+      for (const p of pairs || []) {
+        const a = p.baseToken && p.baseToken.address;
+        if (!a || !(+p.priceUsd > 0)) continue;
+        const liq = (p.liquidity && p.liquidity.usd) || 0;
+        if (!best[a] || /pump/.test(p.dexId || '') || liq > best[a].liq) best[a] = { price: +p.priceUsd, liq, m5: (p.txns && p.txns.m5) || {} };
+      }
+      for (const [a, b] of Object.entries(best)) {
+        const tok = tokens.get(a);
+        if (!tok) continue;
+        tok.last = b.price;
+        tok.buys = b.m5.buys || 0;
+        tok.sells = b.m5.sells || 0;
+        tok.seenDs = true;
+        checkExits(a, false);
+      }
+    } catch { /* réessai au prochain tour */ }
+  }
+}
 
 // Métadonnées (Twitter, site) avec délai maximal pour ne pas rater la seconde
 async function metadata(uri) {
@@ -129,8 +155,8 @@ function scheduleConfirm(tok) {
   pendingConfirm.set(tok.mint, setTimeout(() => {
     pendingConfirm.delete(tok.mint);
     const gain = tok.last / tok.p0 - 1;
-    const ok = tok.buyers.size >= 10 && tok.buys > tok.sells && !tok.devSold && gain >= 0.2 && gain <= 3;
-    if (ok) buy('confirme', tok, `60 s : ${tok.buyers.size} acheteurs, ${gain >= 0 ? '+' : ''}${Math.round(gain * 100)} %`);
+    const ok = tok.seenDs && tok.buys >= 10 && tok.buys > tok.sells && gain >= 0.2 && gain <= 3;
+    if (ok) buy('confirme', tok, `60 s : ${tok.buys} achats / ${tok.sells} ventes, ${gain >= 0 ? '+' : ''}${Math.round(gain * 100)} %`);
     unsubscribe(tok.mint);
   }, VARIANTS.confirme.delay));
 }
@@ -221,6 +247,7 @@ async function start() {
   log(`Sniper seconde démarré · SOL ${solUsd} $`);
   connect();
   setInterval(refreshSol, MIN);
+  setInterval(pollPrices, 10000); // prix des tokens suivis (DexScreener)
   setInterval(() => checkExits(null, false), 10000); // sorties sur durée même sans trade
   setInterval(publish, 2 * MIN);
   setTimeout(publish, 15000);
