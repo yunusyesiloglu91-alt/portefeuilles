@@ -345,9 +345,17 @@
       .filter((t) => filter === 'all' || t.pf === filter).sort((x, y) => y.t - x.t).slice(0, 60);
     $('trades').innerHTML = trades.length ? trades.map((t) => {
       const buy = t.side === 'achat';
+      const half = /moitié/.test(t.reason || '');
+      const qty = buy && t.price > 0 ? t.usd / t.price : 0;
+      const qtyTxt = qty >= 1e6 ? `${num(qty / 1e6, 2)} M` : qty >= 1e3 ? `${num(qty / 1e3, 1)} k` : num(qty, qty < 1 ? 4 : 0);
+      const title = buy ? 'Achat' : half ? 'Vente de la moitié' : 'Vente';
+      const right = buy
+        ? `<b>${t.amount}</b><span>${qty ? `${qtyTxt} jetons à ${fmtPx(t.price)} $` : ''}</span>`
+        : `<b class="${cls(t.ret ?? 0)}">${t.ret != null ? pct(t.ret) : ''}</b><span>${t.amount} reçus${half ? '' : ' (dernière part)'}</span>`;
+      const note = buy ? '' : half ? ' · % sur la moitié vendue' : ' · % sur la mise totale';
       return `<div class="row"><div class="ico" style="color:${buy ? 'var(--up)' : 'var(--down)'};background:${buy ? 'rgba(34,197,94,.14)' : 'rgba(239,68,68,.14)'}">${buy ? '↑' : '↓'}</div>
-        <div class="main"><div class="t">${buy ? 'Achat' : 'Vente'} ${esc(t.name)}</div><div class="s">${t.pf} · ${time(t.t)}${t.reason ? ' · ' + esc(t.reason) : ''}</div></div>
-        <div class="r">${t.ret != null ? `<b class="${cls(t.ret)}">${pct(t.ret)}</b><span>${t.amount}</span>` : `<b>${t.amount}</b><span>${fmtPx(t.price)} $</span>`}</div></div>`;
+        <div class="main"><div class="t">${title} ${esc(t.name)}</div><div class="s">${t.pf} · ${time(t.t)}${t.reason ? ' · ' + esc(String(t.reason).replace(' (moitié)', '')) : ''}${note}</div></div>
+        <div class="r">${right}</div></div>`;
     }).join('') : '<div class="empty">Aucun ordre pour l\'instant.</div>';
   }
 
