@@ -119,7 +119,9 @@ async function runSniper(st, now, opts = {}) {
   for (const list of [await json(`${DS}/token-profiles/latest/v1`), await json(`${DS}/token-boosts/latest/v1`)]) {
     for (const x of list || []) if (x.chainId === 'solana') fresh.set(x.tokenAddress, { twitter: (x.links || []).some((l) => l.type === 'twitter' || /x\.com|twitter\.com/.test(l.url || '')) });
   }
-  const np = await json(`${GT}/networks/solana/new_pools?page=1&include=base_token`);
+  // GeckoTerminal limite à 30 appels/min : nouveaux pools au plus toutes les 10 s
+  if (!S.gtT || now - S.gtT >= 10000) { S.gtT = now; S.gtNp = await json(`${GT}/networks/solana/new_pools?page=1&include=base_token`); }
+  const np = S.gtNp;
   for (const p of (np && np.data) || []) {
     const a = p.relationships.base_token.data.id.replace('solana_', '');
     if (!fresh.has(a)) fresh.set(a, { twitter: null });
@@ -163,9 +165,14 @@ async function runSniper(st, now, opts = {}) {
   let B = null;
   try {
     Brain.observe(base, now);
-    await Brain.track(now, json);
-    B = Brain.stats(2 * Brain.perOrder(FEES));
-    Brain.writeVault(B, S, FEES, now);
+    // Suivi du cerveau et écriture du coffre Obsidian : une fois par minute suffit
+    if (!S.brainT || now - S.brainT >= 60000 || !S.brainCache) {
+      S.brainT = now;
+      await Brain.track(now, json);
+      S.brainCache = Brain.stats(2 * Brain.perOrder(FEES));
+      Brain.writeVault(S.brainCache, S, FEES, now);
+    }
+    B = S.brainCache;
     S.brain = Brain.summary(B);
   } catch (e) { notes.push(`cerveau : ${e.message}`); }
   S.fees = { ...FEES, perOrder: Brain.perOrder(FEES) };
@@ -191,7 +198,9 @@ async function runSniper(st, now, opts = {}) {
   }
   S.watch = base.slice(0, 8).map((c) => ({ name: c.name, ageMin: Math.round(c.ageH * 60), mcap: c.mcap, twitter: c.twitter, ok: c.q.ok, why: c.q.why }));
 
-  // 7. Valeurs
+  // 7. Valeurs (courbe : un point par minute)
+  if (S.histT && now - S.histT < 60000) return notes;
+  S.histT = now;
   for (const v of Object.values(S.variants)) {
     const val = v.cash + v.positions.reduce((a, p) => a + p.qty * (p.last || p.entry), 0);
     v.history.push([now, +val.toFixed(2)]);
