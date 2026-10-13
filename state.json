@@ -378,6 +378,13 @@
    39.9,
    29.95,
    29.95
+  ],
+  [
+   1791904744085,
+   99.76,
+   39.86,
+   29.95,
+   29.95
   ]
  ],
  "watch": [
@@ -430,9 +437,11 @@
    "why": "rotation élevée (23 %/j)"
   }
  ],
- "notes": [],
+ "notes": [
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+ ],
  "lastScan": 1791902044292,
- "lastRun": 1791904445279,
+ "lastRun": 1791904744085,
  "casino": {
   "start": 1791871130814,
   "cash": 0,
@@ -442,7 +451,7 @@
     "addr": "7K52aYQW9rWGjwZmQ7o2d1P6E7bji6hSMsqaLy5EcxLh",
     "t": 1791871130814,
     "entry": 0.00036475370700767733,
-    "last": 0.00022916599123455421,
+    "last": 0.00023384205054707992,
     "qty": 54009.04671158107,
     "cost": 20
    },
@@ -451,7 +460,7 @@
     "addr": "7jNwX4Me9zGEjmWY7zARDG2LYjVs1WXD6DZ1JvSfpump",
     "t": 1791871130814,
     "entry": 0.004938006291740259,
-    "last": 0.0039123917593850204,
+    "last": 0.003882111291350754,
     "qty": 3989.4643376522104,
     "cost": 20
    },
@@ -461,7 +470,7 @@
     "pool": "9dsiuydk5EFRCLk6VEywY95Nn3jjGbdWNijuACf1PXuA",
     "t": 1791881059759,
     "entry": 0.0004080669441752599,
-    "last": 0.00039569083557814013,
+    "last": 0.00039004672365793404,
     "qty": 40198.24273875863,
     "cost": 16.653374696061487
    },
@@ -471,7 +480,7 @@
     "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
     "t": 1791881059759,
     "entry": 0.0010044825832740145,
-    "last": 0.001049180994917559,
+    "last": 0.0010407446397227077,
     "qty": 16330.371824023758,
     "cost": 16.653374696061487
    },
@@ -481,7 +490,7 @@
     "pool": "4MWjp1aBQqE9Y6iC5cd3NrVvWWcHsN2LgpjWYMDK7u7E",
     "t": 1791902044292,
     "entry": 0.004029833779212947,
-    "last": 0.005673404503379297,
+    "last": 0.005324510296668958,
     "qty": 1701.1789993987124,
     "cost": 6.9598665951925005
    }
@@ -754,6 +763,10 @@
    [
     1791904445279,
     70.68
+   ],
+   [
+    1791904744085,
+    69.85
    ]
   ],
   "watch": [
