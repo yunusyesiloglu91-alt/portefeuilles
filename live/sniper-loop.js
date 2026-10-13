@@ -76,7 +76,7 @@ let sha = null;
 async function publish(st) {
   const api = `https://api.github.com/repos/${REPO}/contents/sniper5.json`;
   if (!sha) { const cur = await fetch(`${api}?ref=sniper`, { headers: headers() }); if (cur.ok) sha = (await cur.json()).sha; }
-  const body = { message: 'Sniper (PC) : mise à jour', content: Buffer.from(JSON.stringify({ ...st.sniper, seen: undefined, gtNp: undefined, brainCache: undefined, lastRun: Date.now() })).toString('base64'), branch: 'sniper' };
+  const body = { message: 'Sniper (PC) : mise à jour', content: Buffer.from(JSON.stringify({ ...st.sniper, seen: undefined, gtNp: undefined, pool: undefined, poolSize: Object.keys(st.sniper.pool || {}).length, brainCache: undefined, lastRun: Date.now() })).toString('base64'), branch: 'sniper' };
   if (sha) body.sha = sha;
   const put = await fetch(api, { method: 'PUT', headers: headers(), body: JSON.stringify(body) });
   if (put.ok) sha = (await put.json()).content.sha;

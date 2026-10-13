@@ -140,18 +140,31 @@ async function runSniper(st, now, opts = {}) {
 
   // 3. Nouveaux tokens : profils DexScreener récents + nouveaux pools GeckoTerminal
   const fresh = new Map();
-  for (const list of [await json(`${DS}/token-profiles/latest/v1`), await json(`${DS}/token-boosts/latest/v1`)]) {
+  for (const list of [await json(`${DS}/token-profiles/latest/v1`), await json(`${DS}/token-boosts/latest/v1`), await json(`${DS}/token-boosts/top/v1`)]) {
     for (const x of list || []) if (x.chainId === 'solana') fresh.set(x.tokenAddress, { twitter: (x.links || []).some((l) => l.type === 'twitter' || /x\.com|twitter\.com/.test(l.url || '')) });
   }
   // GeckoTerminal limite à 30 appels/min : nouveaux pools au plus toutes les 20 s (le robot Prudent l'utilise aussi)
-  if (!S.gtT || now - S.gtT >= 20000) { S.gtT = now; S.gtNp = await json(`${GT}/networks/solana/new_pools?page=1&include=base_token`); }
-  const np = S.gtNp;
+  // GeckoTerminal à tour de rôle (une requête toutes les 12 s) : nouveaux pools p. 1 et 2, tendances 1 h
+  const GT_PAGES = ['new_pools?page=1', 'new_pools?page=2', 'trending_pools?duration=1h&page=1', 'trending_pools?duration=5m&page=1'];
+  S.gtNp = S.gtNp || {};
+  if (!S.gtT || now - S.gtT >= 12000) {
+    S.gtT = now;
+    S.gtI = ((S.gtI || 0) + 1) % GT_PAGES.length;
+    const r = await json(`${GT}/networks/solana/${GT_PAGES[S.gtI]}&include=base_token`);
+    if (r) S.gtNp[S.gtI] = r;
+  }
+  const np = { data: Object.values(S.gtNp).flatMap((r) => r.data || []) };
   for (const x of opts.pushed || []) if (!fresh.has(x.mint)) fresh.set(x.mint, { twitter: null });
   for (const p of (np && np.data) || []) {
     const a = p.relationships.base_token.data.id.replace('solana_', '');
     if (!fresh.has(a)) fresh.set(a, { twitter: null });
   }
-  const list = [...fresh.keys()].filter((a) => !S.seen[a] || now - S.seen[a].t < 3 * H);
+  S.pool = S.pool || {};
+  for (const [a, x] of fresh) if (!S.pool[a]) S.pool[a] = { t: now, tw: x.twitter, c: 0 };
+  for (const a in S.pool) if (now - S.pool[a].t > 3 * H) delete S.pool[a];
+  // 90 tokens par passage (3 appels), les moins récemment examinés d'abord : toute la mémoire est revue en ~1 min
+  const list = Object.entries(S.pool).sort((x, y) => x[1].c - y[1].c).slice(0, 90).map(([a]) => a);
+  for (const a of list) S.pool[a].c = now;
   const cands = [];
   for (let k = 0; k < list.length; k += 30) {
     const pairs = (await json(`${DS}/tokens/v1/solana/${list.slice(k, k + 30).join(',')}`)) || [];
@@ -161,7 +174,7 @@ async function runSniper(st, now, opts = {}) {
       if (a && (!best[a] || ((p.liquidity && p.liquidity.usd) || 0) > ((best[a].liquidity && best[a].liquidity.usd) || 0))) best[a] = p;
     }
     for (const [a, p] of Object.entries(best)) {
-      const tw = fresh.get(a).twitter ?? ((p.info && p.info.socials) || []).some((s) => s.type === 'twitter');
+      const tw = (S.pool[a] && S.pool[a].tw) ?? ((p.info && p.info.socials) || []).some((s) => s.type === 'twitter');
       cands.push({
         addr: a, pair: p.pairAddress, name: p.baseToken.symbol || p.baseToken.name, price: +p.priceUsd,
         mcap: p.marketCap || p.fdv || 0, liq: (p.liquidity && p.liquidity.usd) || 0, ageH: (now - p.pairCreatedAt) / H,
