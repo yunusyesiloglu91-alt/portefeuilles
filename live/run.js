@@ -231,7 +231,8 @@ async function main() {
   cz.trades = cz.trades.slice(-200);
 
   // ---------- Laboratoire de sniping
-  try { notes.push(...(await runSniper(st, now))); } catch (e) { notes.push(`sniper : ${e.message}`); }
+  // Le sniper tourne maintenant en continu sur le PC (live/sniper-loop.js) : prix toutes les 15 s, nouveaux tokens chaque minute
+  if (process.env.SNIPER_IN_RUN) { try { notes.push(...(await runSniper(st, now))); } catch (e) { notes.push(`sniper : ${e.message}`); } }
 
   // ---------- Valorisation
   const val = {

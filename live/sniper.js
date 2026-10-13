@@ -65,7 +65,7 @@ function qualityOk(c) {
   return { ok: true, why: 'tous les critères' };
 }
 
-async function runSniper(st, now) {
+async function runSniper(st, now, opts = {}) {
   if (!st.sniper) {
     st.sniper = { start: now, variants: {}, seen: {}, watch: [] };
     for (const id in VARIANTS) st.sniper.variants[id] = { cash: CAPITAL, positions: [], trades: [], history: [] };
@@ -111,6 +111,8 @@ async function runSniper(st, now) {
       else if (now - p.t >= V.maxH * H) sell(1, `${V.maxH} h écoulées`);
     }
   }
+
+  if (opts.exitsOnly) return notes; // passage rapide : seulement les prix et les sorties
 
   // 3. Nouveaux tokens : profils DexScreener récents + nouveaux pools GeckoTerminal
   const fresh = new Map();
