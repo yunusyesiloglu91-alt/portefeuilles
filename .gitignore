@@ -13,3 +13,4 @@ cerveau/
 live/sniper5-state.json
 live/sniper5-state.json.tmp
 live/sniper-loop.log
+live/sniper5-state.backup-*.json

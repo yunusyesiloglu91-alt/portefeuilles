@@ -12,6 +12,7 @@ const VARIANTS = {
   qualite: { name: '🎯 Sniper qualité', quality: true, tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.35, maxH: 24, chosen: true },
   eclair: { name: '⚡ Sniper éclair', quality: true, tp1: 0.5, tp1Part: 1, sl: 0.25, maxH: 6 },
   moonshot: { name: '🚀 Moonshot', quality: true, tp1: 4, tp1Part: 1, sl: 0.5, maxH: 72 },
+  origine: { name: '💾 Recette d’origine (sauvegarde)', quality: true, origine: true, tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.35, maxH: 24 },
   temoin: { name: '🎲 Sans filtre (témoin)', quality: false, tp1: 1, tp1Part: 1, sl: 0.35, maxH: 24 },
   cerveau: { name: '🧠 Cerveau', quality: true, brain: true, tp1: 0.5, tp1Part: 0.5, trail: 0.25, sl: 0.3, maxH: 24 },
 };
@@ -70,18 +71,26 @@ async function rugcheck(addr) {
   };
 }
 
-function qualityOk(c) {
+// Critères de sélection. ORIGINE = la recette qui a trouvé SEALS, ROUTE et SIM (sauvegardée, ne pas modifier).
+// SOUPLE = version assouplie en test depuis le 13/10/2026 19 h 15 (argent virtuel). Retour arrière : CRITERES_ACTIFS = 'origine'.
+const CRITERES = {
+  origine: { twitter: true, creatorMax: 5, top10Max: 30, insidersMax: 0, holdersMin: 100, buyRatioMin: 1 },
+  souple: { twitter: false, creatorMax: 10, top10Max: 40, insidersMax: 2, holdersMin: 50, buyRatioMin: 0.9 },
+};
+const CRITERES_ACTIFS = 'souple';
+
+function qualityOk(c, K = CRITERES[CRITERES_ACTIFS]) {
   const q = c.rc;
   if (!q) return { ok: false, why: 'analyse RugCheck indisponible' };
-  if (!c.twitter) return { ok: false, why: 'pas de Twitter' };
+  if (K.twitter && !c.twitter) return { ok: false, why: 'pas de Twitter' };
   if (q.rugged) return { ok: false, why: 'rug détecté' };
   if (q.mintAuth || q.freezeAuth) return { ok: false, why: 'le créateur peut encore imprimer ou bloquer' };
-  if (q.creatorPct > 5) return { ok: false, why: `créateur détient ${q.creatorPct.toFixed(0)} %` };
-  if (q.top10 > 30) return { ok: false, why: `10 plus gros portefeuilles : ${q.top10.toFixed(0)} %` };
-  if (q.insiders > 0) return { ok: false, why: 'réseau d’insiders détecté' };
+  if (q.creatorPct > K.creatorMax) return { ok: false, why: `créateur détient ${q.creatorPct.toFixed(0)} %` };
+  if (q.top10 > K.top10Max) return { ok: false, why: `10 plus gros portefeuilles : ${q.top10.toFixed(0)} %` };
+  if (q.insiders > K.insidersMax) return { ok: false, why: 'réseau d’insiders détecté' };
   if (q.danger.length) return { ok: false, why: q.danger[0] };
-  if (q.holders < 100) return { ok: false, why: 'moins de 100 détenteurs' };
-  if (!(c.buys1h > c.sells1h)) return { ok: false, why: 'plus de ventes que d’achats' };
+  if (q.holders < K.holdersMin) return { ok: false, why: `moins de ${K.holdersMin} détenteurs` };
+  if (!(c.buys1h > c.sells1h * K.buyRatioMin) || !c.buys1h) return { ok: false, why: 'plus de ventes que d’achats' };
   return { ok: true, why: 'tous les critères' };
 }
 
@@ -224,13 +233,14 @@ async function runSniper(st, now, opts = {}) {
   // 6. Entrées
   for (const c of base) {
     c.q = qualityOk(c);
+    c.q0 = qualityOk(c, CRITERES.origine);
     const sc = Brain.score(c, B, now);
     const safe = c.rc && !c.rc.rugged && !c.rc.mintAuth && !c.rc.freezeAuth && !c.rc.danger.length;
     c.brainOk = sc ? safe && sc.mult >= 1.5 : c.q.ok;
     c.brainWhy = sc ? `note cerveau ×${sc.mult.toFixed(1)}${sc.why.length ? ' : ' + sc.why.slice(0, 2).join(', ') : ''}` : '';
     for (const [id, v] of Object.entries(S.variants)) {
       const V = VARIANTS[id];
-      if (V.brain ? !c.brainOk : V.quality && !c.q.ok) continue;
+      if (V.brain ? !c.brainOk : V.origine ? !c.q0.ok : V.quality && !c.q.ok) continue;
       if (v.positions.length >= MAX_OPEN || v.cash < STAKE) continue;
       if (v.positions.some((p) => p.addr === c.addr) || v.trades.some((t) => t.name === c.name && t.side === 'achat' && now - t.t < 24 * H)) continue;
       v.cash -= STAKE;
@@ -274,4 +284,4 @@ function manualSell(st, id, addr) {
   return t;
 }
 
-module.exports = { runSniper, manualSell, VARIANTS, CAPITAL, apiUsage };
+module.exports = { CRITERES, CRITERES_ACTIFS, runSniper, manualSell, VARIANTS, CAPITAL, apiUsage };

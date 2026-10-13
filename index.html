@@ -127,7 +127,7 @@
   const RTLAB = { diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
   const rp = (p) => { const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry; };
   const rVal = (v) => v.cash + v.positions.reduce((a, p) => a + p.qty * rp(p), 0);
-  const LAB = { qualite: '🎯 Sniper qualité', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)', cerveau: '🧠 Cerveau (apprend tout seul)' };
+  const LAB = { qualite: '🎯 Sniper qualité', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)', cerveau: '🧠 Cerveau (apprend tout seul)', origine: '💾 Recette d’origine (sauvegarde)' };
 
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -314,7 +314,7 @@
         <td>${sx.n ? `${sx.win}/${sx.n}` : '—'}<small>${open} en cours</small></td>
         <td class="${sx.best > -Infinity ? cls(sx.best) : 'flat'}">${sx.best > -Infinity ? pct(sx.best) : '—'}</td></tr>`;
     };
-    const SUB = { qualite: 'Twitter, créateur ≤ 5 %, sécurité · vend ½ à ×2', eclair: 'mêmes filtres · vend tout à +50 %', moonshot: 'mêmes filtres · vise ×5', temoin: 'achète tout · sert de comparaison', cerveau: 'achète ce qui a le mieux marché · vend ½ à +50 %' };
+    const SUB = { qualite: 'critères assouplis (test) · vend ½ à ×2', origine: 'recette qui a trouvé SEALS · sauvegarde', eclair: 'mêmes filtres · vend tout à +50 %', moonshot: 'mêmes filtres · vise ×5', temoin: 'achète tout · sert de comparaison', cerveau: 'achète ce qui a le mieux marché · vend ½ à +50 %' };
     let rows2 = '<tr class="grp"><td colspan="4">🎯 SNIPER · STRATÉGIES EN TEST</td></tr>';
     if (sn) for (const [id, x] of Object.entries(sn.variants).sort((a, c) => vVal(c[1]) - vVal(a[1]))) rows2 += line((id === 'qualite' ? '⭐ ' : '') + (LAB[id] || id), SUB[id] || '', vVal(x), 100, '$', stats(x.trades), x.positions.length);
     rows2 += '<tr class="grp"><td colspan="4">AUTRES PORTEFEUILLES</td></tr>';

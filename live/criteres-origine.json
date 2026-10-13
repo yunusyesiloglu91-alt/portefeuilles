@@ -1,0 +1,18 @@
+{
+  "sauvegarde": "2026-10-13 19:15",
+  "note": "Recette Qualité qui a trouvé SEALS (+932 %), ROUTE (+116 %), SIM (+29 %). Pour revenir : CRITERES_ACTIFS = origine dans live/sniper.js, ou git checkout backup-criteres-origine-2026-10-13 -- live/sniper.js",
+  "criteres": {
+    "twitter": true,
+    "creatorMax": 5,
+    "top10Max": 30,
+    "insidersMax": 0,
+    "holdersMin": 100,
+    "buyRatioMin": 1
+  },
+  "sortie": {
+    "vendre_moitie_a": "x2",
+    "stop_suiveur": "-30 %",
+    "stop": "-35 %",
+    "duree_max": "24 h"
+  }
+}
