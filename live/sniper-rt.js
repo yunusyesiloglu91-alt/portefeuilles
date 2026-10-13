@@ -256,6 +256,7 @@ async function rugReport(mint) {
       insiders: r.graphInsidersDetected || 0, holders: r.totalHolders || 0,
       mintAuth: !!r.mintAuthority, freezeAuth: !!r.freezeAuthority, rugged: !!r.rugged,
       danger: (r.risks || []).filter((x) => x.level === 'danger').map((x) => x.name),
+      uri: r.tokenMeta && r.tokenMeta.uri,
     };
   } catch { return null; }
 }
@@ -273,7 +274,9 @@ async function onMigration(d) {
   buy('diplomeTemoin', tok, 'sortie de pump.fun');
   const liq = (p.liquidity && p.liquidity.usd) || 0;
   const m5 = (p.txns && p.txns.m5) || {};
-  const twitter = ((p.info && p.info.socials) || []).some((x) => x.type === 'twitter');
+  // Réseaux : DexScreener met du temps à les afficher, on lit aussi les métadonnées du token
+  const meta = rc && rc.uri ? await metadata(rc.uri) : null;
+  const twitter = ((p.info && p.info.socials) || []).some((x) => x.type === 'twitter') || !!(meta && [meta.twitter, meta.extensions && meta.extensions.twitter].find((x) => typeof x === 'string' && /(x|twitter).com//i.test(x)));
   let why = null;
   if (!rc) why = 'RugCheck indisponible';
   else if (rc.rugged || rc.danger.length) why = rc.rugged ? 'rug détecté' : rc.danger[0];
