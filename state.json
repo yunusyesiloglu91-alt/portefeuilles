@@ -154,6 +154,13 @@
    39.77,
    29.96,
    29.96
+  ],
+  [
+   1791895444566,
+   99.62,
+   39.72,
+   29.95,
+   29.95
   ]
  ],
  "watch": [
@@ -208,7 +215,7 @@
  ],
  "notes": [],
  "lastScan": 1791894844100,
- "lastRun": 1791895144120,
+ "lastRun": 1791895444566,
  "casino": {
   "start": 1791871130814,
   "cash": 0,
@@ -218,7 +225,7 @@
     "addr": "7K52aYQW9rWGjwZmQ7o2d1P6E7bji6hSMsqaLy5EcxLh",
     "t": 1791871130814,
     "entry": 0.00036475370700767733,
-    "last": 0.0002720983551267076,
+    "last": 0.00028576542891545654,
     "qty": 54009.04671158107,
     "cost": 20
    },
@@ -227,7 +234,7 @@
     "addr": "7jNwX4Me9zGEjmWY7zARDG2LYjVs1WXD6DZ1JvSfpump",
     "t": 1791871130814,
     "entry": 0.004938006291740259,
-    "last": 0.004187806575002743,
+    "last": 0.004225880368535738,
     "qty": 3989.4643376522104,
     "cost": 20
    },
@@ -237,7 +244,7 @@
     "pool": "9dsiuydk5EFRCLk6VEywY95Nn3jjGbdWNijuACf1PXuA",
     "t": 1791881059759,
     "entry": 0.0004080669441752599,
-    "last": 0.0003877169255212786,
+    "last": 0.00038423082186501246,
     "qty": 40198.24273875863,
     "cost": 16.653374696061487
    },
@@ -247,7 +254,7 @@
     "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
     "t": 1791881059759,
     "entry": 0.0010044825832740145,
-    "last": 0.0011786425852843103,
+    "last": 0.0011598748113075042,
     "qty": 16330.371824023758,
     "cost": 16.653374696061487
    },
@@ -257,7 +264,7 @@
     "pool": "2U5kdozDrdgYzyGRNbTdBejGLYEeRt1FkERQmyPbV85P",
     "t": 1791891470454,
     "entry": 0.001035659257987307,
-    "last": 0.000920024701541166,
+    "last": 0.0009779021704868275,
     "qty": 11527.438249275603,
     "cost": 12.120302683999263
    }
@@ -385,55 +392,59 @@
    [
     1791895144120,
     76.84
+   ],
+   [
+    1791895444566,
+    77.95
    ]
   ],
   "watch": [
    {
     "name": "HIRE",
-    "mcap": 939034.669699061,
-    "ageDays": 0.9535430555555555,
-    "ch1": -0.050949999999999995,
-    "ch24": 21.47602,
-    "ok": false
+    "mcap": 948681.075599051,
+    "ageDays": 0.9570204398148148,
+    "ch1": 0.01814,
+    "ch24": 21.706909999999997,
+    "ok": true
    },
    {
     "name": "LOAD",
-    "mcap": 10184304.0965185,
-    "ageDays": 0.7345962962962963,
-    "ch1": 0.10253,
-    "ch24": 48.21317,
+    "mcap": 10177438.5340644,
+    "ageDays": 0.7380736805555556,
+    "ch1": 0.14362,
+    "ch24": 48.17999,
     "ok": false
    },
    {
     "name": "MarsX",
-    "mcap": 382599.036435551,
-    "ageDays": 0.7919574074074074,
-    "ch1": -0.14154999999999998,
-    "ch24": 10.384570000000002,
+    "mcap": 378236.450369187,
+    "ageDays": 0.7954347916666666,
+    "ch1": -0.14551999999999998,
+    "ch24": 10.254760000000001,
     "ok": false
    },
    {
     "name": "HUMPH",
-    "mcap": 4135218.46210431,
-    "ageDays": 1.072802314814815,
-    "ch1": -0.00169,
-    "ch24": 4.38363,
+    "mcap": 4245162.87475613,
+    "ageDays": 1.0762796990740742,
+    "ch1": -0.02258,
+    "ch24": 4.26431,
     "ok": false
    },
    {
     "name": "VEIL",
-    "mcap": 3251500.69894374,
-    "ageDays": 0.7345268518518518,
-    "ch1": 0.15686999999999998,
-    "ch24": 63.30836,
+    "mcap": 3246355.44411021,
+    "ageDays": 0.7380042361111111,
+    "ch1": 0.18308,
+    "ch24": 63.20659,
     "ok": true
    },
    {
     "name": "CLAUDIA",
-    "mcap": 4076371.80989124,
-    "ageDays": 6.4545615740740745,
-    "ch1": 0.15182,
-    "ch24": -0.35694000000000004,
+    "mcap": 4118247.90230233,
+    "ageDays": 6.458038958333334,
+    "ch1": 0.15810000000000002,
+    "ch24": -0.34704999999999997,
     "ok": false
    }
   ]
@@ -450,8 +461,8 @@
       "pair": "HvYfFr8nm6bn9V93TDDMgqWwS2D2LsMn1Y3rDCToqeAB",
       "t": 1791891470454,
       "entry": 0.00005949,
-      "last": 0.0003423,
-      "peak": 0.000365,
+      "last": 0.0004788,
+      "peak": 0.0004788,
       "qty": 41183.39216675072,
       "cost": 5,
       "realized": 8.729808371154817,
@@ -463,7 +474,7 @@
       "pair": "BGiqtbQENNuduagiT1FFyQPHBKTxemPoNwuTZau5SULb",
       "t": 1791893943731,
       "entry": 0.00003496,
-      "last": 0.00005253,
+      "last": 0.00004715,
       "peak": 0.00005755,
       "qty": 140160.18306636158,
       "cost": 5
@@ -474,8 +485,8 @@
       "pair": "EPKraTDQhoYUTniEji77yAZrcmiCws9vFrwaGnzZwJQb",
       "t": 1791894844100,
       "entry": 0.00004577,
-      "last": 0.00005384,
-      "peak": 0.00005384,
+      "last": 0.00007912,
+      "peak": 0.00007912,
       "qty": 107057.02425169326,
       "cost": 5
      }
@@ -656,24 +667,16 @@
      [
       1791895144120,
       107.81
+     ],
+     [
+      1791895444566,
+      115.38
      ]
     ]
    },
    "eclair": {
-    "cash": 89.43935200829732,
-    "positions": [
-     {
-      "name": "STRETCHY",
-      "addr": "EvCMw9YCr681QTnW71oaJv8oFK8qgALjCZjsUsrZpump",
-      "pair": "EPKraTDQhoYUTniEji77yAZrcmiCws9vFrwaGnzZwJQb",
-      "t": 1791894844100,
-      "entry": 0.00004577,
-      "last": 0.00005384,
-      "peak": 0.00005384,
-      "qty": 107057.02425169326,
-      "cost": 5
-     }
-    ],
+    "cash": 97.74029673191541,
+    "positions": [],
     "trades": [
      {
       "t": 1791881059759,
@@ -801,6 +804,15 @@
       "price": 0.00004577,
       "usd": 5,
       "reason": "26 min, 46 k$, créateur 0.0 %, top 10 25 %"
+     },
+     {
+      "t": 1791895444566,
+      "side": "vente",
+      "name": "STRETCHY",
+      "price": 0.00007912,
+      "usd": 8.300944723618091,
+      "ret": 0.6601889447236182,
+      "reason": "objectif ×1.5"
      }
     ],
     "history": [
@@ -859,30 +871,23 @@
      [
       1791895144120,
       95.2
+     ],
+     [
+      1791895444566,
+      97.74
      ]
     ]
    },
    "moonshot": {
-    "cash": 94.68387564540701,
+    "cash": 96.49605109368288,
     "positions": [
-     {
-      "name": "Jamie",
-      "addr": "ACfj29FkvtkpAuzWhcV3xWbVCaF1n625qYssYWxopump",
-      "pair": "3T2TEh4uCmMfh5BvJ9JBKwgHsgSDTtemfxWzeXhm9nda",
-      "t": 1791891470454,
-      "entry": 0.00003625,
-      "last": 0.00002302,
-      "peak": 0.00004009,
-      "qty": 135172.41379310345,
-      "cost": 5
-     },
      {
       "name": "Revolut",
       "addr": "2v52Jo1yC5MVaJxa6ZzESEvcdbs6yUhjgNefXLmvpump",
       "pair": "EtY35iYEu9YRMbiw6mCrFt4PrEnvAdBqtcTLW8GAqmED",
       "t": 1791891470454,
       "entry": 0.00003307,
-      "last": 0.00001825,
+      "last": 0.00001677,
       "peak": 0.00004311,
       "qty": 148170.54732385848,
       "cost": 5
@@ -893,7 +898,7 @@
       "pair": "BGiqtbQENNuduagiT1FFyQPHBKTxemPoNwuTZau5SULb",
       "t": 1791893943731,
       "entry": 0.00003496,
-      "last": 0.00005253,
+      "last": 0.00004715,
       "peak": 0.00005755,
       "qty": 140160.18306636158,
       "cost": 5
@@ -904,8 +909,8 @@
       "pair": "EPKraTDQhoYUTniEji77yAZrcmiCws9vFrwaGnzZwJQb",
       "t": 1791894844100,
       "entry": 0.00004577,
-      "last": 0.00005384,
-      "peak": 0.00005384,
+      "last": 0.00007912,
+      "peak": 0.00007912,
       "qty": 107057.02425169326,
       "cost": 5
      }
@@ -1010,6 +1015,15 @@
       "usd": 2.124715070774355,
       "ret": -0.575056985845129,
       "reason": "stop −50 %"
+     },
+     {
+      "t": 1791895444566,
+      "side": "vente",
+      "name": "Jamie",
+      "price": 0.00001368,
+      "usd": 1.8121754482758619,
+      "ret": -0.6375649103448277,
+      "reason": "stop −50 %"
      }
     ],
     "history": [
@@ -1068,6 +1082,10 @@
      [
       1791895144120,
       113.63
+     ],
+     [
+      1791895444566,
+      114.06
      ]
     ]
    },
@@ -1080,7 +1098,7 @@
       "pair": "8gSh8VZCdQod93YjATYax7UEpLcevo1LKdmfbHEaewvf",
       "t": 1791881059759,
       "entry": 0.00007362,
-      "last": 0.00007328,
+      "last": 0.00007475,
       "peak": 0.00009962,
       "qty": 66558.00054333062,
       "cost": 5
@@ -1091,7 +1109,7 @@
       "pair": "8KUSA63myw4NQjQQojk41YdEE5FgrgPPNxaoYuDSPYU2",
       "t": 1791891470454,
       "entry": 0.0002854,
-      "last": 0.0003092,
+      "last": 0.0003033,
       "peak": 0.000346,
       "qty": 17168.885774351787,
       "cost": 5
@@ -1102,8 +1120,8 @@
       "pair": "BvkVQqZhkn9b1NH8LwgntB2pu91Jk4Nh3gpKnomi6Nbv",
       "t": 1791892144222,
       "entry": 0.00008948,
-      "last": 0.000106,
-      "peak": 0.000106,
+      "last": 0.0001119,
+      "peak": 0.0001119,
       "qty": 54760.84041126509,
       "cost": 5
      },
@@ -1113,7 +1131,7 @@
       "pair": "BGiqtbQENNuduagiT1FFyQPHBKTxemPoNwuTZau5SULb",
       "t": 1791893043775,
       "entry": 0.00003855,
-      "last": 0.00005253,
+      "last": 0.00004715,
       "peak": 0.00005755,
       "qty": 127107.6523994812,
       "cost": 5
@@ -1124,7 +1142,7 @@
       "pair": "5gqV246xYK534Vf8i7PgUci9ALQjbJHeRH1AQseW4ovU",
       "t": 1791894543576,
       "entry": 0.00004714,
-      "last": 0.0000783,
+      "last": 0.00003924,
       "peak": 0.0000783,
       "qty": 103945.69367840476,
       "cost": 5
@@ -1135,8 +1153,8 @@
       "pair": "EPKraTDQhoYUTniEji77yAZrcmiCws9vFrwaGnzZwJQb",
       "t": 1791894844100,
       "entry": 0.00004577,
-      "last": 0.00005384,
-      "peak": 0.00005384,
+      "last": 0.00007912,
+      "peak": 0.00007912,
       "qty": 107057.02425169326,
       "cost": 5
      },
@@ -1146,7 +1164,7 @@
       "pair": "G4DoEEbeW3n5bZCgptjjpXWVh72pwNNB638FgzazFChL",
       "t": 1791895144120,
       "entry": 0.00008606,
-      "last": 0.00008606,
+      "last": 0.00006228,
       "peak": 0.00008606,
       "qty": 56937.020683244256,
       "cost": 5
@@ -1419,6 +1437,10 @@
      [
       1791895144120,
       97.94
+     ],
+     [
+      1791895444566,
+      94.86
      ]
     ]
    }
@@ -1636,35 +1658,27 @@
   "watch": [
    {
     "name": "STRETCHY",
-    "ageMin": 31,
-    "mcap": 53847,
+    "ageMin": 36,
+    "mcap": 76569,
     "twitter": true,
     "ok": true,
     "why": "tous les critères"
    },
    {
     "name": "PUTBACK",
-    "ageMin": 36,
-    "mcap": 50583,
+    "ageMin": 41,
+    "mcap": 44884,
     "twitter": true,
     "ok": true,
     "why": "tous les critères"
    },
    {
     "name": "Lion",
-    "ageMin": 13,
-    "mcap": 78306,
+    "ageMin": 18,
+    "mcap": 36056,
     "twitter": true,
     "ok": false,
     "why": "réseau d’insiders détecté"
-   },
-   {
-    "name": "KERNEL",
-    "ageMin": 10,
-    "mcap": 86066,
-    "twitter": false,
-    "ok": false,
-    "why": "pas de Twitter"
    }
   ]
  }
