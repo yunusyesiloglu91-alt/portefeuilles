@@ -17,6 +17,7 @@ const VARIANTS = {
   temoin: { name: '🎲 Sans filtre (témoin)', quality: false, tp1: 1, tp1Part: 1, sl: 0.35, maxH: 24 },
   cerveau: { name: '🧠 Cerveau', quality: true, brain: true, tp1: 0.5, tp1Part: 0.5, trail: 0.25, sl: 0.3, maxH: 24 },
 };
+const TRIO_IDS = ['origine', 'qualite', 'tres'];
 const Brain = require('./cerveau.js');
 const STAKE = 5, CAPITAL = 100, MAX_OPEN = 15;
 // Frais réalistes d'un ordre de 5 $ sur Solana : outil de trading 1 %, DEX 0,3 %, glissement 0,5 %, réseau + priorité 0,03 $
@@ -244,6 +245,8 @@ async function runSniper(st, now, opts = {}) {
     c.brainWhy = sc ? `note cerveau ×${sc.mult.toFixed(1)}${sc.why.length ? ' : ' + sc.why.slice(0, 2).join(', ') : ''}` : '';
     for (const [id, v] of Object.entries(S.variants)) {
       const V = VARIANTS[id];
+      // Départ équitable : après une remise à zéro, les 3 Snipers n'achètent que des tokens découverts après ce moment
+      if (S.resetAt && TRIO_IDS.includes(id) && S.pool && S.pool[c.addr] && S.pool[c.addr].t < S.resetAt) continue;
       if (V.brain ? !c.brainOk : V.origine ? !c.q0.ok : V.tres ? !c.q2.ok : V.quality && !c.q.ok) continue;
       if (v.positions.length >= MAX_OPEN || v.cash < STAKE) continue;
       if (v.positions.some((p) => p.addr === c.addr) || v.trades.some((t) => t.name === c.name && t.side === 'achat' && now - t.t < 24 * H)) continue;
