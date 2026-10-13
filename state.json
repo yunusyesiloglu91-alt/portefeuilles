@@ -420,6 +420,13 @@
    39.85,
    29.96,
    29.96
+  ],
+  [
+   1791909243992,
+   99.71,
+   39.8,
+   29.96,
+   29.96
   ]
  ],
  "watch": [
@@ -476,17 +483,17 @@
   "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
  ],
  "lastScan": 1791902044292,
- "lastRun": 1791908943988,
+ "lastRun": 1791909243992,
  "casino": {
   "start": 1791871130814,
-  "cash": 11.43092401062275,
+  "cash": 25.289511098538647,
   "positions": [
    {
     "name": "HUMPH",
     "addr": "7jNwX4Me9zGEjmWY7zARDG2LYjVs1WXD6DZ1JvSfpump",
     "t": 1791871130814,
     "entry": 0.004938006291740259,
-    "last": 0.0032492182366511933,
+    "last": 0.003342368999661964,
     "qty": 3989.4643376522104,
     "cost": 20
    },
@@ -496,7 +503,7 @@
     "pool": "9dsiuydk5EFRCLk6VEywY95Nn3jjGbdWNijuACf1PXuA",
     "t": 1791881059759,
     "entry": 0.0004080669441752599,
-    "last": 0.00030364372996250893,
+    "last": 0.0003006072286285261,
     "qty": 40198.24273875863,
     "cost": 16.653374696061487
    },
@@ -506,19 +513,9 @@
     "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
     "t": 1791881059759,
     "entry": 0.0010044825832740145,
-    "last": 0.0011113868110145988,
+    "last": 0.001105120834313692,
     "qty": 16330.371824023758,
     "cost": 16.653374696061487
-   },
-   {
-    "name": "VEIL",
-    "addr": "HgTGdc29D5bDMrDvsCLnorxz899VyDj7ZN7FPa6vpump",
-    "pool": "4MWjp1aBQqE9Y6iC5cd3NrVvWWcHsN2LgpjWYMDK7u7E",
-    "t": 1791902044292,
-    "entry": 0.004029833779212947,
-    "last": 0.007487412606508479,
-    "qty": 1701.1789993987124,
-    "cost": 6.9598665951925005
    }
   ],
   "trades": [
@@ -604,6 +601,15 @@
     "usd": 11.43092401062275,
     "ret": -0.42845379946886253,
     "reason": "stop −40 %"
+   },
+   {
+    "t": 1791909243992,
+    "side": "vente",
+    "name": "VEIL",
+    "price": 0.008270518015040683,
+    "usd": 13.858587087915897,
+    "ret": 0.9912144720544873,
+    "reason": "objectif ×2 atteint"
    }
   ],
   "history": [
@@ -822,6 +828,10 @@
    [
     1791908943988,
     67.49
+   ],
+   [
+    1791909243992,
+    68.75
    ]
   ],
   "watch": [
