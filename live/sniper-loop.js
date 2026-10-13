@@ -6,22 +6,23 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { runSniper, manualSell, apiUsage } = require('./sniper.js');
 const Rapport = require('./rapport.js');
-const REPORTED = ['qualite', 'cerveau'];
+const REPORTED = ['origine', 'qualite', 'tres', 'cerveau'];
 
 // Notifications et bouton « Vendre » via ntfy.sh (service gratuit de messages, sans compte).
 // NOTIF : le PC annonce chaque achat / vente (le site et l'appli ntfy du téléphone l'affichent).
 // CMD : le site envoie « vendre tel token », le PC exécute.
 const MAIN = 'qualite';
+const TRIO = { origine: '1️⃣', qualite: '2️⃣', tres: '3️⃣' }; // les 3 Snipers suivis sur l'accueil
 const NOTIF = 'sniper-97f143460ae09334d6';
 const CMD = 'sniper-97f143460ae09334d6-cmd';
 const DATA = 'sniper-97f143460ae09334d6-data';
 const mc = (x) => (!x ? '' : x >= 1e6 ? `${(x / 1e6).toFixed(1).replace('.', ',')} M$` : `${Math.max(5, Math.round(x / 5e3) * 5)} k$`);
 const fmt = (p) => (p >= 1 ? p.toFixed(2) : Number(p.toPrecision(3)).toString());
-async function notify(t) {
+async function notify(t, id) {
   const buy = t.side === 'achat';
-  const title = buy ? `🟢 Achat ${t.name}` : `${t.ret >= 0 ? '💰' : '🔴'} Vente ${t.name} ${t.ret >= 0 ? '+' : ''}${Math.round(t.ret * 100)} %`;
+  const title = (TRIO[id] || '') + ' ' + (buy ? `🟢 Achat ${t.name}` : `${t.ret >= 0 ? '💰' : '🔴'} Vente ${t.name} ${t.ret >= 0 ? '+' : ''}${Math.round(t.ret * 100)} %`);
   const message = buy ? `5 $ · market cap ≈ ${mc(t.mcap)} · ${fmt(t.price)} $ le jeton` : `${t.usd.toFixed(2)} $ reçus · market cap ≈ ${mc(t.mcap)} · ${t.reason}`;
-  try { await fetch('https://ntfy.sh/', { method: 'POST', body: JSON.stringify({ topic: DATA, message: JSON.stringify({ ...t, f: undefined }) }) }); } catch { /* pas grave */ }
+  try { await fetch('https://ntfy.sh/', { method: 'POST', body: JSON.stringify({ topic: DATA, message: JSON.stringify({ ...t, f: undefined, id }) }) }); } catch { /* pas grave */ }
   try { await fetch('https://ntfy.sh/', { method: 'POST', body: JSON.stringify({ topic: NOTIF, title, message, tags: [buy ? 'chart_with_upwards_trend' : 'moneybag'] }) }); } catch { /* pas grave */ }
 }
 const orders = [];
@@ -32,7 +33,7 @@ function commands() {
       const m = JSON.parse(e.data);
       if (m.event !== 'message') return;
       const c = JSON.parse(m.message);
-      if (c.action === 'sell' && c.addr && Date.now() - m.time * 1000 < 120000) orders.push(c.addr);
+      if (c.action === 'sell' && c.addr && Date.now() - m.time * 1000 < 120000) orders.push({ addr: c.addr, id: TRIO[c.id] ? c.id : MAIN });
     } catch { /* message ignoré */ }
   };
   ws.onclose = () => setTimeout(commands, 5000);
@@ -94,7 +95,8 @@ guard.listen(47125, '127.0.0.1', async () => {
   stream();
   commands();
   let lastScan = 0, lastPub = 0;
-  let seenT = Math.max(0, ...st.sniper.variants[MAIN].trades.map((t) => t.t));
+  const seenT = {};
+  for (const id in TRIO) seenT[id] = Math.max(0, ...((st.sniper.variants[id] || { trades: [] }).trades.map((t) => t.t)));
   const repT = {};
   for (const id of REPORTED) repT[id] = Math.max(0, ...((st.sniper.variants[id] || { trades: [] }).trades.map((t) => t.t)));
   for (;;) {
@@ -104,10 +106,11 @@ guard.listen(47125, '127.0.0.1', async () => {
       while (pushed.length && now - pushed[0].t > 3 * 3600000) pushed.shift();
       const notes = await runSniper(st, now, { exitsOnly: !scan, pushed });
       while (orders.length) {
-        const t = manualSell(st, MAIN, orders.shift());
+        const o = orders.shift();
+        const t = manualSell(st, o.id, o.addr);
         if (t) { log(`vente à la main : ${t.name}`); lastPub = 0; }
       }
-      for (const t of st.sniper.variants[MAIN].trades) if (t.t > seenT) { seenT = t.t; notify(t); }
+      for (const id in TRIO) for (const t of (st.sniper.variants[id] || { trades: [] }).trades) if (t.t > seenT[id]) { seenT[id] = t.t; notify(t, id); }
       for (const id of REPORTED) {
         const v = st.sniper.variants[id];
         if (!v) continue;
