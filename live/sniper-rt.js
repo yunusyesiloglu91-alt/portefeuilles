@@ -39,7 +39,7 @@ let claude = null;
 if (process.env.ANTHROPIC_API_KEY) {
   try { const Anthropic = require('@anthropic-ai/sdk'); claude = new (Anthropic.default || Anthropic)(); } catch { claude = null; }
 }
-const EXIT = { tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.35, maxMs: 30 * MIN };
+const EXIT = { tp1: 0.5, tp1Part: 0.5, trail: 0.25, sl: 0.3, maxMs: 30 * MIN }; // moitié vendue à +50 %, reste suivi à −25 % du plus haut
 
 const log = (...a) => {
   const line = `[${new Date().toLocaleString('fr-FR')}] ${a.join(' ')}`;
@@ -98,6 +98,13 @@ async function pollPrices() {
         if (!tok) continue;
         // Garde-fou : un saut de plus de ×20 en 10 s est une erreur de cotation, on l'ignore
         if (tok.last > 0 && Math.abs(Math.log(b.price / tok.last)) > Math.log(20)) continue;
+        // Saut de plus de ×3 en 10 s : on attend qu'un 2e relevé le confirme avant d'y croire
+        if (tok.last > 0 && Math.abs(Math.log(b.price / tok.last)) > Math.log(3)) {
+          if (!tok.jump || Math.abs(Math.log(b.price / tok.jump)) > Math.log(1.5)) { tok.jump = b.price; continue; }
+        }
+        tok.jump = 0;
+        // Liquidité trop faible : prix pas réalisable en vrai, on ne s'en sert pas pour vendre en gain
+        if (b.liq > 0 && b.liq < 3000 && tok.last > 0 && b.price > tok.last) continue;
         tok.last = b.price;
         tok.buys = b.m5.buys || 0;
         tok.sells = b.m5.sells || 0;
@@ -224,7 +231,7 @@ function checkExits(mint, devSold) {
       p.peak = Math.max(p.peak, p.last);
       if (devSold && p.mint === mint) sell(v, p, 1, 'le créateur vend');
       else if (!p.tp1Done && p.last <= p.entry * (1 - EXIT.sl)) sell(v, p, 1, `stop −${EXIT.sl * 100} %`);
-      else if (!p.tp1Done && p.last >= p.entry * (1 + EXIT.tp1)) { sell(v, p, EXIT.tp1Part, '×2 atteint'); if (v.positions.includes(p)) p.tp1Done = true; }
+      else if (!p.tp1Done && p.last >= p.entry * (1 + EXIT.tp1)) { sell(v, p, EXIT.tp1Part, '+50 % atteint'); if (v.positions.includes(p)) p.tp1Done = true; }
       else if (p.tp1Done && p.last <= p.peak * (1 - EXIT.trail)) sell(v, p, 1, `stop suiveur −${EXIT.trail * 100} %`);
       else if (Date.now() - p.t >= maxMs) sell(v, p, 1, `${Math.round(maxMs / MIN) >= 60 ? Math.round(maxMs / 3600000) + ' h' : Math.round(maxMs / MIN) + ' min'} écoulées`);
     }

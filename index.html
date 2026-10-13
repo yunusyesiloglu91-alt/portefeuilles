@@ -51,6 +51,14 @@
   .seg button { flex: 0 0 auto; }
   .seg button { flex: 1; font: inherit; font-size: 13px; font-weight: 700; color: var(--muted); background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 8px; }
   .seg button[aria-pressed="true"] { color: var(--text); border-color: var(--muted); }
+  table.recap { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .recap th { color: var(--muted); font-weight: 600; font-size: 11px; text-align: right; padding: 0 4px 8px; }
+  .recap th:first-child, .recap td:first-child { text-align: left; }
+  .recap td { padding: 9px 4px; border-top: 1px solid var(--line); text-align: right; white-space: nowrap; }
+  .recap td:first-child { white-space: normal; font-weight: 700; }
+  .recap td small { display: block; color: var(--muted); font-weight: 500; font-size: 11px; }
+  .recap tr.grp td { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .05em; padding-top: 14px; border-top: none; }
+  details > summary { cursor: pointer; font-size: 16px; font-weight: 700; padding: 12px 0; color: var(--blue); }
   footer { color: var(--muted); font-size: 12px; text-align: center; margin-top: 24px; line-height: 1.5; }
   .err { background: rgba(239,68,68,.12); color: #fca5a5; border-radius: 12px; padding: 10px 12px; font-size: 13px; margin-bottom: 12px; }
 </style>
@@ -65,9 +73,12 @@
     <div class="live off" id="live"><i></i><span>…</span></div>
   </header>
   <div id="err"></div>
+  <div class="card" id="recap"></div>
   <div id="cards"></div>
+  <details><summary>Voir le détail de chaque stratégie</summary>
   <div id="lab"></div>
   <div id="rt"></div>
+  </details>
   <h2>Positions en cours</h2>
   <div id="positions"></div>
   <h2>Achats et ventes</h2>
@@ -257,6 +268,39 @@
         (rt.recent && rt.recent.length ? `<div class="empty" style="margin-top:8px">Dernières créations : ${rt.recent.slice(-10).reverse().map((r) => `${esc(r.symbol || '?')} ${r.ok ? '✅' + (r.ai ? ` <span style="opacity:.8">(IA ${r.ai.note}/10)</span>` : '') : `❌ <span style="opacity:.8">(${esc(r.why)})</span>`}`).join(' · ')}</div>` : '');
     }
     $('rt').innerHTML = rtHtml;
+
+    // ---------- Tableau récapitulatif
+    const stats = (trades) => {
+      const cl = trades.filter((t) => t.side === 'vente' && t.ret != null && !/moitié/.test(t.reason || ''));
+      const best = trades.filter((t) => t.side === 'vente' && t.ret != null).reduce((a, t) => Math.max(a, t.ret), -Infinity);
+      return { n: cl.length, win: cl.filter((t) => t.ret > 0).length, best };
+    };
+    const line = (name, sub, val, base, unit, sx, open) => {
+      const g = val / base - 1;
+      return `<tr><td>${name}<small>${sub}</small></td>
+        <td>${num(val)} ${unit}<small class="${cls(g)}">${pct(g)}</small></td>
+        <td>${sx.n ? `${sx.win}/${sx.n}` : '—'}<small>${open} en cours</small></td>
+        <td class="${sx.best > -Infinity ? cls(sx.best) : 'flat'}">${sx.best > -Infinity ? pct(sx.best) : '—'}</td></tr>`;
+    };
+    let rows2 = '<tr class="grp"><td colspan="4">LES 4 PORTEFEUILLES</td></tr>';
+    rows2 += line('🛡️ Prudent', 'Bitcoin, Solana, quelques memes', total, 100, '€', stats(st.trades), (b.qty > 0) + (s.qty > 0) + m.positions.length);
+    rows2 += line('🎰 Casino', 'memecoins jeunes qui montent', czVal, CASINO_CAPITAL, '$', stats(cz.trades), cz.positions.length);
+    if (snq) rows2 += line('🎯 Sniper 5 min', 'nouveaux tokens, vérifiés toutes les 5 min', vVal(snq), 100, '$', stats(snq.trades), snq.positions.length);
+    if (rts) rows2 += line('🔍 Sniper créateur', 'à la seconde, créateur analysé', rVal(rts), 100, '$', stats(rts.trades), rts.positions.length);
+    if (rt) {
+      rows2 += '<tr class="grp"><td colspan="4">TESTS « À LA SECONDE »</td></tr>';
+      for (const [id, x] of Object.entries(rt.variants).sort((a, c) => rVal(c[1]) - rVal(a[1]))) {
+        if (id === 'createur') continue;
+        rows2 += line(RTLAB[id] || id, /emoin/i.test(id) ? 'achète tout, sert de comparaison' : id === 'ia' && !rt.aiEnabled ? 'inactive : pas de clé API' : 'avec filtres de sécurité', rVal(x), 100, '$', stats(x.trades), x.positions.length);
+      }
+    }
+    if (sn) {
+      rows2 += '<tr class="grp"><td colspan="4">TESTS « 5 MIN »</td></tr>';
+      for (const [id, x] of Object.entries(sn.variants).sort((a, c) => vVal(c[1]) - vVal(a[1]))) if (id !== 'qualite') rows2 += line(LAB[id] || id, '5 $ par trade', vVal(x), 100, '$', stats(x.trades), x.positions.length);
+    }
+    $('recap').innerHTML = `<div class="name" style="margin-bottom:10px">📊 Récapitulatif</div>
+      <table class="recap"><thead><tr><th>Portefeuille</th><th>Valeur</th><th>Gagnés</th><th>Meilleur</th></tr></thead><tbody>${rows2}</tbody></table>
+      <div class="empty" style="padding:10px 0 0">« Gagnés » = trades fermés en gain. « Meilleur » = meilleure vente. Les ventes à +500 % et plus viennent de tokens achetés à la seconde de leur création : en vrai, on obtiendrait rarement ce prix-là.</div>`;
 
     // Positions
     const rows = [];
