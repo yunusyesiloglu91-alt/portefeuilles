@@ -1,0 +1,5 @@
+{
+  "name": "portefeuilles",
+  "private": true,
+  "dependencies": { "@anthropic-ai/sdk": "*" }
+}

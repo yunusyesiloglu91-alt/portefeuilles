@@ -18,10 +18,25 @@ const STAKE = 5, CAPITAL = 100, COST = 0.03, MAX_OPEN = 10;
 const MIN = 60000;
 
 const VARIANTS = {
+  createur: { name: '🔍 Analyse créateur', delay: 0, filtered: true },
+  ia: { name: '🤖 IA Claude Opus 5.5', delay: 0, filtered: true },
   seconde: { name: '⚡ Seconde filtrée', delay: 0, filtered: true },
   confirme: { name: '⏱️ Confirmé 60 s', delay: 60000, filtered: true, confirm: true },
   temoin: { name: '🎲 Tout acheter (témoin)', delay: 0, filtered: false },
 };
+const RPC = 'https://api.mainnet-beta.solana.com';
+
+// Clé API Claude facultative (fichier live/.env : ANTHROPIC_API_KEY=...). Sans clé, la variante IA reste inactive.
+try {
+  for (const line of fs.readFileSync(path.join(__dirname, '.env'), 'utf8').split(/\r?\n/)) {
+    const m = line.match(/^\s*([A-Z_]+)\s*=\s*(.+?)\s*$/);
+    if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
+  }
+} catch { /* pas de .env */ }
+let claude = null;
+if (process.env.ANTHROPIC_API_KEY) {
+  try { const Anthropic = require('@anthropic-ai/sdk'); claude = new (Anthropic.default || Anthropic)(); } catch { claude = null; }
+}
 const EXIT = { tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.35, maxMs: 30 * MIN };
 
 const log = (...a) => {
@@ -32,10 +47,10 @@ const log = (...a) => {
 
 // ---------- État
 let st = fs.existsSync(FILE) ? JSON.parse(fs.readFileSync(FILE, 'utf8')) : null;
-if (!st) {
-  st = { start: Date.now(), variants: {}, seen: 0, lastCreate: null, recent: [] };
-  for (const id in VARIANTS) st.variants[id] = { cash: CAPITAL, positions: [], trades: [], history: [] };
-}
+if (!st) st = { start: Date.now(), variants: {}, seen: 0, lastCreate: null, recent: [] };
+for (const id in VARIANTS) if (!st.variants[id]) st.variants[id] = { cash: CAPITAL, positions: [], trades: [], history: [] };
+st.creators = st.creators || {}; // portefeuille créateur -> dates de ses lancements (lanceurs en série)
+st.aiEnabled = !!claude;
 const save = () => { fs.writeFileSync(`${FILE}.tmp`, JSON.stringify(st)); fs.renameSync(`${FILE}.tmp`, FILE); };
 
 // ---------- Prix du SOL
@@ -110,6 +125,65 @@ function filters(tok) {
   return { ok: true, why: 'Twitter, créateur ≤ 5 %' };
 }
 
+// ---------- Analyse du portefeuille du créateur (blockchain Solana, ~0,2 s)
+async function rpc(method, params) {
+  const r = await fetch(RPC, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }) });
+  const j = await r.json();
+  if (j.error) throw new Error(j.error.message);
+  return j.result;
+}
+async function creatorProfile(wallet) {
+  try {
+    const [sigs, bal] = await Promise.all([rpc('getSignaturesForAddress', [wallet, { limit: 1000 }]), rpc('getBalance', [wallet])]);
+    const oldest = sigs.length ? sigs[sigs.length - 1].blockTime : null;
+    return { txs: sigs.length, ageDays: oldest ? (Date.now() / 1000 - oldest) / 86400 : 0, sol: (bal && bal.value) / 1e9 };
+  } catch { return null; }
+}
+
+function creatorFilters(tok) {
+  const base = filters(tok);
+  if (!base.ok) return base;
+  const m = tok.meta || {};
+  const c = tok.creatorInfo;
+  if (!c) return { ok: false, why: 'portefeuille du créateur illisible' };
+  if (c.ageDays < 3) return { ok: false, why: `portefeuille du créateur de ${c.ageDays < 1 ? Math.round(c.ageDays * 24) + ' h' : c.ageDays.toFixed(1) + ' j'}` };
+  if (c.txs < 20) return { ok: false, why: `créateur : ${c.txs} transactions seulement` };
+  if (c.sol < 0.5) return { ok: false, why: `créateur : ${c.sol.toFixed(2)} SOL` };
+  if (tok.launches24h > 1) return { ok: false, why: `créateur : ${tok.launches24h} lancements en 24 h` };
+  if (tok.devPct < 0.5) return { ok: false, why: 'le créateur n’a rien acheté' };
+  if (!(m.website || m.telegram || (m.extensions && (m.extensions.website || m.extensions.telegram)))) return { ok: false, why: 'ni site ni Telegram' };
+  return { ok: true, why: `créateur ${c.ageDays >= 30 ? '30 j+' : Math.round(c.ageDays) + ' j'}, ${c.txs}${c.txs >= 1000 ? '+' : ''} tx, ${c.sol.toFixed(1)} SOL, ${tok.devPct.toFixed(1)} %` };
+}
+
+// Note de Claude (Opus 5.5) sur le projet, à partir des seules données publiques
+async function aiScore(tok) {
+  if (!claude) return null;
+  const m = tok.meta || {};
+  const facts = {
+    nom: tok.name, symbole: tok.symbol, description: (m.description || '').slice(0, 500),
+    twitter: m.twitter || null, site: m.website || null, telegram: m.telegram || null,
+    part_createur_pct: +tok.devPct.toFixed(2), createur: tok.creatorInfo, lancements_createur_24h: tok.launches24h,
+  };
+  try {
+    const res = await claude.beta.messages.create({
+      model: 'claude-opus-5-5',
+      max_tokens: 1000,
+      output_config: { effort: 'low' },
+      betas: ['server-side-fallback-2026-07-01'],
+      fallbacks: 'default',
+      system: 'Tu évalues des memecoins Solana qui viennent d’être lancés, pour un test en argent virtuel. Juge originalité du concept, cohérence nom/description/liens, et signaux d’arnaque (copie d’un token connu, promesses de gains, liens incohérents). Réponds uniquement par un objet JSON : {"note": entier de 0 à 10, "raison": "phrase courte en français"}.',
+      messages: [{ role: 'user', content: JSON.stringify(facts) }],
+    });
+    if (res.stop_reason === 'refusal') return null;
+    const text = res.content.filter((b) => b.type === 'text').map((b) => b.text).join('');
+    const j = JSON.parse(text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1));
+    return { note: Number(j.note), raison: String(j.raison || '').slice(0, 120) };
+  } catch (e) {
+    log('IA indisponible :', e.message);
+    return null;
+  }
+}
+
 // ---------- Ordres virtuels
 function buy(id, tok, why) {
   const v = st.variants[id];
@@ -171,14 +245,30 @@ async function onCreate(d) {
   };
   tokens.set(d.mint, tok);
   st.lastCreate = { name: d.symbol, t: Date.now() };
+  // Lanceurs en série : on retient chaque lancement de chaque créateur
+  const hist = (st.creators[tok.creator] || []).filter((t) => Date.now() - t < 24 * 60 * MIN);
+  hist.push(Date.now());
+  st.creators[tok.creator] = hist;
+  tok.launches24h = hist.length;
   // Témoin : achète tout, tout de suite
   buy('temoin', tok, 'création');
-  tok.meta = await metadata(d.uri);
+  // Métadonnées et portefeuille du créateur en parallèle
+  [tok.meta, tok.creatorInfo] = await Promise.all([metadata(d.uri), creatorProfile(tok.creator)]);
   const f = filters(tok);
-  st.recent.push({ t: Date.now(), symbol: d.symbol, ok: f.ok, why: f.why, devPct: +tok.devPct.toFixed(2) });
+  const fc = creatorFilters(tok);
+  const secs = () => `${((Date.now() - tok.t0) / 1000).toFixed(1)} s après création`;
+  st.recent.push({ t: Date.now(), symbol: d.symbol, ok: fc.ok, why: fc.ok ? fc.why : fc.why, devPct: +tok.devPct.toFixed(2) });
   if (st.recent.length > 200) st.recent = st.recent.slice(-200);
   if (!f.ok) { if (!Object.values(st.variants).some((v) => v.positions.some((p) => p.mint === d.mint))) tokens.delete(d.mint); return; }
-  buy('seconde', tok, `${Math.round((Date.now() - tok.t0) / 1000)} s après création, ${f.why}`);
+  buy('seconde', tok, `${secs()}, ${f.why}`);
+  if (fc.ok) {
+    buy('createur', tok, `${secs()}, ${fc.why}`);
+    const ai = await aiScore(tok);
+    if (ai) {
+      st.recent[st.recent.length - 1].ai = ai;
+      if (ai.note >= 7) buy('ia', tok, `${secs()}, IA ${ai.note}/10 : ${ai.raison}`);
+    }
+  }
   subscribe(d.mint);
   scheduleConfirm(tok);
 }
@@ -225,7 +315,9 @@ async function publish() {
       v.trades = v.trades.slice(-300);
     }
     save();
-    const body = { ...st, lastRun: now, solUsd, recent: st.recent.slice(-15) };
+    const { creators, ...pub } = st;
+    for (const w in creators) if (!creators[w].some((t) => now - t < 24 * 60 * MIN)) delete creators[w];
+    const body = { ...pub, lastRun: now, solUsd, recent: st.recent.slice(-15) };
     const content = Buffer.from(JSON.stringify(body)).toString('base64');
     const api = `https://api.github.com/repos/${REPO}/contents/sniper.json`;
     const headers = { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' };

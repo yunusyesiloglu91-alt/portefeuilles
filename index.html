@@ -88,7 +88,7 @@
   const STATE_RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/data/state.json`;
   const CASINO_CAPITAL = 100, DAY = 86400000;
   let st = null, rt = null, px = {}, memePx = {}, pairPx = {}, rtPx = {}, lastPx = 0, filter = 'all';
-  const RTLAB = { seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
+  const RTLAB = { createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
   const rp = (p) => { const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry; };
   const rVal = (v) => v.cash + v.positions.reduce((a, p) => a + p.qty * rp(p), 0);
   const LAB = { qualite: '🎯 Sniper qualité', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)' };
@@ -234,12 +234,12 @@
     }
 
     // Sniper à la seconde (PC)
-    const rts = rt && rt.variants.seconde;
+    const rts = rt && (rt.variants.createur || rt.variants.seconde);
     let rtHtml = '';
     if (rts) {
       const v = rVal(rts), closed = rts.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
       const alive = now - rt.lastRun < 6 * 60000;
-      rtHtml += card('⚡ Sniper seconde', alive ? 'PC EN LIGNE' : 'PC HORS LIGNE', alive ? 'var(--up)' : 'var(--down)', `${num(v)} $`, v / 100 - 1, `${rt.seen} créations vues`,
+      rtHtml += card('🔍 Sniper créateur', alive ? 'PC EN LIGNE' : 'PC HORS LIGNE', alive ? 'var(--up)' : 'var(--down)', `${num(v)} $`, v / 100 - 1, `${rt.seen} créations vues`,
         [...rts.history, [now, v]], 100, [
           ['Positions', `${rts.positions.length} ouvertes`],
           ['Cash', `${num(rts.cash)} $`],
@@ -247,13 +247,13 @@
         ]);
       const board = Object.entries(rt.variants).map(([id, x]) => {
         const val = rVal(x), cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
-        return { name: RTLAB[id] || id, val, n: cl.length, win: cl.filter((t) => t.ret > 0).length, open: x.positions.length };
+        return { name: (RTLAB[id] || id) + (id === 'ia' && !rt.aiEnabled ? ' — inactive (pas de clé API)' : ''), val, n: cl.length, win: cl.filter((t) => t.ret > 0).length, open: x.positions.length };
       }).sort((a, b) => b.val - a.val);
       rtHtml += `<h2>⚡ Laboratoire « à la seconde »</h2><div class="empty" style="padding-top:0">Le PC écoute chaque création pump.fun en temps réel et décide à la seconde (100 $ par stratégie, 5 $ par trade, 3 % de frais par ordre). Résultats envoyés toutes les 2 min${alive ? '' : ' — <b style="color:var(--down)">le PC ne répond plus</b>'}.</div>` +
         board.map((r, k) => `<div class="row"><div class="ico" style="background:var(--bg);color:${k === 0 ? 'var(--amber)' : 'var(--muted)'}">${k + 1}</div>
           <div class="main"><div class="t">${r.name}</div><div class="s">${r.n ? `${r.win}/${r.n} trades gagnés` : 'aucun trade fermé'} · ${r.open} en cours</div></div>
           <div class="r"><b class="${cls(r.val / 100 - 1)}">${pct(r.val / 100 - 1)}</b><span>${num(r.val)} $</span></div></div>`).join('') +
-        (rt.recent && rt.recent.length ? `<div class="empty" style="margin-top:8px">Dernières créations : ${rt.recent.slice(-10).reverse().map((r) => `${esc(r.symbol || '?')} ${r.ok ? '✅' : `❌ <span style="opacity:.8">(${esc(r.why)})</span>`}`).join(' · ')}</div>` : '');
+        (rt.recent && rt.recent.length ? `<div class="empty" style="margin-top:8px">Dernières créations : ${rt.recent.slice(-10).reverse().map((r) => `${esc(r.symbol || '?')} ${r.ok ? '✅' + (r.ai ? ` <span style="opacity:.8">(IA ${r.ai.note}/10)</span>` : '') : `❌ <span style="opacity:.8">(${esc(r.why)})</span>`}`).join(' · ')}</div>` : '');
     }
     $('rt').innerHTML = rtHtml;
 
