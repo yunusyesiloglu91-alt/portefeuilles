@@ -47,7 +47,8 @@
   .pos { color: var(--up); } .neg { color: var(--down); } .flat { color: var(--muted); }
   .bg-pos { background: rgba(34,197,94,.14); } .bg-neg { background: rgba(239,68,68,.14); } .bg-flat { background: rgba(139,147,167,.14); }
   .empty { color: var(--muted); font-size: 14px; padding: 6px 2px 10px; }
-  .seg { display: flex; gap: 6px; margin-bottom: 10px; }
+  .seg { display: flex; gap: 6px; margin-bottom: 10px; overflow-x: auto; }
+  .seg button { flex: 0 0 auto; }
   .seg button { flex: 1; font: inherit; font-size: 13px; font-weight: 700; color: var(--muted); background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 8px; }
   .seg button[aria-pressed="true"] { color: var(--text); border-color: var(--muted); }
   footer { color: var(--muted); font-size: 12px; text-align: center; margin-top: 24px; line-height: 1.5; }
@@ -66,6 +67,7 @@
   <div id="err"></div>
   <div id="cards"></div>
   <div id="lab"></div>
+  <div id="rt"></div>
   <h2>Positions en cours</h2>
   <div id="positions"></div>
   <h2>Achats et ventes</h2>
@@ -74,6 +76,7 @@
     <button data-f="Casino" aria-pressed="false">🎰 Casino</button>
     <button data-f="Prudent" aria-pressed="false">🛡️ Prudent</button>
     <button data-f="Sniper" aria-pressed="false">🎯 Sniper</button>
+    <button data-f="Seconde" aria-pressed="false">⚡ Seconde</button>
   </div>
   <div id="trades"></div>
   <footer>Argent virtuel uniquement · aucun ordre réel n'est passé.<br>Prix : Binance et DexScreener, recalculés toutes les 15 s. Le robot décide toutes les 5 min. Sniping : nouveaux tokens via DexScreener, sécurité via RugCheck.</footer>
@@ -84,7 +87,10 @@
   const STATE_API = `https://api.github.com/repos/${OWNER}/${REPO}/contents/state.json?ref=data`;
   const STATE_RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/data/state.json`;
   const CASINO_CAPITAL = 100, DAY = 86400000;
-  let st = null, px = {}, memePx = {}, pairPx = {}, lastPx = 0, filter = 'all';
+  let st = null, rt = null, px = {}, memePx = {}, pairPx = {}, rtPx = {}, lastPx = 0, filter = 'all';
+  const RTLAB = { seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
+  const rp = (p) => { const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry; };
+  const rVal = (v) => v.cash + v.positions.reduce((a, p) => a + p.qty * rp(p), 0);
   const LAB = { qualite: '🎯 Sniper qualité', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)' };
 
   const $ = (id) => document.getElementById(id);
@@ -102,11 +108,25 @@
   async function loadState() {
     try { st = await getJson(`${STATE_API}&t=${Date.now()}`, { headers: { Accept: 'application/vnd.github.raw+json' }, cache: 'no-store' }); }
     catch { st = await getJson(`${STATE_RAW}?t=${Date.now()}`, { cache: 'no-store' }); }
+    // Sniper à la seconde (tourne sur le PC, branche "sniper")
+    try { rt = await getJson(`https://api.github.com/repos/${OWNER}/${REPO}/contents/sniper.json?ref=sniper&t=${Date.now()}`, { headers: { Accept: 'application/vnd.github.raw+json' }, cache: 'no-store' }); }
+    catch { try { rt = await getJson(`https://raw.githubusercontent.com/${OWNER}/${REPO}/sniper/sniper.json?t=${Date.now()}`, { cache: 'no-store' }); } catch { /* absent */ } }
   }
 
   async function loadPrices() {
     const tick = await getJson(`https://data-api.binance.vision/api/v3/ticker/price?symbols=${encodeURIComponent(JSON.stringify(['BTCUSDT', 'SOLUSDT', 'EURUSDT']))}`);
     for (const t of tick) px[t.symbol] = +t.price;
+    const rtHeld = rt ? Object.values(rt.variants).flatMap((v) => v.positions) : [];
+    if (rtHeld.length) {
+      try {
+        const mints = [...new Set(rtHeld.map((p) => p.mint))].slice(0, 30);
+        const pairs = await getJson(`https://api.dexscreener.com/tokens/v1/solana/${mints.join(',')}`);
+        for (const p of pairs) {
+          const a = p.baseToken && p.baseToken.address;
+          if (a && +p.priceUsd > 0 && (!rtPx[a] || /pump/.test(p.dexId || ''))) rtPx[a] = +p.priceUsd;
+        }
+      } catch { /* dernier prix du PC */ }
+    }
     const snHeld = st.sniper ? Object.values(st.sniper.variants).flatMap((v) => v.positions) : [];
     const held = [...(st.sleeves.meme.positions || []), ...((st.casino && st.casino.positions) || [])];
     const addrs = [...new Set([...held, ...snHeld].map((p) => p.addr))].slice(0, 30);
@@ -213,6 +233,30 @@
         (sn.watch && sn.watch.length ? `<div class="empty" style="margin-top:8px">Derniers lancements analysés : ${sn.watch.map((w) => `${esc(w.name)} ${w.ok ? '✅' : `❌ <span style="opacity:.8">(${esc(w.why)})</span>`}`).join(' · ')}</div>` : '');
     }
 
+    // Sniper à la seconde (PC)
+    const rts = rt && rt.variants.seconde;
+    let rtHtml = '';
+    if (rts) {
+      const v = rVal(rts), closed = rts.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
+      const alive = now - rt.lastRun < 6 * 60000;
+      rtHtml += card('⚡ Sniper seconde', alive ? 'PC EN LIGNE' : 'PC HORS LIGNE', alive ? 'var(--up)' : 'var(--down)', `${num(v)} $`, v / 100 - 1, `${rt.seen} créations vues`,
+        [...rts.history, [now, v]], 100, [
+          ['Positions', `${rts.positions.length} ouvertes`],
+          ['Cash', `${num(rts.cash)} $`],
+          ['Gagnés', closed.length ? `${closed.filter((t) => t.ret > 0).length} sur ${closed.length}` : 'aucun'],
+        ]);
+      const board = Object.entries(rt.variants).map(([id, x]) => {
+        const val = rVal(x), cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
+        return { name: RTLAB[id] || id, val, n: cl.length, win: cl.filter((t) => t.ret > 0).length, open: x.positions.length };
+      }).sort((a, b) => b.val - a.val);
+      rtHtml += `<h2>⚡ Laboratoire « à la seconde »</h2><div class="empty" style="padding-top:0">Le PC écoute chaque création pump.fun en temps réel et décide à la seconde (100 $ par stratégie, 5 $ par trade, 3 % de frais par ordre). Résultats envoyés toutes les 2 min${alive ? '' : ' — <b style="color:var(--down)">le PC ne répond plus</b>'}.</div>` +
+        board.map((r, k) => `<div class="row"><div class="ico" style="background:var(--bg);color:${k === 0 ? 'var(--amber)' : 'var(--muted)'}">${k + 1}</div>
+          <div class="main"><div class="t">${r.name}</div><div class="s">${r.n ? `${r.win}/${r.n} trades gagnés` : 'aucun trade fermé'} · ${r.open} en cours</div></div>
+          <div class="r"><b class="${cls(r.val / 100 - 1)}">${pct(r.val / 100 - 1)}</b><span>${num(r.val)} $</span></div></div>`).join('') +
+        (rt.recent && rt.recent.length ? `<div class="empty" style="margin-top:8px">Dernières créations : ${rt.recent.slice(-10).reverse().map((r) => `${esc(r.symbol || '?')} ${r.ok ? '✅' : `❌ <span style="opacity:.8">(${esc(r.why)})</span>`}`).join(' · ')}</div>` : '');
+    }
+    $('rt').innerHTML = rtHtml;
+
     // Positions
     const rows = [];
     const lastBuy = (k) => (st.trades.filter((t) => t.sleeve === k && t.side === 'achat').pop() || {}).t;
@@ -221,13 +265,15 @@
     for (const p of m.positions) rows.push({ pf: 'Prudent', col: 'var(--blue)', name: p.name, t: p.t, ret: (p.qty * mp(p)) / p.cost - 1, val: `${num((p.qty * mp(p)) / eurusd)} €`, px: mp(p) });
     for (const p of cz.positions) rows.push({ pf: 'Casino', col: 'var(--amber)', name: p.name, t: p.t, ret: (p.qty * mp(p)) / p.cost - 1, val: `${num(p.qty * mp(p))} $`, px: mp(p) });
     if (snq) for (const p of snq.positions) rows.push({ pf: 'Sniper', col: '#c084fc', name: p.name, t: p.t, ret: (p.qty * sp(p) + (p.realized || 0)) / p.cost - 1, val: `${num(p.qty * sp(p))} $`, px: sp(p) });
+    if (rts) for (const p of rts.positions) rows.push({ pf: 'Seconde', col: 'var(--up)', name: p.name, t: p.t, ret: (p.qty * rp(p) + (p.realized || 0)) / p.cost - 1, val: `${num(p.qty * rp(p))} $`, px: rp(p) });
     $('positions').innerHTML = rows.length ? rows.map((r) => `<div class="row"><div class="bar" style="background:${r.col}"></div>
       <div class="main"><div class="t">${esc(r.name)}</div><div class="s">${r.pf} · acheté il y a ${r.t ? ago(r.t) : '?'} · ${fmtPx(r.px)} $</div></div>
       <div class="r"><b class="${cls(r.ret)}">${pct(r.ret)}</b><span>${r.val}</span></div></div>`).join('') : '<div class="empty">Aucune position : tout est en stablecoin.</div>';
 
     // Ordres
     const trades = [...st.trades.map((t) => ({ ...t, pf: 'Prudent', amount: `${num(t.usd / eurusd)} €` })), ...cz.trades.map((t) => ({ ...t, pf: 'Casino', amount: `${num(t.usd)} $` })),
-      ...(snq ? snq.trades.map((t) => ({ ...t, pf: 'Sniper', amount: `${num(t.usd)} $` })) : [])]
+      ...(snq ? snq.trades.map((t) => ({ ...t, pf: 'Sniper', amount: `${num(t.usd)} $` })) : []),
+      ...(rts ? rts.trades.map((t) => ({ ...t, pf: 'Seconde', amount: `${num(t.usd)} $` })) : [])]
       .filter((t) => filter === 'all' || t.pf === filter).sort((x, y) => y.t - x.t).slice(0, 60);
     $('trades').innerHTML = trades.length ? trades.map((t) => {
       const buy = t.side === 'achat';
