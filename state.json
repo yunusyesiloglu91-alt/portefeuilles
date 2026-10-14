@@ -1246,6 +1246,13 @@
    39.8,
    29.96,
    29.96
+  ],
+  [
+   1791976743595,
+   99.7,
+   39.8,
+   29.95,
+   29.95
   ]
  ],
  "watch": [
@@ -1299,10 +1306,10 @@
   }
  ],
  "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/HMzvsEEmtzHhvZNw9uwbaG85HCTmFnkbhzUx16cy7ca3/ohlcv/day), positions conservées"
  ],
- "lastScan": 1791969245069,
- "lastRun": 1791976443826,
+ "lastScan": 1791976743595,
+ "lastRun": 1791976743595,
  "casino": {
   "start": 1791871130814,
   "cash": 44.987160227567934,
@@ -1313,7 +1320,7 @@
     "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
     "t": 1791881059759,
     "entry": 0.0010044825832740145,
-    "last": 0.0011584620964488564,
+    "last": 0.0011409733514049017,
     "qty": 16330.371824023758,
     "cost": 16.653374696061487
    }
@@ -2118,55 +2125,59 @@
    [
     1791976443826,
     63.91
+   ],
+   [
+    1791976743595,
+    63.62
    ]
   ],
   "watch": [
    {
     "name": "SEALS",
-    "mcap": 620844.224926818,
-    "ageDays": 0.9725702430555555,
-    "ch1": -0.11593,
-    "ch24": 14.49935,
-    "ok": false
+    "mcap": 689919.424985535,
+    "ageDays": 1.059358738425926,
+    "ch1": 0.10203,
+    "ch24": 19.8289,
+    "ok": true
    },
    {
     "name": "VEIL",
-    "mcap": 1284796.536,
-    "ageDays": 1.592176724537037,
-    "ch1": -0.07798,
-    "ch24": 4.51669,
+    "mcap": 1126851.525,
+    "ageDays": 1.6789652199074074,
+    "ch1": -0.02553,
+    "ch24": 2.81757,
     "ok": false
    },
    {
     "name": "Altai",
-    "mcap": 2039316.415,
-    "ageDays": 3.8068063541666666,
-    "ch1": -0.12956,
-    "ch24": 13.006590000000001,
+    "mcap": 2175559.28,
+    "ageDays": 3.893594849537037,
+    "ch1": 0.051609999999999996,
+    "ch24": 16.32281,
     "ok": false
    },
    {
     "name": "CRAWLER",
-    "mcap": 1737874.188,
-    "ageDays": 1.5271882986111112,
-    "ch1": 0.17812999999999998,
-    "ch24": -0.9070699999999999,
+    "mcap": 1159532.954,
+    "ageDays": 1.6139767939814815,
+    "ch1": -0.21589,
+    "ch24": -0.94628,
     "ok": false
    },
    {
     "name": "DOPE",
-    "mcap": 2491291.49413425,
-    "ageDays": 2.820104965277778,
-    "ch1": -0.01057,
-    "ch24": 2.39905,
+    "mcap": 2562954.73277846,
+    "ageDays": 2.9068934606481482,
+    "ch1": -0.007980000000000001,
+    "ch24": 2.88235,
     "ok": false
    },
    {
-    "name": "HIRE",
-    "mcap": 384646.685789494,
-    "ageDays": 1.8111929282407409,
-    "ch1": -0.04042,
-    "ch24": -0.43755000000000005,
+    "name": "QI",
+    "mcap": 504404.424701573,
+    "ageDays": 5.2714883680555555,
+    "ch1": 0.020790000000000003,
+    "ch24": -0.46576999999999996,
     "ok": false
    }
   ],
