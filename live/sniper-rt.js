@@ -25,6 +25,9 @@ const VARIANTS = {
   seconde: { name: '⚡ Seconde filtrée', delay: 0, filtered: true },
   confirme: { name: '⏱️ Confirmé 60 s', delay: 60000, filtered: true, confirm: true },
   temoin: { name: '🎲 Tout acheter (témoin)', delay: 0, filtered: false },
+  // TEST VIRTUEL « éclair » : achète dès la création, sans attendre les métadonnées ni RugCheck (ordre de ~0,1 s),
+  // seulement si le créateur n'a pas acheté plus de 5 % de l'offre. Mêmes frais et même sortie que les autres.
+  eclair: { name: '⚡ Éclair 0,1 s (test)', delay: 0, fast: true, maxMs: 30 * MIN },
 };
 const RPC = 'https://api.mainnet-beta.solana.com';
 
@@ -335,6 +338,8 @@ async function onCreate(d) {
   tok.launches24h = hist.length;
   // Témoin : achète tout, tout de suite
   buy('temoin', tok, 'création');
+  // Éclair (test virtuel) : achat immédiat si le créateur détient peu
+  if (tok.devPct <= 5) buy('eclair', tok, 'création, créateur ' + tok.devPct.toFixed(1) + ' %');
   // Métadonnées et portefeuille du créateur en parallèle
   [tok.meta, tok.creatorInfo] = await Promise.all([metadata(d.uri), creatorProfile(tok.creator)]);
   const f = filters(tok);
