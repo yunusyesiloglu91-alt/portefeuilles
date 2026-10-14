@@ -28,8 +28,12 @@ const VARIANTS = {
   // TEST VIRTUEL « éclair » : achète dès la création, sans attendre les métadonnées ni RugCheck (ordre de ~0,1 s),
   // seulement si le créateur n'a pas acheté plus de 5 % de l'offre. Mêmes frais et même sortie que les autres.
   eclair: { name: '⚡ Éclair 0,1 s (test)', delay: 0, fast: true, maxMs: 30 * MIN },
+  // Éclair sélectif (test virtuel) : achète à la création seulement si le créateur détient ≤ 5 %,
+  // ne lance pas en série (≤ 1 lancement en 24 h) et si le nom n'a pas l'air d'une imitation (pas de mot « test », « rug », « scam »).
+  eclairQ: { name: '⚡ Éclair sélectif (test)', delay: 0, fast: true, selective: true, maxMs: 30 * MIN },
 };
 const RPC = 'https://api.mainnet-beta.solana.com';
+const JUNK_IMITATION = /test|rug|scam|fake|copy|clone|free/i;
 
 // Clé API Claude facultative (fichier live/.env : ANTHROPIC_API_KEY=...). Sans clé, la variante IA reste inactive.
 try {
@@ -340,6 +344,7 @@ async function onCreate(d) {
   buy('temoin', tok, 'création');
   // Éclair (test virtuel) : achat immédiat si le créateur détient peu
   if (tok.devPct <= 5) buy('eclair', tok, 'création, créateur ' + tok.devPct.toFixed(1) + ' %');
+  if (tok.devPct <= 5 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) buy('eclairQ', tok, 'création sélective, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement');
   // Métadonnées et portefeuille du créateur en parallèle
   [tok.meta, tok.creatorInfo] = await Promise.all([metadata(d.uri), creatorProfile(tok.creator)]);
   const f = filters(tok);
