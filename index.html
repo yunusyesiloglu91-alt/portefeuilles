@@ -73,6 +73,7 @@
   button.sellbtn:disabled { opacity: .5; }
   footer { color: var(--muted); font-size: 12px; text-align: center; margin-top: 24px; line-height: 1.5; }
   .err { background: rgba(239,68,68,.12); color: #fca5a5; border-radius: 12px; padding: 10px 12px; font-size: 13px; margin-bottom: 12px; }
+  body[data-sel="eclair"] .sellbtn { display: none; } /* test virtuel : pas de vente manuelle */
 </style>
 </head>
 <body>
@@ -90,6 +91,7 @@
     <button data-id="origine" role="tab">1️⃣ Anti-arnaque</button>
     <button data-id="qualite" role="tab">2️⃣ + 30 min</button>
     <button data-id="tres" role="tab">3️⃣ Jackpot ×5</button>
+    <button data-id="eclair" role="tab">⚡ Éclair (test)</button>
   </div>
   <div id="cards"></div>
   <div id="trio"></div>
@@ -131,12 +133,12 @@
   // Sniper affiché sur l'accueil (choix mémorisé sur ce téléphone)
   let sel = 'qualite';
   try { sel = localStorage.getItem('sniperChoisi') || 'qualite'; } catch { /* navigation privée */ }
-  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5' };
+  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)' };
   const NOTIF = 'sniper-97f143460ae09334d6', CMD = 'sniper-97f143460ae09334d6-cmd', DATA = 'sniper-97f143460ae09334d6-data'; // messages via ntfy.sh
   // Market cap arrondie : 55 k$, 120 k$, 1,2 M$
   const mcap = (x) => (!x ? '?' : x >= 1e6 ? `${num(x / 1e6, 1)} M$` : `${Math.max(5, Math.round(x / 5e3) * 5)} k$`);
   let st = null, rt = null, px = {}, memePx = {}, pairPx = {}, rtPx = {}, lastPx = 0, filter = 'all';
-  const RTLAB = { diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
+  const RTLAB = { eclair: '⚡ Éclair 0,1 s (test)', diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
   const rp = (p) => { const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry; };
   const rVal = (v) => v.cash + v.positions.reduce((a, p) => a + p.qty * rp(p), 0);
   const LAB = { qualite: '2️⃣ Anti-arnaque + 30 min', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)', cerveau: '🧠 Cerveau (apprend tout seul)', origine: '1️⃣ Anti-arnaque', tres: '3️⃣ Jackpot ×5' };
@@ -288,7 +290,10 @@
 
     // Sniper : la stratégie retenue en carte, les 4 dans le classement
     const sn = st.sniper;
-    const snq = sn && (sn.variants[sel] || sn.variants.qualite);
+    // Éclair vit dans le sniper à la seconde (PC) : on le lit depuis sa propre liste, sans bouton Vendre
+    const rtv = rt && rt.variants && rt.variants[sel];
+    const snq = sn && (sn.variants[sel] || (rtv ? { ...rtv, positions: rtv.positions.map((p) => ({ ...p, addr: p.mint, pair: p.mint })) } : null) || sn.variants.qualite);
+    document.body.dataset.sel = sel;
     document.querySelectorAll('#pick button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.id === sel)));
     if (snq) {
       const v = vVal(snq), closed = snq.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
@@ -347,7 +352,7 @@
         <td>${sx.n ? `${sx.win}/${sx.n}` : '—'}<small>${open} en cours</small></td>
         <td class="${sx.best > -Infinity ? cls(sx.best) : 'flat'}">${sx.best > -Infinity ? pct(sx.best) : '—'}</td></tr>`;
     };
-    const SUB = { origine: 'liquidité ≥ 35 %, acheteurs ×1,3, top 10 ≤ 35 % · ½ à ×2', qualite: 'pareil + token d’au moins 30 min', tres: 'mêmes filtres · ½ à ×5', eclair: 'mêmes filtres · vend tout à +50 %', moonshot: 'mêmes filtres · vise ×5', temoin: 'achète tout · sert de comparaison', cerveau: 'achète ce qui a le mieux marché · vend ½ à +50 %' };
+    const SUB = { eclair: 'achat à la création si le créateur ≤ 5 % · sans RugCheck · virtuel', origine: 'liquidité ≥ 35 %, acheteurs ×1,3, top 10 ≤ 35 % · ½ à ×2', qualite: 'pareil + token d’au moins 30 min', tres: 'mêmes filtres · ½ à ×5', eclair: 'mêmes filtres · vend tout à +50 %', moonshot: 'mêmes filtres · vise ×5', temoin: 'achète tout · sert de comparaison', cerveau: 'achète ce qui a le mieux marché · vend ½ à +50 %' };
     let rows2 = '<tr class="grp"><td colspan="4">🎯 SNIPER · STRATÉGIES EN TEST</td></tr>';
     if (sn) for (const [id, x] of Object.entries(sn.variants).sort((a, c) => vVal(c[1]) - vVal(a[1]))) rows2 += line((id === 'qualite' ? '⭐ ' : '') + (LAB[id] || id), SUB[id] || '', vVal(x), 100, '$', stats(x.trades), x.positions.length);
     rows2 += '<tr class="grp"><td colspan="4">AUTRES PORTEFEUILLES</td></tr>';
