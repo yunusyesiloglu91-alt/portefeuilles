@@ -1085,6 +1085,13 @@
    39.79,
    29.94,
    29.94
+  ],
+  [
+   1791969245069,
+   99.7,
+   39.81,
+   29.94,
+   29.94
   ]
  ],
  "watch": [
@@ -1138,10 +1145,10 @@
   }
  ],
  "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/54Vp27uLaw4wNLo5n7r4fcC6zLamoQc28xBARjss4EUJ/ohlcv/day), positions conservées"
  ],
- "lastScan": 1791959644325,
- "lastRun": 1791968344367,
+ "lastScan": 1791969245069,
+ "lastRun": 1791969245069,
  "casino": {
   "start": 1791871130814,
   "cash": 44.987160227567934,
@@ -1152,7 +1159,7 @@
     "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
     "t": 1791881059759,
     "entry": 0.0010044825832740145,
-    "last": 0.0010920659740382493,
+    "last": 0.0010289385131215102,
     "qty": 16330.371824023758,
     "cost": 16.653374696061487
    }
@@ -1865,55 +1872,59 @@
    [
     1791968344367,
     62.82
+   ],
+   [
+    1791969245069,
+    61.79
    ]
   ],
   "watch": [
    {
-    "name": "PULT",
-    "mcap": 6085675.81,
-    "ageDays": 1.1630130208333334,
-    "ch1": 0.052649999999999995,
-    "ch24": 3.44435,
-    "ok": true
-   },
-   {
-    "name": "RSGP",
-    "mcap": 3857335.744,
-    "ageDays": 0.8540662615740741,
-    "ch1": 0.04873,
-    "ch24": 3.7841000000000005,
-    "ok": true
-   },
-   {
     "name": "SEALS",
-    "mcap": 656699.191192359,
-    "ageDays": 0.8614505208333333,
-    "ch1": 0.03437,
-    "ch24": 15.394459999999999,
+    "mcap": 620844.224926818,
+    "ageDays": 0.9725702430555555,
+    "ch1": -0.11593,
+    "ch24": 14.49935,
     "ok": false
    },
    {
     "name": "VEIL",
-    "mcap": 1284337.389,
-    "ageDays": 1.4810570023148149,
-    "ch1": 0.06309999999999999,
-    "ch24": 4.20839,
+    "mcap": 1284796.536,
+    "ageDays": 1.592176724537037,
+    "ch1": -0.07798,
+    "ch24": 4.51669,
     "ok": false
    },
    {
     "name": "Altai",
-    "mcap": 2268720.737,
-    "ageDays": 3.6956866319444446,
-    "ch1": -0.18188,
-    "ch24": 12.04691,
+    "mcap": 2039316.415,
+    "ageDays": 3.8068063541666666,
+    "ch1": -0.12956,
+    "ch24": 13.006590000000001,
     "ok": false
    },
    {
     "name": "CRAWLER",
-    "mcap": 1867132.771,
-    "ageDays": 1.416068576388889,
-    "ch1": -0.11735,
-    "ch24": -0.89803,
+    "mcap": 1737874.188,
+    "ageDays": 1.5271882986111112,
+    "ch1": 0.17812999999999998,
+    "ch24": -0.9070699999999999,
+    "ok": false
+   },
+   {
+    "name": "DOPE",
+    "mcap": 2491291.49413425,
+    "ageDays": 2.820104965277778,
+    "ch1": -0.01057,
+    "ch24": 2.39905,
+    "ok": false
+   },
+   {
+    "name": "HIRE",
+    "mcap": 384646.685789494,
+    "ageDays": 1.8111929282407409,
+    "ch1": -0.04042,
+    "ch24": -0.43755000000000005,
     "ok": false
    }
   ],
