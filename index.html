@@ -293,7 +293,9 @@
     const sn = st.sniper;
     // Éclair vit dans le sniper à la seconde (PC) : on le lit depuis sa propre liste, sans bouton Vendre
     const rtv = rt && rt.variants && rt.variants[sel];
-    const snq = sn && (sn.variants[sel] || (rtv ? { ...rtv, positions: rtv.positions.map((p) => ({ ...p, addr: p.mint, pair: p.mint })) } : null) || sn.variants.qualite);
+    const rtMapped = rtv ? { ...rtv, positions: rtv.positions.map((p) => ({ ...p, addr: p.mint, pair: p.mint })) } : null;
+    // Les variantes « Éclair » vivent dans le sniper à la seconde, pas dans le sniper 5 min (qui a des variantes du même nom)
+    const snq = sn && (sel.startsWith('eclair') && rtMapped ? rtMapped : (sn.variants[sel] || rtMapped || sn.variants.qualite));
     document.body.dataset.sel = sel;
     document.querySelectorAll('#pick button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.id === sel)));
     if (snq) {
