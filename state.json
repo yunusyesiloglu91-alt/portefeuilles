@@ -2282,6 +2282,13 @@
    38.52,
    29.92,
    29.92
+  ],
+  [
+   1792068843892,
+   98.32,
+   38.49,
+   29.91,
+   29.91
   ]
  ],
  "watch": [
@@ -2335,10 +2342,10 @@
   }
  ],
  "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/HMzvsEEmtzHhvZNw9uwbaG85HCTmFnkbhzUx16cy7ca3/ohlcv/day), positions conservées"
  ],
- "lastScan": 1792064943633,
- "lastRun": 1792068544159,
+ "lastScan": 1792068843892,
+ "lastRun": 1792068843892,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -3744,55 +3751,59 @@
    [
     1792068544159,
     65.63
+   ],
+   [
+    1792068843892,
+    65.63
    ]
   ],
   "watch": [
    {
-    "name": "PULT",
-    "mcap": 1994686.65594859,
-    "ageDays": 0.409365775462963,
-    "ch1": 0.08311,
-    "ch24": 1.3488,
-    "ok": true
-   },
-   {
     "name": "dopewif",
-    "mcap": 766783.275905616,
-    "ageDays": 0.05972457175925926,
-    "ch1": 0.041159999999999995,
-    "ch24": 15.49907,
+    "mcap": 688373.090285872,
+    "ageDays": 0.08055430555555555,
+    "ch1": -0.13293,
+    "ch24": 13.81189,
     "ok": false
    },
    {
     "name": "DOPE",
-    "mcap": 4762754.8857277,
-    "ageDays": 3.952039386574074,
-    "ch1": 0.10112,
-    "ch24": 1.23278,
-    "ok": false
-   },
-   {
-    "name": "STREAM",
-    "mcap": 6914057.43,
-    "ageDays": 0.7122129976851852,
-    "ch1": 0.32732999999999995,
-    "ch24": 18.02542,
-    "ok": true
-   },
-   {
-    "name": "Nihilism",
-    "mcap": 404524.0259,
-    "ageDays": 0.2920741087962963,
-    "ch1": -0.27222,
-    "ch24": 10.11304,
+    "mcap": 4544236.3716405,
+    "ageDays": 3.9728691203703703,
+    "ch1": -0.03705,
+    "ch24": 1.30993,
     "ok": false
    },
    {
     "name": "ALTAIDOPE",
-    "mcap": 592570.479350605,
-    "ageDays": 0.06201623842592593,
-    "ch1": 3.0148099999999998,
-    "ch24": 12.326369999999999,
+    "mcap": 412333.835603393,
+    "ageDays": 0.08284597222222222,
+    "ch1": -0.07246999999999999,
+    "ch24": 8.273010000000001,
+    "ok": false
+   },
+   {
+    "name": "STREAM",
+    "mcap": 6888835.806,
+    "ageDays": 0.7330427314814815,
+    "ch1": 0.38645,
+    "ch24": 17.956020000000002,
+    "ok": true
+   },
+   {
+    "name": "Nihilism",
+    "mcap": 407064.4816,
+    "ageDays": 0.3129038425925926,
+    "ch1": -0.24709,
+    "ch24": 10.182830000000001,
+    "ok": false
+   },
+   {
+    "name": "SAINDRA",
+    "mcap": 675386.601139284,
+    "ageDays": 1.2830311574074074,
+    "ch1": -0.1702,
+    "ch24": 0.9781,
     "ok": false
    }
   ],
