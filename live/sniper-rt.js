@@ -469,9 +469,10 @@ async function onCreate(d) {
   // Témoin : achète tout, tout de suite
   buy('temoin', tok, 'création');
   // Éclair (test virtuel) : achat immédiat si le créateur détient peu
-  if (tok.devPct <= 5) buyReal('eclair', tok, 'création, créateur ' + tok.devPct.toFixed(1) + ' %');
-  if (tok.devPct <= 1 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) buyReal('eclairS', tok, 'création stricte, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement');
-  if (tok.devPct <= 5 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) {
+  if (false && tok.devPct <= 5) buyReal('eclair', tok, 'création, créateur ' + tok.devPct.toFixed(1) + ' %');
+  if (false && tok.devPct <= 1 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) buyReal('eclairS', tok, 'création stricte, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement');
+  // Éclair arrêtés le 16/10/2026 : perdants avec les prix réels
+  if (false && tok.devPct <= 5 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) {
     const why = 'création sélective, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement';
     buyReal('eclairQ04', tok, why);
     buyReal('eclairQ', tok, why);
