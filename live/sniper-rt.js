@@ -34,6 +34,8 @@ const VARIANTS = {
   eclairS: { name: '⚡ Éclair strict (test)', delay: 0, fast: true, strict: true, real: true, maxMs: 30 * MIN, stake: 5 },
   eclairQ: { name: '⚡ Éclair sélectif (test)', delay: 0, fast: true, selective: true, real: true, maxMs: 30 * MIN, stake: 10 },
   // Même stratégie, autres vitesses d'exécution : combien la vitesse rapporte-t-elle vraiment ?
+  // 📰 Actu : token lancé juste après une actualité qui démarre et qui en porte le nom (prix réels, 10 $)
+  actu: { name: '📰 Actu', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
   eclairQ04: { name: '🚀 Sélectif 0,4 s (bot pro)', delay: 0, fast: true, selective: true, real: true, latency: 400, maxMs: 30 * MIN, stake: 10 },
   eclairQ3: { name: '🐢 Sélectif 3 s (bot ordinaire)', delay: 0, fast: true, selective: true, real: true, latency: 3000, maxMs: 30 * MIN, stake: 10 },
 };
@@ -283,6 +285,8 @@ function checkExits(mint, devSold) {
 // On lit donc la courbe LATENCY_MS après la décision, et on calcule exactement ce que l'ordre aurait reçu
 // (frais pump.fun, impact de notre propre ordre, achats des autres bots arrivés avant nous compris).
 const Courbe = require('./courbe.js');
+const Actu = require('./actu.js');
+const actuBought = {}; // mot -> heure du dernier achat (un seul achat par mot et par heure)
 const LATENCY_MS = 1000;   // bot rapide avec frais de priorité : ~2 à 3 blocs Solana
 const NET_SOL = 0.000205;  // frais réseau de base + frais de priorité, par transaction
 
@@ -473,6 +477,12 @@ async function onCreate(d) {
     buyReal('eclairQ', tok, why);
     buyReal('eclairQ3', tok, why);
   }
+  // 📰 Actu
+  const hit = Actu.match(d.name, d.symbol);
+  if (hit && tok.devPct <= 10 && tok.launches24h <= 1 && !(Date.now() - (actuBought[hit.word] || 0) < 3600000)) {
+    actuBought[hit.word] = Date.now();
+    buyReal('actu', tok, `actu « ${hit.word} » : ${hit.title.slice(0, 80)}`);
+  }
   // Métadonnées et portefeuille du créateur en parallèle
   [tok.meta, tok.creatorInfo] = await Promise.all([metadata(d.uri), creatorProfile(tok.creator)]);
   const f = filters(tok);
@@ -565,7 +575,9 @@ async function start() {
   setInterval(refreshSol, MIN);
   setInterval(pollPrices, 10000); // prix des tokens suivis (DexScreener)
   setInterval(() => checkExits(null, false), 10000); // sorties sur durée même sans trade
-  setInterval(realExits, 1000); // moteur réaliste : courbes relues sur la blockchain chaque seconde
+  setInterval(realExits, 1000);
+  Actu.start();
+  setInterval(() => { st.actuHot = Actu.hot().slice(0, 15); }, 60000); // moteur réaliste : courbes relues sur la blockchain chaque seconde
   setInterval(publish, 2 * MIN);
   setTimeout(publish, 15000);
 }
