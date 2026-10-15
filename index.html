@@ -91,6 +91,8 @@
     <button data-id="eclair" role="tab">⚡ Éclair (test)</button>
     <button data-id="eclairQ" role="tab">⚡ Éclair sélectif</button>
     <button data-id="eclairS" role="tab">⚡ Éclair strict</button>
+    <button data-id="eclairQ04" role="tab">🚀 Sélectif 0,4 s</button>
+    <button data-id="eclairQ3" role="tab">🐢 Sélectif 3 s</button>
   </div>
   <div id="cards"></div>
   <div id="trio"></div>
@@ -132,12 +134,12 @@
   // Sniper affiché sur l'accueil (choix mémorisé sur ce téléphone)
   let sel = 'eclairQ';
   try { sel = localStorage.getItem('sniperChoisi') || 'eclairQ'; } catch { /* navigation privée */ }
-  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)', eclairS: '⚡ Éclair strict (test virtuel)' };
+  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)', eclairS: '⚡ Éclair strict (test virtuel)', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)' };
   const NOTIF = 'sniper-97f143460ae09334d6', CMD = 'sniper-97f143460ae09334d6-cmd', DATA = 'sniper-97f143460ae09334d6-data'; // messages via ntfy.sh
   // Market cap arrondie : 55 k$, 120 k$, 1,2 M$
   const mcap = (x) => (!x ? '?' : x >= 1e6 ? `${num(x / 1e6, 1)} M$` : `${Math.max(5, Math.round(x / 5e3) * 5)} k$`);
   let st = null, rt = null, px = {}, memePx = {}, pairPx = {}, rtPx = {}, lastPx = 0, filter = 'all';
-  const RTLAB = { eclairS: '⚡ Éclair strict (test)', eclairQ: '⚡ Éclair sélectif (test)', eclair: '⚡ Éclair 0,1 s (test)', diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
+  const RTLAB = { eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', eclairS: '⚡ Éclair strict (test)', eclairQ: '⚡ Éclair sélectif (test)', eclair: '⚡ Éclair 0,1 s (test)', diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
   const rp = (p) => { const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry; };
   const rVal = (v) => v.cash + v.positions.reduce((a, p) => a + p.qty * rp(p), 0);
   const LAB = { qualite: '2️⃣ Anti-arnaque + 30 min', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)', cerveau: '🧠 Cerveau (apprend tout seul)', origine: '1️⃣ Anti-arnaque', tres: '3️⃣ Jackpot ×5' };
@@ -390,7 +392,7 @@
       ${br.bad.length ? '<div style="font-weight:700;margin-top:10px">❌ À éviter</div>' + br.bad.map((l) => les(l, false)).join('') : ''}`;
 
     // ---------- Les 3 Snipers côte à côte
-    const TRIO = [['eclair', '⚡ Éclair', 'achat à la création si créateur ≤ 5 % · 10 $'], ['eclairQ', '⚡ Éclair sélectif', 'créateur ≤ 5 %, premier lancement · 10 $'], ['eclairS', '⚡ Éclair strict', 'créateur ≤ 1 %, premier lancement · 5 $']];
+    const TRIO = [['eclairQ04', '🚀 Sélectif 0,4 s', 'bot très rapide (infrastructure pro)'], ['eclairQ', '⚡ Sélectif 1 s', 'notre vitesse actuelle'], ['eclairQ3', '🐢 Sélectif 3 s', 'bot ordinaire'], ['eclair', '⚡ Éclair', 'sans filtre créateur/nom'], ['eclairS', '⚡ Éclair strict', 'créateur ≤ 1 %']];
     $('trio').innerHTML = sn ? TRIO.map(([id, name, sub]) => {
       const x = id.startsWith('eclair') ? (rt && rt.variants[id]) : sn.variants[id];
       if (!x) return `<div class="row"><div class="main"><div class="t">${name}</div><div class="s">démarre au prochain passage du robot</div></div></div>`;

@@ -33,6 +33,9 @@ const VARIANTS = {
   // Éclair strict (test, 5 $ par trade, 100 $ de départ) : comme le sélectif, mais créateur ≤ 1 % seulement
   eclairS: { name: '⚡ Éclair strict (test)', delay: 0, fast: true, strict: true, real: true, maxMs: 30 * MIN, stake: 5 },
   eclairQ: { name: '⚡ Éclair sélectif (test)', delay: 0, fast: true, selective: true, real: true, maxMs: 30 * MIN, stake: 10 },
+  // Même stratégie, autres vitesses d'exécution : combien la vitesse rapporte-t-elle vraiment ?
+  eclairQ04: { name: '🚀 Sélectif 0,4 s (bot pro)', delay: 0, fast: true, selective: true, real: true, latency: 400, maxMs: 30 * MIN, stake: 10 },
+  eclairQ3: { name: '🐢 Sélectif 3 s (bot ordinaire)', delay: 0, fast: true, selective: true, real: true, latency: 3000, maxMs: 30 * MIN, stake: 10 },
 };
 const RPC = 'https://api.mainnet-beta.solana.com';
 const JUNK_IMITATION = /test|rug|scam|fake|copy|clone|free/i;
@@ -320,7 +323,7 @@ function buyReal(id, tok, why) {
     const reason = `${why} · prix réel après ${(delay / 1000).toFixed(1)} s${hoped ? ` (${gap < 0 ? '' : '+'}${(gap * 100).toFixed(0)} % de jetons vs prix annoncé)` : ''}`;
     pushLive(id, { t: Date.now(), side: 'achat', name, mint: tok.mint, addr: tok.mint, price: entry, usd: stake, qty: q.tokens, reason });
     v.trades.push({ t: Date.now(), side: 'achat', name, mint: tok.mint, price: entry, usd: stake, reason, gap, delay });
-  }, LATENCY_MS);
+  }, VARIANTS[id].latency || LATENCY_MS);
 }
 
 function realSell(id, v, p, part, reason) {
@@ -350,7 +353,7 @@ function realSell(id, v, p, part, reason) {
     v.trades.push({ t: Date.now(), side: 'vente', name: p.name, mint: p.mint, price: usd / qty, usd, ret: done ? p.realized / p.cost - 1 : usd / (p.cost * part) - 1, reason: r, held: Date.now() - p.t, peak: p.peak / p.entry, lag: Date.now() - tDecision });
     if (done) v.positions.splice(v.positions.indexOf(p), 1);
     else p.tp1Done = true;
-  }, LATENCY_MS);
+  }, VARIANTS[id].latency || LATENCY_MS);
 }
 
 let realBusy = false;
@@ -464,7 +467,12 @@ async function onCreate(d) {
   // Éclair (test virtuel) : achat immédiat si le créateur détient peu
   if (tok.devPct <= 5) buyReal('eclair', tok, 'création, créateur ' + tok.devPct.toFixed(1) + ' %');
   if (tok.devPct <= 1 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) buyReal('eclairS', tok, 'création stricte, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement');
-  if (tok.devPct <= 5 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) buyReal('eclairQ', tok, 'création sélective, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement');
+  if (tok.devPct <= 5 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) {
+    const why = 'création sélective, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement';
+    buyReal('eclairQ04', tok, why);
+    buyReal('eclairQ', tok, why);
+    buyReal('eclairQ3', tok, why);
+  }
   // Métadonnées et portefeuille du créateur en parallèle
   [tok.meta, tok.creatorInfo] = await Promise.all([metadata(d.uri), creatorProfile(tok.creator)]);
   const f = filters(tok);
