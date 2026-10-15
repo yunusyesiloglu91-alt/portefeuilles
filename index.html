@@ -418,10 +418,24 @@
     $('trio').innerHTML = sn ? TRIO.map(([id, name, sub]) => {
       const x = (id.startsWith('eclair') || id === 'actu' || id === 'vague' || id === 'expert') ? (rt && rt.variants[id]) : sn.variants[id];
       if (!x) return `<div class="row"><div class="main"><div class="t">${name}</div><div class="s">démarre au prochain passage du robot</div></div></div>`;
-      const val = vVal(x), cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
-      return `<div class="row" data-id="${id}" style="cursor:pointer;${id === sel ? 'border-color:var(--muted)' : ''}"><div class="bar" style="background:${color(val / 100 - 1)}"></div>
-        <div class="main"><div class="t">${name}</div><div class="s">${sub} · ${cl.length ? `${cl.filter((t) => t.ret > 0).length}/${cl.length} gagnés` : 'aucune vente'} · ${x.positions.length} en cours</div></div>
+      // Valeur en direct : cash + positions au prix lu sur la blockchain
+      const val = x.cash + x.positions.reduce((a, p) => a + p.qty * rp(p), 0);
+      const cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || '') && !/palier/.test(t.reason || ''));
+      const open = openTrio === id;
+      let html = `<div class="row" data-id="${id}" style="cursor:pointer;${id === sel ? 'border-color:var(--muted)' : ''}"><div class="bar" style="background:${color(val / 100 - 1)}"></div>
+        <div class="main"><div class="t">${name} <span style="opacity:.6">${open ? '▲' : '▼'}</span></div><div class="s">${sub} · ${cl.length ? `${cl.filter((t) => t.ret > 0).length}/${cl.length} gagnés` : 'aucune vente'} · ${x.positions.length} en cours</div></div>
         <div class="r"><b class="${cls(val / 100 - 1)}">${pct(val / 100 - 1)}</b><span>${num(val)} $</span></div></div>`;
+      if (open) {
+        const link = (m, n) => `<a href="https://pump.fun/coin/${esc(m || '')}" target="_blank" rel="noopener" style="color:var(--text);font-weight:700">${esc(n)} ↗</a>`;
+        const hm = (t) => new Date(t).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const pos = x.positions.map((p) => {
+          const now = p.qty * rp(p), r = (now + (p.realized || 0)) / p.cost - 1;
+          return `<div class="lesson"><span>${link(p.mint, p.name)}<br><small style="color:var(--muted)">acheté à ${hm(p.t)} · mise ${num(p.cost)} $${p.step ? ` · palier ${p.step} atteint` : p.tp1Done ? ' · moitié vendue' : ''}</small></span><b class="${cls(r)}">${pct(r)}<br><small style="color:var(--muted)">${num(now)} $</small></b></div>`;
+        }).join('') || '<div class="empty" style="padding:6px 0">Aucune position ouverte.</div>';
+        const ops = x.trades.slice(-12).reverse().map((t) => `<div class="lesson"><span>${t.side === 'achat' ? '🟢 Achat' : '🔴 Vente'} ${link(t.mint, t.name)}<br><small style="color:var(--muted)">${hm(t.t)} · ${esc(String(t.reason || '').slice(0, 70))}</small></span><b>${t.side === 'achat' ? `${num(t.usd)} $` : `<span class="${cls(t.ret)}">${pct(t.ret)}</span><br><small style="color:var(--muted)">${num(t.usd)} $ reçus</small>`}</b></div>`).join('') || '<div class="empty" style="padding:6px 0">Aucune opération.</div>';
+        html += `<div class="card" style="margin:-4px 0 12px;padding:12px 14px"><b>En cours (${x.positions.length})</b>${pos}<b style="display:block;margin-top:12px">Dernières opérations</b>${ops}</div>`;
+      }
+      return html;
     }).join('') : '';
 
     // ---------- Rapports automatiques
@@ -512,9 +526,17 @@
   }
 
   const pending = {};
+  let openTrio = null;
   const choose = (id) => { sel = id; try { localStorage.setItem('sniperChoisi', id); } catch { /* rien */ } render(); };
   $('pick').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) choose(b.dataset.id); });
-  $('trio').addEventListener('click', (e) => { const r = e.target.closest('[data-id]'); if (r) choose(r.dataset.id); });
+  // Un clic sur une stratégie la sélectionne et ouvre / ferme son détail juste en dessous
+  $('trio').addEventListener('click', (e) => {
+    if (e.target.closest('a')) return; // les liens pump.fun s'ouvrent normalement
+    const r = e.target.closest('[data-id]');
+    if (!r) return;
+    openTrio = openTrio === r.dataset.id ? null : r.dataset.id;
+    choose(r.dataset.id);
+  });
   $('detailsBtn').addEventListener('click', () => {
     const open = $('details').hidden;
     $('details').hidden = !open;
