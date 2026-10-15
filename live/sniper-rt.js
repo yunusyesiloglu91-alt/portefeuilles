@@ -292,7 +292,9 @@ const Courbe = require('./courbe.js');
 const Actu = require('./actu.js');
 const actuBought = {}; // mot -> heure du dernier achat (un seul achat par mot et par heure)
 const LATENCY_MS = 1000;   // bot rapide avec frais de priorité : ~2 à 3 blocs Solana
-const NET_SOL = 0.000205;  // frais réseau de base + frais de priorité, par transaction
+// Frais réseau de base + frais de priorité, par transaction. 0,001 SOL (~0,10 $) : le prix réaliste pour être inclus
+// en 2–3 blocs quand le réseau est chargé (un ordre à 0,0002 SOL peut attendre bien plus longtemps, ou échouer).
+const NET_SOL = 0.001;
 
 async function readOne(key) {
   for (let k = 0; k < 2; k++) {
