@@ -1,0 +1,1342 @@
+[
+ {
+  "name": "BLUBBER",
+  "mint": "9sfAtahu2carW4wU8xWsUEtbCekheRWsZ333CSuFpump",
+  "ret": 6.412396900126123,
+  "held": 30.086,
+  "buyP": 0.000003166398847260951,
+  "sellP": 0.00004172,
+  "buyT": 1792072854589,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "BLOO",
+  "mint": "6Boa9iHdo8TFMgRTiMx29MMHBhDhwKNWSYsL6jE5pump",
+  "ret": 3.5331568582734745,
+  "held": 30.152383333333333,
+  "buyP": 0.000003094135155372078,
+  "sellP": 0.00001808,
+  "buyT": 1792071839808,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "SCANND",
+  "mint": "HCdK7j2ZakQBERGLpXY2K3KLd2KYpwqt88m32hU7pump",
+  "ret": 3.345839484374695,
+  "held": 9.780766666666667,
+  "buyP": 0.000003058983206305144,
+  "sellP": 0.0000141,
+  "buyT": 1792063804722,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "JUSTICEPAD",
+  "mint": "Gss827aqZfzXW2WUkGCZ7fJYqH5HjgvHLqXHWrSWpump",
+  "ret": 1.8197972844434167,
+  "held": 4.881916666666666,
+  "buyP": 0.0000030503877166821922,
+  "sellP": 0.000007665,
+  "buyT": 1792065249731,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "GEM",
+  "mint": "8meVNUWwHoeSyHU7an6iMbVoiDQZuSbnL5eLGKogpump",
+  "ret": 1.4625799920513969,
+  "held": 2.13185,
+  "buyP": 0.000003081841005975981,
+  "sellP": 0.000003138,
+  "buyT": 1792063733089,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "BANK",
+  "mint": "GmqaMR2PAAdvxj5gmi4MkGmBqLZJnRJ3gruLVdbpump",
+  "ret": 1.3160638668288955,
+  "held": 2.2396166666666666,
+  "buyP": 0.0000030292817484373466,
+  "sellP": 0.000006081,
+  "buyT": 1792057992659,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "SolBack",
+  "mint": "GZXomzk2yagB8aFJpurHv8D6ydqd162GXtiwgdLZpump",
+  "ret": 0.9428032501879873,
+  "held": 4.966666666666667,
+  "buyP": 0.000003072809868638191,
+  "sellP": 0.000002881,
+  "buyT": 1792070058472,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "SI",
+  "mint": "EUFEoTh39ta6puB55K4ZrwUsrvDf9yk1rcTLYkB2pump",
+  "ret": 0.7641140759765814,
+  "held": 1.7007,
+  "buyP": 0.0000030527731019994938,
+  "sellP": 0.000002853,
+  "buyT": 1792070304718,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "TRUMPTIGER",
+  "mint": "FB8QyRczevGAYbrm8TNsEERizkzFktAS4oF1kZBnpump",
+  "ret": 0.7140003409652735,
+  "held": 2.24285,
+  "buyP": 0.000002972817378280344,
+  "sellP": 0.000004231,
+  "buyT": 1792063646511,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "DUO",
+  "mint": "6zufAMXpUeKgttNQmrfaLzwzmiNRXRMnhKsvE2Qkpump",
+  "ret": 0.6527084120856315,
+  "held": 0,
+  "sellP": 0.000005138,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "DCITY",
+  "mint": "5ZnuyTehWNVmeLKZ8txH7bReMFjaqLHh9PDg2tkFpump",
+  "ret": 0.5989082203791938,
+  "held": 7.273266666666666,
+  "buyP": 0.0000031379693568715915,
+  "sellP": 0.000003019,
+  "buyT": 1792075794964,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "IAMJD",
+  "mint": "6sbQuK1atBvEx8csMzNGaJgUw9umCQe9ifnYft2vpump",
+  "ret": 0.5315103912257861,
+  "held": 2.5296333333333334,
+  "buyP": 0.000002956215658697759,
+  "sellP": 0.000002504,
+  "buyT": 1792068073319,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "DegenOS ",
+  "mint": "8y1HcwF7KzEV9NTG6eF8ahYQUEyYCBrbDEtHvEMVpump",
+  "ret": 0.5287654640970945,
+  "held": 8.651366666666666,
+  "buyP": 0.0000031490180234044376,
+  "sellP": 0.000004425,
+  "buyT": 1792063932519,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "UNTAXXED",
+  "mint": "FHC7koRrpC5erdHiqvJMegEsWmGQFNKRrruebynWpump",
+  "ret": 0.5034300532539118,
+  "held": 2.219883333333333,
+  "buyP": 0.000003168211909620216,
+  "sellP": 0.000004396,
+  "buyT": 1792060785839,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "UNTAXED",
+  "mint": "Ek4iEvFX1bTifDSJSvb1Ggqa4MpZG1rr6KXAiZvLpump",
+  "ret": 0.5026753278633405,
+  "held": 7.43745,
+  "buyP": 0.0000031914279226364855,
+  "sellP": 0.000004318,
+  "buyT": 1792057910895,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "VT",
+  "mint": "A5gheWZ1yxp2iKJqmdvL5NbwV7NKSRks6RpwpPrUpump",
+  "ret": 0.4833810246753283,
+  "held": 3.279733333333333,
+  "buyP": 0.000003002434927988111,
+  "sellP": 0.000003218,
+  "buyT": 1792057579841,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "WAKE",
+  "mint": "2e9MzCTrL3HnPQH3w75s48wpsKfZTcUqpNm86LU6pump",
+  "ret": 0.4809444341996223,
+  "held": 7.784866666666667,
+  "buyP": 0.0000031367348380701215,
+  "sellP": 0.000002888,
+  "buyT": 1792071750800,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "PixTilcayo",
+  "mint": "5mnRiRjePdnCCmYKXV2h4GJPtsEwnMiQYCws2Yd4pump",
+  "ret": 0.4716308840088699,
+  "held": 3.7379166666666666,
+  "buyP": 0.000003067603465688609,
+  "sellP": 0.000002869,
+  "buyT": 1792059223657,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "SHARED",
+  "mint": "7e1EspXqosVQtkHsFndaNoDKSxVyFwUR34KjrD56pump",
+  "ret": 0.3984208575491468,
+  "held": 13.057233333333333,
+  "buyP": 0.0000030051933059445974,
+  "sellP": 0.000003826,
+  "buyT": 1792070423723,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "Froovik",
+  "mint": "5RvKVJcAneP6TJ8FMSVYo1iZv3zdGAvyBW8BJKcXpump",
+  "ret": 0.393906000146774,
+  "held": 1.7923,
+  "buyP": 0.0000031732412368798542,
+  "sellP": 0.000002928,
+  "buyT": 1792076233845,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "XMART",
+  "mint": "A7zcCnwoN96TovFUrkbrAtsKNvYhrhaGGYGQQ2u3pump",
+  "ret": 0.3647720142090247,
+  "held": 3.4048666666666665,
+  "buyP": 0.0000031343696642836045,
+  "sellP": 0.000002876,
+  "buyT": 1792072183730,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "STREAM",
+  "mint": "2PJQLvJUpc7cNgLvDBGvfRkkRXfUmxjD517nBh3Hpump",
+  "ret": 0.3583436921031222,
+  "held": 9.16515,
+  "buyP": 0.0000032752425073743777,
+  "sellP": 0.000002924,
+  "buyT": 1792073539344,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "VIBE",
+  "mint": "GeTQb2tH4mQyGsDH5TPqNEQUbrjD5f9NPPwpn61Gpump",
+  "ret": 0.3511313807662535,
+  "held": 5.633916666666667,
+  "buyP": 0.000003064069163764183,
+  "sellP": 0.000003368,
+  "buyT": 1792070418906,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "OFFICE",
+  "mint": "CgpbqguJkPtBq24UReajnzHo8h4GgeCvbuei2Xyepump",
+  "ret": 0.3304570331076009,
+  "held": 2.98465,
+  "buyP": 0.000002984094864549382,
+  "sellP": 0.000003089,
+  "buyT": 1792072649713,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "FAWKES",
+  "mint": "AThCveP5m6KFudWT2GcyfUXqfsiVH4Cv2n2gDsbNpump",
+  "ret": 0.2819251952645685,
+  "held": 30.04071666666667,
+  "buyP": 0.0000030388044594099955,
+  "sellP": 0.000004016,
+  "buyT": 1792073107725,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "SOL-S-GO",
+  "mint": "4s7T6h68Sysrr4PCmd3BD1eQz8YFBrQmjqVmX9vvpump",
+  "ret": 0.2386943480221897,
+  "held": 4.309333333333333,
+  "buyP": 0.000003233739627855511,
+  "sellP": 0.000002965,
+  "buyT": 1792065804572,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "TGK",
+  "mint": "9mRVpBUnFVegvo1qCXMir4CaaAqMPNGyCg5JPMwupump",
+  "ret": 0.22925024745582379,
+  "held": 4.2808,
+  "buyP": 0.000003096424025846526,
+  "sellP": 0.000003193,
+  "buyT": 1792061262502,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "NongPloy",
+  "mint": "6c5Porw8aCE94Y56dEYjHvgMq35hYpHXpkbBaJ4Cpump",
+  "ret": 0.22411501658299882,
+  "held": 2.9579833333333334,
+  "buyP": 0.0000030836603986256706,
+  "sellP": 0.000002855,
+  "buyT": 1792062542766,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "Never",
+  "mint": "HrkW9SVbxxuGV99BUnPpXaAGNFvawo68vPXC73ztpump",
+  "ret": 0.18462327593815253,
+  "held": 1.3424666666666667,
+  "buyP": 0.0000032429592411626464,
+  "sellP": 0.000002954,
+  "buyT": 1792077661988,
+  "reason": "stop suiveur −25 %"
+ },
+ {
+  "name": "Vantax",
+  "mint": "DjWckUixq3we6r9SqNoFS5MeppBt146TkJAkBxxFpump",
+  "ret": 0.12573304015371223,
+  "held": 30.107483333333334,
+  "buyP": 0.000003087330544660428,
+  "sellP": 0.000003583,
+  "buyT": 1792072392902,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "daemon",
+  "mint": "JCvwX4XGt26GAsgbGrZYwZRK1niEdwmo9oGrinrapump",
+  "ret": 0.020166829354891558,
+  "held": 30.000783333333334,
+  "buyP": 0.0000030664102281958796,
+  "sellP": 0.000003225,
+  "buyT": 1792074211344,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "MC",
+  "mint": "8uWkrugbs5jrn7UJqtioFgeyY9DjXrMnGVnYBRT3pump",
+  "ret": -0.032582781463538324,
+  "held": 30.106083333333334,
+  "buyP": 0.00000312331633353714,
+  "sellP": 0.000003115,
+  "buyT": 1792061754320,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "altra",
+  "mint": "Dp86EAz7XW2GM3UrWp7JP3BHyhLZiHJmkMBhubAwpump",
+  "ret": -0.05595406858888041,
+  "held": 30.021733333333334,
+  "buyP": 0.0000029519856050164795,
+  "sellP": 0.000002873,
+  "buyT": 1792058967269,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "MSL",
+  "mint": "CYYawEstruQZUF8dSbBZHGjTuUaw14MK9ue6Agvgpump",
+  "ret": -0.05757435970161018,
+  "held": 30.005,
+  "buyP": 0.000002959119405024919,
+  "sellP": 0.000002875,
+  "buyT": 1792058878214,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "JUSTICEPAD",
+  "mint": "ESGzWVGsPjo5Hx6aKQd3UnLJ51x2kExkjj4dttr9pump",
+  "ret": -0.05760043719623398,
+  "held": 30.045783333333333,
+  "buyP": 0.0000030363978432743016,
+  "sellP": 0.00000295,
+  "buyT": 1792066251833,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "CME",
+  "mint": "Gz3ag2VmPp5U9TjVHGc7wwhuCH4uRBxzuJtiUygVpump",
+  "ret": -0.05780282612567478,
+  "held": 30.003466666666668,
+  "buyP": 0.0000029433648039894323,
+  "sellP": 0.000002859,
+  "buyT": 1792061140029,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "FLYBY",
+  "mint": "Epacgm3AyLr5D8DQVworpnHYcpYNH11R4PEsFRStpump",
+  "ret": -0.057976134462414786,
+  "held": 30.103033333333332,
+  "buyP": 0.000002967589359750103,
+  "sellP": 0.000002882,
+  "buyT": 1792074154576,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "MADEBYHUMANS",
+  "mint": "C4fgQ824F5YJUAuoTtG7K961Ve5G4bdv28b43QUNpump",
+  "ret": -0.058252427184465994,
+  "held": 30.114883333333335,
+  "buyP": 0.000002943707362534949,
+  "sellP": 0.000002857968313140727,
+  "buyT": 1792068249632,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Gemini",
+  "mint": "A8Y4JdLFCCJJY4SbhCwG2q2tCi2n7ihu3qZgi2GTpump",
+  "ret": -0.058252427184466216,
+  "held": 0,
+  "sellP": 0.0000028870456663560112,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "23 HOUR OG",
+  "mint": "AUFwNMHXrz7WWiaRdyNAfLoyjPANAdiGrQFjbbGLpump",
+  "ret": -0.058252427184466216,
+  "held": 30.162866666666666,
+  "buyP": 0.0000029673215284249773,
+  "sellP": 0.00000288089468779124,
+  "buyT": 1792057387599,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "GTA97",
+  "mint": "HV42h3TTqHKpscBqc2qcNZ3zCAFN8JHEHiqtLPuypump",
+  "ret": -0.058252427184466216,
+  "held": 30.105666666666668,
+  "buyP": 0.0000029667968755118924,
+  "sellP": 0.0000028803853160309634,
+  "buyT": 1792059142404,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "H2O",
+  "mint": "2ai8Va4jSk9pjFgjTgf5PJGGPSsSrxGB7wYwds1Bpump",
+  "ret": -0.058252427184466216,
+  "held": 30.14725,
+  "buyP": 0.0000029365079217148183,
+  "sellP": 0.0000028509785647716683,
+  "buyT": 1792060180674,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "H2O",
+  "mint": "8BJ3AzeiQVZpnQL85ChPmLvDHTpcD3X5gKNhCShUpump",
+  "ret": -0.058252427184466216,
+  "held": 30.1265,
+  "buyP": 0.000002949178937558248,
+  "sellP": 0.0000028632805219012114,
+  "buyT": 1792060692320,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "AudaCity",
+  "mint": "8GCGYukozWBJvAWiFAXTpHcBATfxtfCDwbvNCUXLpump",
+  "ret": -0.058252427184466216,
+  "held": 30.155216666666668,
+  "buyP": 0.0000029353560111835974,
+  "sellP": 0.000002849860205032619,
+  "buyT": 1792071219724,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "GTAVI",
+  "mint": "7wsP6ArayWdgtLSy1F8RFcmKjX6KLVpLrPrZzW2mpump",
+  "ret": -0.058252427184466216,
+  "held": 30.049133333333334,
+  "buyP": 0.000002962713886300093,
+  "sellP": 0.0000028764212488350416,
+  "buyT": 1792074688795,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "MARAUDER",
+  "mint": "5tAJcJyj8odfPUCNztNR1XLmAV7LH9pKqPjME8mXpump",
+  "ret": -0.058252427184466216,
+  "held": 30.004933333333334,
+  "buyP": 0.0000029748089468779123,
+  "sellP": 0.0000028881640260950603,
+  "buyT": 1792074911599,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "BOUNCER",
+  "mint": "5waMRm19m9PTnNgCT9TiU4Vh7EJcwWH7WZ6fpieapump",
+  "ret": -0.058252427184466216,
+  "held": 30.055183333333332,
+  "buyP": 0.0000030073504193849024,
+  "sellP": 0.0000029197576887232063,
+  "buyT": 1792075849349,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "TENSILE",
+  "mint": "9XMX2WpAVMzo8xMejMQBs6JWRFMXYtqqhkcUo3gVpump",
+  "ret": -0.058312825248754585,
+  "held": 30.004533333333335,
+  "buyP": 0.0000029336281453867663,
+  "sellP": 0.000002848,
+  "buyT": 1792059949067,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Juan",
+  "mint": "D7jb4AvT7XPBzPJSjzrDLPPVZCMnD9NHYsdXdZ1apump",
+  "ret": -0.059213840848833854,
+  "held": 30.007983333333332,
+  "buyP": 0.000002929220389983651,
+  "sellP": 0.000002841,
+  "buyT": 1792069947000,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "SI",
+  "mint": "5e52jcUbdB4BNBKD3ghNwKG8PSYFg2P8gmmngukdpump",
+  "ret": -0.059257748252771414,
+  "held": 30.023566666666667,
+  "buyP": 0.0000029427614151042155,
+  "sellP": 0.000002854,
+  "buyT": 1792065843238,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Cyber Owl",
+  "mint": "Htgar6fC5hwyWeCigzqWYZXWv9Fg2tm8B1oU8qMVpump",
+  "ret": -0.05930785597094379,
+  "held": 0,
+  "sellP": 0.000002884,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "AMAZCAT",
+  "mint": "9KD783brx53GCKCnWjQKPpwQa69pYzt4xxSBsSGQpump",
+  "ret": -0.059547552159422756,
+  "held": 30.104566666666667,
+  "buyP": 0.000002950888167043655,
+  "sellP": 0.000002861,
+  "buyT": 1792061924553,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "OUTPOST",
+  "mint": "CxHMUXiMWCN257gJzMjqEfHVGHTEhekwJE6hkeLbpump",
+  "ret": -0.05958315751777743,
+  "held": 30.116,
+  "buyP": 0.0000029499684338676047,
+  "sellP": 0.00000286,
+  "buyT": 1792062974747,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "CatchCat",
+  "mint": "9igwBiZQr3xzjMxfvvKqYpiCvK2H9rWDB9Ycy8dipump",
+  "ret": -0.05963014863034355,
+  "held": 30.007766666666665,
+  "buyP": 0.000002935674719876582,
+  "sellP": 0.000002846,
+  "buyT": 1792070257248,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "DA",
+  "mint": "25sifVTZAwNMeKuPVJ34keAg8jFy6Dp3AFP1RJZppump",
+  "ret": -0.06059829770531766,
+  "held": 30.11765,
+  "buyP": 0.000002925276794035415,
+  "sellP": 0.000002833,
+  "buyT": 1792071281535,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Nihilism",
+  "mint": "FD8KbPv1rZqk1AMqiPTArF48hTuK7ZfadPWyhip8pump",
+  "ret": -0.06063783299508141,
+  "held": 30.015783333333335,
+  "buyP": 0.000002956378378378378,
+  "sellP": 0.000002863,
+  "buyT": 1792064481954,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Pitbull",
+  "mint": "5UUmNYQJAKk58MHdPyr7MikNKYqnRxYT5bxJAT1opump",
+  "ret": -0.06139222937966893,
+  "held": 30.1594,
+  "buyP": 0.000002939119072258237,
+  "sellP": 0.000002844,
+  "buyT": 1792066405135,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "JIO",
+  "mint": "Bs8vSMAoFD9y4g2ExNy3HDykD1M5HnwZDBm98Lyvpump",
+  "ret": -0.061720258027288644,
+  "held": 30.010466666666666,
+  "buyP": 0.000002964957971010856,
+  "sellP": 0.000002868,
+  "buyT": 1792064422209,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "ronnie",
+  "mint": "AA4jrsC6DFKNWtUmnTxN8kiiHNodaphEuxK5WesEpump",
+  "ret": -0.06184078783613545,
+  "held": 30.1582,
+  "buyP": 0.000002934320704105786,
+  "sellP": 0.000002838,
+  "buyT": 1792072079758,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "DV2027",
+  "mint": "9GKNWpJ6Uhvh3dFARd47dtCQrvF7QbvEgsjqQNDdpump",
+  "ret": -0.06599132877088854,
+  "held": 0,
+  "sellP": 0.000002883,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "PFECO",
+  "mint": "EFGUVxvp9bm2dLiqhBrdngBdbKuT7YMJrexBWPrMpump",
+  "ret": -0.06601227803812793,
+  "held": 30.035433333333334,
+  "buyP": 0.000002972351707331469,
+  "sellP": 0.000002862,
+  "buyT": 1792064000411,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Xshop",
+  "mint": "4yzcta7fXUv1jno1VRbmAdJpLe6vv1wHXnmeY2YRpump",
+  "ret": -0.0701630147444019,
+  "held": 30.011133333333333,
+  "buyP": 0.000003037779788059892,
+  "sellP": 0.000002912,
+  "buyT": 1792076021756,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "FLIPPOS",
+  "mint": "2E4kVsgudzyxSej1CHJJ6iqxEHujyGMx3LY9sQAspump",
+  "ret": -0.07046990069048942,
+  "held": 30.04675,
+  "buyP": 0.000002983475201136637,
+  "sellP": 0.000002859,
+  "buyT": 1792061017348,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Corp",
+  "mint": "7AcjjvjtxjKmTwZGMFa6gLBvXawgbJBBZNgJuvQrpump",
+  "ret": -0.07203565294077519,
+  "held": 30.1086,
+  "buyP": 0.0000029916451087778914,
+  "sellP": 0.000002862,
+  "buyT": 1792064986823,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "DUVAL",
+  "mint": "6p4J1BPEUFV8EsknweosZqJVi11J9dB8N6AkwDyepump",
+  "ret": -0.07234945272275561,
+  "held": 30.012316666666667,
+  "buyP": 0.0000030553962462687027,
+  "sellP": 0.000002922,
+  "buyT": 1792075551077,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "OFFICE",
+  "mint": "5sGN3iW1ixU1Nudr88yv3mC6e7W1FJovaje3YZT7pump",
+  "ret": -0.07449688822594425,
+  "held": 30.03686666666667,
+  "buyP": 0.000003023706743282338,
+  "sellP": 0.000002885,
+  "buyT": 1792073418123,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "PH₂O",
+  "mint": "BedQcDWmZJWgsRbcN3qPVTzwBrm9y2yRtx96dsN1pump",
+  "ret": -0.07653464309268654,
+  "held": 30.010116666666665,
+  "buyP": 0.0000030272277991697125,
+  "sellP": 0.000002882,
+  "buyT": 1792058367540,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "VOLUME",
+  "mint": "BMhFjkxB8NiAy66PdYEs7w5MaPwJjt8G1gRg1uofpump",
+  "ret": -0.07705240146893022,
+  "held": 30.01193333333333,
+  "buyP": 0.000002999498567855915,
+  "sellP": 0.000002854,
+  "buyT": 1792066123747,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Reptilecat",
+  "mint": "YUNeBDCefQQQLZXsq4Hsi3WifxKV5w4cqSn4YGhpump",
+  "ret": -0.07753501477628988,
+  "held": 30.119183333333332,
+  "buyP": 0.0000029926555958441197,
+  "sellP": 0.000002846,
+  "buyT": 1792068128913,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Nihilism",
+  "mint": "9zY7YXVGGuZh7VEBpio7Zj1HWFPCRGvL2Liu5oLSpump",
+  "ret": -0.07772236119258125,
+  "held": 30.15515,
+  "buyP": 0.0000030027292037363052,
+  "sellP": 0.000002855,
+  "buyT": 1792061541245,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "OFFICE",
+  "mint": "EGBUpddWfHCFySb3b9obuznjH8rsHcoL3NsumLLnpump",
+  "ret": -0.0790656907066355,
+  "held": 30.056866666666668,
+  "buyP": 0.000002990256712352286,
+  "sellP": 0.000002839,
+  "buyT": 1792073056532,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "MAXIMUM",
+  "mint": "9B4wFgTsrqyEsbyDsWQGerqGiiaZ1EBVqgA31536pump",
+  "ret": -0.07907216989642785,
+  "held": 30.142666666666667,
+  "buyP": 0.0000030345157445027025,
+  "sellP": 0.000002881,
+  "buyT": 1792074032284,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "BEPE",
+  "mint": "AdsoAXMHE1Gb8TsgcuPWdm4Cf7iHpwhHqJiMQz6upump",
+  "ret": -0.07914316506838293,
+  "held": 30.00101666666667,
+  "buyP": 0.0000029978818588070794,
+  "sellP": 0.000002846,
+  "buyT": 1792068496684,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "OPEN",
+  "mint": "ABjeLZnoc3t1WKMkKEbPmimYuRgyikGDTANaPnjppump",
+  "ret": -0.0795655577684069,
+  "held": 30.04485,
+  "buyP": 0.000003008742255760999,
+  "sellP": 0.000002855,
+  "buyT": 1792064820546,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "KOVRA",
+  "mint": "2GrSruaWdM3giqJM9U5iZGJecDLwbsVZGpk7gwkLpump",
+  "ret": -0.0831775447166736,
+  "held": 30.03315,
+  "buyP": 0.000003045987785210814,
+  "sellP": 0.000002879,
+  "buyT": 1792057375359,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "RAM",
+  "mint": "4qzBcpaZDmVaCuXK3np3YxzMnRbPNQFer17tmttRpump",
+  "ret": -0.08446365744925399,
+  "held": 30.132066666666667,
+  "buyP": 0.000003029076914930099,
+  "sellP": 0.000002859,
+  "buyT": 1792059300955,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "BAIT",
+  "mint": "3t1UdNpsd791oYY8PNp1Pfp2TzKM5BbnKWD3BxSTpump",
+  "ret": -0.08495953779361132,
+  "held": 30.052583333333335,
+  "buyP": 0.0000030550998731348583,
+  "sellP": 0.000002882,
+  "buyT": 1792075228477,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "JUSTICEPAD",
+  "mint": "FJm1iAHKR2ERTtHrwKtA7qowv5Qtz2SCCaJZk2Ggpump",
+  "ret": -0.0870539402776368,
+  "held": 30.0772,
+  "buyP": 0.0000030334212744641117,
+  "sellP": 0.000002855,
+  "buyT": 1792066300001,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "CUTORYX",
+  "mint": "7Tw4D3JzGLsacCT3eHGfTcNeCTbSoYuEKKQ63snFpump",
+  "ret": -0.08983443684247461,
+  "held": 30.00285,
+  "buyP": 0.0000030586742815693423,
+  "sellP": 0.00000287,
+  "buyT": 1792074741224,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "RULSA",
+  "mint": "FWpnvB1EJktRtdKDsZaZbmwe7YB7BokLueW2tZh3pump",
+  "ret": -0.08986860512640094,
+  "held": 30.135,
+  "buyP": 0.000003049197089158122,
+  "sellP": 0.000002861,
+  "buyT": 1792062753445,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Lucas",
+  "mint": "EZgrYwD6nDk8mBTCXigGp9xFbGM2ygUFM3RMPqsrpump",
+  "ret": -0.090203193654385,
+  "held": 30.02325,
+  "buyP": 0.0000030321935411938877,
+  "sellP": 0.000002844,
+  "buyT": 1792066283228,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "MIC",
+  "mint": "353pkJcvUN2oxSKU42WwFxsWWq9QukoiQwLU5bchpump",
+  "ret": -0.0902924729100999,
+  "held": 30.0441,
+  "buyP": 0.0000030730096396396378,
+  "sellP": 0.000002882,
+  "buyT": 1792058295434,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "OFF",
+  "mint": "7csh2ofhHoe4fbtQaKMzrTeR3qV2BjzdRM6CLaz4pump",
+  "ret": -0.09062327293220762,
+  "held": 30.079266666666665,
+  "buyP": 0.000003045327549704876,
+  "sellP": 0.000002855,
+  "buyT": 1792062586630,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "WORLDWATCH",
+  "mint": "DiXA5rXCbuKVQdFQUdbfQgC2eRPA7E34LX1Bg3zjpump",
+  "ret": -0.09082401500355497,
+  "held": 30.010266666666666,
+  "buyP": 0.0000030363978432743076,
+  "sellP": 0.000002846,
+  "buyT": 1792068595844,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "MAXIMUM",
+  "mint": "7J8MMvDo2hDXndHc9q9RYR47w6Z71H86GPnNCfotpump",
+  "ret": -0.09190676798103703,
+  "held": 30.075766666666667,
+  "buyP": 0.000003072063419961426,
+  "sellP": 0.000002876,
+  "buyT": 1792073896152,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "TRALALEROA",
+  "mint": "DhTVre81igKTP7uXxNwyyDTFEwvUG8ZzGfwiHEQcpump",
+  "ret": -0.0925685889165544,
+  "held": 30.00585,
+  "buyP": 0.0000030539939064828753,
+  "sellP": 0.000002857,
+  "buyT": 1792058387808,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "BLET",
+  "mint": "EVUcVMqb82QvGFyx2GAkNEKrfiUCwPzmAhgT1yCXpump",
+  "ret": -0.09314850216386594,
+  "held": 30.147266666666667,
+  "buyP": 0.000003058086143781301,
+  "sellP": 0.000002859,
+  "buyT": 1792065565150,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "CLAUDIAGI",
+  "mint": "EwShtVeknoX8sV2RsuepJPC7S6Lo6T9C8sdpdKqEpump",
+  "ret": -0.09457827777142358,
+  "held": 30.027283333333333,
+  "buyP": 0.000003046845389582516,
+  "sellP": 0.000002844,
+  "buyT": 1792066623381,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "GTAINU",
+  "mint": "GRNy6QfLWtW4sNDSKN3dGQ6HoVfp28APuPYLizZcpump",
+  "ret": -0.09573430485018741,
+  "held": 30.152733333333334,
+  "buyP": 0.0000030410862811116674,
+  "sellP": 0.000002835,
+  "buyT": 1792071009229,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "mint",
+  "mint": "5wXYeKrkhSri4M3ocwQRFfb8SsBG2vTVTnCeWUSzpump",
+  "ret": -0.09620214690517437,
+  "held": 30.001583333333333,
+  "buyP": 0.0000030458802159946846,
+  "sellP": 0.000002838,
+  "buyT": 1792067375692,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "BlackBox",
+  "mint": "EkEZkeUJcBsHmomY2HMQCvStzAzoXkVnxnxWXDHEpump",
+  "ret": -0.0962257171622708,
+  "held": 30.133666666666667,
+  "buyP": 0.0000030706450191151052,
+  "sellP": 0.000002861,
+  "buyT": 1792064424830,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "POPDOG",
+  "mint": "HCRwjv8L5x6dMvRj14o8iJiX3JAZoRAp7s2jHGuopump",
+  "ret": -0.09728266980222422,
+  "held": 30.068416666666668,
+  "buyP": 0.000003063494969564963,
+  "sellP": 0.000002851,
+  "buyT": 1792070033772,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "GEMS",
+  "mint": "5KbNXPb52D8Sra76sn4x6ue22ykfXcNuYJkQhH5Ppump",
+  "ret": -0.097746440018186,
+  "held": 30.078383333333335,
+  "buyP": 0.0000030833461051193567,
+  "sellP": 0.000002868,
+  "buyT": 1792062946971,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "GITFLUX",
+  "mint": "92EzfrKkcUramZrqm6vSqUnQppz6MFoUpkH2Ez4Jpump",
+  "ret": -0.09779322453606665,
+  "held": 30.0954,
+  "buyP": 0.0000031705924603914177,
+  "sellP": 0.000002949,
+  "buyT": 1792074865585,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "DAEMONFI",
+  "mint": "5duJsxgPi1ZfTp9hSWnsApBqXTU62gAVgshQ7EQBpump",
+  "ret": -0.09845198557917478,
+  "held": 30.03715,
+  "buyP": 0.0000030545572237426784,
+  "sellP": 0.000002839,
+  "buyT": 1792072857521,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "come_from",
+  "mint": "DwrGimThyc5d8Nuhb8tdrgD9Vz7b2vTdvtAxaVX4pump",
+  "ret": -0.09931907939535733,
+  "held": 30.093516666666666,
+  "buyP": 0.0000030693444667886856,
+  "sellP": 0.00000285,
+  "buyT": 1792068450765,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Nearlana",
+  "mint": "7yM2ScX1wciJuuV9feGtLZmpH3v2gwaTFMEBsdBMpump",
+  "ret": -0.0998534133992578,
+  "held": 30.039116666666665,
+  "buyP": 0.0000031379777938910982,
+  "sellP": 0.000002912,
+  "buyT": 1792075989995,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Clod",
+  "mint": "HHeQxcWMGq8MJDxfN6AfZFPxVCjKcyodsyZNSrS2pump",
+  "ret": -0.10209439280747346,
+  "held": 30.02585,
+  "buyP": 0.000003083152591791769,
+  "sellP": 0.000002854,
+  "buyT": 1792066793422,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "CHATGPT",
+  "mint": "YmGF3zv3AySZ1FS8YYHpQQqoV8dfKcJJ8DW6MYmpump",
+  "ret": -0.10340312058169765,
+  "held": 30.165666666666667,
+  "buyP": 0.000003096307899042784,
+  "sellP": 0.000002862,
+  "buyT": 1792063141925,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "JASON",
+  "mint": "DLoAHbM32Z6Ckr2sCPvDkKbjZF8DAGaHnnWz7aPUpump",
+  "ret": -0.103773957927358,
+  "held": 30.102916666666665,
+  "buyP": 0.000003082436651373366,
+  "sellP": 0.000002848,
+  "buyT": 1792069761126,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "SOCIETY",
+  "mint": "3griuiRniCeJL13kKafeDBt1bNGq1UajPzTGyL6epump",
+  "ret": -0.10618318122219217,
+  "held": 0,
+  "sellP": 0.000002884,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Dacity",
+  "mint": "55CTWuU1qJG7fzQY9979xLXFDhDYGmuaY6hcchHopump",
+  "ret": -0.1090587258930793,
+  "held": 30.1002,
+  "buyP": 0.0000031007206426362835,
+  "sellP": 0.000002848,
+  "buyT": 1792069471066,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "EZSZ",
+  "mint": "ANBPPi77xNzkbycuyZFHs1u8SpSeSQFYMxv4VFCmpump",
+  "ret": -0.11078106080387795,
+  "held": 30.009366666666665,
+  "buyP": 0.0000031165440566361767,
+  "sellP": 0.000002857,
+  "buyT": 1792060689343,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "CCAMPS",
+  "mint": "CtPkCBCVrzPhbeE6SphhbCUS31K2vSqYrhcsksu4pump",
+  "ret": -0.1112501371984086,
+  "held": 30.042766666666665,
+  "buyP": 0.0000031072747412806183,
+  "sellP": 0.000002847,
+  "buyT": 1792060226982,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "VELL",
+  "mint": "8dwcCGMkqU5yrRCtejeYjMWovg26pzg979Mb1NxUpump",
+  "ret": -0.1139082066960142,
+  "held": 30.153966666666665,
+  "buyP": 0.0000031549101584342876,
+  "sellP": 0.000002882,
+  "buyT": 1792064563815,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "67Dog",
+  "mint": "HAi4Yb3uWJkjDFsg9Xkbb5rDvvKALLBKq34fL4mMpump",
+  "ret": -0.11673705120542444,
+  "held": 30.0915,
+  "buyP": 0.00000316721085585876,
+  "sellP": 0.000002884,
+  "buyT": 1792058132447,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "DISCORD",
+  "mint": "HkRHQP59on6cdyZst5yVVacLquF4qW28Rr8DeKVDpump",
+  "ret": -0.11686802636537297,
+  "held": 0,
+  "sellP": 0.000002879,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "GHOSTCAT",
+  "mint": "DKXXtRbdm4CjRbTE3wJ3ZdmohTZTLfnXDUsd2ovWpump",
+  "ret": -0.11703246365994979,
+  "held": 30.020516666666666,
+  "buyP": 0.0000031441020034635196,
+  "sellP": 0.000002862,
+  "buyT": 1792063400819,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Nihilism",
+  "mint": "CdAw3XYcq3PRFiZLJQQYWCoso52me5p6k9z9bgGZpump",
+  "ret": -0.11725103608962151,
+  "held": 0,
+  "sellP": 0.000002884,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "TPAD",
+  "mint": "3VaZp7QcoGSwabtJdmEQ74rKkRRp3ACHEStP8TB6pump",
+  "ret": -0.11792747147565519,
+  "held": 30.077383333333334,
+  "buyP": 0.000003139594432935078,
+  "sellP": 0.000002855,
+  "buyT": 1792068221513,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "SQUEEZE",
+  "mint": "7wZS5iZCUNS3sVzmzcBd1LfVQZrYXdYNnNtMdqL5pump",
+  "ret": -0.11794279050864598,
+  "held": 30.098366666666667,
+  "buyP": 0.0000031253528346417553,
+  "sellP": 0.000002842,
+  "buyT": 1792069201160,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "ZOMBUCKS",
+  "mint": "GhFoNUseKWQqpbiHTR6SPyZAsQnvEj9kUq3VPqoZpump",
+  "ret": -0.11795875367275921,
+  "held": 30.137,
+  "buyP": 0.0000031397057808026365,
+  "sellP": 0.000002855,
+  "buyT": 1792064754986,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "LEGOSX",
+  "mint": "AsP6ZwtWq6Fuie7JeGN7JThjJjTiUWyELZ7nGL3vpump",
+  "ret": -0.1180207822327557,
+  "held": 0,
+  "sellP": 0.000002875,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "cove",
+  "mint": "8B7HTABNWb85YrDbddMEnZPw9R2YAN6nh1SxfK56pump",
+  "ret": -0.11819416657716242,
+  "held": 30.0256,
+  "buyP": 0.0000031416439934930604,
+  "sellP": 0.000002856,
+  "buyT": 1792068104537,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "MONOID",
+  "mint": "H7uLNEdEMWmSGsMyLcMjaSsAGLApPbW3UaoTuCp5pump",
+  "ret": -0.11867776284409426,
+  "held": 30.06015,
+  "buyP": 0.0000031686821031681104,
+  "sellP": 0.000002879,
+  "buyT": 1792057283675,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Hours",
+  "mint": "DLwckpSkJjbED5DXzUTtWw89eAMYCubkKRwoE2jWpump",
+  "ret": -0.11868829073396225,
+  "held": 30.140466666666665,
+  "buyP": 0.0000031268959336703055,
+  "sellP": 0.000002841,
+  "buyT": 1792070369379,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "MASHUP",
+  "mint": "CD7yEawfVXU1r1b6y4J2kYJ5oDCiUp9Fjk1o5Yqypump",
+  "ret": -0.11887698955164372,
+  "held": 0,
+  "sellP": 0.000002875,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "ROOKIE",
+  "mint": "Hw7st14VQ5jfVsDaoRkECXEz1pUqbEGpqUK3VV3xpump",
+  "ret": -0.11906273540122925,
+  "held": 30.017666666666667,
+  "buyP": 0.000003150247028389667,
+  "sellP": 0.000002861,
+  "buyT": 1792064001477,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "ONBOARD ",
+  "mint": "DuYCRKDoGxD2YfeJdL2M43NXNowfBb4odLX7yhmpump",
+  "ret": -0.11909083438739909,
+  "held": 30.11905,
+  "buyP": 0.000003148145243864551,
+  "sellP": 0.000002859,
+  "buyT": 1792062033781,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "ALIBI",
+  "mint": "EKype49w3xca4EhDxUgfrQgmNgbmq5azB8vJGNaUpump",
+  "ret": -0.11933994612228438,
+  "held": 30.133033333333334,
+  "buyP": 0.0000031677603494291882,
+  "sellP": 0.000002876,
+  "buyT": 1792073732471,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "MOG",
+  "mint": "61JE1LQE5XY7k8NBJtHMyvQWRgH4VpRZsNDG5ReFpump",
+  "ret": -0.119536229235911,
+  "held": 30.040016666666666,
+  "buyP": 0.000003145331008448749,
+  "sellP": 0.000002855,
+  "buyT": 1792066572527,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "NOEMA",
+  "mint": "FfjUD5rz7EH2YG7L8PjRdqAwPBeVvVUjUBJscvvcpump",
+  "ret": -0.1197795507476368,
+  "held": 30.00305,
+  "buyP": 0.000003124160546753642,
+  "sellP": 0.000002835,
+  "buyT": 1792070778003,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "HODLFI",
+  "mint": "43QmnFNzg8oKqYFZeAGtyGFkY9yUcDTvneygpcAopump",
+  "ret": -0.12029438484491839,
+  "held": 30.164783333333332,
+  "buyP": 0.000003150247028389667,
+  "sellP": 0.000002857,
+  "buyT": 1792059489147,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "SQUEEZE",
+  "mint": "9qaqoKzFP4RLrD73vF2yecJc4H27vGBSc4ZNituWpump",
+  "ret": -0.12074140718711279,
+  "held": 30.125233333333334,
+  "buyP": 0.000003130887798540775,
+  "sellP": 0.000002838,
+  "buyT": 1792069909911,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "STREAM",
+  "mint": "DzxmuGF6aqtzyrPciAppiUfVMSBocmS246jb9xHnpump",
+  "ret": -0.12171857836060429,
+  "held": 30.0837,
+  "buyP": 0.000003144311073830105,
+  "sellP": 0.000002847,
+  "buyT": 1792071603905,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "CLAWDM",
+  "mint": "CzQSGjsX2RwBm3hfh2orRXwFjmcLD8J9npoGL9copump",
+  "ret": -0.12188315021501328,
+  "held": 30.113966666666666,
+  "buyP": 0.000003134958634120343,
+  "sellP": 0.000002838,
+  "buyT": 1792071732147,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Chase",
+  "mint": "VmToRioLWGnLL51CDCEAghjXNQuwdYTPvg653tLpump",
+  "ret": -0.12335155031727996,
+  "held": 30.09861666666667,
+  "buyP": 0.000003159020016521211,
+  "sellP": 0.000002855,
+  "buyT": 1792061314454,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "ORBIT",
+  "mint": "4eq8mUTJRKpwtT5QdzdKC3QMoJDxoseg6jPN4XgEpump",
+  "ret": -0.12425598163817386,
+  "held": 0,
+  "sellP": 0.000002881,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "STASH",
+  "mint": "FCs6epgL3o81SNnK7ygpaNCN2kpBXsqMi1Rw4PC5pump",
+  "ret": -0.12479465994754546,
+  "held": 30.02,
+  "buyP": 0.0000031830701579506286,
+  "sellP": 0.000002872,
+  "buyT": 1792058837284,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "ZTRASH",
+  "mint": "2oG5VwUjWbvLPLmMpyQHbTmYacNWkViVv1by3FTzpump",
+  "ret": -0.1309982682478943,
+  "held": 30.127583333333334,
+  "buyP": 0.0000031957473714128423,
+  "sellP": 0.000002863,
+  "buyT": 1792060111816,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "gaslab",
+  "mint": "F1E6DuJ5wDPxcUJFreEwvr83pQGM75rNftru5UsEpump",
+  "ret": -0.13347842806437193,
+  "held": 30.13906666666667,
+  "buyP": 0.0000032093719187946458,
+  "sellP": 0.000002867,
+  "buyT": 1792062002545,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "Autheo",
+  "mint": "CcitFj7STbG5zjheLXhcC4KXrHr1SeaZ19mU2c4Kpump",
+  "ret": -0.13354606056371576,
+  "held": 30.110983333333333,
+  "buyP": 0.0000031771567704926284,
+  "sellP": 0.000002838,
+  "buyT": 1792067649048,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "APOLLO",
+  "mint": "5pm2SQvWYeGZJNuNcXbyhvSxSFFJx9nNtQWN5tPXpump",
+  "ret": -0.14580515044133002,
+  "held": 30.115933333333334,
+  "buyP": 0.0000032318387326103724,
+  "sellP": 0.000002846,
+  "buyT": 1792067928953,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "SQUEEZE",
+  "mint": "3yhDxsHTJ2LpkuQNYTEARyqh4p3KpJJPSG42ZQ86pump",
+  "ret": -0.14698180523988746,
+  "held": 30.1338,
+  "buyP": 0.000003222651072258867,
+  "sellP": 0.000002834,
+  "buyT": 1792072221163,
+  "reason": "30 min écoulées"
+ },
+ {
+  "name": "$FOMUSK",
+  "mint": "9Z2qggkLfyx1YT2XA5zgyFqnfnTGnGdJriBWBnWKpump",
+  "ret": -0.3768936742979674,
+  "held": 1.0521166666666666,
+  "buyP": 0.00000304493779269911,
+  "sellP": 0.000001956,
+  "buyT": 1792073666050,
+  "reason": "stop −30 %"
+ },
+ {
+  "name": "GORILLA",
+  "mint": "6EFwcnwE2BCrgCANeiyyFxsWFzkPfxwH2CeEcNCvpump",
+  "ret": -0.9056422808587389,
+  "held": 1.91905,
+  "buyP": 0.000002982236138823216,
+  "sellP": 2.901e-7,
+  "buyT": 1792058191821,
+  "reason": "stop −30 %"
+ }
+]
