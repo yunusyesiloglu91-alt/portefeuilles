@@ -138,7 +138,29 @@
   const mcap = (x) => (!x ? '?' : x >= 1e6 ? `${num(x / 1e6, 1)} M$` : `${Math.max(5, Math.round(x / 5e3) * 5)} k$`);
   let st = null, rt = null, px = {}, memePx = {}, pairPx = {}, rtPx = {}, lastPx = 0, filter = 'all';
   const RTLAB = { vague: '🌊 Vague', actu: '📰 Actu', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', eclairS: '⚡ Éclair strict (test)', eclairQ: '⚡ Éclair sélectif (test)', eclair: '⚡ Éclair 0,1 s (test)', diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
-  const rp = (p) => { const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry; };
+  const curvePx = {}; // clé de courbe -> prix d'un jeton en SOL, lu sur la blockchain
+  let curveT = 0;
+  const rp = (p) => {
+    if (p.curve && curvePx[p.curve] && px.SOLUSDT) return curvePx[p.curve] * px.SOLUSDT;
+    const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry;
+  };
+  async function loadCurves() {
+    const keys = rt && rt.variants ? [...new Set(Object.values(rt.variants).flatMap((v) => v.positions).map((p) => p.curve).filter(Boolean))].slice(0, 100) : [];
+    if (!keys.length) return;
+    try {
+      const r = await fetch('https://api.mainnet-beta.solana.com', { method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'getMultipleAccounts', params: [keys, { encoding: 'base64', commitment: 'processed' }] }) });
+      const j = await r.json();
+      (j.result ? j.result.value : []).forEach((acc, i) => {
+        if (!acc) return;
+        const b = Uint8Array.from(atob(acc.data[0]), (c) => c.charCodeAt(0));
+        const dv = new DataView(b.buffer);
+        const vT = Number(dv.getBigUint64(8, true)) / 1e6, vS = Number(dv.getBigUint64(16, true)) / 1e9;
+        if (vT > 0 && !b[48]) curvePx[keys[i]] = vS / vT;
+      });
+      curveT = Date.now();
+    } catch { /* on réessaie dans 2 s */ }
+  }
   const rVal = (v) => v.cash + v.positions.reduce((a, p) => a + p.qty * rp(p), 0);
   const LAB = { qualite: '2️⃣ Anti-arnaque + 30 min', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)', cerveau: '🧠 Cerveau (apprend tout seul)', origine: '1️⃣ Anti-arnaque', tres: '3️⃣ Jackpot ×5' };
 
@@ -181,7 +203,7 @@
     if (v.trades.some((x) => x.t === t.t && x.side === t.side && x.name === t.name)) return false;
     v.trades.push(t);
     if (t.side === 'achat' && !v.positions.some((p) => p.addr === t.addr)) {
-      v.positions.push({ name: t.name, addr: t.addr, mint: t.addr, pair: t.pair, t: t.t, entry: t.price, last: t.price, peak: t.price, qty: t.qty || t.usd / t.price, cost: t.usd, f: { mcap: t.mcap } });
+      v.positions.push({ name: t.name, addr: t.addr, mint: t.addr, curve: t.curve, pair: t.pair, t: t.t, entry: t.price, last: t.price, peak: t.price, qty: t.qty || t.usd / t.price, cost: t.usd, f: { mcap: t.mcap } });
       v.cash -= t.usd;
     } else if (t.side === 'vente') {
       const p = v.positions.find((x) => x.addr === t.addr);
@@ -295,7 +317,7 @@
     // Éclair vit dans le sniper à la seconde (PC) : on le lit depuis sa propre liste, sans bouton Vendre
     const rtv = rt && rt.variants && rt.variants[sel];
     const isRtSel = sel.startsWith('eclair') || sel === 'actu' || sel === 'vague';
-    const rtMapped = rtv ? { ...rtv, positions: rtv.positions.map((p) => ({ ...p, addr: p.mint, pair: p.mint })) } : null;
+    const rtMapped = rtv ? { ...rtv, positions: rtv.positions.map((p) => ({ ...p, addr: p.mint, pair: p.mint, last: rp(p) })) } : null;
     // Les variantes « Éclair » vivent dans le sniper à la seconde, pas dans le sniper 5 min (qui a des variantes du même nom)
     const snq = sn && (isRtSel && rtMapped ? rtMapped : (sn.variants[sel] || rtMapped || sn.variants.qualite));
     document.body.dataset.sel = sel;
@@ -438,7 +460,7 @@
     $('positions').innerHTML = mine.length ? mine.map((p) => {
       const val = p.qty * sp(p), ret = (val + (p.realized || 0)) / p.cost - 1;
       return `<div class="row"><div class="bar" style="background:#c084fc"></div>
-        <div class="main"><div class="t">${esc(p.name)}</div><div class="s">ouvert à ${new Date(p.t).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })} (il y a ${ago(p.t)}) · market cap ${mcap(p.f && p.f.mcap)} → <b style="color:var(--text)">${mcap(p.f && p.f.mcap ? p.f.mcap * (sp(p) / p.entry) : 0)}</b>${p.tp1Done ? ' · moitié vendue' : ''}</div></div>
+        <div class="main"><div class="t"><a href="https://pump.fun/coin/${esc(p.mint || p.addr)}" target="_blank" rel="noopener" style="color:inherit">${esc(p.name)} ↗</a></div><div class="s">ouvert à ${new Date(p.t).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })} (il y a ${ago(p.t)}) · market cap ${mcap(p.f && p.f.mcap)} → <b style="color:var(--text)">${mcap(p.f && p.f.mcap ? p.f.mcap * (sp(p) / p.entry) : 0)}</b>${p.tp1Done ? ' · moitié vendue' : ''}</div></div>
         <div class="r"><b class="${cls(ret)}">${pct(ret)}</b><span>${num(val)} $</span></div>
         <button class="sellbtn" data-addr="${esc(p.addr)}" data-name="${esc(p.name)}" ${pending[p.addr] ? 'disabled' : ''}>${pending[p.addr] ? 'Envoyé…' : 'Vendre'}</button></div>`;
     }).join('') : '<div class="empty">Aucune position : le robot attend un bon lancement.</div>';
@@ -455,7 +477,7 @@
     $('last').innerHTML = lastT.length ? lastT.map((t) => {
       const buy = t.side === 'achat', half = /moitié/.test(t.reason || '');
       return `<div class="row"><div class="ico" style="color:${buy ? 'var(--up)' : 'var(--down)'};background:${buy ? 'rgba(34,197,94,.14)' : 'rgba(239,68,68,.14)'}">${buy ? '↑' : '↓'}</div>
-        <div class="main"><div class="t">${buy ? 'Achat' : half ? 'Vente moitié' : 'Vente'} ${esc(t.name)}</div><div class="s"><b style="color:var(--text)">[${esc(SEL_NAME[sel] || sel)}]</b> · ${time(t.t)} · ${buy ? `market cap ≈ ${mcap(t.mcap || +((String(t.reason).match(/(\d+) k\$/) || [])[1] * 1e3))}` : `${t.mcap ? `≈ ${mcap(t.mcap)} · ` : ''}${esc(String(t.reason || '').replace(' (moitié)', ''))}`}</div></div>
+        <div class="main"><div class="t">${buy ? 'Achat' : half ? 'Vente moitié' : 'Vente'} <a href="https://pump.fun/coin/${esc(t.mint || t.addr || '')}" target="_blank" rel="noopener" style="color:inherit">${esc(t.name)} ↗</a></div><div class="s"><b style="color:var(--text)">[${esc(SEL_NAME[sel] || sel)}]</b> · ${time(t.t)} · ${buy ? `market cap ≈ ${mcap(t.mcap || +((String(t.reason).match(/(\d+) k\$/) || [])[1] * 1e3))}` : `${t.mcap ? `≈ ${mcap(t.mcap)} · ` : ''}${esc(String(t.reason || '').replace(' (moitié)', ''))}`}</div></div>
         <div class="r">${buy ? `<b>${num(t.usd || 5)} $</b>` : `<b class="${cls(t.ret)}">${pct(t.ret)}</b><span>${num(t.usd)} $ reçus</span>`}</div></div>`;
     }).join('') : '<div class="empty">Aucune opération pour l’instant.</div>';
 
@@ -556,6 +578,7 @@
     try { await loadState(); } catch { $('err').innerHTML = '<div class="err">Impossible de charger les portefeuilles. Recharge dans un instant.</div>'; return; }
     await refreshPrices();
     setInterval(refreshPrices, 15000);
+    setInterval(async () => { await loadCurves(); render(); }, 2000); // cours des positions en direct
     setInterval(refreshState, 75000);
     setInterval(render, 1000);
     document.addEventListener('visibilitychange', () => { if (!document.hidden) { refreshState(); refreshPrices(); } });

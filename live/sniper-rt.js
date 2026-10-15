@@ -303,13 +303,15 @@ function buyReal(id, tok, why) {
   const v = st.variants[id];
   const stake = VARIANTS[id].stake || STAKE_DEFAULT;
   if (!tok.curve || !(solUsd > 0) || v.cash < stake) return;
-  if (v.positions.length + (v.pending || 0) >= MAX_OPEN || v.positions.some((p) => p.mint === tok.mint)) return;
+  // Un seul achat par token et par stratégie, y compris pendant la seconde où l'ordre est en cours
+  v.pendingMints = v.pendingMints || [];
+  if (v.positions.length + v.pendingMints.length >= MAX_OPEN || v.positions.some((p) => p.mint === tok.mint) || v.pendingMints.includes(tok.mint)) return;
   v.cash -= stake;
-  v.pending = (v.pending || 0) + 1;
+  v.pendingMints.push(tok.mint);
   const solIn = stake / solUsd - NET_SOL;
   const hoped = tok.vT0 && tok.vS0 ? Courbe.buyQuote({ vT: tok.vT0, vS: tok.vS0 }, solIn) : null; // ce que l'ancien calcul supposait
   setTimeout(async () => {
-    v.pending--;
+    v.pendingMints = v.pendingMints.filter((m) => m !== tok.mint);
     const c = await readOne(tok.curve);
     if (!c || c.complete) {
       // Ordre échoué : la transaction coûte quand même ses frais réseau
@@ -327,7 +329,7 @@ function buyReal(id, tok, why) {
     const name = tok.symbol || tok.name;
     v.positions.push({ mint: tok.mint, name, curve: tok.curve, t: Date.now(), entry, last, peak: last, qty: q.tokens, cost: stake, realized: 0, real: true, gap, delay });
     const reason = `${why} · prix réel après ${(delay / 1000).toFixed(1)} s${hoped ? ` (${gap < 0 ? '' : '+'}${(gap * 100).toFixed(0)} % de jetons vs prix annoncé)` : ''}`;
-    pushLive(id, { t: Date.now(), side: 'achat', name, mint: tok.mint, addr: tok.mint, price: entry, usd: stake, qty: q.tokens, reason });
+    pushLive(id, { t: Date.now(), side: 'achat', name, mint: tok.mint, addr: tok.mint, curve: tok.curve, price: entry, usd: stake, qty: q.tokens, reason });
     v.trades.push({ t: Date.now(), side: 'achat', name, mint: tok.mint, price: entry, usd: stake, reason, gap, delay });
   }, VARIANTS[id].latency || LATENCY_MS);
 }
@@ -399,6 +401,7 @@ async function vagueScan() {
       const [lead, second] = ranked;
       if (!lead || lead.c.vS < 33) continue; // au moins ~3 SOL achetés par le public
       if (second && (lead.c.vS - 30) < 1.5 * (second.c.vS - 30)) continue; // pas encore de vrai leader
+      for (const w of vagueWords(lead.name, lead.symbol)) vagueBought[w] = now;
       vagueBought[h.w] = now;
       const tok = { mint: lead.mint, curve: lead.curve, name: lead.name, symbol: lead.symbol, vT0: lead.c.vT, vS0: lead.c.vS, tRecv: now };
       buyReal('vague', tok, `vague « ${h.w} » : ${h.n} tokens de ${h.creators} créateurs en 15 min, leader avec ${(lead.c.vS - 30).toFixed(1)} SOL achetés`);
