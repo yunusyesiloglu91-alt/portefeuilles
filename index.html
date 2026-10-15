@@ -176,11 +176,14 @@
   }
   const liveEv = [];
   function applyTrade(t) {
-    const v = st && st.sniper && st.sniper.variants && st.sniper.variants[t.id || 'qualite'];
-    if (!v || v.trades.some((x) => x.t === t.t && x.side === t.side && x.name === t.name)) return false;
+    // Les Éclair vivent dans le sniper à la seconde (rt), les autres dans le sniper à 5 min
+    const isRt = String(t.id || '').startsWith('eclair');
+    const v = isRt ? (rt && rt.variants && rt.variants[t.id]) : (st && st.sniper && st.sniper.variants && st.sniper.variants[t.id || 'qualite']);
+    if (!v) return false;
+    if (v.trades.some((x) => x.t === t.t && x.side === t.side && x.name === t.name)) return false;
     v.trades.push(t);
     if (t.side === 'achat' && !v.positions.some((p) => p.addr === t.addr)) {
-      v.positions.push({ name: t.name, addr: t.addr, pair: t.pair, t: t.t, entry: t.price, last: t.price, peak: t.price, qty: t.qty, cost: t.usd, f: { mcap: t.mcap } });
+      v.positions.push({ name: t.name, addr: t.addr, mint: t.addr, pair: t.pair, t: t.t, entry: t.price, last: t.price, peak: t.price, qty: t.qty || t.usd / t.price, cost: t.usd, f: { mcap: t.mcap } });
       v.cash -= t.usd;
     } else if (t.side === 'vente') {
       const p = v.positions.find((x) => x.addr === t.addr);

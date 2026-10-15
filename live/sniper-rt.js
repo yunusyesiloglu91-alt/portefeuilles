@@ -208,6 +208,12 @@ async function aiScore(tok) {
 }
 
 // ---------- Ordres virtuels
+// Chaque achat / vente est aussi envoyé tout de suite au site (canal temps réel ntfy, sans passer par GitHub)
+const LIVE_TOPIC = 'sniper-97f143460ae09334d6-data';
+function pushLive(id, t) {
+  fetch('https://ntfy.sh/', { method: 'POST', body: JSON.stringify({ topic: LIVE_TOPIC, message: JSON.stringify({ ...t, id }) }) }).catch(() => {});
+}
+
 function buy(id, tok, why) {
   const v = st.variants[id];
   if (v.positions.length >= MAX_OPEN || v.cash < STAKE || !(tok.last > 0)) return;
@@ -216,6 +222,7 @@ function buy(id, tok, why) {
   v.cash -= STAKE;
   v.fees = (v.fees || 0) + STAKE - STAKE / (1 + COST); // frais d'achat (3 %) : déjà inclus dans le prix d'entrée
   v.positions.push({ mint: tok.mint, name: tok.symbol || tok.name, t: Date.now(), entry: fill, last: tok.last, peak: tok.last, qty: STAKE / fill, cost: STAKE, realized: 0 });
+  pushLive(id, { t: Date.now(), side: 'achat', name: tok.symbol || tok.name, mint: tok.mint, addr: tok.mint, price: fill, usd: STAKE, qty: STAKE / fill, reason: why });
   v.trades.push({ t: Date.now(), side: 'achat', name: tok.symbol || tok.name, mint: tok.mint, price: fill, usd: STAKE, reason: why });
   subscribe(tok.mint);
 }
@@ -233,6 +240,7 @@ function cancelToken(tok) {
   log('achat annulé, prix de départ faux :', tok.symbol || tok.mint);
 }
 
+const VID = (v) => Object.keys(st.variants).find((k) => st.variants[k] === v);
 function sell(v, p, part, reason) {
   const qty = p.qty * part;
   const usd = qty * p.last * (1 - COST);
@@ -241,6 +249,7 @@ function sell(v, p, part, reason) {
   p.qty -= qty;
   p.realized += usd;
   const done = part >= 1 || p.qty <= 1e-9;
+  pushLive(VID(v), { t: Date.now(), side: 'vente', name: p.name, mint: p.mint, addr: p.mint, price: p.last, usd, done, reason: done ? reason : reason + ' (moitié)' });
   v.trades.push({ t: Date.now(), side: 'vente', name: p.name, mint: p.mint, price: p.last, usd, ret: done ? p.realized / p.cost - 1 : usd / (p.cost * part) - 1, reason: done ? reason : `${reason} (moitié)` });
   if (done) { v.positions.splice(v.positions.indexOf(p), 1); unsubscribe(p.mint); }
 }
