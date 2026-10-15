@@ -439,12 +439,12 @@
     $('positions').innerHTML = mine.length ? mine.map((p) => {
       const val = p.qty * sp(p), ret = (val + (p.realized || 0)) / p.cost - 1;
       return `<div class="row"><div class="bar" style="background:#c084fc"></div>
-        <div class="main"><div class="t">${esc(p.name)}</div><div class="s">il y a ${ago(p.t)} · market cap ${mcap(p.f && p.f.mcap)} → <b style="color:var(--text)">${mcap(p.f && p.f.mcap ? p.f.mcap * (sp(p) / p.entry) : 0)}</b>${p.tp1Done ? ' · moitié vendue' : ''}</div></div>
+        <div class="main"><div class="t">${esc(p.name)}</div><div class="s">ouvert à ${new Date(p.t).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })} (il y a ${ago(p.t)}) · market cap ${mcap(p.f && p.f.mcap)} → <b style="color:var(--text)">${mcap(p.f && p.f.mcap ? p.f.mcap * (sp(p) / p.entry) : 0)}</b>${p.tp1Done ? ' · moitié vendue' : ''}</div></div>
         <div class="r"><b class="${cls(ret)}">${pct(ret)}</b><span>${num(val)} $</span></div>
         <button class="sellbtn" data-addr="${esc(p.addr)}" data-name="${esc(p.name)}" ${pending[p.addr] ? 'disabled' : ''}>${pending[p.addr] ? 'Envoyé…' : 'Vendre'}</button></div>`;
     }).join('') : '<div class="empty">Aucune position : le robot attend un bon lancement.</div>';
     // Dernières opérations du Sniper principal
-    const lastT = snq ? snq.trades.slice(-8).reverse() : [];
+    const lastT = snq ? snq.trades.slice(-(sel.startsWith("eclair") ? 40 : 8)).reverse() : [];
     $('last').innerHTML = lastT.length ? lastT.map((t) => {
       const buy = t.side === 'achat', half = /moitié/.test(t.reason || '');
       return `<div class="row"><div class="ico" style="color:${buy ? 'var(--up)' : 'var(--down)'};background:${buy ? 'rgba(34,197,94,.14)' : 'rgba(239,68,68,.14)'}">${buy ? '↑' : '↓'}</div>
