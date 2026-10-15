@@ -399,14 +399,14 @@ async function vagueScan() {
       const cands = clusters[h.w].filter((x) => now - x.t >= 60000 && x.devPct <= 10 && x.curve);
       if (cands.length < 2) continue;
       const curves = await Courbe.read([...new Set(cands.map((x) => x.curve))]);
-      const ranked = cands.map((x) => ({ ...x, c: curves[x.curve] })).filter((x) => x.c && !x.c.complete).sort((a, b) => b.c.vS - a.c.vS);
+      const ranked = cands.map((x) => ({ ...x, c: curves[x.curve] })).filter((x) => x.c && !x.c.complete).sort((a, b) => b.c.rS - a.c.rS);
       const [lead, second] = ranked;
-      if (!lead || lead.c.vS < 33) continue; // au moins ~3 SOL achetés par le public
-      if (second && (lead.c.vS - 30) < 1.5 * (second.c.vS - 30)) continue; // pas encore de vrai leader
+      if (!lead || lead.c.rS < 3) continue; // au moins 3 SOL réellement achetés
+      if (second && lead.c.rS < 1.5 * second.c.rS) continue; // pas encore de vrai leader
       for (const w of vagueWords(lead.name, lead.symbol)) vagueBought[w] = now;
       vagueBought[h.w] = now;
       const tok = { mint: lead.mint, curve: lead.curve, name: lead.name, symbol: lead.symbol, vT0: lead.c.vT, vS0: lead.c.vS, tRecv: now };
-      buyReal('vague', tok, `vague « ${h.w} » : ${h.n} tokens de ${h.creators} créateurs en 15 min, leader avec ${(lead.c.vS - 30).toFixed(1)} SOL achetés`);
+      buyReal('vague', tok, `vague « ${h.w} » : ${h.n} tokens de ${h.creators} créateurs en 15 min, leader avec ${lead.c.rS.toFixed(1)} SOL achetés`);
     }
   } catch { /* RPC momentanément indisponible */ }
   vagueBusy = false;
@@ -444,8 +444,8 @@ async function expertScan() {
       w.peak = Math.max(w.peak, mid);
       const age = now - w.t;
       // Sans intérêt après 4 min : on arrête de le suivre
-      if (age > 4 * MIN && c.vS < 32) { watch.delete(w.mint); continue; }
-      if (age < MIN || age > 12 * MIN || c.vS < 36 || expertChecked.has(w.mint)) continue;
+      if (age > 4 * MIN && c.rS < 2) { watch.delete(w.mint); continue; }
+      if (age < MIN || age > 12 * MIN || c.rS < 6 || expertChecked.has(w.mint)) continue;
       if (w.peak < w.mid0 * 1.6) continue;
       const pull = 1 - mid / w.peak;
       if (pull < 0.15 || pull > 0.35) continue;
@@ -463,7 +463,7 @@ async function expertScan() {
       st.expertRecent = (st.expertRecent || []).concat([{ t: now, symbol: w.symbol || w.name, ok: !why, why: why || 'acheté' }]).slice(-20);
       if (why) continue;
       const tok = { mint: w.mint, curve: w.curve, name: w.name, symbol: w.symbol, vT0: c.vT, vS0: c.vS, tRecv: now };
-      buyReal('expert', tok, `repli de ${Math.round(pull * 100)} % après ×${(w.peak / w.mid0).toFixed(1)}, rebond, ${(c.vS - 30).toFixed(1)} SOL achetés, top 10 ${rc.top10.toFixed(0)} %, créateur ${rc.creatorPct.toFixed(1)} %`);
+      buyReal('expert', tok, `repli de ${Math.round(pull * 100)} % après ×${(w.peak / w.mid0).toFixed(1)}, rebond, ${c.rS.toFixed(1)} SOL achetés, top 10 ${rc.top10.toFixed(0)} %, créateur ${rc.creatorPct.toFixed(1)} %`);
       watch.delete(w.mint);
     }
   } catch { /* RPC momentanément indisponible */ }

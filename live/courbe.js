@@ -4,7 +4,7 @@
 const RPC = 'https://api.mainnet-beta.solana.com';
 const FEE = 0.0125; // frais pump.fun sur la courbe : 0,95 % plateforme + 0,30 % créateur
 
-// Lit plusieurs courbes en un seul appel (jusqu'à 100). Renvoie { clé: { vT, vS, complete } } ; vT en jetons, vS en SOL.
+// Lit plusieurs courbes en un seul appel (jusqu'à 100). Renvoie { clé: { vT, vS, rS, complete } } ; vT en jetons, vS et rS en SOL.
 async function read(keys) {
   const out = {};
   for (let k = 0; k < keys.length; k += 100) {
@@ -18,7 +18,8 @@ async function read(keys) {
     j.result.value.forEach((acc, i) => {
       if (!acc) return; // compte introuvable
       const b = Buffer.from(acc.data[0], 'base64');
-      out[keys[k + i]] = { vT: Number(b.readBigUInt64LE(8)) / 1e6, vS: Number(b.readBigUInt64LE(16)) / 1e9, complete: b[48] === 1 };
+      // rS = SOL réellement déposés par les acheteurs (les réserves « virtuelles » dépendent du réglage de la courbe)
+      out[keys[k + i]] = { vT: Number(b.readBigUInt64LE(8)) / 1e6, vS: Number(b.readBigUInt64LE(16)) / 1e9, rS: Number(b.readBigUInt64LE(32)) / 1e9, complete: b[48] === 1 };
     });
   }
   return out;
