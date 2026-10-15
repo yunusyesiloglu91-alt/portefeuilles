@@ -1,5 +1,8 @@
 {
   "name": "portefeuilles",
   "private": true,
-  "dependencies": { "@anthropic-ai/sdk": "*" }
+  "dependencies": {
+    "@anthropic-ai/sdk": "*",
+    "@solana/web3.js": "^1.98.0"
+  }
 }
