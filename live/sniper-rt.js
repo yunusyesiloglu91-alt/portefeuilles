@@ -36,6 +36,8 @@ const VARIANTS = {
   // Même stratégie, autres vitesses d'exécution : combien la vitesse rapporte-t-elle vraiment ?
   // 📰 Actu : token lancé juste après une actualité qui démarre et qui en porte le nom (prix réels, 10 $)
   // 🌊 Vague : plusieurs créateurs lancent en même temps des tokens sur le même thème ; on achète le leader
+  // 🧠 Expert : entrée sur repli d'un token qui a déjà de l'élan, contrôle RugCheck, vente par paliers de 25 %
+  expert: { name: '🧠 Expert', delay: 0, fast: true, real: true, ladder: true, maxMs: 3 * 60 * MIN, stake: 10 },
   vague: { name: '🌊 Vague', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
   actu: { name: '📰 Actu', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
   eclairQ04: { name: '🚀 Sélectif 0,4 s (bot pro)', delay: 0, fast: true, selective: true, real: true, latency: 400, maxMs: 30 * MIN, stake: 10 },
@@ -356,7 +358,7 @@ function realSell(id, v, p, part, reason) {
     p.realized += usd;
     p.selling = false;
     const done = part >= 1 || p.qty <= 1e-9;
-    const r = (done ? reason : `${reason} (moitié)`) + note;
+    const r = (done || VARIANTS[id].ladder ? reason : `${reason} (moitié)`) + note;
     pushLive(id, { t: Date.now(), side: 'vente', name: p.name, mint: p.mint, addr: p.mint, price: usd / qty, usd, done, reason: r });
     v.trades.push({ t: Date.now(), side: 'vente', name: p.name, mint: p.mint, price: usd / qty, usd, ret: done ? p.realized / p.cost - 1 : usd / (p.cost * part) - 1, reason: r, held: Date.now() - p.t, peak: p.peak / p.entry, lag: Date.now() - tDecision });
     if (done) v.positions.splice(v.positions.indexOf(p), 1);
@@ -410,6 +412,82 @@ async function vagueScan() {
   vagueBusy = false;
 }
 
+// ---------- 🧠 Expert
+// Liste de surveillance : jeunes tokens « propres » à la création (créateur ≤ 10 %, premier lancement, nom normal).
+// Toutes les 3 s, leur courbe est relue sur la blockchain. On achète quand :
+//  - le token a 1 à 12 min et le public y a déjà mis ≥ 6 SOL (il y a de l'intérêt) ;
+//  - il a déjà monté d'au moins ×1,6 depuis son lancement (élan) ;
+//  - il est revenu 15 à 35 % sous son plus haut (repli) et rebondit (+5 % depuis le plus bas des 30 dernières secondes) ;
+//  - RugCheck : créateur ≤ 10 %, 10 plus gros portefeuilles ≤ 30 % (hors courbe), ≤ 2 insiders, aucun risque « danger ».
+const watch = new Map(); // mint -> suivi
+const expertChecked = new Set();
+function expertWatch(tok) {
+  if (tok.devPct > 10 || tok.launches24h > 1 || JUNK_IMITATION.test(tok.name || '') || JUNK_IMITATION.test(tok.symbol || '') || !tok.curve) return;
+  watch.set(tok.mint, { mint: tok.mint, curve: tok.curve, name: tok.name, symbol: tok.symbol, t: Date.now(), hist: [], mid0: tok.vS0 && tok.vT0 ? tok.vS0 / tok.vT0 : null, peak: 0 });
+}
+let expertBusy = false;
+async function expertScan() {
+  if (expertBusy || !(solUsd > 0) || !watch.size) return;
+  expertBusy = true;
+  const now = Date.now();
+  try {
+    for (const [m, w] of watch) if (now - w.t > 15 * MIN) watch.delete(m);
+    const list = [...watch.values()];
+    const curves = await Courbe.read(list.map((w) => w.curve));
+    for (const w of list) {
+      const c = curves[w.curve];
+      if (!c || c.complete) { watch.delete(w.mint); continue; }
+      const mid = Courbe.mid(c);
+      if (!w.mid0) w.mid0 = mid;
+      w.hist.push([now, mid]);
+      w.hist = w.hist.filter((h) => now - h[0] < 10 * MIN);
+      w.peak = Math.max(w.peak, mid);
+      const age = now - w.t;
+      // Sans intérêt après 4 min : on arrête de le suivre
+      if (age > 4 * MIN && c.vS < 32) { watch.delete(w.mint); continue; }
+      if (age < MIN || age > 12 * MIN || c.vS < 36 || expertChecked.has(w.mint)) continue;
+      if (w.peak < w.mid0 * 1.6) continue;
+      const pull = 1 - mid / w.peak;
+      if (pull < 0.15 || pull > 0.35) continue;
+      const low30 = Math.min(...w.hist.filter((h) => now - h[0] < 30000).map((h) => h[1]));
+      if (!(mid >= low30 * 1.05)) continue;
+      expertChecked.add(w.mint);
+      const rc = await rugReport(w.mint);
+      let why = null;
+      if (!rc) why = 'RugCheck indisponible';
+      else if (rc.rugged || rc.danger.length) why = rc.rugged ? 'rug' : rc.danger[0];
+      else if (rc.mintAuth || rc.freezeAuth) why = 'autorisations dangereuses';
+      else if (rc.creatorPct > 10) why = `créateur ${rc.creatorPct.toFixed(0)} %`;
+      else if (rc.top10 > 30) why = `top 10 : ${rc.top10.toFixed(0)} %`;
+      else if (rc.insiders > 2) why = `${rc.insiders} insiders`;
+      st.expertRecent = (st.expertRecent || []).concat([{ t: now, symbol: w.symbol || w.name, ok: !why, why: why || 'acheté' }]).slice(-20);
+      if (why) continue;
+      const tok = { mint: w.mint, curve: w.curve, name: w.name, symbol: w.symbol, vT0: c.vT, vS0: c.vS, tRecv: now };
+      buyReal('expert', tok, `repli de ${Math.round(pull * 100)} % après ×${(w.peak / w.mid0).toFixed(1)}, rebond, ${(c.vS - 30).toFixed(1)} SOL achetés, top 10 ${rc.top10.toFixed(0)} %, créateur ${rc.creatorPct.toFixed(1)} %`);
+      watch.delete(w.mint);
+    }
+  } catch { /* RPC momentanément indisponible */ }
+  expertBusy = false;
+}
+
+// Sortie par paliers (Expert) : 25 % à +50 %, 25 % à +100 %, 25 % à +200 %, dernier quart suivi à −30 % du plus haut.
+// Stop −35 % avant le 1er palier, puis stop au prix d'achat. Sans nouveau plus haut pendant 5 min avant le 1er palier : sortie.
+function ladderExit(id, v, p) {
+  p.step = p.step || 0;
+  if (p.last > p.peak * 0.999) p.peakT = Date.now();
+  p.peakT = p.peakT || p.t;
+  const r = p.last / p.entry - 1;
+  const maxMs = VARIANTS[id].maxMs;
+  if (p.step === 0 && r <= -0.35) return realSell(id, v, p, 1, 'stop −35 %');
+  if (p.step >= 1 && p.step < 3 && r <= 0) return realSell(id, v, p, 1, 'retour au prix d’achat (stop sécurisé)');
+  if (p.step === 0 && Date.now() - p.peakT > 5 * MIN) return realSell(id, v, p, 1, 'plus de nouveau sommet depuis 5 min');
+  if (p.step === 0 && r >= 0.5) { p.step = 1; return realSell(id, v, p, 0.25, 'palier 1 : +50 % (25 %)'); }
+  if (p.step === 1 && r >= 1) { p.step = 2; return realSell(id, v, p, 1 / 3, 'palier 2 : +100 % (25 %)'); }
+  if (p.step === 2 && r >= 2) { p.step = 3; return realSell(id, v, p, 0.5, 'palier 3 : +200 % (25 %)'); }
+  if (p.step >= 3 && p.last <= p.peak * 0.7) return realSell(id, v, p, 1, 'dernier quart : −30 % du plus haut');
+  if (Date.now() - p.t >= maxMs) return realSell(id, v, p, 1, '3 h écoulées');
+}
+
 let realBusy = false;
 async function realExits() {
   if (realBusy) return;
@@ -425,6 +503,7 @@ async function realExits() {
       if (c.complete) { realSell(id, v, p, 1, 'token sorti de la courbe'); continue; }
       p.last = Courbe.mid(c) * solUsd;
       p.peak = Math.max(p.peak, p.last);
+      if (VARIANTS[id].ladder) { ladderExit(id, v, p); continue; }
       const maxMs = VARIANTS[id].maxMs || EXIT.maxMs;
       if (!p.tp1Done && p.last <= p.entry * (1 - EXIT.sl)) realSell(id, v, p, 1, `stop −${EXIT.sl * 100} %`);
       else if (!p.tp1Done && p.last >= p.entry * (1 + EXIT.tp1)) realSell(id, v, p, EXIT.tp1Part, '+50 % atteint');
@@ -529,6 +608,7 @@ async function onCreate(d) {
     buyReal('eclairQ3', tok, why);
   }
   vagueAdd(tok);
+  expertWatch(tok);
   // 📰 Actu
   const hit = Actu.match(d.name, d.symbol);
   if (hit && tok.devPct <= 10 && tok.launches24h <= 1 && !(Date.now() - (actuBought[hit.word] || 0) < 3600000)) {
@@ -630,6 +710,7 @@ async function start() {
   setInterval(realExits, 1000);
   Actu.start();
   setInterval(vagueScan, 10000);
+  setInterval(expertScan, 3000);
   setInterval(() => { st.actuHot = Actu.hot().slice(0, 15); }, 60000); // moteur réaliste : courbes relues sur la blockchain chaque seconde
   setInterval(publish, 2 * MIN);
   setTimeout(publish, 15000);
