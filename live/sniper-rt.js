@@ -711,6 +711,7 @@ async function start() {
   Actu.start();
   setInterval(vagueScan, 10000);
   setInterval(expertScan, 3000);
+  setInterval(() => { st.expertWatching = watch.size; }, 30000);
   setInterval(() => { st.actuHot = Actu.hot().slice(0, 15); }, 60000); // moteur réaliste : courbes relues sur la blockchain chaque seconde
   setInterval(publish, 2 * MIN);
   setTimeout(publish, 15000);

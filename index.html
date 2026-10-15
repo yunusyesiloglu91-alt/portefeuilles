@@ -423,7 +423,7 @@
       const cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || '') && !/palier/.test(t.reason || ''));
       const open = openTrio === id;
       let html = `<div class="row" data-id="${id}" style="cursor:pointer;${id === sel ? 'border-color:var(--muted)' : ''}"><div class="bar" style="background:${color(val / 100 - 1)}"></div>
-        <div class="main"><div class="t">${name} <span style="opacity:.6">${open ? '▲' : '▼'}</span></div><div class="s">${sub} · ${cl.length ? `${cl.filter((t) => t.ret > 0).length}/${cl.length} gagnés` : 'aucune vente'} · ${x.positions.length} en cours</div></div>
+        <div class="main"><div class="t">${name} <span style="opacity:.6">${open ? '▲' : '▼'}</span></div><div class="s">${sub} · ${cl.length ? `${cl.filter((t) => t.ret > 0).length}/${cl.length} gagnés` : 'aucune vente'}${id === 'expert' && rt && rt.expertWatching != null ? ` · ${rt.expertWatching} tokens surveillés` : ''}</div>${x.positions.length ? `<div class="s" style="white-space:normal;color:var(--text)">🟢 ${x.positions.length} en cours : ${x.positions.slice(0, 6).map((p) => { const r2 = (p.qty * rp(p) + (p.realized || 0)) / p.cost - 1; return `${esc(p.name)} <span class="${cls(r2)}">${pct(r2)}</span>`; }).join(' · ')}${x.positions.length > 6 ? ' …' : ''}</div>` : '<div class="s">⏳ aucune position en cours</div>'}</div>
         <div class="r"><b class="${cls(val / 100 - 1)}">${pct(val / 100 - 1)}</b><span>${num(val)} $</span></div></div>`;
       if (open) {
         const link = (m, n) => `<a href="https://pump.fun/coin/${esc(m || '')}" target="_blank" rel="noopener" style="color:var(--text);font-weight:700">${esc(n)} ↗</a>`;
