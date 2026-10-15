@@ -27,12 +27,12 @@ const VARIANTS = {
   temoin: { name: '🎲 Tout acheter (témoin)', delay: 0, filtered: false },
   // TEST VIRTUEL « éclair » : achète dès la création, sans attendre les métadonnées ni RugCheck (ordre de ~0,1 s),
   // seulement si le créateur n'a pas acheté plus de 5 % de l'offre. Mêmes frais et même sortie que les autres.
-  eclair: { name: '⚡ Éclair 0,1 s (test)', delay: 0, fast: true, maxMs: 30 * MIN, stake: 10 },
+  eclair: { name: '⚡ Éclair 0,1 s (test)', delay: 0, fast: true, real: true, maxMs: 30 * MIN, stake: 10 },
   // Éclair sélectif (test virtuel) : achète à la création seulement si le créateur détient ≤ 5 %,
   // ne lance pas en série (≤ 1 lancement en 24 h) et si le nom n'a pas l'air d'une imitation (pas de mot « test », « rug », « scam »).
   // Éclair strict (test, 5 $ par trade, 100 $ de départ) : comme le sélectif, mais créateur ≤ 1 % seulement
-  eclairS: { name: '⚡ Éclair strict (test)', delay: 0, fast: true, strict: true, maxMs: 30 * MIN, stake: 5 },
-  eclairQ: { name: '⚡ Éclair sélectif (test)', delay: 0, fast: true, selective: true, maxMs: 30 * MIN, stake: 10 },
+  eclairS: { name: '⚡ Éclair strict (test)', delay: 0, fast: true, strict: true, real: true, maxMs: 30 * MIN, stake: 5 },
+  eclairQ: { name: '⚡ Éclair sélectif (test)', delay: 0, fast: true, selective: true, real: true, maxMs: 30 * MIN, stake: 10 },
 };
 const RPC = 'https://api.mainnet-beta.solana.com';
 const JUNK_IMITATION = /test|rug|scam|fake|copy|clone|free/i;
@@ -259,6 +259,7 @@ function sell(v, p, part, reason) {
 
 function checkExits(mint, devSold) {
   for (const [vid, v] of Object.entries(st.variants)) {
+    if (VARIANTS[vid] && VARIANTS[vid].real) continue; // gérées par le moteur réaliste (courbe lue sur la blockchain)
     const maxMs = (VARIANTS[vid] && VARIANTS[vid].maxMs) || EXIT.maxMs;
     for (const p of [...v.positions]) {
       if (p.mint !== mint && mint) continue;
@@ -272,6 +273,109 @@ function checkExits(mint, devSold) {
       else if (Date.now() - p.t >= maxMs) sell(v, p, 1, `${Math.round(maxMs / MIN) >= 60 ? Math.round(maxMs / 3600000) + ' h' : Math.round(maxMs / MIN) + ' min'} écoulées`);
     }
   }
+}
+
+// ---------- Moteur réaliste : prix réellement obtenus sur la courbe pump.fun, lus sur la blockchain
+// Un ordre n'est pas instantané : signer, envoyer et faire inclure la transaction prend du temps.
+// On lit donc la courbe LATENCY_MS après la décision, et on calcule exactement ce que l'ordre aurait reçu
+// (frais pump.fun, impact de notre propre ordre, achats des autres bots arrivés avant nous compris).
+const Courbe = require('./courbe.js');
+const LATENCY_MS = 1000;   // bot rapide avec frais de priorité : ~2 à 3 blocs Solana
+const NET_SOL = 0.000205;  // frais réseau de base + frais de priorité, par transaction
+
+async function readOne(key) {
+  for (let k = 0; k < 2; k++) {
+    try { const m = await Courbe.read([key]); return m[key] || null; } catch { await new Promise((r) => setTimeout(r, 300)); }
+  }
+  return undefined; // RPC injoignable
+}
+
+function buyReal(id, tok, why) {
+  const v = st.variants[id];
+  const stake = VARIANTS[id].stake || STAKE_DEFAULT;
+  if (!tok.curve || !(solUsd > 0) || v.cash < stake) return;
+  if (v.positions.length + (v.pending || 0) >= MAX_OPEN || v.positions.some((p) => p.mint === tok.mint)) return;
+  v.cash -= stake;
+  v.pending = (v.pending || 0) + 1;
+  const solIn = stake / solUsd - NET_SOL;
+  const hoped = tok.vT0 && tok.vS0 ? Courbe.buyQuote({ vT: tok.vT0, vS: tok.vS0 }, solIn) : null; // ce que l'ancien calcul supposait
+  setTimeout(async () => {
+    v.pending--;
+    const c = await readOne(tok.curve);
+    if (!c || c.complete) {
+      // Ordre échoué : la transaction coûte quand même ses frais réseau
+      v.cash += stake - NET_SOL * solUsd;
+      v.fees = (v.fees || 0) + NET_SOL * solUsd;
+      v.failed = (v.failed || 0) + 1;
+      return;
+    }
+    const q = Courbe.buyQuote(c, solIn);
+    const entry = stake / q.tokens; // prix réellement payé par jeton, frais compris (en $)
+    const last = Courbe.mid(q.after) * solUsd;
+    const gap = hoped ? q.tokens / hoped.tokens - 1 : 0; // jetons en moins à cause du délai
+    v.fees = (v.fees || 0) + (q.feeSol + NET_SOL) * solUsd;
+    const delay = Date.now() - tok.tRecv;
+    const name = tok.symbol || tok.name;
+    v.positions.push({ mint: tok.mint, name, curve: tok.curve, t: Date.now(), entry, last, peak: last, qty: q.tokens, cost: stake, realized: 0, real: true, gap, delay });
+    const reason = `${why} · prix réel après ${(delay / 1000).toFixed(1)} s${hoped ? ` (${gap < 0 ? '' : '+'}${(gap * 100).toFixed(0)} % de jetons vs prix annoncé)` : ''}`;
+    pushLive(id, { t: Date.now(), side: 'achat', name, mint: tok.mint, addr: tok.mint, price: entry, usd: stake, qty: q.tokens, reason });
+    v.trades.push({ t: Date.now(), side: 'achat', name, mint: tok.mint, price: entry, usd: stake, reason, gap, delay });
+  }, LATENCY_MS);
+}
+
+function realSell(id, v, p, part, reason) {
+  p.selling = true;
+  const tDecision = Date.now();
+  setTimeout(async () => {
+    const c = await readOne(p.curve);
+    let usd, note = '';
+    const qty = p.qty * part;
+    if (c && !c.complete) {
+      const q = Courbe.sellQuote(c, qty);
+      usd = Math.max(0, (q.sol - NET_SOL) * solUsd);
+      v.fees = (v.fees || 0) + (q.feeSol + NET_SOL) * solUsd;
+      p.last = Courbe.mid(c) * solUsd;
+    } else {
+      // Courbe terminée (token parti sur PumpSwap) ou RPC injoignable : dernier prix connu, pénalisé de 5 %
+      usd = Math.max(0, qty * p.last * 0.95 - NET_SOL * solUsd);
+      note = ' (prix estimé)';
+    }
+    v.cash += usd;
+    p.qty -= qty;
+    p.realized += usd;
+    p.selling = false;
+    const done = part >= 1 || p.qty <= 1e-9;
+    const r = (done ? reason : `${reason} (moitié)`) + note;
+    pushLive(id, { t: Date.now(), side: 'vente', name: p.name, mint: p.mint, addr: p.mint, price: usd / qty, usd, done, reason: r });
+    v.trades.push({ t: Date.now(), side: 'vente', name: p.name, mint: p.mint, price: usd / qty, usd, ret: done ? p.realized / p.cost - 1 : usd / (p.cost * part) - 1, reason: r, held: Date.now() - p.t, peak: p.peak / p.entry, lag: Date.now() - tDecision });
+    if (done) v.positions.splice(v.positions.indexOf(p), 1);
+    else p.tp1Done = true;
+  }, LATENCY_MS);
+}
+
+let realBusy = false;
+async function realExits() {
+  if (realBusy) return;
+  const open = [];
+  for (const [id, v] of Object.entries(st.variants)) if (VARIANTS[id] && VARIANTS[id].real) for (const p of v.positions) if (p.curve && !p.selling) open.push([id, v, p]);
+  if (!open.length || !(solUsd > 0)) return;
+  realBusy = true;
+  try {
+    const curves = await Courbe.read([...new Set(open.map((o) => o[2].curve))]);
+    for (const [id, v, p] of open) {
+      const c = curves[p.curve];
+      if (!c) continue;
+      if (c.complete) { realSell(id, v, p, 1, 'token sorti de la courbe'); continue; }
+      p.last = Courbe.mid(c) * solUsd;
+      p.peak = Math.max(p.peak, p.last);
+      const maxMs = VARIANTS[id].maxMs || EXIT.maxMs;
+      if (!p.tp1Done && p.last <= p.entry * (1 - EXIT.sl)) realSell(id, v, p, 1, `stop −${EXIT.sl * 100} %`);
+      else if (!p.tp1Done && p.last >= p.entry * (1 + EXIT.tp1)) realSell(id, v, p, EXIT.tp1Part, '+50 % atteint');
+      else if (p.tp1Done && p.last <= p.peak * (1 - EXIT.trail)) realSell(id, v, p, 1, `stop suiveur −${EXIT.trail * 100} %`);
+      else if (Date.now() - p.t >= maxMs) realSell(id, v, p, 1, `${Math.round(maxMs / MIN)} min écoulées`);
+    }
+  } catch { /* RPC momentanément indisponible : on réessaie à la seconde suivante */ }
+  realBusy = false;
 }
 
 // ---------- Confirmation à 60 s
@@ -346,6 +450,7 @@ async function onCreate(d) {
     mint: d.mint, creator: d.traderPublicKey, name: d.name, symbol: d.symbol, t0: Date.now(),
     devPct: ((d.initialBuy || 0) / SUPPLY) * 100, p0: priceUsd(d.marketCapSol), last: priceUsd(d.marketCapSol),
     buyers: new Set(), buys: 0, sells: 0, devSold: false, meta: null,
+    curve: d.bondingCurveKey, vT0: d.vTokensInBondingCurve, vS0: d.vSolInBondingCurve, tRecv: Date.now(),
   };
   tokens.set(d.mint, tok);
   st.lastCreate = { name: d.symbol, t: Date.now() };
@@ -357,9 +462,9 @@ async function onCreate(d) {
   // Témoin : achète tout, tout de suite
   buy('temoin', tok, 'création');
   // Éclair (test virtuel) : achat immédiat si le créateur détient peu
-  if (tok.devPct <= 5) buy('eclair', tok, 'création, créateur ' + tok.devPct.toFixed(1) + ' %');
-  if (tok.devPct <= 1 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) buy('eclairS', tok, 'création stricte, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement');
-  if (tok.devPct <= 5 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) buy('eclairQ', tok, 'création sélective, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement');
+  if (tok.devPct <= 5) buyReal('eclair', tok, 'création, créateur ' + tok.devPct.toFixed(1) + ' %');
+  if (tok.devPct <= 1 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) buyReal('eclairS', tok, 'création stricte, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement');
+  if (tok.devPct <= 5 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) buyReal('eclairQ', tok, 'création sélective, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement');
   // Métadonnées et portefeuille du créateur en parallèle
   [tok.meta, tok.creatorInfo] = await Promise.all([metadata(d.uri), creatorProfile(tok.creator)]);
   const f = filters(tok);
@@ -452,6 +557,7 @@ async function start() {
   setInterval(refreshSol, MIN);
   setInterval(pollPrices, 10000); // prix des tokens suivis (DexScreener)
   setInterval(() => checkExits(null, false), 10000); // sorties sur durée même sans trade
+  setInterval(realExits, 1000); // moteur réaliste : courbes relues sur la blockchain chaque seconde
   setInterval(publish, 2 * MIN);
   setTimeout(publish, 15000);
 }
