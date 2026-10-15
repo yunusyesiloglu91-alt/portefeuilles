@@ -2212,6 +2212,13 @@
    38.61,
    29.9,
    29.9
+  ],
+  [
+   1792065543829,
+   98.39,
+   38.57,
+   29.91,
+   29.91
   ]
  ],
  "watch": [
@@ -2264,9 +2271,11 @@
    "why": "moins de 7 jours"
   }
  ],
- "notes": [],
+ "notes": [
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+ ],
  "lastScan": 1792064943633,
- "lastRun": 1792065243695,
+ "lastRun": 1792065543829,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -3631,6 +3640,10 @@
    ],
    [
     1792065243695,
+    65.63
+   ],
+   [
+    1792065543829,
     65.63
    ]
   ],
