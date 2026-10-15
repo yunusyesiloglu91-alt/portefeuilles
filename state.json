@@ -2198,6 +2198,13 @@
    38.61,
    29.89,
    29.89
+  ],
+  [
+   1792064943633,
+   98.38,
+   38.6,
+   29.89,
+   29.89
   ]
  ],
  "watch": [
@@ -2251,10 +2258,10 @@
   }
  ],
  "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/AG1EhPjsBrkxQWkViuLXF6pQnHwfr9f9sdNneeoykcEJ/ohlcv/day), positions conservées"
  ],
- "lastScan": 1792061043522,
- "lastRun": 1792064643788,
+ "lastScan": 1792064943633,
+ "lastRun": 1792064943633,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -3612,56 +3619,60 @@
    [
     1792064643788,
     65.63
+   ],
+   [
+    1792064943633,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "PULT",
-    "mcap": 1860688.40695205,
-    "ageDays": 0.3746366435185185,
-    "ch1": 0.11564999999999999,
-    "ch24": 1.19101,
+    "mcap": 1876253.05195165,
+    "ageDays": 0.38505362268518517,
+    "ch1": 0.11306,
+    "ch24": 1.20934,
     "ok": true
    },
    {
     "name": "DOPE",
-    "mcap": 4719177.78017213,
-    "ageDays": 3.9173102546296295,
-    "ch1": 0.005849999999999999,
-    "ch24": 0.94439,
+    "mcap": 4709690.56345404,
+    "ageDays": 3.9277272337962965,
+    "ch1": -0.0394,
+    "ch24": 1.00503,
     "ok": false
    },
    {
     "name": "STREAM",
-    "mcap": 5207514.461,
-    "ageDays": 0.6774838657407407,
-    "ch1": 0.0256,
-    "ch24": 13.32952,
-    "ok": true
-   },
-   {
-    "name": "Nihilism",
-    "mcap": 647632.9507,
-    "ageDays": 0.25734497685185187,
-    "ch1": 0.78961,
-    "ch24": 16.791700000000002,
+    "mcap": 4807830.542,
+    "ageDays": 0.6879008449074074,
+    "ch1": -0.18869,
+    "ch24": 12.22971,
     "ok": false
    },
    {
-    "name": "SAINDRA",
-    "mcap": 620611.348492713,
-    "ageDays": 1.2274722916666667,
-    "ch1": -0.10978,
-    "ch24": 1.98084,
+    "name": "Nihilism",
+    "mcap": 534574.5554,
+    "ageDays": 0.26776195601851854,
+    "ch1": 0.7402200000000001,
+    "ch24": 13.68577,
     "ok": false
    },
    {
     "name": "dopewif",
-    "mcap": 884995.415978533,
-    "ageDays": 0.024995439814814814,
-    "ch1": 18.04267,
-    "ch24": 18.04267,
+    "mcap": 1145776.30221181,
+    "ageDays": 0.03541241898148148,
+    "ch1": 23.65395,
+    "ch24": 23.65395,
     "ok": false
+   },
+   {
+    "name": "SAINDRA",
+    "mcap": 772289.857582206,
+    "ageDays": 1.2378892708333333,
+    "ch1": 0.21619,
+    "ch24": 3.32178,
+    "ok": true
    }
   ],
   "paused": true
