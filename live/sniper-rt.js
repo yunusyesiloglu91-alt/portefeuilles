@@ -214,6 +214,7 @@ function buy(id, tok, why) {
   if (v.positions.some((p) => p.mint === tok.mint)) return;
   const fill = tok.last * (1 + COST);
   v.cash -= STAKE;
+  v.fees = (v.fees || 0) + STAKE - STAKE / (1 + COST); // frais d'achat (3 %) : déjà inclus dans le prix d'entrée
   v.positions.push({ mint: tok.mint, name: tok.symbol || tok.name, t: Date.now(), entry: fill, last: tok.last, peak: tok.last, qty: STAKE / fill, cost: STAKE, realized: 0 });
   v.trades.push({ t: Date.now(), side: 'achat', name: tok.symbol || tok.name, mint: tok.mint, price: fill, usd: STAKE, reason: why });
   subscribe(tok.mint);
@@ -236,6 +237,7 @@ function sell(v, p, part, reason) {
   const qty = p.qty * part;
   const usd = qty * p.last * (1 - COST);
   v.cash += usd;
+  v.fees = (v.fees || 0) + qty * p.last * COST; // frais de vente (3 %)
   p.qty -= qty;
   p.realized += usd;
   const done = part >= 1 || p.qty <= 1e-9;
