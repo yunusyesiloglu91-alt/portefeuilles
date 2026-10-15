@@ -88,11 +88,9 @@
   <div id="err"></div>
   <div id="toasts" aria-live="polite"></div>
   <div class="seg" id="pick" role="tablist" aria-label="Choisir le Sniper">
-    <button data-id="origine" role="tab">1️⃣ Anti-arnaque</button>
-    <button data-id="qualite" role="tab">2️⃣ + 30 min</button>
-    <button data-id="tres" role="tab">3️⃣ Jackpot ×5</button>
     <button data-id="eclair" role="tab">⚡ Éclair (test)</button>
     <button data-id="eclairQ" role="tab">⚡ Éclair sélectif</button>
+    <button data-id="eclairS" role="tab">⚡ Éclair strict</button>
   </div>
   <div id="cards"></div>
   <div id="trio"></div>
@@ -132,14 +130,14 @@
   const STATE_RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/data/state.json`;
   const CASINO_CAPITAL = 100, DAY = 86400000;
   // Sniper affiché sur l'accueil (choix mémorisé sur ce téléphone)
-  let sel = 'qualite';
-  try { sel = localStorage.getItem('sniperChoisi') || 'qualite'; } catch { /* navigation privée */ }
-  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)' };
+  let sel = 'eclairQ';
+  try { sel = localStorage.getItem('sniperChoisi') || 'eclairQ'; } catch { /* navigation privée */ }
+  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)', eclairS: '⚡ Éclair strict (test virtuel)' };
   const NOTIF = 'sniper-97f143460ae09334d6', CMD = 'sniper-97f143460ae09334d6-cmd', DATA = 'sniper-97f143460ae09334d6-data'; // messages via ntfy.sh
   // Market cap arrondie : 55 k$, 120 k$, 1,2 M$
   const mcap = (x) => (!x ? '?' : x >= 1e6 ? `${num(x / 1e6, 1)} M$` : `${Math.max(5, Math.round(x / 5e3) * 5)} k$`);
   let st = null, rt = null, px = {}, memePx = {}, pairPx = {}, rtPx = {}, lastPx = 0, filter = 'all';
-  const RTLAB = { eclairQ: '⚡ Éclair sélectif (test)', eclair: '⚡ Éclair 0,1 s (test)', diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
+  const RTLAB = { eclairS: '⚡ Éclair strict (test)', eclairQ: '⚡ Éclair sélectif (test)', eclair: '⚡ Éclair 0,1 s (test)', diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
   const rp = (p) => { const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry; };
   const rVal = (v) => v.cash + v.positions.reduce((a, p) => a + p.qty * rp(p), 0);
   const LAB = { qualite: '2️⃣ Anti-arnaque + 30 min', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)', cerveau: '🧠 Cerveau (apprend tout seul)', origine: '1️⃣ Anti-arnaque', tres: '3️⃣ Jackpot ×5' };
@@ -392,9 +390,9 @@
       ${br.bad.length ? '<div style="font-weight:700;margin-top:10px">❌ À éviter</div>' + br.bad.map((l) => les(l, false)).join('') : ''}`;
 
     // ---------- Les 3 Snipers côte à côte
-    const TRIO = [['origine', '1️⃣ Anti-arnaque', 'liquidité forte, acheteurs ×1,3 · vend ½ à ×2'], ['qualite', '2️⃣ Anti-arnaque + 30 min', 'pareil, tokens de 30 min et plus'], ['tres', '3️⃣ Jackpot ×5', 'mêmes filtres · vend ½ à ×5']];
+    const TRIO = [['eclair', '⚡ Éclair', 'achat à la création si créateur ≤ 5 % · 10 $'], ['eclairQ', '⚡ Éclair sélectif', 'créateur ≤ 5 %, premier lancement · 10 $'], ['eclairS', '⚡ Éclair strict', 'créateur ≤ 1 %, premier lancement · 5 $']];
     $('trio').innerHTML = sn ? TRIO.map(([id, name, sub]) => {
-      const x = sn.variants[id];
+      const x = id.startsWith('eclair') ? (rt && rt.variants[id]) : sn.variants[id];
       if (!x) return `<div class="row"><div class="main"><div class="t">${name}</div><div class="s">démarre au prochain passage du robot</div></div></div>`;
       const val = vVal(x), cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
       return `<div class="row" data-id="${id}" style="cursor:pointer;${id === sel ? 'border-color:var(--muted)' : ''}"><div class="bar" style="background:${color(val / 100 - 1)}"></div>
@@ -444,11 +442,11 @@
         <button class="sellbtn" data-addr="${esc(p.addr)}" data-name="${esc(p.name)}" ${pending[p.addr] ? 'disabled' : ''}>${pending[p.addr] ? 'Envoyé…' : 'Vendre'}</button></div>`;
     }).join('') : '<div class="empty">Aucune position : le robot attend un bon lancement.</div>';
     // Dernières opérations du Sniper principal
-    const lastT = snq ? snq.trades.slice(-(sel.startsWith("eclair") ? 40 : 8)).reverse() : [];
+    const lastT = snq ? snq.trades.slice(-(sel.startsWith('eclair') ? 40 : 8)).reverse() : [];
     $('last').innerHTML = lastT.length ? lastT.map((t) => {
       const buy = t.side === 'achat', half = /moitié/.test(t.reason || '');
       return `<div class="row"><div class="ico" style="color:${buy ? 'var(--up)' : 'var(--down)'};background:${buy ? 'rgba(34,197,94,.14)' : 'rgba(239,68,68,.14)'}">${buy ? '↑' : '↓'}</div>
-        <div class="main"><div class="t">${buy ? 'Achat' : half ? 'Vente moitié' : 'Vente'} ${esc(t.name)}</div><div class="s">${time(t.t)} · ${buy ? `market cap ≈ ${mcap(t.mcap || +((String(t.reason).match(/(\d+) k\$/) || [])[1] * 1e3))}` : `${t.mcap ? `≈ ${mcap(t.mcap)} · ` : ''}${esc(String(t.reason || '').replace(' (moitié)', ''))}`}</div></div>
+        <div class="main"><div class="t">${buy ? 'Achat' : half ? 'Vente moitié' : 'Vente'} ${esc(t.name)}</div><div class="s"><b style="color:var(--text)">[${esc(SEL_NAME[sel] || sel)}]</b> · ${time(t.t)} · ${buy ? `market cap ≈ ${mcap(t.mcap || +((String(t.reason).match(/(\d+) k\$/) || [])[1] * 1e3))}` : `${t.mcap ? `≈ ${mcap(t.mcap)} · ` : ''}${esc(String(t.reason || '').replace(' (moitié)', ''))}`}</div></div>
         <div class="r">${buy ? `<b>${num(t.usd || 5)} $</b>` : `<b class="${cls(t.ret)}">${pct(t.ret)}</b><span>${num(t.usd)} $ reçus</span>`}</div></div>`;
     }).join('') : '<div class="empty">Aucune opération pour l’instant.</div>';
 

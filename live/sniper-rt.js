@@ -30,6 +30,8 @@ const VARIANTS = {
   eclair: { name: '⚡ Éclair 0,1 s (test)', delay: 0, fast: true, maxMs: 30 * MIN, stake: 10 },
   // Éclair sélectif (test virtuel) : achète à la création seulement si le créateur détient ≤ 5 %,
   // ne lance pas en série (≤ 1 lancement en 24 h) et si le nom n'a pas l'air d'une imitation (pas de mot « test », « rug », « scam »).
+  // Éclair strict (test, 5 $ par trade, 100 $ de départ) : comme le sélectif, mais créateur ≤ 1 % seulement
+  eclairS: { name: '⚡ Éclair strict (test)', delay: 0, fast: true, strict: true, maxMs: 30 * MIN, stake: 5 },
   eclairQ: { name: '⚡ Éclair sélectif (test)', delay: 0, fast: true, selective: true, maxMs: 30 * MIN, stake: 10 },
 };
 const RPC = 'https://api.mainnet-beta.solana.com';
@@ -356,6 +358,7 @@ async function onCreate(d) {
   buy('temoin', tok, 'création');
   // Éclair (test virtuel) : achat immédiat si le créateur détient peu
   if (tok.devPct <= 5) buy('eclair', tok, 'création, créateur ' + tok.devPct.toFixed(1) + ' %');
+  if (tok.devPct <= 1 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) buy('eclairS', tok, 'création stricte, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement');
   if (tok.devPct <= 5 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) buy('eclairQ', tok, 'création sélective, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement');
   // Métadonnées et portefeuille du créateur en parallèle
   [tok.meta, tok.creatorInfo] = await Promise.all([metadata(d.uri), creatorProfile(tok.creator)]);
