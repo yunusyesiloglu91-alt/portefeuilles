@@ -1953,6 +1953,13 @@
    38.66,
    29.89,
    29.89
+  ],
+  [
+   1792054143501,
+   98.46,
+   38.71,
+   29.88,
+   29.88
   ]
  ],
  "watch": [
@@ -2005,24 +2012,15 @@
    "why": "moins de 7 jours"
   }
  ],
- "notes": [],
+ "notes": [
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+ ],
  "lastScan": 1792053543390,
- "lastRun": 1792053843951,
+ "lastRun": 1792054143501,
  "casino": {
   "start": 1791871130814,
-  "cash": 44.987160227567934,
-  "positions": [
-   {
-    "name": "SI276",
-    "addr": "HMYd9tosnUXuNHmq7pXmoePRVBLBBjA3JBfydq6upump",
-    "pool": "12jc1DzJpzbCDaKuM4brAKh9jcFry2TLG1FfGsL4ftCG",
-    "t": 1791881059759,
-    "entry": 0.0010044825832740145,
-    "last": 0.0012849344780262951,
-    "qty": 16330.371824023758,
-    "cost": 16.653374696061487
-   }
-  ],
+  "cash": 65.63241193926822,
+  "positions": [],
   "trades": [
    {
     "t": 1791871130814,
@@ -2133,6 +2131,15 @@
     "usd": 9.610782001991852,
     "ret": -0.4228928263852253,
     "reason": "stop −40 %"
+   },
+   {
+    "t": 1792054143501,
+    "side": "vente",
+    "name": "SI276",
+    "price": 0.0012834763735742759,
+    "usd": 20.645251711700283,
+    "ret": 0.23970378908143308,
+    "reason": "48 h écoulées"
    }
   ],
   "history": [
@@ -3227,6 +3234,10 @@
    [
     1792053843951,
     65.97
+   ],
+   [
+    1792054143501,
+    65.63
    ]
   ],
   "watch": [
