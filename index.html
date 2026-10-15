@@ -73,7 +73,7 @@
   button.sellbtn:disabled { opacity: .5; }
   footer { color: var(--muted); font-size: 12px; text-align: center; margin-top: 24px; line-height: 1.5; }
   .err { background: rgba(239,68,68,.12); color: #fca5a5; border-radius: 12px; padding: 10px 12px; font-size: 13px; margin-bottom: 12px; }
-  body[data-sel^="eclair"] .sellbtn, body[data-sel="actu"] .sellbtn { display: none; } /* test virtuel : pas de vente manuelle */
+  body[data-sel^="eclair"] .sellbtn, body[data-sel="actu"] .sellbtn, body[data-sel="vague"] .sellbtn { display: none; } /* test virtuel : pas de vente manuelle */
 </style>
 </head>
 <body>
@@ -88,6 +88,7 @@
   <div id="err"></div>
   <div id="toasts" aria-live="polite"></div>
   <div class="seg" id="pick" role="tablist" aria-label="Choisir le Sniper">
+    <button data-id="vague" role="tab">🌊 Vague</button>
     <button data-id="actu" role="tab">📰 Actu</button>
   </div>
   <div id="cards"></div>
@@ -130,13 +131,13 @@
   // Sniper affiché sur l'accueil (choix mémorisé sur ce téléphone)
   let sel = 'actu';
   try { sel = localStorage.getItem('sniperChoisi') || 'actu'; } catch { /* navigation privée */ }
-  if (sel !== 'actu') sel = 'actu'; // seules les stratégies encore actives sont proposées
-  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)', eclairS: '⚡ Éclair strict (test virtuel)', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', actu: '📰 Actu (token lié à une actualité)' };
+  if (sel !== 'actu' && sel !== 'vague') sel = 'vague'; // seules les stratégies encore actives sont proposées
+  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)', eclairS: '⚡ Éclair strict (test virtuel)', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', actu: '📰 Actu (token lié à une actualité)', vague: '🌊 Vague (le leader d’une vague de tokens)' };
   const NOTIF = 'sniper-97f143460ae09334d6', CMD = 'sniper-97f143460ae09334d6-cmd', DATA = 'sniper-97f143460ae09334d6-data'; // messages via ntfy.sh
   // Market cap arrondie : 55 k$, 120 k$, 1,2 M$
   const mcap = (x) => (!x ? '?' : x >= 1e6 ? `${num(x / 1e6, 1)} M$` : `${Math.max(5, Math.round(x / 5e3) * 5)} k$`);
   let st = null, rt = null, px = {}, memePx = {}, pairPx = {}, rtPx = {}, lastPx = 0, filter = 'all';
-  const RTLAB = { actu: '📰 Actu', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', eclairS: '⚡ Éclair strict (test)', eclairQ: '⚡ Éclair sélectif (test)', eclair: '⚡ Éclair 0,1 s (test)', diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
+  const RTLAB = { vague: '🌊 Vague', actu: '📰 Actu', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', eclairS: '⚡ Éclair strict (test)', eclairQ: '⚡ Éclair sélectif (test)', eclair: '⚡ Éclair 0,1 s (test)', diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
   const rp = (p) => { const x = rtPx[p.mint]; return x && p.last && Math.abs(Math.log(x / p.last)) < Math.log(20) ? x : p.last || p.entry; };
   const rVal = (v) => v.cash + v.positions.reduce((a, p) => a + p.qty * rp(p), 0);
   const LAB = { qualite: '2️⃣ Anti-arnaque + 30 min', eclair: '⚡ Sniper éclair', moonshot: '🚀 Moonshot', temoin: '🎲 Sans filtre (témoin)', cerveau: '🧠 Cerveau (apprend tout seul)', origine: '1️⃣ Anti-arnaque', tres: '3️⃣ Jackpot ×5' };
@@ -174,7 +175,7 @@
   const liveEv = [];
   function applyTrade(t) {
     // Les Éclair vivent dans le sniper à la seconde (rt), les autres dans le sniper à 5 min
-    const isRt = String(t.id || '').startsWith('eclair') || t.id === 'actu';
+    const isRt = String(t.id || '').startsWith('eclair') || t.id === 'actu' || t.id === 'vague';
     const v = isRt ? (rt && rt.variants && rt.variants[t.id]) : (st && st.sniper && st.sniper.variants && st.sniper.variants[t.id || 'qualite']);
     if (!v) return false;
     if (v.trades.some((x) => x.t === t.t && x.side === t.side && x.name === t.name)) return false;
@@ -293,7 +294,7 @@
     const sn = st.sniper;
     // Éclair vit dans le sniper à la seconde (PC) : on le lit depuis sa propre liste, sans bouton Vendre
     const rtv = rt && rt.variants && rt.variants[sel];
-    const isRtSel = sel.startsWith('eclair') || sel === 'actu';
+    const isRtSel = sel.startsWith('eclair') || sel === 'actu' || sel === 'vague';
     const rtMapped = rtv ? { ...rtv, positions: rtv.positions.map((p) => ({ ...p, addr: p.mint, pair: p.mint })) } : null;
     // Les variantes « Éclair » vivent dans le sniper à la seconde, pas dans le sniper 5 min (qui a des variantes du même nom)
     const snq = sn && (isRtSel && rtMapped ? rtMapped : (sn.variants[sel] || rtMapped || sn.variants.qualite));
@@ -390,9 +391,9 @@
       ${br.bad.length ? '<div style="font-weight:700;margin-top:10px">❌ À éviter</div>' + br.bad.map((l) => les(l, false)).join('') : ''}`;
 
     // ---------- Les 3 Snipers côte à côte
-    const TRIO = [['actu', '📰 Actu', 'token lancé sur une actualité qui démarre']]; const TRIO_OLD = [ ['eclairQ04', '🚀 Sélectif 0,4 s', 'bot très rapide (infrastructure pro)'], ['eclairQ', '⚡ Sélectif 1 s', 'notre vitesse actuelle'], ['eclairQ3', '🐢 Sélectif 3 s', 'bot ordinaire'], ['eclair', '⚡ Éclair', 'sans filtre créateur/nom'], ['eclairS', '⚡ Éclair strict', 'créateur ≤ 1 %']];
+    const TRIO = [['vague', '🌊 Vague', 'plusieurs tokens sur le même thème : achète le leader'], ['actu', '📰 Actu', 'token lancé sur une actualité qui démarre']]; const TRIO_OLD = [ ['eclairQ04', '🚀 Sélectif 0,4 s', 'bot très rapide (infrastructure pro)'], ['eclairQ', '⚡ Sélectif 1 s', 'notre vitesse actuelle'], ['eclairQ3', '🐢 Sélectif 3 s', 'bot ordinaire'], ['eclair', '⚡ Éclair', 'sans filtre créateur/nom'], ['eclairS', '⚡ Éclair strict', 'créateur ≤ 1 %']];
     $('trio').innerHTML = sn ? TRIO.map(([id, name, sub]) => {
-      const x = (id.startsWith('eclair') || id === 'actu') ? (rt && rt.variants[id]) : sn.variants[id];
+      const x = (id.startsWith('eclair') || id === 'actu' || id === 'vague') ? (rt && rt.variants[id]) : sn.variants[id];
       if (!x) return `<div class="row"><div class="main"><div class="t">${name}</div><div class="s">démarre au prochain passage du robot</div></div></div>`;
       const val = vVal(x), cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
       return `<div class="row" data-id="${id}" style="cursor:pointer;${id === sel ? 'border-color:var(--muted)' : ''}"><div class="bar" style="background:${color(val / 100 - 1)}"></div>
@@ -441,6 +442,10 @@
         <div class="r"><b class="${cls(ret)}">${pct(ret)}</b><span>${num(val)} $</span></div>
         <button class="sellbtn" data-addr="${esc(p.addr)}" data-name="${esc(p.name)}" ${pending[p.addr] ? 'disabled' : ''}>${pending[p.addr] ? 'Envoyé…' : 'Vendre'}</button></div>`;
     }).join('') : '<div class="empty">Aucune position : le robot attend un bon lancement.</div>';
+    if (sel === 'vague') {
+      const vw = (rt && rt.vagueHot) || [];
+      $('positions').innerHTML = `<div class="card" style="padding:14px"><b>🌊 Vagues en cours</b><div class="empty" style="padding:6px 0 0">${vw.length ? vw.map((w) => `<b style="color:var(--text)">${esc(w.w)}</b> : ${w.n} tokens, ${w.creators} créateurs en 15 min`).join('<br>') : 'Aucune vague pour l’instant.'}</div></div>` + $('positions').innerHTML;
+    }
     if (sel === 'actu') {
       const hotW = (rt && rt.actuHot) || [];
       $('positions').innerHTML = `<div class="card" style="padding:14px"><b>🔥 Actualités qui démarrent</b><div class="empty" style="padding:6px 0 0">${hotW.length ? hotW.map((w) => `<b style="color:var(--text)">${esc(w.word)}</b> <span style="opacity:.8">(${esc(w.title.slice(0, 70))})</span>`).join('<br>') : 'Aucun mot nouveau dans l’heure pour l’instant (le robot observe 30 min avant de juger).'}</div></div>` + $('positions').innerHTML;

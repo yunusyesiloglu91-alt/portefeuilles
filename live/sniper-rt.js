@@ -35,6 +35,8 @@ const VARIANTS = {
   eclairQ: { name: '⚡ Éclair sélectif (test)', delay: 0, fast: true, selective: true, real: true, maxMs: 30 * MIN, stake: 10 },
   // Même stratégie, autres vitesses d'exécution : combien la vitesse rapporte-t-elle vraiment ?
   // 📰 Actu : token lancé juste après une actualité qui démarre et qui en porte le nom (prix réels, 10 $)
+  // 🌊 Vague : plusieurs créateurs lancent en même temps des tokens sur le même thème ; on achète le leader
+  vague: { name: '🌊 Vague', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
   actu: { name: '📰 Actu', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
   eclairQ04: { name: '🚀 Sélectif 0,4 s (bot pro)', delay: 0, fast: true, selective: true, real: true, latency: 400, maxMs: 30 * MIN, stake: 10 },
   eclairQ3: { name: '🐢 Sélectif 3 s (bot ordinaire)', delay: 0, fast: true, selective: true, real: true, latency: 3000, maxMs: 30 * MIN, stake: 10 },
@@ -360,6 +362,51 @@ function realSell(id, v, p, part, reason) {
   }, VARIANTS[id].latency || LATENCY_MS);
 }
 
+// ---------- 🌊 Vague : la même actu fait naître plusieurs tokens en quelques minutes.
+// Signal = au moins 4 créateurs différents sur le même mot en 15 min. Choix = le token où l'argent entre vraiment
+// (le plus de SOL dans sa courbe, nettement devant le 2e), au moins 1 min après sa création.
+const VAGUE_STOP = new Set('coin token pump meme memes official solana inu dog dogs cat cats baby real super king moon based fun the and for with this that your from just over best first last new old big little coins tokens world money rich chad pepe wojak frog elon trump'.split(' '));
+const clusters = {}; // mot -> lancements récents
+const vagueBought = {};
+function vagueWords(name, symbol) {
+  const w = new Set(`${name || ''} ${symbol || ''}`.toLowerCase().normalize('NFKD').replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter((x) => x.length >= 4 && !VAGUE_STOP.has(x) && !/^\d+$/.test(x)));
+  return [...w];
+}
+function vagueAdd(tok) {
+  for (const w of vagueWords(tok.name, tok.symbol)) (clusters[w] = clusters[w] || []).push({ mint: tok.mint, curve: tok.curve, name: tok.name, symbol: tok.symbol, creator: tok.creator, devPct: tok.devPct, t: Date.now() });
+}
+let vagueBusy = false;
+async function vagueScan() {
+  if (vagueBusy || !(solUsd > 0)) return;
+  vagueBusy = true;
+  const now = Date.now();
+  try {
+    const hotList = [];
+    for (const [w, list] of Object.entries(clusters)) {
+      clusters[w] = list.filter((x) => now - x.t < 30 * MIN);
+      if (!clusters[w].length) { delete clusters[w]; continue; }
+      const recent = clusters[w].filter((x) => now - x.t < 15 * MIN);
+      const creators = new Set(recent.map((x) => x.creator)).size;
+      if (creators >= 4) hotList.push({ w, n: recent.length, creators });
+    }
+    st.vagueHot = hotList.sort((a, b) => b.n - a.n).slice(0, 10);
+    for (const h of hotList) {
+      if (now - (vagueBought[h.w] || 0) < 2 * 3600000) continue;
+      const cands = clusters[h.w].filter((x) => now - x.t >= 60000 && x.devPct <= 10 && x.curve);
+      if (cands.length < 2) continue;
+      const curves = await Courbe.read([...new Set(cands.map((x) => x.curve))]);
+      const ranked = cands.map((x) => ({ ...x, c: curves[x.curve] })).filter((x) => x.c && !x.c.complete).sort((a, b) => b.c.vS - a.c.vS);
+      const [lead, second] = ranked;
+      if (!lead || lead.c.vS < 33) continue; // au moins ~3 SOL achetés par le public
+      if (second && (lead.c.vS - 30) < 1.5 * (second.c.vS - 30)) continue; // pas encore de vrai leader
+      vagueBought[h.w] = now;
+      const tok = { mint: lead.mint, curve: lead.curve, name: lead.name, symbol: lead.symbol, vT0: lead.c.vT, vS0: lead.c.vS, tRecv: now };
+      buyReal('vague', tok, `vague « ${h.w} » : ${h.n} tokens de ${h.creators} créateurs en 15 min, leader avec ${(lead.c.vS - 30).toFixed(1)} SOL achetés`);
+    }
+  } catch { /* RPC momentanément indisponible */ }
+  vagueBusy = false;
+}
+
 let realBusy = false;
 async function realExits() {
   if (realBusy) return;
@@ -478,6 +525,7 @@ async function onCreate(d) {
     buyReal('eclairQ', tok, why);
     buyReal('eclairQ3', tok, why);
   }
+  vagueAdd(tok);
   // 📰 Actu
   const hit = Actu.match(d.name, d.symbol);
   if (hit && tok.devPct <= 10 && tok.launches24h <= 1 && !(Date.now() - (actuBought[hit.word] || 0) < 3600000)) {
@@ -578,6 +626,7 @@ async function start() {
   setInterval(() => checkExits(null, false), 10000); // sorties sur durée même sans trade
   setInterval(realExits, 1000);
   Actu.start();
+  setInterval(vagueScan, 10000);
   setInterval(() => { st.actuHot = Actu.hot().slice(0, 15); }, 60000); // moteur réaliste : courbes relues sur la blockchain chaque seconde
   setInterval(publish, 2 * MIN);
   setTimeout(publish, 15000);
