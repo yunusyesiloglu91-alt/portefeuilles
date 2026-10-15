@@ -2401,6 +2401,13 @@
    38.69,
    29.9,
    29.9
+  ],
+  [
+   1792074244074,
+   98.53,
+   38.72,
+   29.91,
+   29.91
   ]
  ],
  "watch": [
@@ -2454,10 +2461,10 @@
   }
  ],
  "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/D9NCkN3unPTVLtA56Y68J2cXisje9yyYe61gMM2HCHwJ/ohlcv/day), positions conservées"
  ],
- "lastScan": 1792068843892,
- "lastRun": 1792073943966,
+ "lastScan": 1792074244074,
+ "lastRun": 1792074244074,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -3931,55 +3938,59 @@
    [
     1792073943966,
     65.63
+   ],
+   [
+    1792074244074,
+    65.63
    ]
   ],
   "watch": [
    {
-    "name": "dopewif",
-    "mcap": 526059.474854335,
-    "ageDays": 0.11527704861111111,
-    "ch1": -0.14343,
-    "ch24": 10.31935,
-    "ok": false
-   },
-   {
     "name": "STREAM",
-    "mcap": 8657838.313,
-    "ageDays": 0.767765474537037,
-    "ch1": 0.15103999999999998,
-    "ch24": 22.82379,
+    "mcap": 9074234.897,
+    "ageDays": 0.7955448379629629,
+    "ch1": 0.32999,
+    "ch24": 23.969589999999997,
     "ok": true
    },
    {
     "name": "DOPE",
-    "mcap": 4056653.42049663,
-    "ageDays": 4.007591863425926,
-    "ch1": -0.14198,
-    "ch24": 0.8523999999999999,
+    "mcap": 4434550.74058219,
+    "ageDays": 4.035371226851852,
+    "ch1": 0.03868,
+    "ch24": 1.07787,
     "ok": false
    },
    {
     "name": "Nihilism",
-    "mcap": 355159.6646,
-    "ageDays": 0.34762658564814813,
-    "ch1": -0.19247,
-    "ch24": 8.7569,
-    "ok": false
-   },
-   {
-    "name": "SAINDRA",
-    "mcap": 608450.698817284,
-    "ageDays": 1.317753900462963,
-    "ch1": -0.047990000000000005,
-    "ch24": 1.56586,
+    "mcap": 304010.0178,
+    "ageDays": 0.3754059490740741,
+    "ch1": -0.21905999999999998,
+    "ch24": 7.35173,
     "ok": false
    },
    {
     "name": "FTR",
-    "mcap": 600269.258,
-    "ageDays": 0.4830085300925926,
-    "ch1": -0.15094,
-    "ch24": 12.382919999999999,
+    "mcap": 852770.0288,
+    "ageDays": 0.5107878935185185,
+    "ch1": 0.6921200000000001,
+    "ch24": 18.01239,
+    "ok": true
+   },
+   {
+    "name": "SAINDRA",
+    "mcap": 730011.189983657,
+    "ageDays": 1.3455332638888888,
+    "ch1": 0.20024,
+    "ch24": 0.58923,
+    "ok": false
+   },
+   {
+    "name": "VEIL",
+    "mcap": 435046.2102,
+    "ageDays": 2.807442986111111,
+    "ch1": 0.02257,
+    "ch24": -0.60303,
     "ok": false
    }
   ],
