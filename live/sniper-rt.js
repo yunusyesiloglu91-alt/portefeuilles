@@ -69,6 +69,8 @@ const log = (...a) => {
 let st = fs.existsSync(FILE) ? JSON.parse(fs.readFileSync(FILE, 'utf8')) : null;
 if (!st) st = { start: Date.now(), variants: {}, seen: 0, lastCreate: null, recent: [] };
 for (const id in VARIANTS) if (!st.variants[id]) st.variants[id] = { cash: CAPITAL, positions: [], trades: [], history: [] };
+// Une vente en cours au moment d'un arrêt du robot ne doit pas bloquer la position pour toujours
+for (const v of Object.values(st.variants)) for (const p of v.positions) delete p.selling;
 st.creators = st.creators || {}; // portefeuille créateur -> dates de ses lancements (lanceurs en série)
 st.aiEnabled = !!claude;
 const save = () => { fs.writeFileSync(`${FILE}.tmp`, JSON.stringify(st)); fs.renameSync(`${FILE}.tmp`, FILE); };
