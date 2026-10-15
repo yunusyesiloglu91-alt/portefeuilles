@@ -460,7 +460,7 @@
     $('positions').innerHTML = mine.length ? mine.map((p) => {
       const val = p.qty * sp(p), ret = (val + (p.realized || 0)) / p.cost - 1;
       return `<div class="row"><div class="bar" style="background:#c084fc"></div>
-        <div class="main"><div class="t"><a href="https://pump.fun/coin/${esc(p.mint || p.addr)}" target="_blank" rel="noopener" style="color:inherit">${esc(p.name)} ↗</a></div><div class="s">ouvert à ${new Date(p.t).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })} (il y a ${ago(p.t)}) · market cap ${mcap(p.f && p.f.mcap)} → <b style="color:var(--text)">${mcap(p.f && p.f.mcap ? p.f.mcap * (sp(p) / p.entry) : 0)}</b>${p.tp1Done ? ' · moitié vendue' : ''}</div></div>
+        <div class="main"><div class="t"><a href="https://pump.fun/coin/${esc(p.mint || p.addr)}" target="_blank" rel="noopener" style="color:inherit">${esc(p.name)} ↗</a></div><div class="s">ouvert à ${new Date(p.t).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })} (il y a ${ago(p.t)}) · market cap ${mcap((p.f && p.f.mcap) || p.entry * 1e9)} → <b style="color:var(--text)">${mcap(((p.f && p.f.mcap) || p.entry * 1e9) * (sp(p) / p.entry))}</b>${p.tp1Done ? ' · moitié vendue' : ''}</div></div>
         <div class="r"><b class="${cls(ret)}">${pct(ret)}</b><span>${num(val)} $</span></div>
         <button class="sellbtn" data-addr="${esc(p.addr)}" data-name="${esc(p.name)}" ${pending[p.addr] ? 'disabled' : ''}>${pending[p.addr] ? 'Envoyé…' : 'Vendre'}</button></div>`;
     }).join('') : '<div class="empty">Aucune position : le robot attend un bon lancement.</div>';
