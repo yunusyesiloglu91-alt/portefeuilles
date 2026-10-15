@@ -9,11 +9,11 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const FILTER_BASE = { maxAgeH: 3, minMcap: 30e3, maxMcap: 300e3, minLiq: 8e3 };
 const VARIANTS = {
-  qualite: { name: '2️⃣ Anti-arnaque + 30 min', quality: true, crit: 'anti30', tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.4, maxH: 24, chosen: true },
+  qualite: { name: '2️⃣ Anti-arnaque + 30 min', paused: true, quality: true, crit: 'anti30', tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.4, maxH: 24, chosen: true },
   eclair: { name: '⚡ Sniper éclair', quality: true, tp1: 0.5, tp1Part: 1, sl: 0.25, maxH: 6 },
   moonshot: { name: '🚀 Moonshot', quality: true, tp1: 4, tp1Part: 1, sl: 0.5, maxH: 72 },
-  origine: { name: '1️⃣ Anti-arnaque', quality: true, crit: 'anti', tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.4, maxH: 24 },
-  tres: { name: '3️⃣ Jackpot ×5', quality: true, crit: 'anti', tp1: 4, tp1Part: 0.5, trail: 0.3, sl: 0.4, maxH: 24 },
+  origine: { name: '1️⃣ Anti-arnaque', paused: true, quality: true, crit: 'anti', tp1: 1, tp1Part: 0.5, trail: 0.3, sl: 0.4, maxH: 24 },
+  tres: { name: '3️⃣ Jackpot ×5', paused: true, quality: true, crit: 'anti', tp1: 4, tp1Part: 0.5, trail: 0.3, sl: 0.4, maxH: 24 },
   temoin: { name: '🎲 Sans filtre (témoin)', quality: false, tp1: 1, tp1Part: 1, sl: 0.35, maxH: 24 },
   cerveau: { name: '🧠 Cerveau', quality: true, brain: true, tp1: 0.5, tp1Part: 0.5, trail: 0.25, sl: 0.3, maxH: 24 },
 };
@@ -254,6 +254,7 @@ async function runSniper(st, now, opts = {}) {
       const V = VARIANTS[id];
       // Départ équitable : après une remise à zéro, les 3 Snipers n'achètent que des tokens découverts après ce moment
       if (S.resetAt && TRIO_IDS.includes(id) && S.pool && S.pool[c.addr] && S.pool[c.addr].t < S.resetAt) continue;
+      if (V.paused) continue; // arrêtée : on garde l'historique mais elle n'achète plus
       if (V.brain ? !c.brainOk : V.crit ? !qualityOk(c, CRITERES[V.crit]).ok : V.quality && !c.q.ok) continue;
       if (v.positions.length >= MAX_OPEN || v.cash < STAKE) continue;
       if (v.positions.some((p) => p.addr === c.addr) || v.trades.some((t) => t.name === c.name && t.side === 'achat' && now - t.t < 24 * H)) continue;

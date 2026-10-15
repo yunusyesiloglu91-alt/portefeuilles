@@ -14,7 +14,7 @@ const FILE = path.join(__dirname, 'sniper-rt-state.json');
 const LOG = path.join(__dirname, 'sniper-rt.log');
 const WS_URL = 'wss://pumpportal.fun/api/data';
 const SUPPLY = 1e9; // offre fixe des tokens pump.fun
-const STAKE = 5, CAPITAL = 100, COST = 0.03, MAX_OPEN = 10;
+const STAKE_DEFAULT = 5, STAKE = STAKE_DEFAULT, CAPITAL = 100, COST = 0.03, MAX_OPEN = 10;
 const MIN = 60000;
 
 const VARIANTS = {
@@ -27,10 +27,10 @@ const VARIANTS = {
   temoin: { name: '🎲 Tout acheter (témoin)', delay: 0, filtered: false },
   // TEST VIRTUEL « éclair » : achète dès la création, sans attendre les métadonnées ni RugCheck (ordre de ~0,1 s),
   // seulement si le créateur n'a pas acheté plus de 5 % de l'offre. Mêmes frais et même sortie que les autres.
-  eclair: { name: '⚡ Éclair 0,1 s (test)', delay: 0, fast: true, maxMs: 30 * MIN },
+  eclair: { name: '⚡ Éclair 0,1 s (test)', delay: 0, fast: true, maxMs: 30 * MIN, stake: 10 },
   // Éclair sélectif (test virtuel) : achète à la création seulement si le créateur détient ≤ 5 %,
   // ne lance pas en série (≤ 1 lancement en 24 h) et si le nom n'a pas l'air d'une imitation (pas de mot « test », « rug », « scam »).
-  eclairQ: { name: '⚡ Éclair sélectif (test)', delay: 0, fast: true, selective: true, maxMs: 30 * MIN },
+  eclairQ: { name: '⚡ Éclair sélectif (test)', delay: 0, fast: true, selective: true, maxMs: 30 * MIN, stake: 10 },
 };
 const RPC = 'https://api.mainnet-beta.solana.com';
 const JUNK_IMITATION = /test|rug|scam|fake|copy|clone|free/i;
@@ -216,6 +216,7 @@ function pushLive(id, t) {
 
 function buy(id, tok, why) {
   const v = st.variants[id];
+  const STAKE = (VARIANTS[id] && VARIANTS[id].stake) || STAKE_DEFAULT;
   if (v.positions.length >= MAX_OPEN || v.cash < STAKE || !(tok.last > 0)) return;
   if (v.positions.some((p) => p.mint === tok.mint)) return;
   const fill = tok.last * (1 + COST);
