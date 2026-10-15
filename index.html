@@ -449,7 +449,7 @@
       const buy = t.side === 'achat', half = /moitié/.test(t.reason || '');
       return `<div class="row"><div class="ico" style="color:${buy ? 'var(--up)' : 'var(--down)'};background:${buy ? 'rgba(34,197,94,.14)' : 'rgba(239,68,68,.14)'}">${buy ? '↑' : '↓'}</div>
         <div class="main"><div class="t">${buy ? 'Achat' : half ? 'Vente moitié' : 'Vente'} ${esc(t.name)}</div><div class="s">${time(t.t)} · ${buy ? `market cap ≈ ${mcap(t.mcap || +((String(t.reason).match(/(\d+) k\$/) || [])[1] * 1e3))}` : `${t.mcap ? `≈ ${mcap(t.mcap)} · ` : ''}${esc(String(t.reason || '').replace(' (moitié)', ''))}`}</div></div>
-        <div class="r">${buy ? `<b>5,00 $</b>` : `<b class="${cls(t.ret)}">${pct(t.ret)}</b><span>${num(t.usd)} $ reçus</span>`}</div></div>`;
+        <div class="r">${buy ? `<b>${num(t.usd || 5)} $</b>` : `<b class="${cls(t.ret)}">${pct(t.ret)}</b><span>${num(t.usd)} $ reçus</span>`}</div></div>`;
     }).join('') : '<div class="empty">Aucune opération pour l’instant.</div>';
 
     $('allpos').innerHTML = rows.length ? rows.map((r) => `<div class="row"><div class="bar" style="background:${r.col}"></div>
