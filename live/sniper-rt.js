@@ -37,7 +37,7 @@ const VARIANTS = {
   // 📰 Actu : token lancé juste après une actualité qui démarre et qui en porte le nom (prix réels, 10 $)
   // 🌊 Vague : plusieurs créateurs lancent en même temps des tokens sur le même thème ; on achète le leader
   // 🧠 Expert : entrée sur repli d'un token qui a déjà de l'élan, contrôle RugCheck, vente par paliers de 25 %
-  expert: { name: '🧠 Expert', delay: 0, fast: true, real: true, ladder: true, maxMs: 3 * 60 * MIN, stake: 10 },
+  expert: { name: '🧠 Expert', paused: true /* arrêté le 16/10 : −55 % sur 20 trades */, delay: 0, fast: true, real: true, ladder: true, maxMs: 3 * 60 * MIN, stake: 10 },
   vague: { name: '🌊 Vague', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
   actu: { name: '📰 Actu', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
   eclairQ04: { name: '🚀 Sélectif 0,4 s (bot pro)', delay: 0, fast: true, selective: true, real: true, latency: 400, maxMs: 30 * MIN, stake: 10 },
@@ -467,6 +467,7 @@ async function expertScan() {
       st.expertRecent = (st.expertRecent || []).concat([{ t: now, symbol: w.symbol || w.name, ok: !why, why: why || 'acheté' }]).slice(-20);
       if (why) continue;
       const tok = { mint: w.mint, curve: w.curve, name: w.name, symbol: w.symbol, vT0: c.vT, vS0: c.vS, tRecv: now };
+      if (VARIANTS.expert.paused) continue;
       buyReal('expert', tok, `repli de ${Math.round(pull * 100)} % après ×${(w.peak / w.mid0).toFixed(1)}, rebond, ${c.rS.toFixed(1)} SOL achetés, top 10 ${rc.top10.toFixed(0)} %, créateur ${rc.creatorPct.toFixed(1)} %`);
       watch.delete(w.mint);
     }
