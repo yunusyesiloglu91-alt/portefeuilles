@@ -43,6 +43,8 @@ const VARIANTS = {
   // acheteurs ≥ 2 × vendeurs sur 1 h ET market cap < 50 k$. Testée ici aux vrais prix.
   cerveauR: { name: '🧠 Cerveau', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
   tiktok: { name: '📱 TikTok', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
+  // 💎 Copie long terme : portefeuilles qui gardent leurs memecoins des jours (research/longterme.js)
+  copieLong: { name: '💎 Copie long terme', delay: 0, fast: true, real: true, copy: 'long', copyLong: true, maxMs: 14 * 24 * 3600000, stake: 5, maxOpen: 20 },
   copieCourt: { name: '👥 Copie court terme', delay: 0, fast: true, real: true, copy: 'court', maxMs: 6 * 3600000, stake: 5, maxOpen: 20 },
   copieMoyen: { name: '👥 Copie moyen terme', delay: 0, fast: true, real: true, copy: 'moyen', maxMs: 48 * 3600000, stake: 5, maxOpen: 20 },
   expert: { name: '🧠 Expert', paused: true /* arrêté le 16/10 : −55 % sur 20 trades */, delay: 0, fast: true, real: true, ladder: true, maxMs: 3 * 60 * MIN, stake: 10 },
@@ -538,7 +540,56 @@ function ladderExit(id, v, p) {
 const { PublicKey } = require('@solana/web3.js');
 const PUMP_PROGRAM = new PublicKey('6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P');
 const Copie = require('./copie.js');
-const COPY_ID = { court: 'copieCourt', moyen: 'copieMoyen' };
+const COPY_ID = { court: 'copieCourt', moyen: 'copieMoyen', long: 'copieLong' };
+
+// ---------- Prix hors de la courbe (PumpSwap…) pour le long terme : DexScreener, glissement de 1 % compté
+const DEX_SLIP = 0.01;
+async function dexPrice(mint) {
+  try {
+    const pairs = await (await fetch(`https://api.dexscreener.com/tokens/v1/solana/${mint}`, { signal: AbortSignal.timeout(5000) })).json();
+    const p = (pairs || []).filter((x) => +x.priceUsd > 0).sort((a, b) => ((b.liquidity && b.liquidity.usd) || 0) - ((a.liquidity && a.liquidity.usd) || 0))[0];
+    return p ? { price: +p.priceUsd, pair: p.pairAddress, symbol: p.baseToken.symbol, liq: (p.liquidity && p.liquidity.usd) || 0 } : null;
+  } catch { return null; }
+}
+async function buyDex(id, mint, why) {
+  const v = st.variants[id];
+  const stake = VARIANTS[id].stake || STAKE_DEFAULT;
+  if (v.cash < stake || v.positions.length >= (VARIANTS[id].maxOpen || MAX_OPEN) || v.positions.some((p) => p.mint === mint)) return;
+  const d = await dexPrice(mint);
+  if (!d || d.liq < 5000) { copyEvent(`${shortA(mint)} : pas de marché assez liquide, pas copié`); return; }
+  const net = stake - NET_SOL * solUsd;
+  const fill = d.price * (1 + Courbe.FEE + DEX_SLIP);
+  const qty = net / fill;
+  v.cash -= stake;
+  v.fees = (v.fees || 0) + stake - qty * d.price;
+  v.positions.push({ mint, name: d.symbol, dex: true, pair: d.pair, t: Date.now(), entry: stake / qty, last: d.price, peak: d.price, qty, cost: stake, realized: 0, real: true });
+  const t = { t: Date.now(), side: 'achat', name: d.symbol, mint, price: stake / qty, usd: stake, reason: `${why} · prix PumpSwap (DexScreener) + 1 % de glissement` };
+  pushLive(id, { ...t, addr: mint, qty });
+  v.trades.push(t);
+}
+async function sellDex(id, v, p, part, reason) {
+  p.selling = true;
+  const d = await dexPrice(p.mint);
+  const price = d ? d.price : p.last * 0.95;
+  const qty = p.qty * part;
+  const usd = Math.max(0, qty * price * (1 - Courbe.FEE - DEX_SLIP) - NET_SOL * solUsd);
+  v.fees = (v.fees || 0) + qty * price - usd;
+  v.cash += usd; p.qty -= qty; p.realized += usd; p.selling = false;
+  const done = part >= 1 || p.qty <= 1e-9;
+  const r = reason + (d ? '' : ' (prix estimé)');
+  pushLive(id, { t: Date.now(), side: 'vente', name: p.name, mint: p.mint, addr: p.mint, price: usd / qty, usd, done, reason: r });
+  v.trades.push({ t: Date.now(), side: 'vente', name: p.name, mint: p.mint, price: usd / qty, usd, ret: done ? p.realized / p.cost - 1 : usd / (p.cost * part) - 1, reason: r, held: Date.now() - p.t });
+  if (done) v.positions.splice(v.positions.indexOf(p), 1);
+}
+// Toutes les minutes : prix des positions hors courbe, et durée maximale
+async function dexLoop() {
+  for (const [id, v] of Object.entries(st.variants)) for (const p of [...v.positions]) {
+    if (!p.dex || p.selling) continue;
+    const d = await dexPrice(p.mint);
+    if (d) { p.last = d.price; p.peak = Math.max(p.peak || 0, d.price); }
+    if (VARIANTS[id] && Date.now() - p.t >= (VARIANTS[id].maxMs || EXIT.maxMs)) await sellDex(id, v, p, 1, 'durée maximale atteinte');
+  }
+}
 const shortA = (a) => `${a.slice(0, 4)}…${a.slice(-4)}`;
 const names = {};
 async function tokenName(mint) {
@@ -559,7 +610,10 @@ async function copyTrade(e) {
   if (e.side === 'achat') {
     const curve = PublicKey.findProgramAddressSync([Buffer.from('bonding-curve'), new PublicKey(e.mint).toBuffer()], PUMP_PROGRAM)[0].toBase58();
     const c = (await Courbe.read([curve]).catch(() => ({})))[curve];
-    if (!c || c.complete) { copyEvent(`${shortA(e.wallet)} achète ${shortA(e.mint)} hors de la courbe pump.fun : pas copié (prix non calculable)`); return; }
+    if (!c || c.complete) {
+      if (VARIANTS[id].copyLong) { copyEvent(`${shortA(e.wallet)} achète ${shortA(e.mint)} sur PumpSwap : on copie`); return buyDex(id, e.mint, `copie de ${shortA(e.wallet)} (${e.sol.toFixed(2)} SOL)`); }
+      copyEvent(`${shortA(e.wallet)} achète ${shortA(e.mint)} hors de la courbe pump.fun : pas copié (prix non calculable)`); return;
+    }
     const name = await tokenName(e.mint);
     copyEvent(`${shortA(e.wallet)} achète ${name} (${e.sol.toFixed(2)} SOL) : on copie`);
     buyReal(id, { mint: e.mint, curve, name, symbol: name, vT0: c.vT, vS0: c.vS, tRecv: Date.now() }, `copie de ${shortA(e.wallet)} (${e.sol.toFixed(2)} SOL)`);
@@ -567,7 +621,8 @@ async function copyTrade(e) {
     const p = v.positions.find((x) => x.mint === e.mint);
     if (!p || p.selling) return;
     copyEvent(`${shortA(e.wallet)} vend ${Math.round(e.part * 100)} % de ${p.name} : on vend la même part`);
-    realSell(id, v, p, e.part >= 0.95 ? 1 : e.part, `${shortA(e.wallet)} vend ${Math.round(e.part * 100)} %`);
+    if (p.dex) sellDex(id, v, p, e.part >= 0.95 ? 1 : e.part, `${shortA(e.wallet)} vend ${Math.round(e.part * 100)} %`);
+    else realSell(id, v, p, e.part >= 0.95 ? 1 : e.part, `${shortA(e.wallet)} vend ${Math.round(e.part * 100)} %`);
   }
 }
 // ---------- 📱 Stratégie « TikTok » : alerte → contrôle avant d'entrer
@@ -648,6 +703,10 @@ function startCopy() {
       list = [...res.court.map((x) => ({ wallet: x.wallet, group: 'court' })), ...res.moyen.map((x) => ({ wallet: x.wallet, group: 'moyen' }))];
     } catch { list = []; }
   }
+  try {
+    const lt = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'research', 'longterme.json'), 'utf8'));
+    for (const x of lt.long || []) if (!list.some((w) => w.wallet === x.wallet)) list.push({ wallet: x.wallet, group: 'long' });
+  } catch { /* pas encore de recherche long terme */ }
   st.copyWallets = list;
   if (!list.length) { log('copie : aucun portefeuille à suivre pour l’instant'); return; }
   copier = Copie.create({
@@ -667,7 +726,7 @@ let realBusy = false;
 async function realExits() {
   if (realBusy) return;
   const open = [];
-  for (const [id, v] of Object.entries(st.variants)) if (VARIANTS[id] && VARIANTS[id].real) for (const p of v.positions) if (p.curve && !p.selling) open.push([id, v, p]);
+  for (const [id, v] of Object.entries(st.variants)) if (VARIANTS[id] && VARIANTS[id].real) for (const p of v.positions) if (p.curve && !p.selling && !p.dex) open.push([id, v, p]);
   if (!open.length || !(solUsd > 0)) return;
   realBusy = true;
   try {
@@ -675,6 +734,7 @@ async function realExits() {
     for (const [id, v, p] of open) {
       const c = curves[p.curve];
       if (!c) continue;
+      if (c.complete && VARIANTS[id].copyLong) { p.dex = true; continue; } // le long terme garde le token sur PumpSwap
       if (c.complete) { realSell(id, v, p, 1, 'token sorti de la courbe'); continue; }
       if (VARIANTS[id].copy) {
         p.last = Courbe.mid(c) * solUsd;
@@ -891,6 +951,7 @@ async function start() {
   setInterval(realExits, 1000);
   Actu.start();
   startCopy();
+  setInterval(() => dexLoop().catch(() => {}), 60000);
   setInterval(vagueScan, 10000);
   setInterval(expertScan, 3000);
   setInterval(cerveauScan, 20000);

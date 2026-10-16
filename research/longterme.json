@@ -1,0 +1,310 @@
+{
+ "date": "2026-10-16T05:20:58.723Z",
+ "survivants": [
+  {
+   "mint": "DFMt2FyLpB6ekPNAzVErLXgpSnJ9CRf1VnxBAkTLpump",
+   "name": "FTR",
+   "age": 1.1329907523148148,
+   "mcap": 5411504.447,
+   "curve": "8XsAGVVh7A7dAUx1TzX6eBsSZhiVeArqRnhxDvr1jpmc"
+  },
+  {
+   "mint": "2j5SaS7xy776qCBpyPQbZjyQSAtKiFgrwjfErthnW2ZM",
+   "name": "CLAUDIA",
+   "age": 9.149843958333333,
+   "mcap": 5336158.74688426,
+   "curve": "2JabQhGZei1af6EqziyWsbLXNmD8Wyyt3yqK5xCUhJWU"
+  }
+ ],
+ "res": [
+  {
+   "wallet": "6My97BBVoJz3j7mQWFVz5pykFxMsCs44gjhaqmczcAND",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 9,
+   "lastActiveDays": 0.2
+  },
+  {
+   "wallet": "6YWiTobrAUgEverHcb8GZ9hwgv9ZL6ddfeX4tdvNhaG6",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 33.1,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "AsbbdkEX7WtP7LUbKhPCwUHXDc8JLzhtyVophM47a6n3",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 10.9,
+   "lastActiveDays": 0.2
+  },
+  {
+   "wallet": "G6gyaJorC45JtaXS2ypKD3pdipTJt47b8k6yYNVCVhHZ",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 412.3,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "6mrqa4cDaqBCD9UrUiUyoK78e4AJ8XzRaF8uTbcuTVae",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 122.9,
+   "lastActiveDays": 0.1
+  },
+  {
+   "wallet": "D9Jibi4oneM46vCjF2qq8Azc2kPxCTfJKi6i5uMnz8Aq",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 265.7,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "AUxyaiWqndztbtXQmEcL8HKQhCSwNDx8ZZadBU2NhUZB",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 1.6,
+   "lastActiveDays": 0.1
+  },
+  {
+   "wallet": "2H72vhZoYo9Ht9PuQGtXmKFsX23xefJAuH5sKqU32MB8",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 736.9,
+   "lastActiveDays": 0.1
+  },
+  {
+   "wallet": "89moUGVa1p3Z5UnpvmHdspag8e3MFqytXDUDLmrBVkS7",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 36,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "87rRdssFiTJKY4MGARa4G5vQ31hmR7MxSmhzeaJ5AAxJ",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 616.5,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "AvGiSdrkwtGYhrrFXZPtdhNhV4pASUR67TmRjfaKGdMP",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 600.3,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "GDpqhJgwzg8zcoEmVvGDiVRVnaa797ryvPnNqQVBjQrN",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 556.4,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "Df7DsBZPhHKK6qxG7DQ1jNQ7J5HbJw1eZLhG4M1DWhLH",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 23.9,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "CyT2UQZET4JrXSKLNbnGbyPMm1pb1gr5qKHc6XeRjUjD",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 304.1,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "CrCAvyQ78362N7ar7frofog2zyTphdMrUUXZerACnKtT",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 326.6,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "9BvPQTeipmg7UZvBtknQkadPdgZ5ekyWVPg1LrSbTYP8",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 316.2,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "2QzHknQeK1PbbxUdP6N7cgTX648bZ7cBFRvwsYoP4cdv",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 7.8,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "Be24Gbf5KisDk1LcWWZsBn8dvB816By7YzYF5zWZnRR6",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 1002.3,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "49KBrKBiG91fHRrfDcf9xWyrwuzhiRaP2Ag4TmUADbTw",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 0.8,
+   "lastActiveDays": 2.8
+  },
+  {
+   "wallet": "8WXKcUjwMU5TxiEN4mjw52iP4uPKx8VpXGozqMadqhyq",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 47.4,
+   "lastActiveDays": 1.1
+  },
+  {
+   "wallet": "5tHXq7mPvpBUCK82vADkxTgZCeGdRRcozeZZzbZTngom",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 9.5,
+   "lastActiveDays": 0.2
+  },
+  {
+   "wallet": "3zufTvMinxWrAgupp28TeeAdw3bJFBMXN32VneWPhd9f",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 0.4,
+   "lastActiveDays": 1.5
+  },
+  {
+   "wallet": "4GELppbfrevo3eQ8nAywmN2irRrCeGTSmQ19vwzyTS8P",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 97.2,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "257NW6dpsweSLuWuCzn2NhYmwRKkZ152me9h7hxZwqJr",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 182.6,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "H2zUTjXc81pdY5j1YY49QvCi4w6H5Bn16pVFpnK1MFEp",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 34,
+   "lastActiveDays": 0.1
+  },
+  {
+   "wallet": "9ab9J1hMmkgvNUpNHfNh85qrtYHAiEujyfYb2xSJhiFr",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 26.3,
+   "lastActiveDays": 0.3
+  },
+  {
+   "wallet": "HQn9ZTCxVWBeXPm7bHv8iNZB78c8MWp6QiuF8RJTH2cK",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 73.4,
+   "lastActiveDays": 0.5
+  },
+  {
+   "wallet": "BpdrVWyVFvAZFtMPM2TxacXWxFYbBW4XiHpLaCr42oPr",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 23,
+   "lastActiveDays": 0.6
+  },
+  {
+   "wallet": "FadNsfTVVkHBLwmWygGCzuxgErdtn85kx2ZiVwuMe5gf",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 8.3,
+   "lastActiveDays": 1.5
+  },
+  {
+   "wallet": "7DDJ7DnUCzfPJ46vjbNx2x3LB78YPncajUGs2bHQTBkE",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 11.3,
+   "lastActiveDays": 0.3
+  },
+  {
+   "wallet": "5gicj8rKbNXnoS7dJ1FxR22tcUf7ig4uviJnSJmr8G8o",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 17.4,
+   "lastActiveDays": 0.1
+  },
+  {
+   "wallet": "AcoNeFQsTPYs7ZrH8RMWaxxGJTTQJJ4H5aTXmptaz5UK",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 120.7,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "49Rnnt3QEKQW5pFzyasESQcXYsj6jv7L8tYcVxRknNwg",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 5.7,
+   "lastActiveDays": 0.3
+  },
+  {
+   "wallet": "Gge2CjCKcrFq5oVvZpEyEMvHV3UGDkWGcsUocEgzAgSx",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 22.8,
+   "lastActiveDays": 4.1
+  },
+  {
+   "wallet": "BT9BSFGMsHuovNnmLQXsHbhkywiKGHgjBeNZ3skkw7mX",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 0.7,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "9dJKzPJQVoSLQ3ujdzUpUw3o2Ef2kTJLTgbLWnCMMD3i",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 557.4,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "B15SZUkeBjRWKWKDh3ozoGWewKBjE6oSKCiTHxQg5yqz",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 45.1,
+   "lastActiveDays": 0
+  }
+ ],
+ "long": [
+  {
+   "wallet": "3zufTvMinxWrAgupp28TeeAdw3bJFBMXN32VneWPhd9f",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 0.4,
+   "lastActiveDays": 1.5
+  },
+  {
+   "wallet": "BT9BSFGMsHuovNnmLQXsHbhkywiKGHgjBeNZ3skkw7mX",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 0.7,
+   "lastActiveDays": 0
+  },
+  {
+   "wallet": "49KBrKBiG91fHRrfDcf9xWyrwuzhiRaP2Ag4TmUADbTw",
+   "survivants": 1,
+   "tokens": "CLAUDIA",
+   "txPerDay": 0.8,
+   "lastActiveDays": 2.8
+  },
+  {
+   "wallet": "AUxyaiWqndztbtXQmEcL8HKQhCSwNDx8ZZadBU2NhUZB",
+   "survivants": 1,
+   "tokens": "FTR",
+   "txPerDay": 1.6,
+   "lastActiveDays": 0.1
+  }
+ ]
+}
