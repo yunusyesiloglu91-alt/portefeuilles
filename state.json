@@ -3815,63 +3815,68 @@
    38.76,
    29.8,
    29.8
+  ],
+  [
+   1792191247095,
+   98.51,
+   38.85,
+   29.83,
+   29.83
   ]
  ],
  "watch": [
   {
    "name": "CATE",
-   "score": 70,
-   "mcap": 55903763.2018886,
-   "ageDays": 79.15370880787037,
+   "score": 80,
+   "mcap": 62027929.3341851,
+   "ageDays": 82.26486221064815,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "STONK",
+   "score": 62,
+   "mcap": 89036849.8941593,
+   "ageDays": 65.50170248842592,
+   "ok": false,
+   "why": "liquidité très faible"
+  },
+  {
+   "name": "ZEREBRO",
+   "score": 60,
+   "mcap": 32690004.0949514,
+   "ageDays": 718.1567024884259,
+   "ok": false,
+   "why": "rotation élevée (32 %/j)"
+  },
+  {
+   "name": "baton",
+   "score": 60,
+   "mcap": 9387738.31037506,
+   "ageDays": 37.098519618055555,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "JEANPHIL",
    "score": 60,
-   "mcap": 8448122.97629462,
-   "ageDays": 24.04657917824074,
+   "mcap": 7106753.8708457,
+   "ageDays": 27.157732581018518,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "STONK",
-   "score": 57,
-   "mcap": 94080024.3421628,
-   "ageDays": 62.390549085648146,
+   "name": "OTC",
+   "score": 35,
+   "mcap": 5101530.38607367,
+   "ageDays": 49.389538136574075,
    "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
-   "name": "arc",
-   "score": 50,
-   "mcap": 30991363.2188784,
-   "ageDays": 671.9578060300926,
-   "ok": false,
-   "why": "rotation élevée (29 %/j)"
-  },
-  {
-   "name": "fone",
-   "score": 50,
-   "mcap": 4604514.13076004,
-   "ageDays": 47.84050278935185,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "LOAD",
-   "score": 42,
-   "mcap": 8577620.81514487,
-   "ageDays": 1.0505606597222221,
-   "ok": false,
-   "why": "moins de 7 jours"
+   "why": "rotation élevée (32 %/j)"
   }
  ],
- "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
- ],
- "lastScan": 1792158843866,
- "lastRun": 1792164844040,
+ "notes": [],
+ "lastScan": 1792191247095,
+ "lastRun": 1792191247095,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -6153,55 +6158,59 @@
    [
     1792164844040,
     65.63
+   ],
+   [
+    1792191247095,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "FTR",
-    "mcap": 6553027.607,
-    "ageDays": 1.503842199074074,
-    "ch1": 0.22819,
-    "ch24": 6.653339999999999,
+    "mcap": 4237064.994,
+    "ageDays": 1.864989525462963,
+    "ch1": 0.19211999999999999,
+    "ch24": 1.60233,
     "ok": false
    },
    {
     "name": "1",
-    "mcap": 1808655.23965059,
-    "ageDays": 0.7462611805555556,
-    "ch1": -0.17129999999999998,
-    "ch24": 9.798540000000001,
+    "mcap": 1157892.97964644,
+    "ageDays": 1.1074085069444444,
+    "ch1": -0.11801,
+    "ch24": 0.52662,
     "ok": false
    },
    {
-    "name": "STREAM",
-    "mcap": 18908719.1640591,
-    "ageDays": 1.7885991435185185,
-    "ch1": 0.07271,
-    "ch24": 1.00415,
+    "name": "IRIS",
+    "mcap": 499098.1315,
+    "ageDays": 0.04626267361111111,
+    "ch1": 0.5709000000000001,
+    "ch24": 3.93979,
     "ok": false
    },
    {
-    "name": "Dacity",
-    "mcap": 1296110.56929782,
-    "ageDays": 5.122974143518518,
-    "ch1": -0.06602000000000001,
-    "ch24": -0.46235,
+    "name": "NUBI",
+    "mcap": 1935060.57487344,
+    "ageDays": 0.09768628472222222,
+    "ch1": -0.1168,
+    "ch24": 19.54797,
     "ok": false
    },
    {
-    "name": "OWLDACITY",
-    "mcap": 405554.90801389,
-    "ageDays": 0.738518125,
-    "ch1": -0.43631,
-    "ch24": 1.6753399999999998,
+    "name": "VEIL",
+    "mcap": 6082706.21688955,
+    "ageDays": 4.161644618055556,
+    "ch1": 0.027309999999999997,
+    "ch24": 0.47239,
     "ok": false
    },
    {
     "name": "DOPE",
-    "mcap": 4060248.13045122,
-    "ageDays": 5.028425532407407,
-    "ch1": 0.006999999999999999,
-    "ch24": -0.12892,
+    "mcap": 3864187.35256438,
+    "ageDays": 5.3895728587962966,
+    "ch1": 0.10044,
+    "ch24": -0.28935,
     "ok": false
    }
   ],
