@@ -3199,6 +3199,13 @@
    39.17,
    29.9,
    29.9
+  ],
+  [
+   1792109344199,
+   99,
+   39.2,
+   29.9,
+   29.9
   ]
  ],
  "watch": [
@@ -3252,10 +3259,10 @@
   }
  ],
  "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/zxTpi4BtaWX3mgdAPoezkMD1hxx8CdeCfrqXMWvSCLX/ohlcv/day), positions conservées"
  ],
- "lastScan": 1792105144869,
- "lastRun": 1792109044227,
+ "lastScan": 1792109344199,
+ "lastRun": 1792109344199,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -5185,55 +5192,59 @@
    [
     1792109044227,
     65.63
+   ],
+   [
+    1792109344199,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Dacity",
-    "mcap": 1910038.98028073,
-    "ageDays": 4.525747106481481,
-    "ch1": 0.53291,
-    "ch24": 16.75057,
+    "mcap": 2046300.13563713,
+    "ageDays": 4.536171284722222,
+    "ch1": 0.20568,
+    "ch24": 19.9432,
     "ok": false
    },
    {
     "name": "1",
-    "mcap": 1788225.60109076,
-    "ageDays": 0.1490341435185185,
-    "ch1": 1.35767,
-    "ch24": 9.67657,
+    "mcap": 2283916.6472763,
+    "ageDays": 0.15945832175925925,
+    "ch1": 1.19776,
+    "ch24": 12.63608,
     "ok": false
    },
    {
     "name": "FTR",
-    "mcap": 1795724.306,
-    "ageDays": 0.9066151620370371,
-    "ch1": 0.10289999999999999,
-    "ch24": 39.03542,
-    "ok": false
+    "mcap": 2084155.925,
+    "ageDays": 0.9170393402777778,
+    "ch1": 0.18998,
+    "ch24": 45.465959999999995,
+    "ok": true
    },
    {
     "name": "DOPE",
-    "mcap": 4907151.59720014,
-    "ageDays": 4.431198495370371,
-    "ch1": -0.09754,
-    "ch24": 0.00538,
+    "mcap": 4959470.38570382,
+    "ageDays": 4.4416226736111115,
+    "ch1": -0.08742000000000001,
+    "ch24": 0.17915,
     "ok": false
    },
    {
     "name": "SAINDRA",
-    "mcap": 508439.970019516,
-    "ageDays": 1.7413605324074075,
-    "ch1": -0.11917,
-    "ch24": -0.03454,
+    "mcap": 475238.550432986,
+    "ageDays": 1.7517847106481481,
+    "ch1": -0.17161,
+    "ch24": -0.02007,
     "ok": false
    },
    {
     "name": "OWLDACITY",
-    "mcap": 749209.571106725,
-    "ageDays": 0.14129108796296297,
-    "ch1": -0.06127,
-    "ch24": 3.9423500000000002,
+    "mcap": 803687.846635233,
+    "ageDays": 0.1517152662037037,
+    "ch1": 0.03777,
+    "ch24": 4.30173,
     "ok": false
    }
   ],
