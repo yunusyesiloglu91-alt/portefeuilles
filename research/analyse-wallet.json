@@ -1,0 +1,41 @@
+[
+ {
+  "wallet": "7Yxs5JKM5aA2hbpzQPriDmH6Wd3BbXZ6DVUpypLxsgS4",
+  "transactions": 109,
+  "jours": 0.55,
+  "txParJour": 198,
+  "dernierMouvementH": 0.3,
+  "tokens": 5,
+  "fermes": 4,
+  "gagnes": 0,
+  "beneficeSol": -10.983,
+  "sansTop3Sol": -3.175,
+  "miseMoyenneSol": 3.834,
+  "detentionMedianeMin": 427.8,
+  "detentionMoyenneMin": 279.1,
+  "detentionMaxMin": 427.9,
+  "ouverts": 1,
+  "meilleurs": [
+   {
+    "mint": "5wN7E8JFNFhZPY5if3iiaqv73PE8P1fF18mt66wVpump",
+    "pnl": -1.998,
+    "minutes": 2.1
+   },
+   {
+    "mint": "AXDjihwNsYQqDueHamwHDnE3JvMf2yb86U4kqvxGpump",
+    "pnl": -2.797,
+    "minutes": 427.8
+   },
+   {
+    "mint": "G97EU185vTD9simFiUK1EQYPWig8e2A7b4T488nZamnR",
+    "pnl": -3.013,
+    "minutes": 427.9
+   },
+   {
+    "mint": "HGYiaHSpJAfiwZBkYvw2HWgdKULW2LyDqwQ7zXsNpump",
+    "pnl": -3.175,
+    "minutes": 258.8
+   }
+  ]
+ }
+]

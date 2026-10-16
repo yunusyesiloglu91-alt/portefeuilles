@@ -48,7 +48,7 @@ const VARIANTS = {
   copieCourt: { name: '👥 Copie court terme', delay: 0, fast: true, real: true, copy: 'court', maxMs: 6 * 3600000, stake: 5, maxOpen: 20 },
   copieMoyen: { name: '👥 Copie moyen terme', delay: 0, fast: true, real: true, copy: 'moyen', maxMs: 48 * 3600000, stake: 5, maxOpen: 20 },
   expert: { name: '🧠 Expert', paused: true /* arrêté le 16/10 : −55 % sur 20 trades */, delay: 0, fast: true, real: true, ladder: true, maxMs: 3 * 60 * MIN, stake: 10 },
-  vague: { name: '🌊 Vague', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
+  vague: { name: '🌊 Vague', paused: true /* retiré le 16/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
   actu: { name: '📰 Actu', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
   eclairQ04: { name: '🚀 Sélectif 0,4 s (bot pro)', delay: 0, fast: true, selective: true, real: true, latency: 400, maxMs: 30 * MIN, stake: 10 },
   eclairQ3: { name: '🐢 Sélectif 3 s (bot ordinaire)', delay: 0, fast: true, selective: true, real: true, latency: 3000, maxMs: 30 * MIN, stake: 10 },
@@ -395,7 +395,7 @@ function vagueAdd(tok) {
 }
 let vagueBusy = false;
 async function vagueScan() {
-  if (vagueBusy || !(solUsd > 0)) return;
+  if (VARIANTS.vague.paused || vagueBusy || !(solUsd > 0)) return;
   vagueBusy = true;
   const now = Date.now();
   try {
