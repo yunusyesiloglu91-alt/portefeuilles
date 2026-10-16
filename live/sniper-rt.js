@@ -41,7 +41,7 @@ const VARIANTS = {
   // 📱 TikTok : l'achat d'un trader suivi n'est qu'une alerte ; on n'entre qu'après contrôle hype + élan + détenteurs
   // 🧠 Cerveau : règle trouvée par le cerveau sur 2 356 tokens (research/cerveau-strategie.js) :
   // acheteurs ≥ 2 × vendeurs sur 1 h ET market cap < 50 k$. Testée ici aux vrais prix.
-  cerveauR: { name: '🧠 Cerveau', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
+  cerveauR: { name: '🧠 Cerveau', paused: true /* retiré le 16/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
   tiktok: { name: '📱 TikTok', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
   // 💎 Copie long terme : portefeuilles qui gardent leurs memecoins des jours (research/longterme.js)
   copieLong: { name: '💎 Copie long terme', delay: 0, fast: true, real: true, copy: 'long', copyLong: true, maxMs: 14 * 24 * 3600000, stake: 5, maxOpen: 20 },
@@ -507,7 +507,7 @@ async function cerveauScan() {
         cerveauDone.add(w.mint);
         const ok = buys >= 2 * sells && mcap > 0 && mcap < 50e3;
         st.cerveauRecent = (st.cerveauRecent || []).concat([{ t: now, symbol: w.symbol || w.name, ok, why: `${buys} achats / ${sells} ventes, market cap ${Math.round(mcap / 1e3)} k$` }]).slice(-20);
-        if (!ok) continue;
+        if (!ok || VARIANTS.cerveauR.paused) continue;
         const c = (await Courbe.read([w.curve]).catch(() => ({})))[w.curve];
         if (!c || c.complete) continue;
         buyReal('cerveauR', { mint: w.mint, curve: w.curve, name: w.symbol || w.name, symbol: w.symbol, vT0: c.vT, vS0: c.vS, tRecv: now },
