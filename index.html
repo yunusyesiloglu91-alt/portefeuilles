@@ -73,7 +73,7 @@
   button.sellbtn:disabled { opacity: .5; }
   footer { color: var(--muted); font-size: 12px; text-align: center; margin-top: 24px; line-height: 1.5; }
   .err { background: rgba(239,68,68,.12); color: #fca5a5; border-radius: 12px; padding: 10px 12px; font-size: 13px; margin-bottom: 12px; }
-  body[data-sel^="eclair"] .sellbtn, body[data-sel="actu"] .sellbtn, body[data-sel="vague"] .sellbtn, body[data-sel="expert"] .sellbtn { display: none; } /* test virtuel : pas de vente manuelle */
+  body[data-sel^="eclair"] .sellbtn, body[data-sel="actu"] .sellbtn, body[data-sel="vague"] .sellbtn, body[data-sel="expert"] .sellbtn, body[data-sel^="copie"] .sellbtn { display: none; } /* test virtuel : pas de vente manuelle */
 </style>
 </head>
 <body>
@@ -88,7 +88,8 @@
   <div id="err"></div>
   <div id="toasts" aria-live="polite"></div>
   <div class="seg" id="pick" role="tablist" aria-label="Choisir le Sniper">
-    <button data-id="expert" role="tab">🧠 Expert</button>
+    <button data-id="copieCourt" role="tab">👥 Copie court</button>
+    <button data-id="copieMoyen" role="tab">👥 Copie moyen</button>
     <button data-id="vague" role="tab">🌊 Vague</button>
     <button data-id="actu" role="tab">📰 Actu</button>
   </div>
@@ -130,15 +131,16 @@
   const STATE_RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/data/state.json`;
   const CASINO_CAPITAL = 100, DAY = 86400000;
   // Sniper affiché sur l'accueil (choix mémorisé sur ce téléphone)
-  let sel = 'actu';
-  try { sel = localStorage.getItem('sniperChoisi') || 'actu'; } catch { /* navigation privée */ }
-  if (!['actu', 'vague', 'expert'].includes(sel)) sel = 'expert'; // seules les stratégies encore actives sont proposées
-  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)', eclairS: '⚡ Éclair strict (test virtuel)', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', actu: '📰 Actu (token lié à une actualité)', vague: '🌊 Vague (le leader d’une vague de tokens)', expert: '🧠 Expert (repli + paliers de 25 %)' };
+  const isRtId = (x) => /^eclair/.test(x || '') || ['actu', 'vague', 'expert', 'copieCourt', 'copieMoyen'].includes(x);
+  let sel = 'copieCourt';
+  try { sel = localStorage.getItem('sniperChoisi') || 'copieCourt'; } catch { /* navigation privée */ }
+  if (!['copieCourt', 'copieMoyen', 'vague', 'actu'].includes(sel)) sel = 'copieCourt'; // seules les stratégies encore actives sont proposées
+  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)', eclairS: '⚡ Éclair strict (test virtuel)', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', actu: '📰 Actu (token lié à une actualité)', vague: '🌊 Vague (le leader d’une vague de tokens)', expert: '🧠 Expert (repli + paliers de 25 %)', copieCourt: '👥 Copie court terme (portefeuilles gagnants)', copieMoyen: '👥 Copie moyen terme (portefeuilles gagnants)' };
   const NOTIF = 'sniper-97f143460ae09334d6', CMD = 'sniper-97f143460ae09334d6-cmd', DATA = 'sniper-97f143460ae09334d6-data'; // messages via ntfy.sh
   // Market cap arrondie : 55 k$, 120 k$, 1,2 M$
   const mcap = (x) => (!x ? '?' : x >= 1e6 ? `${num(x / 1e6, 1)} M$` : `${Math.max(5, Math.round(x / 5e3) * 5)} k$`);
   let st = null, rt = null, px = {}, memePx = {}, pairPx = {}, rtPx = {}, lastPx = 0, filter = 'all';
-  const RTLAB = { expert: '🧠 Expert', vague: '🌊 Vague', actu: '📰 Actu', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', eclairS: '⚡ Éclair strict (test)', eclairQ: '⚡ Éclair sélectif (test)', eclair: '⚡ Éclair 0,1 s (test)', diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
+  const RTLAB = { copieCourt: '👥 Copie court terme', copieMoyen: '👥 Copie moyen terme', expert: '🧠 Expert', vague: '🌊 Vague', actu: '📰 Actu', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', eclairS: '⚡ Éclair strict (test)', eclairQ: '⚡ Éclair sélectif (test)', eclair: '⚡ Éclair 0,1 s (test)', diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
   const curvePx = {}; // clé de courbe -> prix d'un jeton en SOL, lu sur la blockchain
   let curveT = 0;
   const rp = (p) => {
@@ -198,7 +200,7 @@
   const liveEv = [];
   function applyTrade(t) {
     // Les Éclair vivent dans le sniper à la seconde (rt), les autres dans le sniper à 5 min
-    const isRt = String(t.id || '').startsWith('eclair') || t.id === 'actu' || t.id === 'vague' || t.id === 'expert';
+    const isRt = isRtId(t.id);
     const v = isRt ? (rt && rt.variants && rt.variants[t.id]) : (st && st.sniper && st.sniper.variants && st.sniper.variants[t.id || 'qualite']);
     if (!v) return false;
     if (v.trades.some((x) => x.t === t.t && x.side === t.side && x.name === t.name)) return false;
@@ -317,7 +319,7 @@
     const sn = st.sniper;
     // Éclair vit dans le sniper à la seconde (PC) : on le lit depuis sa propre liste, sans bouton Vendre
     const rtv = rt && rt.variants && rt.variants[sel];
-    const isRtSel = sel.startsWith('eclair') || sel === 'actu' || sel === 'vague' || sel === 'expert';
+    const isRtSel = isRtId(sel);
     const rtMapped = rtv ? { ...rtv, positions: rtv.positions.map((p) => ({ ...p, addr: p.mint, pair: p.mint, last: rp(p) })) } : null;
     // Les variantes « Éclair » vivent dans le sniper à la seconde, pas dans le sniper 5 min (qui a des variantes du même nom)
     const snq = sn && (isRtSel && rtMapped ? rtMapped : (sn.variants[sel] || rtMapped || sn.variants.qualite));
@@ -414,9 +416,9 @@
       ${br.bad.length ? '<div style="font-weight:700;margin-top:10px">❌ À éviter</div>' + br.bad.map((l) => les(l, false)).join('') : ''}`;
 
     // ---------- Les 3 Snipers côte à côte
-    const TRIO = [['expert', '🧠 Expert', 'achète un repli après un premier élan, vend par paliers de 25 %'], ['vague', '🌊 Vague', 'plusieurs tokens sur le même thème : achète le leader'], ['actu', '📰 Actu', 'token lancé sur une actualité qui démarre']]; const TRIO_OLD = [ ['eclairQ04', '🚀 Sélectif 0,4 s', 'bot très rapide (infrastructure pro)'], ['eclairQ', '⚡ Sélectif 1 s', 'notre vitesse actuelle'], ['eclairQ3', '🐢 Sélectif 3 s', 'bot ordinaire'], ['eclair', '⚡ Éclair', 'sans filtre créateur/nom'], ['eclairS', '⚡ Éclair strict', 'créateur ≤ 1 %']];
+    const TRIO = [['copieCourt', '👥 Copie court terme', 'achète et revend en même temps que des portefeuilles gagnants rapides'], ['copieMoyen', '👥 Copie moyen terme', 'pareil, avec des portefeuilles qui gardent plus longtemps'], ['vague', '🌊 Vague', 'plusieurs tokens sur le même thème : achète le leader'], ['actu', '📰 Actu', 'token lancé sur une actualité qui démarre']]; const TRIO_OLD = [ ['eclairQ04', '🚀 Sélectif 0,4 s', 'bot très rapide (infrastructure pro)'], ['eclairQ', '⚡ Sélectif 1 s', 'notre vitesse actuelle'], ['eclairQ3', '🐢 Sélectif 3 s', 'bot ordinaire'], ['eclair', '⚡ Éclair', 'sans filtre créateur/nom'], ['eclairS', '⚡ Éclair strict', 'créateur ≤ 1 %']];
     $('trio').innerHTML = sn ? TRIO.map(([id, name, sub]) => {
-      const x = (id.startsWith('eclair') || id === 'actu' || id === 'vague' || id === 'expert') ? (rt && rt.variants[id]) : sn.variants[id];
+      const x = isRtId(id) ? (rt && rt.variants[id]) : sn.variants[id];
       if (!x) return `<div class="row"><div class="main"><div class="t">${name}</div><div class="s">démarre au prochain passage du robot</div></div></div>`;
       // Valeur en direct : cash + positions au prix lu sur la blockchain
       const val = x.cash + x.positions.reduce((a, p) => a + p.qty * rp(p), 0);
@@ -479,6 +481,13 @@
         <div class="r"><b class="${cls(ret)}">${pct(ret)}</b><span>${num(val)} $</span></div>
         <button class="sellbtn" data-addr="${esc(p.addr)}" data-name="${esc(p.name)}" ${pending[p.addr] ? 'disabled' : ''}>${pending[p.addr] ? 'Envoyé…' : 'Vendre'}</button></div>`;
     }).join('') : '<div class="empty">Aucune position : le robot attend un bon lancement.</div>';
+    if (sel.startsWith('copie')) {
+      const grp = sel === 'copieCourt' ? 'court' : 'moyen';
+      const ws = ((rt && rt.copyWallets) || []).filter((w) => w.group === grp);
+      const ev = ((rt && rt.copyEvents) || []).slice(-8).reverse();
+      $('positions').innerHTML = `<div class="card" style="padding:14px"><b>👥 Portefeuilles suivis (${ws.length})</b><div class="empty" style="padding:6px 0 0">${ws.length ? ws.map((w) => `<a href="https://solscan.io/account/${esc(w.wallet)}" target="_blank" rel="noopener" style="color:var(--text)">${esc(w.wallet.slice(0, 4) + '…' + w.wallet.slice(-4))} ↗</a>${w.from ? ' <span style="opacity:.8">(nouvelle adresse de ' + esc(w.from.slice(0, 4)) + '…)</span>' : ''}`).join('<br>') : 'Recherche des portefeuilles en cours…'}</div>
+        <b style="display:block;margin-top:10px">Derniers mouvements</b><div class="empty" style="padding:6px 0 0">${ev.length ? ev.map((e) => `${new Date(e.t).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })} · ${esc(e.msg)}`).join('<br>') : 'Aucun mouvement pour l’instant.'}</div></div>` + $('positions').innerHTML;
+    }
     if (sel === 'expert') {
       const er = ((rt && rt.expertRecent) || []).slice(-8).reverse();
       $('positions').innerHTML = `<div class="card" style="padding:14px"><b>🔎 Derniers tokens analysés par l’expert</b><div class="empty" style="padding:6px 0 0">${er.length ? er.map((r) => `${r.ok ? '✅' : '❌'} <b style="color:var(--text)">${esc(r.symbol || '?')}</b> <span style="opacity:.8">(${esc(r.why)})</span>`).join('<br>') : 'En attente d’un repli intéressant.'}</div></div>` + $('positions').innerHTML;

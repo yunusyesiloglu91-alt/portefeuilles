@@ -1,0 +1,270 @@
+{
+ "date": "2026-10-16T01:04:57.763Z",
+ "winners": [
+  {
+   "mint": "J2c8spbHWrezx8XwxpFFEEjnma2kQ4VxGkuqkJ8k7fCD",
+   "name": "1 / SOL",
+   "curve": "2MCVeUTxX2MSng4Mx3MPSC9TK76CHnxHzCUzRSNVMbZb"
+  },
+  {
+   "mint": "31GYUbJW5vjF1o7VM5SGP9Emj5WDBHb1cdcR8BM6pump",
+   "name": "NULLCASH / SOL",
+   "curve": "7VWTxyQJuoVLrbmwRTWFMqqxNpGABPxgHZVbZhMAnoXq"
+  },
+  {
+   "mint": "Bwd4r4dRphpQv4Ys2C15avbGY5L1Pmhnfb9Ne3vapump",
+   "name": "DCITY / SOL",
+   "curve": "6MbbJEkddxL6PRBiyxQuqi4oJQQ81BQep4ztWwd7ZHiY"
+  },
+  {
+   "mint": "6mxzkwtL5TqTSjncmXytp3zzDuhyQVYRgGFmMn53pump",
+   "name": "鬧鬧 / SOL",
+   "curve": "F3X4LtJpwYKS8ZFWjmcCjKGMdrjSDQNNkfRUhVgBWqYA"
+  },
+  {
+   "mint": "DSQULmrvxRhy7XJHqaG2SfzuuSHHtrxBNHwosUJkpump",
+   "name": "4CHAN / SOL",
+   "curve": "2x23AwHGwWajtWgxd1SCGjX2Tbo8TguJzFYxcXc1xqnj"
+  },
+  {
+   "mint": "2PLF955KTb7CDpHbA5VZH8CgunkvWqfic9wufwJFpump",
+   "name": "PDOOM / SOL",
+   "curve": "455nmb9NUYZTEYY1dXjSEU1tcRwRXrGDoGDe3bNHMK8H"
+  },
+  {
+   "mint": "64xncy8vrFNCfABgnwP6Wqi5gLKDdjtrATeWQkD2pump",
+   "name": "H2O / SOL",
+   "curve": "FtkJ5cdSBDkQizSd6GrDVDHS7oVqtJoFtpRS4R52sYSK"
+  },
+  {
+   "mint": "DbPZDtdyCTJGsLZWWiC92DYU6gWHTpTiazNd2JR5pump",
+   "name": "API / SOL",
+   "curve": "2ByUf4Mhur4dPANoXVo57CyNxDMWzYm38HdZV6dL88EF"
+  },
+  {
+   "mint": "FduVQvDcuGPHHAniQVgpPWS3ZGDNgjU7ts4DzmSZpump",
+   "name": "OPM / SOL",
+   "curve": "C3DXETXqvMUWe74e1xpdvpToSXyF88zjq6jnfdDXN9mS"
+  },
+  {
+   "mint": "34fph3wNfMY19U1Xe3gJmPMh7mRvGqgyKUbXpMrqpump",
+   "name": "索拉拉 / SOL",
+   "curve": "HyAKv84JraN1kmHRCq12rgBBeHbvPW82CwKzUtZd4iDt"
+  }
+ ],
+ "results": [
+  {
+   "wallet": "5gxzZhVpoTq715PyPFy6G9fwVkssWcFEbWCMF5ZGtzKx",
+   "earlyOn": 1,
+   "creator": true,
+   "closed": 3,
+   "wins": 3,
+   "pnlSol": 11.475,
+   "medianHoldMin": 0.1,
+   "avgBuySol": 3.722,
+   "txPerHour": 75.2
+  },
+  {
+   "wallet": "8yTiEati6GGkhdahSsdWHoHzyga6gQQaRkkM6FEVVW6i",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 6,
+   "wins": 4,
+   "pnlSol": 4.179,
+   "medianHoldMin": 0.1,
+   "avgBuySol": 1.818,
+   "txPerHour": 57.2
+  },
+  {
+   "wallet": "CNZkSWx1AQ9AFCZuuLpaHamLUzWaCHqoA5V7XbhPGNTS",
+   "earlyOn": 1,
+   "creator": true,
+   "closed": 1,
+   "wins": 1,
+   "pnlSol": 2.91,
+   "medianHoldMin": 0,
+   "avgBuySol": 2.128,
+   "txPerHour": 8.1
+  },
+  {
+   "wallet": "SQHK48QT8SY1vYN44iXji7wQ6CJek8AjfX6mBp47TZq",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 13,
+   "wins": 7,
+   "pnlSol": 2.824,
+   "medianHoldMin": 2.6,
+   "avgBuySol": 3.106,
+   "txPerHour": 109
+  },
+  {
+   "wallet": "FfW5e8gKJfgaZPog6DiJoW6Kif6Fb23CokWprRhHVjV1",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 4,
+   "wins": 2,
+   "pnlSol": 1.884,
+   "medianHoldMin": 0,
+   "avgBuySol": 2.544,
+   "txPerHour": 110.3
+  },
+  {
+   "wallet": "4nDJMtnz35oWDF4EZJ8bxEeuQAFsAit8kTMKsi9BtZ4s",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 7,
+   "wins": 4,
+   "pnlSol": 1.242,
+   "medianHoldMin": 1.3,
+   "avgBuySol": 0.221,
+   "txPerHour": 30.9
+  },
+  {
+   "wallet": "EZbw9MrMwGKE3PCYDos7Y7cQsaqoRAby9i18MjGjzxMk",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 13,
+   "wins": 6,
+   "pnlSol": 0.451,
+   "medianHoldMin": 1.3,
+   "avgBuySol": 0.842,
+   "txPerHour": 76.8
+  },
+  {
+   "wallet": "CuATPPVF1VuZUaCC3EBCA1afnM9X7WBG33iXyQGjZWGp",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 37,
+   "wins": 17,
+   "pnlSol": 0.42,
+   "medianHoldMin": 0.5,
+   "avgBuySol": 0.502,
+   "txPerHour": 31.7
+  },
+  {
+   "wallet": "Gdfyi9hHz7s1aDKbexkGeudLZ4pVjpLpsxECTEmV55Qr",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 33,
+   "wins": 12,
+   "pnlSol": 0.378,
+   "medianHoldMin": 0.3,
+   "avgBuySol": 0.402,
+   "txPerHour": 27.5
+  },
+  {
+   "wallet": "FBvxneTq8dY7WKxj924CseuveWzDL5tN9JuSW3S9nJkN",
+   "earlyOn": 2,
+   "creator": false,
+   "closed": 10,
+   "wins": 3,
+   "pnlSol": -0.182,
+   "medianHoldMin": 0.2,
+   "avgBuySol": 1.135,
+   "txPerHour": 19.5
+  },
+  {
+   "wallet": "sssssDdMNAWKingjpEojkTNdVuZrBe7FsJLaGtexe7d",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 8,
+   "wins": 3,
+   "pnlSol": -0.274,
+   "medianHoldMin": 1.4,
+   "avgBuySol": 1.542,
+   "txPerHour": 1085.7
+  },
+  {
+   "wallet": "64hP97Bwr5PubotcTeGgfhkFrGiLVVxT2kVo9M9b4AEz",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 9,
+   "wins": 4,
+   "pnlSol": -0.537,
+   "medianHoldMin": 3.4,
+   "avgBuySol": 2.98,
+   "txPerHour": 125.8
+  },
+  {
+   "wallet": "Bpv3GFKY93Q5c5b2q6X2zCKayRYi3aKpqZteWonxnixD",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 23,
+   "wins": 6,
+   "pnlSol": -1.553,
+   "medianHoldMin": 0.2,
+   "avgBuySol": 1.395,
+   "txPerHour": 170.6
+  }
+ ],
+ "court": [
+  {
+   "wallet": "8yTiEati6GGkhdahSsdWHoHzyga6gQQaRkkM6FEVVW6i",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 6,
+   "wins": 4,
+   "pnlSol": 4.179,
+   "medianHoldMin": 0.1,
+   "avgBuySol": 1.818,
+   "txPerHour": 57.2
+  },
+  {
+   "wallet": "SQHK48QT8SY1vYN44iXji7wQ6CJek8AjfX6mBp47TZq",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 13,
+   "wins": 7,
+   "pnlSol": 2.824,
+   "medianHoldMin": 2.6,
+   "avgBuySol": 3.106,
+   "txPerHour": 109
+  },
+  {
+   "wallet": "FfW5e8gKJfgaZPog6DiJoW6Kif6Fb23CokWprRhHVjV1",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 4,
+   "wins": 2,
+   "pnlSol": 1.884,
+   "medianHoldMin": 0,
+   "avgBuySol": 2.544,
+   "txPerHour": 110.3
+  }
+ ],
+ "moyen": [
+  {
+   "wallet": "CuATPPVF1VuZUaCC3EBCA1afnM9X7WBG33iXyQGjZWGp",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 37,
+   "wins": 17,
+   "pnlSol": 0.42,
+   "medianHoldMin": 0.5,
+   "avgBuySol": 0.502,
+   "txPerHour": 31.7
+  },
+  {
+   "wallet": "Gdfyi9hHz7s1aDKbexkGeudLZ4pVjpLpsxECTEmV55Qr",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 33,
+   "wins": 12,
+   "pnlSol": 0.378,
+   "medianHoldMin": 0.3,
+   "avgBuySol": 0.402,
+   "txPerHour": 27.5
+  },
+  {
+   "wallet": "4nDJMtnz35oWDF4EZJ8bxEeuQAFsAit8kTMKsi9BtZ4s",
+   "earlyOn": 1,
+   "creator": false,
+   "closed": 7,
+   "wins": 4,
+   "pnlSol": 1.242,
+   "medianHoldMin": 1.3,
+   "avgBuySol": 0.221,
+   "txPerHour": 30.9
+  }
+ ]
+}

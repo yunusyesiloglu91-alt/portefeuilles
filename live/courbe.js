@@ -10,12 +10,12 @@ const usage = { public: 0, tatum: 0, failed: 0 };
 async function rpcCall(body) {
   try {
     const r = await fetch(RPC, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: AbortSignal.timeout(3000), body });
-    if (r.ok) { const j = await r.json(); if (j.result) { usage.public++; return j; } }
+    if (r.ok) { const j = await r.json(); if (j.result !== undefined) { usage.public++; return j; } }
   } catch { /* on passe au secours */ }
   if (TATUM_KEY) {
     try {
       const r = await fetch(TATUM, { method: 'POST', headers: { 'content-type': 'application/json', 'x-api-key': TATUM_KEY.trim() }, signal: AbortSignal.timeout(4000), body });
-      if (r.ok) { const j = await r.json(); if (j.result) { usage.tatum++; return j; } }
+      if (r.ok) { const j = await r.json(); if (j.result !== undefined) { usage.tatum++; return j; } }
     } catch { /* les deux ont échoué */ }
   }
   usage.failed++;
@@ -53,4 +53,9 @@ function sellQuote(c, tokens) {
 
 const mid = (c) => c.vS / c.vT; // prix instantané d'un jeton, en SOL
 
-module.exports = { read, buyQuote, sellQuote, mid, FEE, usage };
+async function rpc(method, params) {
+  const j = await rpcCall(JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }));
+  return j.result;
+}
+
+module.exports = { read, buyQuote, sellQuote, mid, FEE, usage, rpc };

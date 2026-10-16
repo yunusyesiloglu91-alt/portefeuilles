@@ -37,6 +37,9 @@ const VARIANTS = {
   // 📰 Actu : token lancé juste après une actualité qui démarre et qui en porte le nom (prix réels, 10 $)
   // 🌊 Vague : plusieurs créateurs lancent en même temps des tokens sur le même thème ; on achète le leader
   // 🧠 Expert : entrée sur repli d'un token qui a déjà de l'élan, contrôle RugCheck, vente par paliers de 25 %
+  // 👥 Copie : achète quand un portefeuille gagnant achète, revend la même part quand il vend (5 $, 100 $)
+  copieCourt: { name: '👥 Copie court terme', delay: 0, fast: true, real: true, copy: 'court', maxMs: 6 * 3600000, stake: 5, maxOpen: 20 },
+  copieMoyen: { name: '👥 Copie moyen terme', delay: 0, fast: true, real: true, copy: 'moyen', maxMs: 48 * 3600000, stake: 5, maxOpen: 20 },
   expert: { name: '🧠 Expert', paused: true /* arrêté le 16/10 : −55 % sur 20 trades */, delay: 0, fast: true, real: true, ladder: true, maxMs: 3 * 60 * MIN, stake: 10 },
   vague: { name: '🌊 Vague', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
   actu: { name: '📰 Actu', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
@@ -311,7 +314,7 @@ function buyReal(id, tok, why) {
   if (!tok.curve || !(solUsd > 0) || v.cash < stake) return;
   // Un seul achat par token et par stratégie, y compris pendant la seconde où l'ordre est en cours
   v.pendingMints = v.pendingMints || [];
-  if (v.positions.length + v.pendingMints.length >= MAX_OPEN || v.positions.some((p) => p.mint === tok.mint) || v.pendingMints.includes(tok.mint)) return;
+  if (v.positions.length + v.pendingMints.length >= (VARIANTS[id].maxOpen || MAX_OPEN) || v.positions.some((p) => p.mint === tok.mint) || v.pendingMints.includes(tok.mint)) return;
   v.cash -= stake;
   v.pendingMints.push(tok.mint);
   const solIn = stake / solUsd - NET_SOL;
@@ -362,7 +365,7 @@ function realSell(id, v, p, part, reason) {
     p.realized += usd;
     p.selling = false;
     const done = part >= 1 || p.qty <= 1e-9;
-    const r = (done || VARIANTS[id].ladder ? reason : `${reason} (moitié)`) + note;
+    const r = (done || VARIANTS[id].ladder || VARIANTS[id].copy ? reason : `${reason} (moitié)`) + note;
     pushLive(id, { t: Date.now(), side: 'vente', name: p.name, mint: p.mint, addr: p.mint, price: usd / qty, usd, done, reason: r });
     v.trades.push({ t: Date.now(), side: 'vente', name: p.name, mint: p.mint, price: usd / qty, usd, ret: done ? p.realized / p.cost - 1 : usd / (p.cost * part) - 1, reason: r, held: Date.now() - p.t, peak: p.peak / p.entry, lag: Date.now() - tDecision });
     if (done) v.positions.splice(v.positions.indexOf(p), 1);
@@ -493,6 +496,64 @@ function ladderExit(id, v, p) {
   if (Date.now() - p.t >= maxMs) return realSell(id, v, p, 1, '3 h écoulées');
 }
 
+// ---------- 👥 Copie de portefeuilles gagnants (liste trouvée par research/smartmoney.js)
+const { PublicKey } = require('@solana/web3.js');
+const PUMP_PROGRAM = new PublicKey('6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P');
+const Copie = require('./copie.js');
+const COPY_ID = { court: 'copieCourt', moyen: 'copieMoyen' };
+const shortA = (a) => `${a.slice(0, 4)}…${a.slice(-4)}`;
+const names = {};
+async function tokenName(mint) {
+  if (names[mint]) return names[mint];
+  try {
+    const pairs = await (await fetch(`https://api.dexscreener.com/tokens/v1/solana/${mint}`, { signal: AbortSignal.timeout(3000) })).json();
+    if (pairs && pairs[0]) return (names[mint] = pairs[0].baseToken.symbol);
+  } catch { /* pas encore indexé */ }
+  return shortA(mint);
+}
+function copyEvent(msg) { st.copyEvents = (st.copyEvents || []).concat([{ t: Date.now(), msg }]).slice(-40); log(`copie : ${msg}`); }
+let copier = null;
+async function copyTrade(e) {
+  const id = COPY_ID[e.group];
+  if (!id) return;
+  const v = st.variants[id];
+  if (e.side === 'achat') {
+    const curve = PublicKey.findProgramAddressSync([Buffer.from('bonding-curve'), new PublicKey(e.mint).toBuffer()], PUMP_PROGRAM)[0].toBase58();
+    const c = (await Courbe.read([curve]).catch(() => ({})))[curve];
+    if (!c || c.complete) { copyEvent(`${shortA(e.wallet)} achète ${shortA(e.mint)} hors de la courbe pump.fun : pas copié (prix non calculable)`); return; }
+    const name = await tokenName(e.mint);
+    copyEvent(`${shortA(e.wallet)} achète ${name} (${e.sol.toFixed(2)} SOL) : on copie`);
+    buyReal(id, { mint: e.mint, curve, name, symbol: name, vT0: c.vT, vS0: c.vS, tRecv: Date.now() }, `copie de ${shortA(e.wallet)} (${e.sol.toFixed(2)} SOL)`);
+  } else {
+    const p = v.positions.find((x) => x.mint === e.mint);
+    if (!p || p.selling) return;
+    copyEvent(`${shortA(e.wallet)} vend ${Math.round(e.part * 100)} % de ${p.name} : on vend la même part`);
+    realSell(id, v, p, e.part >= 0.95 ? 1 : e.part, `${shortA(e.wallet)} vend ${Math.round(e.part * 100)} %`);
+  }
+}
+function startCopy() {
+  let list = st.copyWallets;
+  if (!list || !list.length) {
+    try {
+      const res = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'research', 'smartmoney.json'), 'utf8'));
+      list = [...res.court.map((x) => ({ wallet: x.wallet, group: 'court' })), ...res.moyen.map((x) => ({ wallet: x.wallet, group: 'moyen' }))];
+    } catch { list = []; }
+  }
+  st.copyWallets = list;
+  if (!list.length) { log('copie : aucun portefeuille à suivre pour l’instant'); return; }
+  copier = Copie.create({
+    rpc: Courbe.rpc, log, onTrade: (e) => copyTrade(e).catch(() => {}),
+    onNewWallet: (w) => {
+      if (st.copyWallets.filter((x) => x.group === w.group).length >= 8) return;
+      if (copier.add(w.to, w.group)) {
+        st.copyWallets.push({ wallet: w.to, group: w.group, from: w.from });
+        copyEvent(`${shortA(w.from)} a envoyé ${w.sol.toFixed(1)} SOL vers ${shortA(w.to)} : nouvelle adresse suivie`);
+      }
+    },
+  });
+  copier.start(list);
+}
+
 let realBusy = false;
 async function realExits() {
   if (realBusy) return;
@@ -506,6 +567,12 @@ async function realExits() {
       const c = curves[p.curve];
       if (!c) continue;
       if (c.complete) { realSell(id, v, p, 1, 'token sorti de la courbe'); continue; }
+      if (VARIANTS[id].copy) {
+        p.last = Courbe.mid(c) * solUsd;
+        p.peak = Math.max(p.peak, p.last);
+        if (Date.now() - p.t >= VARIANTS[id].maxMs) realSell(id, v, p, 1, 'durée maximale atteinte');
+        continue;
+      }
       p.last = Courbe.mid(c) * solUsd;
       p.peak = Math.max(p.peak, p.last);
       if (VARIANTS[id].ladder) { ladderExit(id, v, p); continue; }
@@ -714,6 +781,7 @@ async function start() {
   setInterval(() => checkExits(null, false), 10000); // sorties sur durée même sans trade
   setInterval(realExits, 1000);
   Actu.start();
+  startCopy();
   setInterval(vagueScan, 10000);
   setInterval(expertScan, 3000);
   setInterval(() => { st.expertWatching = watch.size; st.rpcUsage = Courbe.usage; }, 30000);
