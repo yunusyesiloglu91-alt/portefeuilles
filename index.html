@@ -73,7 +73,7 @@
   button.sellbtn:disabled { opacity: .5; }
   footer { color: var(--muted); font-size: 12px; text-align: center; margin-top: 24px; line-height: 1.5; }
   .err { background: rgba(239,68,68,.12); color: #fca5a5; border-radius: 12px; padding: 10px 12px; font-size: 13px; margin-bottom: 12px; }
-  body[data-sel^="eclair"] .sellbtn, body[data-sel="actu"] .sellbtn, body[data-sel="vague"] .sellbtn, body[data-sel="expert"] .sellbtn, body[data-sel^="copie"] .sellbtn, body[data-sel="tiktok"] .sellbtn { display: none; } /* test virtuel : pas de vente manuelle */
+  body[data-sel^="eclair"] .sellbtn, body[data-sel="actu"] .sellbtn, body[data-sel="vague"] .sellbtn, body[data-sel="expert"] .sellbtn, body[data-sel^="copie"] .sellbtn, body[data-sel="tiktok"] .sellbtn, body[data-sel="cerveauR"] .sellbtn { display: none; } /* test virtuel : pas de vente manuelle */
 </style>
 </head>
 <body>
@@ -88,6 +88,7 @@
   <div id="err"></div>
   <div id="toasts" aria-live="polite"></div>
   <div class="seg" id="pick" role="tablist" aria-label="Choisir le Sniper">
+    <button data-id="cerveauR" role="tab">🧠 Cerveau</button>
     <button data-id="tiktok" role="tab">📱 TikTok</button>
     <button data-id="copieCourt" role="tab">👥 Copie court</button>
     <button data-id="copieMoyen" role="tab">👥 Copie moyen</button>
@@ -132,16 +133,16 @@
   const STATE_RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/data/state.json`;
   const CASINO_CAPITAL = 100, DAY = 86400000;
   // Sniper affiché sur l'accueil (choix mémorisé sur ce téléphone)
-  const isRtId = (x) => /^eclair/.test(x || '') || ['actu', 'vague', 'expert', 'copieCourt', 'copieMoyen', 'tiktok'].includes(x);
+  const isRtId = (x) => /^eclair/.test(x || '') || ['actu', 'vague', 'expert', 'copieCourt', 'copieMoyen', 'tiktok', 'cerveauR'].includes(x);
   let sel = 'copieCourt';
   try { sel = localStorage.getItem('sniperChoisi') || 'copieCourt'; } catch { /* navigation privée */ }
-  if (!['tiktok', 'copieCourt', 'copieMoyen', 'vague', 'actu'].includes(sel)) sel = 'tiktok'; // seules les stratégies encore actives sont proposées
-  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)', eclairS: '⚡ Éclair strict (test virtuel)', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', actu: '📰 Actu (token lié à une actualité)', vague: '🌊 Vague (le leader d’une vague de tokens)', expert: '🧠 Expert (repli + paliers de 25 %)', copieCourt: '👥 Copie court terme (portefeuilles gagnants)', copieMoyen: '👥 Copie moyen terme (portefeuilles gagnants)', tiktok: '📱 TikTok (alerte trader + contrôle avant d’entrer)' };
+  if (!['cerveauR', 'tiktok', 'copieCourt', 'copieMoyen', 'vague', 'actu'].includes(sel)) sel = 'cerveauR'; // seules les stratégies encore actives sont proposées
+  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)', eclairS: '⚡ Éclair strict (test virtuel)', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', actu: '📰 Actu (token lié à une actualité)', vague: '🌊 Vague (le leader d’une vague de tokens)', expert: '🧠 Expert (repli + paliers de 25 %)', copieCourt: '👥 Copie court terme (portefeuilles gagnants)', copieMoyen: '👥 Copie moyen terme (portefeuilles gagnants)', tiktok: '📱 TikTok (alerte trader + contrôle avant d’entrer)', cerveauR: '🧠 Cerveau (règle apprise sur 2 356 tokens)' };
   const NOTIF = 'sniper-97f143460ae09334d6', CMD = 'sniper-97f143460ae09334d6-cmd', DATA = 'sniper-97f143460ae09334d6-data'; // messages via ntfy.sh
   // Market cap arrondie : 55 k$, 120 k$, 1,2 M$
   const mcap = (x) => (!x ? '?' : x >= 1e6 ? `${num(x / 1e6, 1)} M$` : `${Math.max(5, Math.round(x / 5e3) * 5)} k$`);
   let st = null, rt = null, px = {}, memePx = {}, pairPx = {}, rtPx = {}, lastPx = 0, filter = 'all';
-  const RTLAB = { tiktok: '📱 TikTok', copieCourt: '👥 Copie court terme', copieMoyen: '👥 Copie moyen terme', expert: '🧠 Expert', vague: '🌊 Vague', actu: '📰 Actu', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', eclairS: '⚡ Éclair strict (test)', eclairQ: '⚡ Éclair sélectif (test)', eclair: '⚡ Éclair 0,1 s (test)', diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
+  const RTLAB = { cerveauR: '🧠 Cerveau', tiktok: '📱 TikTok', copieCourt: '👥 Copie court terme', copieMoyen: '👥 Copie moyen terme', expert: '🧠 Expert', vague: '🌊 Vague', actu: '📰 Actu', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', eclairS: '⚡ Éclair strict (test)', eclairQ: '⚡ Éclair sélectif (test)', eclair: '⚡ Éclair 0,1 s (test)', diplome: "🎓 Diplômé + sécurité", diplomeTemoin: "🎓 Diplômé témoin", createur: '🔍 Analyse créateur', ia: '🤖 IA Claude Opus 5.5', seconde: '⚡ Seconde filtrée', confirme: '⏱️ Confirmé 60 s', temoin: '🎲 Tout acheter (témoin)' };
   const curvePx = {}; // clé de courbe -> prix d'un jeton en SOL, lu sur la blockchain
   let curveT = 0;
   const rp = (p) => {
@@ -417,7 +418,7 @@
       ${br.bad.length ? '<div style="font-weight:700;margin-top:10px">❌ À éviter</div>' + br.bad.map((l) => les(l, false)).join('') : ''}`;
 
     // ---------- Les 3 Snipers côte à côte
-    const TRIO = [['tiktok', '📱 TikTok', 'un trader suivi achète → contrôle hype, élan, détenteurs → on entre'], ['copieCourt', '👥 Copie court terme', 'achète et revend en même temps que des portefeuilles gagnants rapides'], ['copieMoyen', '👥 Copie moyen terme', 'pareil, avec des portefeuilles qui gardent plus longtemps'], ['vague', '🌊 Vague', 'plusieurs tokens sur le même thème : achète le leader'], ['actu', '📰 Actu', 'token lancé sur une actualité qui démarre']]; const TRIO_OLD = [ ['eclairQ04', '🚀 Sélectif 0,4 s', 'bot très rapide (infrastructure pro)'], ['eclairQ', '⚡ Sélectif 1 s', 'notre vitesse actuelle'], ['eclairQ3', '🐢 Sélectif 3 s', 'bot ordinaire'], ['eclair', '⚡ Éclair', 'sans filtre créateur/nom'], ['eclairS', '⚡ Éclair strict', 'créateur ≤ 1 %']];
+    const TRIO = [['cerveauR', '🧠 Cerveau', 'règle apprise : acheteurs ≥ 2 × vendeurs et market cap < 50 k$'], ['tiktok', '📱 TikTok', 'un trader suivi achète → contrôle hype, élan, détenteurs → on entre'], ['copieCourt', '👥 Copie court terme', 'achète et revend en même temps que des portefeuilles gagnants rapides'], ['copieMoyen', '👥 Copie moyen terme', 'pareil, avec des portefeuilles qui gardent plus longtemps'], ['vague', '🌊 Vague', 'plusieurs tokens sur le même thème : achète le leader'], ['actu', '📰 Actu', 'token lancé sur une actualité qui démarre']]; const TRIO_OLD = [ ['eclairQ04', '🚀 Sélectif 0,4 s', 'bot très rapide (infrastructure pro)'], ['eclairQ', '⚡ Sélectif 1 s', 'notre vitesse actuelle'], ['eclairQ3', '🐢 Sélectif 3 s', 'bot ordinaire'], ['eclair', '⚡ Éclair', 'sans filtre créateur/nom'], ['eclairS', '⚡ Éclair strict', 'créateur ≤ 1 %']];
     $('trio').innerHTML = sn ? TRIO.map(([id, name, sub]) => {
       const x = isRtId(id) ? (rt && rt.variants[id]) : sn.variants[id];
       if (!x) return `<div class="row"><div class="main"><div class="t">${name}</div><div class="s">démarre au prochain passage du robot</div></div></div>`;
@@ -482,6 +483,10 @@
         <div class="r"><b class="${cls(ret)}">${pct(ret)}</b><span>${num(val)} $</span></div>
         <button class="sellbtn" data-addr="${esc(p.addr)}" data-name="${esc(p.name)}" ${pending[p.addr] ? 'disabled' : ''}>${pending[p.addr] ? 'Envoyé…' : 'Vendre'}</button></div>`;
     }).join('') : '<div class="empty">Aucune position : le robot attend un bon lancement.</div>';
+    if (sel === 'cerveauR') {
+      const cr = ((rt && rt.cerveauRecent) || []).slice(-8).reverse();
+      $('positions').innerHTML = `<div class="card" style="padding:14px"><b>🧠 Derniers tokens jugés par le cerveau</b><div class="empty" style="padding:6px 0 0">${cr.length ? cr.map((r) => `${r.ok ? '✅' : '❌'} <b style="color:var(--text)">${esc(r.symbol || '?')}</b> <span style="opacity:.8">(${esc(r.why)})</span>`).join('<br>') : 'En attente de tokens assez actifs pour être jugés.'}</div></div>` + $('positions').innerHTML;
+    }
     if (sel === 'tiktok') {
       const tr = ((rt && rt.tiktokRecent) || []).slice(-8).reverse();
       $('positions').innerHTML = `<div class="card" style="padding:14px"><b>📱 Derniers contrôles avant d’entrer</b><div class="empty" style="padding:6px 0 0">${tr.length ? tr.map((r) => `${r.ok ? '✅' : '❌'} <b style="color:var(--text)">${esc(r.symbol || '?')}</b> <span style="opacity:.8">(${esc(r.why)})</span>`).join('<br>') : 'En attente d’une alerte des traders suivis.'}</div></div>` + $('positions').innerHTML;

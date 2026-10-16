@@ -39,6 +39,9 @@ const VARIANTS = {
   // 🧠 Expert : entrée sur repli d'un token qui a déjà de l'élan, contrôle RugCheck, vente par paliers de 25 %
   // 👥 Copie : achète quand un portefeuille gagnant achète, revend la même part quand il vend (5 $, 100 $)
   // 📱 TikTok : l'achat d'un trader suivi n'est qu'une alerte ; on n'entre qu'après contrôle hype + élan + détenteurs
+  // 🧠 Cerveau : règle trouvée par le cerveau sur 2 356 tokens (research/cerveau-strategie.js) :
+  // acheteurs ≥ 2 × vendeurs sur 1 h ET market cap < 50 k$. Testée ici aux vrais prix.
+  cerveauR: { name: '🧠 Cerveau', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
   tiktok: { name: '📱 TikTok', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
   copieCourt: { name: '👥 Copie court terme', delay: 0, fast: true, real: true, copy: 'court', maxMs: 6 * 3600000, stake: 5, maxOpen: 20 },
   copieMoyen: { name: '👥 Copie moyen terme', delay: 0, fast: true, real: true, copy: 'moyen', maxMs: 48 * 3600000, stake: 5, maxOpen: 20 },
@@ -480,6 +483,39 @@ async function expertScan() {
   expertBusy = false;
 }
 
+// ---------- 🧠 Cerveau : sur les jeunes tokens surveillés (liste de l'Expert), toutes les 20 s,
+// on lit leurs compteurs d'achats / ventes sur DexScreener et on applique la règle du cerveau.
+const cerveauDone = new Set();
+let cerveauBusy = false;
+async function cerveauScan() {
+  if (cerveauBusy || !(solUsd > 0)) return;
+  cerveauBusy = true;
+  try {
+    const now = Date.now();
+    const list = [...watch.values()].filter((w) => now - w.t >= MIN && !cerveauDone.has(w.mint)).slice(0, 90);
+    for (let k = 0; k < list.length; k += 30) {
+      const chunk = list.slice(k, k + 30);
+      const pairs = (await (await fetch(`https://api.dexscreener.com/tokens/v1/solana/${chunk.map((w) => w.mint).join(',')}`, { signal: AbortSignal.timeout(5000) })).json()) || [];
+      for (const w of chunk) {
+        const p = pairs.filter((x) => x.baseToken && x.baseToken.address === w.mint).sort((a, b) => ((b.txns && b.txns.h1 && b.txns.h1.buys) || 0) - ((a.txns && a.txns.h1 && a.txns.h1.buys) || 0))[0];
+        if (!p) continue;
+        const buys = (p.txns && p.txns.h1 && p.txns.h1.buys) || 0, sells = (p.txns && p.txns.h1 && p.txns.h1.sells) || 0;
+        const mcap = p.marketCap || p.fdv || 0;
+        if (buys < 20) continue; // pas encore assez d'activité pour juger
+        cerveauDone.add(w.mint);
+        const ok = buys >= 2 * sells && mcap > 0 && mcap < 50e3;
+        st.cerveauRecent = (st.cerveauRecent || []).concat([{ t: now, symbol: w.symbol || w.name, ok, why: `${buys} achats / ${sells} ventes, market cap ${Math.round(mcap / 1e3)} k$` }]).slice(-20);
+        if (!ok) continue;
+        const c = (await Courbe.read([w.curve]).catch(() => ({})))[w.curve];
+        if (!c || c.complete) continue;
+        buyReal('cerveauR', { mint: w.mint, curve: w.curve, name: w.symbol || w.name, symbol: w.symbol, vT0: c.vT, vS0: c.vS, tRecv: now },
+          `règle du cerveau : ${buys} achats pour ${sells} ventes en 1 h, market cap ${Math.round(mcap / 1e3)} k$`);
+      }
+    }
+  } catch { /* DexScreener ou RPC momentanément indisponible */ }
+  cerveauBusy = false;
+}
+
 // Sortie par paliers (Expert) : 25 % à +50 %, 25 % à +100 %, 25 % à +200 %, dernier quart suivi à −30 % du plus haut.
 // Stop −35 % avant le 1er palier, puis stop au prix d'achat. Sans nouveau plus haut pendant 5 min avant le 1er palier : sortie.
 function ladderExit(id, v, p) {
@@ -857,6 +893,7 @@ async function start() {
   startCopy();
   setInterval(vagueScan, 10000);
   setInterval(expertScan, 3000);
+  setInterval(cerveauScan, 20000);
   setInterval(() => { st.expertWatching = watch.size; st.rpcUsage = Courbe.usage; }, 30000);
   setInterval(() => { st.actuHot = Actu.hot().slice(0, 15); }, 60000); // moteur réaliste : courbes relues sur la blockchain chaque seconde
   setInterval(publish, 2 * MIN);
