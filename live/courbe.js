@@ -32,7 +32,7 @@ async function read(keys) {
       if (!acc) return; // compte introuvable
       const b = Buffer.from(acc.data[0], 'base64');
       // rS = SOL réellement déposés par les acheteurs (les réserves « virtuelles » dépendent du réglage de la courbe)
-      out[keys[k + i]] = { vT: Number(b.readBigUInt64LE(8)) / 1e6, vS: Number(b.readBigUInt64LE(16)) / 1e9, rS: Number(b.readBigUInt64LE(32)) / 1e9, complete: b[48] === 1 };
+      out[keys[k + i]] = { vT: Number(b.readBigUInt64LE(8)) / 1e6, vS: Number(b.readBigUInt64LE(16)) / 1e9, rS: Number(b.readBigUInt64LE(32)) / 1e9, rT: Number(b.readBigUInt64LE(24)) / 1e6, complete: b[48] === 1 };
     });
   }
   return out;

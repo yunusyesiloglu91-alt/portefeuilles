@@ -38,6 +38,8 @@ const VARIANTS = {
   // 🌊 Vague : plusieurs créateurs lancent en même temps des tokens sur le même thème ; on achète le leader
   // 🧠 Expert : entrée sur repli d'un token qui a déjà de l'élan, contrôle RugCheck, vente par paliers de 25 %
   // 👥 Copie : achète quand un portefeuille gagnant achète, revend la même part quand il vend (5 $, 100 $)
+  // 📱 TikTok : l'achat d'un trader suivi n'est qu'une alerte ; on n'entre qu'après contrôle hype + élan + détenteurs
+  tiktok: { name: '📱 TikTok', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
   copieCourt: { name: '👥 Copie court terme', delay: 0, fast: true, real: true, copy: 'court', maxMs: 6 * 3600000, stake: 5, maxOpen: 20 },
   copieMoyen: { name: '👥 Copie moyen terme', delay: 0, fast: true, real: true, copy: 'moyen', maxMs: 48 * 3600000, stake: 5, maxOpen: 20 },
   expert: { name: '🧠 Expert', paused: true /* arrêté le 16/10 : −55 % sur 20 trades */, delay: 0, fast: true, real: true, ladder: true, maxMs: 3 * 60 * MIN, stake: 10 },
@@ -517,6 +519,7 @@ async function copyTrade(e) {
   const id = COPY_ID[e.group];
   if (!id) return;
   const v = st.variants[id];
+  if (e.side === 'achat') tiktokAlert(e).catch(() => {});
   if (e.side === 'achat') {
     const curve = PublicKey.findProgramAddressSync([Buffer.from('bonding-curve'), new PublicKey(e.mint).toBuffer()], PUMP_PROGRAM)[0].toBase58();
     const c = (await Courbe.read([curve]).catch(() => ({})))[curve];
@@ -531,6 +534,76 @@ async function copyTrade(e) {
     realSell(id, v, p, e.part >= 0.95 ? 1 : e.part, `${shortA(e.wallet)} vend ${Math.round(e.part * 100)} %`);
   }
 }
+// ---------- 📱 Stratégie « TikTok » : alerte → contrôle avant d'entrer
+const METAPLEX = new PublicKey('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s');
+const tiktokSeen = new Set();
+function tiktokLog(symbol, ok, why) {
+  st.tiktokRecent = (st.tiktokRecent || []).concat([{ t: Date.now(), symbol, ok, why }]).slice(-20);
+}
+// Réseaux sociaux du token, lus dans sa fiche de métadonnées (compte Metaplex → fichier JSON)
+async function socials(mint) {
+  try {
+    let uri = '', symbol = '';
+    // Nouveaux tokens pump.fun (Token-2022) : nom, symbole et adresse de la fiche sont dans le token lui-même
+    const acc = await Courbe.rpc('getAccountInfo', [mint, { encoding: 'jsonParsed' }]);
+    const ext = (acc && acc.value && acc.value.data.parsed && acc.value.data.parsed.info.extensions) || [];
+    const md = ext.find((x) => x.extension === 'tokenMetadata');
+    if (md) { uri = md.state.uri; symbol = md.state.symbol; }
+    else {
+      // Anciens tokens : fiche Metaplex
+      const pda = PublicKey.findProgramAddressSync([Buffer.from('metadata'), METAPLEX.toBuffer(), new PublicKey(mint).toBuffer()], METAPLEX)[0].toBase58();
+      const m = await Courbe.rpc('getAccountInfo', [pda, { encoding: 'base64' }]);
+      if (!m || !m.value) return null;
+      const buf = Buffer.from(m.value.data[0], 'base64');
+      let o = 65;
+      const str = () => { const n = buf.readUInt32LE(o); o += 4; const v = buf.slice(o, o + n).toString('utf8').replace(/\u0000/g, '').trim(); o += n; return v; };
+      str(); symbol = str(); uri = str();
+    }
+    const j = await (await fetch(uri, { signal: AbortSignal.timeout(4000) })).json();
+    const pick = (k) => [j[k], j.extensions && j.extensions[k]].find((x) => typeof x === 'string' && x.length > 4);
+    // Les sites générés automatiquement (pages de plateforme) ne comptent pas comme de la hype
+    const fake = /otcdesks|pump\.fun|letsbonk|bonk\.fun|dexscreener|birdeye|gmgn|photon|axiom|solscan/i;
+    const tw = pick('twitter'), tg = pick('telegram'), web = pick('website');
+    return { symbol, twitter: tw && /(^|\/\/|\.)(x|twitter)\.com\//i.test(tw) ? tw : null, telegram: tg && /t\.me\//i.test(tg) ? tg : null, website: web && !fake.test(web) ? web : null };
+  } catch { return null; }
+}
+async function tiktokAlert(e) {
+  if (tiktokSeen.has(e.mint)) return;
+  tiktokSeen.add(e.mint);
+  const v = st.variants.tiktok;
+  if (!v || v.positions.some((p) => p.mint === e.mint)) return;
+  const curve = PublicKey.findProgramAddressSync([Buffer.from('bonding-curve'), new PublicKey(e.mint).toBuffer()], PUMP_PROGRAM)[0].toBase58();
+  // 1. Hype : le token doit avoir un moyen d'attirer du monde
+  const so = await socials(e.mint);
+  const sym = (so && so.symbol) || shortA(e.mint);
+  if (!so || !(so.twitter || so.telegram || so.website)) return tiktokLog(sym, false, 'aucun réseau social (pas de hype possible)');
+  // 2. Élan : 45 s d'observation de la courbe
+  const pts = [];
+  for (let k = 0; k < 16; k++) {
+    const c = (await Courbe.read([curve]).catch(() => ({})))[curve];
+    if (c && !c.complete) pts.push(c);
+    await new Promise((res) => setTimeout(res, 3000));
+  }
+  if (pts.length < 8) return tiktokLog(sym, false, 'courbe illisible ou token sorti de pump.fun');
+  const last = pts[pts.length - 1], first = pts[0];
+  const mids = pts.map((x) => Courbe.mid(x));
+  const flow = last.rS - first.rS;
+  if (last.rS < 5) return tiktokLog(sym, false, `seulement ${last.rS.toFixed(1)} SOL achetés au total`);
+  if (flow < 0.5) return tiktokLog(sym, false, `l'argent n'entre plus (${flow >= 0 ? '+' : ''}${flow.toFixed(1)} SOL en 45 s)`);
+  if (mids[mids.length - 1] < 0.85 * Math.max(...mids)) return tiktokLog(sym, false, 'le prix retombe déjà (sommet probable)');
+  // 3. Détenteurs : les 10 plus gros, hors courbe
+  try {
+    const big = await Courbe.rpc('getTokenLargestAccounts', [e.mint]);
+    const curveHeld = last.rT + 206.9e6; // le compte de la courbe détient tous les jetons pas encore vendus
+    const others = (big.value || []).map((x) => +x.uiAmount).filter((q) => Math.abs(q - curveHeld) > curveHeld * 0.001);
+    const top10 = others.slice(0, 10).reduce((a, q) => a + q, 0) / 1e7; // en % de l'offre (1 milliard)
+    if (top10 > 30) return tiktokLog(sym, false, `10 plus gros détenteurs : ${top10.toFixed(0)} %`);
+    tiktokLog(sym, true, `hype ${so.twitter ? 'Twitter' : so.telegram ? 'Telegram' : 'site'}, +${flow.toFixed(1)} SOL en 45 s, top 10 ${top10.toFixed(0)} %`);
+    buyReal('tiktok', { mint: e.mint, curve, name: sym, symbol: sym, vT0: last.vT, vS0: last.vS, tRecv: Date.now() },
+      `alerte ${shortA(e.wallet)} · hype ${so.twitter ? 'Twitter' : so.telegram ? 'Telegram' : 'site'} · +${flow.toFixed(1)} SOL en 45 s · top 10 ${top10.toFixed(0)} %`);
+  } catch { tiktokLog(sym, false, 'détenteurs illisibles'); }
+}
+
 function startCopy() {
   let list = st.copyWallets;
   if (!list || !list.length) {
