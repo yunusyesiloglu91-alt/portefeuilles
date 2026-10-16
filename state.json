@@ -3696,6 +3696,13 @@
    39.03,
    29.86,
    29.86
+  ],
+  [
+   1792147234682,
+   98.44,
+   38.93,
+   29.75,
+   29.75
   ]
  ],
  "watch": [
@@ -3749,10 +3756,10 @@
   }
  ],
  "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/HMzvsEEmtzHhvZNw9uwbaG85HCTmFnkbhzUx16cy7ca3/ohlcv/day), positions conservées"
  ],
- "lastScan": 1792130343896,
- "lastRun": 1792130943826,
+ "lastScan": 1792147234682,
+ "lastRun": 1792147234682,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -5966,55 +5973,59 @@
    [
     1792130943826,
     65.63
+   ],
+   [
+    1792147234682,
+    65.63
    ]
   ],
   "watch": [
    {
-    "name": "ALLOX",
-    "mcap": 1921252.197,
-    "ageDays": 0.3994081597222222,
-    "ch1": 0.06983,
-    "ch24": 1.7384899999999999,
+    "name": "RSGP",
+    "mcap": 1794808.27,
+    "ageDays": 0.3179940046296296,
+    "ch1": 0.08055,
+    "ch24": 0.9541299999999999,
     "ok": true
    },
    {
     "name": "FTR",
-    "mcap": 6630323.901,
-    "ageDays": 1.1635632523148147,
-    "ch1": 0.33175,
-    "ch24": 29.9208,
-    "ok": false
-   },
-   {
-    "name": "RSGP",
-    "mcap": 1298582.745,
-    "ageDays": 0.1259706597222222,
-    "ch1": 0.08793,
-    "ch24": 0.41385,
+    "mcap": 6126882.779,
+    "ageDays": 1.3555865972222223,
+    "ch1": -0.060579999999999995,
+    "ch24": 17.60293,
     "ok": false
    },
    {
     "name": "1",
-    "mcap": 1050884.10286276,
-    "ageDays": 0.4059822337962963,
-    "ch1": -0.09666999999999999,
-    "ch24": 5.27429,
-    "ok": false
+    "mcap": 1599389.61898567,
+    "ageDays": 0.5980055787037037,
+    "ch1": 0.00484,
+    "ch24": 8.54913,
+    "ok": true
    },
    {
     "name": "Dacity",
-    "mcap": 1442028.05746025,
-    "ageDays": 4.782695196759259,
-    "ch1": 0.10825,
-    "ch24": 11.23583,
+    "mcap": 1635394.23591434,
+    "ageDays": 4.974718541666666,
+    "ch1": 0.1024,
+    "ch24": 12.52262,
+    "ok": false
+   },
+   {
+    "name": "Irene",
+    "mcap": 737709.6001,
+    "ageDays": 0.03695233796296296,
+    "ch1": 7.3191999999999995,
+    "ch24": 7.3191999999999995,
     "ok": false
    },
    {
     "name": "DOPE",
-    "mcap": 4640417.03575968,
-    "ageDays": 4.688146585648148,
-    "ch1": -0.0152,
-    "ch24": 0.31367999999999996,
+    "mcap": 4679794.05730264,
+    "ageDays": 4.880169930555556,
+    "ch1": -0.02941,
+    "ch24": -0.02379,
     "ok": false
    }
   ],
