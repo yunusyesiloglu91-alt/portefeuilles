@@ -1,0 +1,140 @@
+{
+ "date": "2026-10-18T23:28:07.425Z",
+ "tokens": [
+  "godspeed",
+  "mucron",
+  "onboard",
+  "FTR",
+  "Gato",
+  "PIERRE",
+  "SUPERCORE",
+  "LUKE",
+  "CLAUDIA",
+  "CAPE",
+  "FOMO",
+  "STONK",
+  "TikTok US",
+  "AgenC"
+ ],
+ "res": [
+  {
+   "wallet": "MriyaNN8TMp6qRWjfr723PK7xgQK7yCt7Kg2v2PQu7X",
+   "sur": 5,
+   "tokens": "godspeed,mucron,onboard,Gato,CLAUDIA",
+   "profitUsd": 74578,
+   "tags": "",
+   "stats7d": {
+    "token_num": 2019,
+    "winrate": 0.9169184290030211,
+    "pnl_lt_nd5_num": 5,
+    "pnl_nd5_0x_num": 135,
+    "pnl_0x_2x_num": 1747,
+    "pnl_2x_5x_num": 35,
+    "pnl_gt_5x_num": 97,
+    "avg_holding_period": 1500518.3015873015
+   }
+  },
+  {
+   "wallet": "HB3GebzspXg5PBpeqewkjHPxugf4Uhx8xdZWGPC9q5ks",
+   "sur": 2,
+   "tokens": "FTR,PIERRE",
+   "profitUsd": 66619,
+   "tags": "",
+   "stats7d": {
+    "token_num": 471,
+    "winrate": 0.25274725274725274,
+    "pnl_lt_nd5_num": 31,
+    "pnl_nd5_0x_num": 306,
+    "pnl_0x_2x_num": 128,
+    "pnl_2x_5x_num": 5,
+    "pnl_gt_5x_num": 1,
+    "avg_holding_period": 169627.31395348837
+   }
+  },
+  {
+   "wallet": "GDpqhJgwzg8zcoEmVvGDiVRVnaa797ryvPnNqQVBjQrN",
+   "sur": 2,
+   "tokens": "FTR,CLAUDIA",
+   "profitUsd": 62357,
+   "tags": "",
+   "stats7d": {
+    "token_num": 51,
+    "winrate": 0.1875,
+    "pnl_lt_nd5_num": 2,
+    "pnl_nd5_0x_num": 24,
+    "pnl_0x_2x_num": 25,
+    "pnl_2x_5x_num": 0,
+    "pnl_gt_5x_num": 0,
+    "avg_holding_period": 576943.756097561
+   }
+  },
+  {
+   "wallet": "GijFWw4oNyh9ko3FaZforNsi3jk6wDovARpkKahPD4o5",
+   "sur": 2,
+   "tokens": "FTR,SUPERCORE",
+   "profitUsd": 54421,
+   "tags": "",
+   "stats7d": {
+    "token_num": 281,
+    "winrate": 0.38613861386138615,
+    "pnl_lt_nd5_num": 29,
+    "pnl_nd5_0x_num": 95,
+    "pnl_0x_2x_num": 150,
+    "pnl_2x_5x_num": 4,
+    "pnl_gt_5x_num": 3,
+    "avg_holding_period": 534398.5610687023
+   }
+  },
+  {
+   "wallet": "7XUAo3ugnHFtUgUamYB2rxhXPDCgz8zSbTausvriAs3p",
+   "sur": 2,
+   "tokens": "FTR,Gato",
+   "profitUsd": 51001,
+   "tags": "",
+   "stats7d": {
+    "token_num": 63,
+    "winrate": 0.25,
+    "pnl_lt_nd5_num": 9,
+    "pnl_nd5_0x_num": 28,
+    "pnl_0x_2x_num": 23,
+    "pnl_2x_5x_num": 3,
+    "pnl_gt_5x_num": 0,
+    "avg_holding_period": 175573.32653061225
+   }
+  },
+  {
+   "wallet": "Df7DsBZPhHKK6qxG7DQ1jNQ7J5HbJw1eZLhG4M1DWhLH",
+   "sur": 2,
+   "tokens": "mucron,FTR",
+   "profitUsd": 30125,
+   "tags": "",
+   "stats7d": {
+    "token_num": 40,
+    "winrate": 0.2727272727272727,
+    "pnl_lt_nd5_num": 3,
+    "pnl_nd5_0x_num": 21,
+    "pnl_0x_2x_num": 16,
+    "pnl_2x_5x_num": 0,
+    "pnl_gt_5x_num": 0,
+    "avg_holding_period": 42663.6
+   }
+  },
+  {
+   "wallet": "Es8BKzJDdcvaZrC3syZAZwtYJBLo1ETHJJx7uwYVJHNQ",
+   "sur": 2,
+   "tokens": "godspeed,Gato",
+   "profitUsd": 18153,
+   "tags": "",
+   "stats7d": {
+    "token_num": 40,
+    "winrate": 0.5333333333333333,
+    "pnl_lt_nd5_num": 6,
+    "pnl_nd5_0x_num": 7,
+    "pnl_0x_2x_num": 24,
+    "pnl_2x_5x_num": 0,
+    "pnl_gt_5x_num": 3,
+    "avg_holding_period": 109206.06451612903
+   }
+  }
+ ]
+}
