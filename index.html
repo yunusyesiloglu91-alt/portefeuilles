@@ -414,7 +414,7 @@
       ${br.bad.length ? '<div style="font-weight:700;margin-top:10px">❌ À éviter</div>' + br.bad.map((l) => les(l, false)).join('') : ''}`;
 
     // ---------- Les 3 Snipers côte à côte
-    const TRIO = [['copieLong', '💎 Copie long terme', 'copie des portefeuilles qui gardent leurs memecoins des jours'], ['copieMoyen', '👥 Copie moyen terme', 'pareil, avec des portefeuilles qui gardent plus longtemps'], ['actu', '📰 Actu', 'token lancé sur une actualité qui démarre']]; const TRIO_OLD = [ ['eclairQ04', '🚀 Sélectif 0,4 s', 'bot très rapide (infrastructure pro)'], ['eclairQ', '⚡ Sélectif 1 s', 'notre vitesse actuelle'], ['eclairQ3', '🐢 Sélectif 3 s', 'bot ordinaire'], ['eclair', '⚡ Éclair', 'sans filtre créateur/nom'], ['eclairS', '⚡ Éclair strict', 'créateur ≤ 1 %']];
+    const TRIO = [['copieLong', '💎 Copie long terme', 'copie des portefeuilles qui gardent leurs memecoins des jours'], ['copieMoyen', '👥 Copie moyen terme', 'pareil, avec des portefeuilles qui gardent plus longtemps']];
     $('trio').innerHTML = sn ? TRIO.map(([id, name, sub]) => {
       const x = isRtId(id) ? (rt && rt.variants[id]) : sn.variants[id];
       if (!x) return `<div class="row"><div class="main"><div class="t">${name}</div><div class="s">démarre au prochain passage du robot</div></div></div>`;
