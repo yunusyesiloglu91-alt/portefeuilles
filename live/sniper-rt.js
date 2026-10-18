@@ -45,6 +45,8 @@ const VARIANTS = {
   tiktok: { name: '📱 TikTok', paused: true /* retiré le 19/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
   // 💎 Copie long terme : portefeuilles qui gardent leurs memecoins des jours (research/longterme.js)
   copieLong: { name: '💎 Copie long terme', delay: 0, fast: true, real: true, copy: 'long', copyLong: true, maxMs: 14 * 24 * 3600000, stake: 5, maxOpen: 20 },
+  // 📈 Cassure de l'ATH (live/breakout.js) : mise 5/10/15 $ selon le nombre de « smart money », sorties par paliers
+  breakout: { name: '📈 Cassure ATH', delay: 0, fast: true, real: true, maxMs: 24 * 3600000, stake: 5, maxOpen: 6 },
   copieCourt: { name: '👥 Copie court terme', delay: 0, fast: true, real: true, copy: 'court', copyLong: true, maxMs: 6 * 3600000, stake: 5, maxOpen: 20 },
   copieMoyen: { name: '👥 Copie moyen terme', delay: 0, fast: true, real: true, copy: 'moyen', copyLong: true, maxMs: 48 * 3600000, stake: 5, maxOpen: 20 },
   expert: { name: '🧠 Expert', paused: true /* arrêté le 16/10 : −55 % sur 20 trades */, delay: 0, fast: true, real: true, ladder: true, maxMs: 3 * 60 * MIN, stake: 10 },
@@ -567,6 +569,38 @@ async function buyDex(id, mint, why) {
   pushLive(id, { ...t, addr: mint, qty });
   v.trades.push(t);
 }
+// Prix de plusieurs tokens en un seul appel (DexScreener : jusqu'à 30 adresses)
+async function dexPrices(mints) {
+  const out = {};
+  for (let k = 0; k < mints.length; k += 30) {
+    try {
+      const pairs = await (await fetch(`https://api.dexscreener.com/tokens/v1/solana/${mints.slice(k, k + 30).join(',')}`, { signal: AbortSignal.timeout(5000) })).json();
+      for (const p of pairs || []) {
+        const a = p.baseToken && p.baseToken.address;
+        if (!a || !(+p.priceUsd > 0)) continue;
+        const liq = (p.liquidity && p.liquidity.usd) || 0;
+        if (!out[a] || liq > out[a].liq) out[a] = { price: +p.priceUsd, pair: p.pairAddress, symbol: p.baseToken.symbol, liq };
+      }
+    } catch { /* on réessaie au prochain tour */ }
+  }
+  return out;
+}
+// Achat avec mise choisie (frais pump.fun + 1 % de glissement + frais réseau comptés)
+async function buyDexStake(id, mint, why, stake, extra) {
+  const v = st.variants[id];
+  if (v.cash < stake || v.positions.some((p) => p.mint === mint)) return;
+  const d = (await dexPrices([mint]))[mint];
+  if (!d || d.liq < 15000) { copyEvent(`${shortA(mint)} : marché trop peu liquide pour acheter`); return; }
+  const net = stake - NET_SOL * solUsd;
+  const fill = d.price * (1 + Courbe.FEE + DEX_SLIP);
+  const qty = net / fill;
+  v.cash -= stake;
+  v.fees = (v.fees || 0) + stake - qty * d.price;
+  v.positions.push({ mint, name: d.symbol, dex: true, pair: d.pair, t: Date.now(), entry: stake / qty, last: d.price, peak: d.price, qty, cost: stake, realized: 0, real: true, ...extra });
+  const t = { t: Date.now(), side: 'achat', name: d.symbol, mint, price: stake / qty, usd: stake, reason: `${why} · prix PumpSwap + 1 % de glissement` };
+  pushLive(id, { ...t, addr: mint, qty });
+  v.trades.push(t);
+}
 async function sellDex(id, v, p, part, reason) {
   p.selling = true;
   const d = await dexPrice(p.mint);
@@ -584,7 +618,7 @@ async function sellDex(id, v, p, part, reason) {
 // Toutes les minutes : prix des positions hors courbe, et durée maximale
 async function dexLoop() {
   for (const [id, v] of Object.entries(st.variants)) for (const p of [...v.positions]) {
-    if (!p.dex || p.selling) continue;
+    if (!p.dex || p.selling || p.breakout) continue;
     const d = await dexPrice(p.mint);
     if (d) { p.last = d.price; p.peak = Math.max(p.peak || 0, d.price); }
     if (VARIANTS[id] && Date.now() - p.t >= (VARIANTS[id].maxMs || EXIT.maxMs)) await sellDex(id, v, p, 1, 'durée maximale atteinte');
@@ -952,6 +986,14 @@ async function start() {
   Actu.start();
   startCopy();
   setInterval(() => dexLoop().catch(() => {}), 60000);
+  // 📈 Cassure de l'ATH
+  const Breakout = require('./breakout.js').create({
+    st, id: 'breakout', log, dexPrices, maxOpen: VARIANTS.breakout.maxOpen,
+    buy: (mint, why, stake, extra) => buyDexStake('breakout', mint, why, stake, extra),
+    sell: (p, part, reason) => sellDex('breakout', st.variants.breakout, p, part, reason),
+  });
+  setInterval(() => Breakout.scan(), 20000);
+  setInterval(() => Breakout.manage(), 8000);
   setInterval(vagueScan, 10000);
   setInterval(expertScan, 3000);
   setInterval(cerveauScan, 20000);
