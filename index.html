@@ -89,6 +89,7 @@
   <div id="toasts" aria-live="polite"></div>
   <div class="seg" id="pick" role="tablist" aria-label="Choisir le Sniper">
     <button data-id="copieLong" role="tab">💎 Long terme</button>
+    <button data-id="copieCourt" role="tab">⚡ Court terme</button>
     <button data-id="copieMoyen" role="tab">👥 Copie moyen</button>
   </div>
   <div id="cards"></div>
@@ -130,9 +131,9 @@
   const CASINO_CAPITAL = 100, DAY = 86400000;
   // Sniper affiché sur l'accueil (choix mémorisé sur ce téléphone)
   const isRtId = (x) => /^eclair/.test(x || '') || ['actu', 'vague', 'expert', 'copieCourt', 'copieMoyen', 'tiktok', 'cerveauR', 'copieLong'].includes(x);
-  let sel = 'copieMoyen';
-  try { sel = localStorage.getItem('sniperChoisi') || 'copieMoyen'; } catch { /* navigation privée */ }
-  if (!['copieMoyen', 'copieLong'].includes(sel)) sel = 'copieMoyen'; // seules les stratégies encore actives sont proposées
+  let sel = 'copieCourt';
+  try { sel = localStorage.getItem('sniperChoisi') || 'copieCourt'; } catch { /* navigation privée */ }
+  if (!['copieCourt', 'copieMoyen', 'copieLong'].includes(sel)) sel = 'copieCourt'; // seules les stratégies encore actives sont proposées
   const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)', eclairS: '⚡ Éclair strict (test virtuel)', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', actu: '📰 Actu (token lié à une actualité)', vague: '🌊 Vague (le leader d’une vague de tokens)', expert: '🧠 Expert (repli + paliers de 25 %)', copieCourt: '👥 Copie court terme (portefeuilles gagnants)', copieMoyen: '👥 Copie moyen terme (portefeuilles gagnants)', tiktok: '📱 TikTok (alerte trader + contrôle avant d’entrer)', cerveauR: '🧠 Cerveau (règle apprise sur 2 356 tokens)', copieLong: '💎 Copie long terme (mains solides)' };
   const NOTIF = 'sniper-97f143460ae09334d6', CMD = 'sniper-97f143460ae09334d6-cmd', DATA = 'sniper-97f143460ae09334d6-data'; // messages via ntfy.sh
   // Market cap arrondie : 55 k$, 120 k$, 1,2 M$
@@ -414,7 +415,7 @@
       ${br.bad.length ? '<div style="font-weight:700;margin-top:10px">❌ À éviter</div>' + br.bad.map((l) => les(l, false)).join('') : ''}`;
 
     // ---------- Les 3 Snipers côte à côte
-    const TRIO = [['copieLong', '💎 Copie long terme', 'copie des portefeuilles qui gardent leurs memecoins des jours'], ['copieMoyen', '👥 Copie moyen terme', 'pareil, avec des portefeuilles qui gardent plus longtemps']];
+    const TRIO = [['copieCourt', '⚡ Copie court terme', 'copie de traders qui gardent 10 à 30 minutes'], ['copieLong', '💎 Copie long terme', 'copie des portefeuilles qui gardent leurs memecoins des jours'], ['copieMoyen', '👥 Copie moyen terme', 'pareil, avec des portefeuilles qui gardent plus longtemps']];
     $('trio').innerHTML = sn ? TRIO.map(([id, name, sub]) => {
       const x = isRtId(id) ? (rt && rt.variants[id]) : sn.variants[id];
       if (!x) return `<div class="row"><div class="main"><div class="t">${name}</div><div class="s">démarre au prochain passage du robot</div></div></div>`;

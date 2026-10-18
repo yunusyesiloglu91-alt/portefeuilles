@@ -45,7 +45,7 @@ const VARIANTS = {
   tiktok: { name: '📱 TikTok', paused: true /* retiré le 19/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
   // 💎 Copie long terme : portefeuilles qui gardent leurs memecoins des jours (research/longterme.js)
   copieLong: { name: '💎 Copie long terme', delay: 0, fast: true, real: true, copy: 'long', copyLong: true, maxMs: 14 * 24 * 3600000, stake: 5, maxOpen: 20 },
-  copieCourt: { name: '👥 Copie court terme', paused: true /* retiré le 19/10 */, delay: 0, fast: true, real: true, copy: 'court', maxMs: 6 * 3600000, stake: 5, maxOpen: 20 },
+  copieCourt: { name: '👥 Copie court terme', delay: 0, fast: true, real: true, copy: 'court', copyLong: true, maxMs: 6 * 3600000, stake: 5, maxOpen: 20 },
   copieMoyen: { name: '👥 Copie moyen terme', delay: 0, fast: true, real: true, copy: 'moyen', copyLong: true, maxMs: 48 * 3600000, stake: 5, maxOpen: 20 },
   expert: { name: '🧠 Expert', paused: true /* arrêté le 16/10 : −55 % sur 20 trades */, delay: 0, fast: true, real: true, ladder: true, maxMs: 3 * 60 * MIN, stake: 10 },
   vague: { name: '🌊 Vague', paused: true /* retiré le 16/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
@@ -707,7 +707,6 @@ function startCopy() {
     const lt = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'research', 'longterme.json'), 'utf8'));
     for (const x of lt.long || []) if (!list.some((w) => w.wallet === x.wallet)) list.push({ wallet: x.wallet, group: 'long' });
   } catch { /* pas encore de recherche long terme */ }
-  list = list.filter((w) => w.group !== 'court');
   st.copyWallets = list;
   if (!list.length) { log('copie : aucun portefeuille à suivre pour l’instant'); return; }
   copier = Copie.create({

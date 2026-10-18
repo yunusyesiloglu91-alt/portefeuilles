@@ -1,0 +1,317 @@
+{
+ "date": "2026-10-18T23:44:40.024Z",
+ "res": [
+  {
+   "wallet": "4AHgEkTsGqY77qtde4UJn9yZCrbGcM7UM3vjT3qM4G5H",
+   "nom": "BagCalls 🎒",
+   "tokens": "UV",
+   "tokens7j": 455,
+   "winrate": 0.25806451612903225,
+   "detentionSec": 364249.5797752809,
+   "profit7jUsd": -1734,
+   "rendement7j": -0.132
+  },
+  {
+   "wallet": "7tiRXPM4wwBMRMYzmywRAE6jveS3gDbNyxgRrEoU6RLA",
+   "nom": "qtdegen",
+   "tokens": "Butler,godspeed",
+   "tokens7j": 481,
+   "winrate": 0.3344947735191638,
+   "detentionSec": 147377.55869565217,
+   "profit7jUsd": 2704,
+   "rendement7j": 0.031
+  },
+  {
+   "wallet": "EQaxqKT3N981QBmdSUGNzAGK5S26zUwAdRHhBCgn87zD",
+   "nom": "jamessmith",
+   "tokens": "Butler",
+   "tokens7j": 885,
+   "winrate": 0.372972972972973,
+   "detentionSec": 286922.1226635514,
+   "profit7jUsd": 1224,
+   "rendement7j": 0.017
+  },
+  {
+   "wallet": "D1eC6YVBTZhhARytHCCQUB9YHTUPLeycQxKvC32nuM5i",
+   "nom": "",
+   "tokens": "Butler,$15,godspeed",
+   "tokens7j": 347,
+   "winrate": 0.3877551020408163,
+   "detentionSec": 1416.1323076923077,
+   "profit7jUsd": 3550,
+   "rendement7j": 0.047
+  },
+  {
+   "wallet": "B7o1CskeweEiJY34GhQXvc79TsywVHzoBebrUx2WhE17",
+   "nom": "",
+   "tokens": "Butler,$15",
+   "tokens7j": 191,
+   "winrate": 0.3812154696132597,
+   "detentionSec": 2766.325153374233,
+   "profit7jUsd": 1088,
+   "rendement7j": 0.006
+  },
+  {
+   "wallet": "GM7Hrz2bDq33ezMtL6KGidSWZXMWgZ6qBuugkb5H8NvN",
+   "nom": "Beaver 🦁",
+   "tokens": "$15",
+   "tokens7j": 342,
+   "winrate": 0.30994152046783624,
+   "detentionSec": 308514.35185185185,
+   "profit7jUsd": -4707,
+   "rendement7j": -0.096
+  },
+  {
+   "wallet": "JBhcmuEPC6hWGBgdDc3EWdGZDryNTCPDtyMQr8dm84F1",
+   "nom": "",
+   "tokens": "$15,godspeed",
+   "tokens7j": 93,
+   "winrate": 0.5056179775280899,
+   "detentionSec": 9198.948051948051,
+   "profit7jUsd": 1068,
+   "rendement7j": 0.032
+  },
+  {
+   "wallet": "xxbYYKBgSTiKRR7vBp3EqJXXLs9s2yDYS9984fkRrad",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 238,
+   "winrate": 0.4484304932735426,
+   "detentionSec": 7356.9182692307695,
+   "profit7jUsd": 1497,
+   "rendement7j": 0.018
+  },
+  {
+   "wallet": "8WoZWtZ5w1dGUMYZWyyauQiWuHXndvRVn1N6FJGFvNqF",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 275,
+   "winrate": 0.7802197802197802,
+   "detentionSec": 5914.264925373134,
+   "profit7jUsd": 1736,
+   "rendement7j": 0.031
+  },
+  {
+   "wallet": "J4d9GkjMeujQJMwZZYX9wq84FARy5GXE5G2cRo2j45zn",
+   "nom": "",
+   "tokens": "UV",
+   "tokens7j": 93,
+   "winrate": 0.5056179775280899,
+   "detentionSec": 245914.80952380953,
+   "profit7jUsd": 726,
+   "rendement7j": 0.037
+  },
+  {
+   "wallet": "ardinRsN1mNYVeoJWTBsWeYeXvuR9UUDGMsCDKpb6AT",
+   "nom": "trunoest",
+   "tokens": "godspeed",
+   "tokens7j": 1214,
+   "winrate": 0.5541490857946554,
+   "detentionSec": 153707.34175084176,
+   "profit7jUsd": 47282,
+   "rendement7j": 0.151
+  },
+  {
+   "wallet": "663x6uqkXNLwocPXxAxfnhLzGM4cfjSAiok21Vjtx2pU",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 78,
+   "winrate": 0.6233766233766234,
+   "detentionSec": 127.57692307692308,
+   "profit7jUsd": 1070,
+   "rendement7j": 0.03
+  },
+  {
+   "wallet": "GVVUa3PmKCRdnSa2sKUaN9tCKzp6gTqSRNVDUu78Fct1",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 290,
+   "winrate": 0.5105633802816901,
+   "detentionSec": 63979.80344827586,
+   "profit7jUsd": 1888,
+   "rendement7j": 0.033
+  },
+  {
+   "wallet": "Gf3s1aS6Gbgo4RkpW2qTCEuqMpmeo8KK27UEEC3Su6wy",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 75,
+   "winrate": 0.3793103448275862,
+   "detentionSec": 204480.56666666668,
+   "profit7jUsd": 4851,
+   "rendement7j": 0.208
+  },
+  {
+   "wallet": "nogZ6727iZNKkbtjfP7rRe4ywAqDmgZGBgiXfxFgmNz",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 221,
+   "winrate": 0.5700483091787439,
+   "detentionSec": 172895.11520737328,
+   "profit7jUsd": 4846,
+   "rendement7j": 0.022
+  },
+  {
+   "wallet": "7uDFnn6ZUd7tkwYLwMisCezsKds8XAi436iufBSRhJTC",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 157,
+   "winrate": 0.5570469798657718,
+   "detentionSec": 76961.22535211267,
+   "profit7jUsd": 1189,
+   "rendement7j": 0.02
+  },
+  {
+   "wallet": "CUKFKdJw7F91bZBbtAJMrLLxqtVigVSJhx644EFnCnw",
+   "nom": "Baraka",
+   "tokens": "godspeed",
+   "tokens7j": 385,
+   "winrate": 0.21739130434782608,
+   "detentionSec": 162587.22,
+   "profit7jUsd": -3789,
+   "rendement7j": -0.124
+  },
+  {
+   "wallet": "DuQabFqdC9eeBULVa7TTdZYxe8vK8ct5DZr4Xcf7docy",
+   "nom": "orangie",
+   "tokens": "Butler",
+   "tokens7j": 394,
+   "winrate": 0.6111111111111112,
+   "detentionSec": 305816.9896640827,
+   "profit7jUsd": 2181,
+   "rendement7j": 0.152
+  },
+  {
+   "wallet": "Dvm79y8kxFo4j5MPewbHr3EgtYMeo4qPkMFSd1pfzaPY",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 343,
+   "winrate": 0.4662756598240469,
+   "detentionSec": 126.7212543554007,
+   "profit7jUsd": 2085,
+   "rendement7j": 0.045
+  },
+  {
+   "wallet": "4BFPgEKeeKvX8fBidc5ZU8TYuD6FiNevrb9R69vBP9Dc",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 339,
+   "winrate": 0.47928994082840237,
+   "detentionSec": 126.95070422535211,
+   "profit7jUsd": 2081,
+   "rendement7j": 0.047
+  },
+  {
+   "wallet": "Ex1uaNUrZkf6kVwoiKjobvZJ6aSn97EcdQiX7iCeBjLt",
+   "nom": "",
+   "tokens": "$15",
+   "tokens7j": 353,
+   "winrate": 0.3236994219653179,
+   "detentionSec": 22481.286604361372,
+   "profit7jUsd": 1078,
+   "rendement7j": 0.022
+  },
+  {
+   "wallet": "45hgJN9sUDun6H6N8ddJ8HgyYAgB6fXYaEpaPSBuXsu4",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 476,
+   "winrate": 0.41755888650963596,
+   "detentionSec": 831.2017167381974,
+   "profit7jUsd": 5293,
+   "rendement7j": 0.035
+  },
+  {
+   "wallet": "4K7qMyTDUJ5Mx15xsH4Ys2rAjZUGExoJa37ECxDrkh71",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 137,
+   "winrate": 0.432,
+   "detentionSec": 25844.638655462186,
+   "profit7jUsd": 3260,
+   "rendement7j": 0.16
+  },
+  {
+   "wallet": "9HSvEkMgo4yc2FXtmYTcSqQ6TAoBF5mGg2yPSQCVtzSK",
+   "nom": "",
+   "tokens": "$15",
+   "tokens7j": 360,
+   "winrate": 0.3352272727272727,
+   "detentionSec": 11269.393188854488,
+   "profit7jUsd": 1652,
+   "rendement7j": 0.033
+  },
+  {
+   "wallet": "E7gozEiAPNhpJsdS52amhhN2XCAqLZa7WPrhyR6C8o4S",
+   "nom": "",
+   "tokens": "$15",
+   "tokens7j": 158,
+   "winrate": 0.24675324675324675,
+   "detentionSec": 731148.711409396,
+   "profit7jUsd": -2572,
+   "rendement7j": -0.132
+  },
+  {
+   "wallet": "FTWyXCVC7e8evMsUbDM7Yz6R7KyCqgkXXJJzEFWYfzQE",
+   "nom": "",
+   "tokens": "Butler",
+   "tokens7j": 62,
+   "winrate": 0.3220338983050847,
+   "detentionSec": 355932.76923076925,
+   "profit7jUsd": 1643,
+   "rendement7j": 0.042
+  },
+  {
+   "wallet": "BMUffqPY3qPX9cXMrRwggKtqaqw96FtHCyghY8HyeubR",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 70,
+   "winrate": 0.42592592592592593,
+   "detentionSec": 50471.031746031746,
+   "profit7jUsd": 2023,
+   "rendement7j": 0.286
+  },
+  {
+   "wallet": "4vw54BmAogeRV3vPKWyFet5yf8DTLcREzdSzx4rw9Ud9",
+   "nom": "decu",
+   "tokens": "$15",
+   "tokens7j": 1482,
+   "winrate": 0.6875,
+   "detentionSec": 172871.6223146223,
+   "profit7jUsd": 103516,
+   "rendement7j": 0.196
+  },
+  {
+   "wallet": "9Vk7pkBZ9KFJmzaPzNYjGedyz8qoKMQtnYyYi2AehNMT",
+   "nom": "Xelf",
+   "tokens": "godspeed",
+   "tokens7j": 376,
+   "winrate": 0.043478260869565216,
+   "detentionSec": 394551.3708791209,
+   "profit7jUsd": -4300,
+   "rendement7j": -0.233
+  },
+  {
+   "wallet": "6zZyanyff5jr3zrWzwN3zEkjCKcADPSNm1c6KoFHxKj8",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 234,
+   "winrate": 0.5377358490566038,
+   "detentionSec": 83301.16585365853,
+   "profit7jUsd": 4397,
+   "rendement7j": 0.064
+  }
+ ],
+ "retenus": [
+  {
+   "wallet": "663x6uqkXNLwocPXxAxfnhLzGM4cfjSAiok21Vjtx2pU",
+   "nom": "",
+   "tokens": "godspeed",
+   "tokens7j": 78,
+   "winrate": 0.6233766233766234,
+   "detentionSec": 127.57692307692308,
+   "profit7jUsd": 1070,
+   "rendement7j": 0.03
+  }
+ ]
+}
