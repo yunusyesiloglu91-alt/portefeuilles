@@ -42,14 +42,14 @@ const VARIANTS = {
   // 🧠 Cerveau : règle trouvée par le cerveau sur 2 356 tokens (research/cerveau-strategie.js) :
   // acheteurs ≥ 2 × vendeurs sur 1 h ET market cap < 50 k$. Testée ici aux vrais prix.
   cerveauR: { name: '🧠 Cerveau', paused: true /* retiré le 16/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
-  tiktok: { name: '📱 TikTok', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
+  tiktok: { name: '📱 TikTok', paused: true /* retiré le 19/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
   // 💎 Copie long terme : portefeuilles qui gardent leurs memecoins des jours (research/longterme.js)
   copieLong: { name: '💎 Copie long terme', delay: 0, fast: true, real: true, copy: 'long', copyLong: true, maxMs: 14 * 24 * 3600000, stake: 5, maxOpen: 20 },
-  copieCourt: { name: '👥 Copie court terme', delay: 0, fast: true, real: true, copy: 'court', maxMs: 6 * 3600000, stake: 5, maxOpen: 20 },
+  copieCourt: { name: '👥 Copie court terme', paused: true /* retiré le 19/10 */, delay: 0, fast: true, real: true, copy: 'court', maxMs: 6 * 3600000, stake: 5, maxOpen: 20 },
   copieMoyen: { name: '👥 Copie moyen terme', delay: 0, fast: true, real: true, copy: 'moyen', copyLong: true, maxMs: 48 * 3600000, stake: 5, maxOpen: 20 },
   expert: { name: '🧠 Expert', paused: true /* arrêté le 16/10 : −55 % sur 20 trades */, delay: 0, fast: true, real: true, ladder: true, maxMs: 3 * 60 * MIN, stake: 10 },
   vague: { name: '🌊 Vague', paused: true /* retiré le 16/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
-  actu: { name: '📰 Actu', delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
+  actu: { name: '📰 Actu', paused: true /* retiré le 19/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
   eclairQ04: { name: '🚀 Sélectif 0,4 s (bot pro)', delay: 0, fast: true, selective: true, real: true, latency: 400, maxMs: 30 * MIN, stake: 10 },
   eclairQ3: { name: '🐢 Sélectif 3 s (bot ordinaire)', delay: 0, fast: true, selective: true, real: true, latency: 3000, maxMs: 30 * MIN, stake: 10 },
 };
@@ -604,7 +604,7 @@ function copyEvent(msg) { st.copyEvents = (st.copyEvents || []).concat([{ t: Dat
 let copier = null;
 async function copyTrade(e) {
   const id = COPY_ID[e.group];
-  if (!id) return;
+  if (!id || VARIANTS[id].paused) return;
   const v = st.variants[id];
   if (e.side === 'achat') tiktokAlert(e).catch(() => {});
   if (e.side === 'achat') {
@@ -659,7 +659,7 @@ async function socials(mint) {
   } catch { return null; }
 }
 async function tiktokAlert(e) {
-  if (tiktokSeen.has(e.mint)) return;
+  if (VARIANTS.tiktok.paused || tiktokSeen.has(e.mint)) return;
   tiktokSeen.add(e.mint);
   const v = st.variants.tiktok;
   if (!v || v.positions.some((p) => p.mint === e.mint)) return;
@@ -707,6 +707,7 @@ function startCopy() {
     const lt = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'research', 'longterme.json'), 'utf8'));
     for (const x of lt.long || []) if (!list.some((w) => w.wallet === x.wallet)) list.push({ wallet: x.wallet, group: 'long' });
   } catch { /* pas encore de recherche long terme */ }
+  list = list.filter((w) => w.group !== 'court');
   st.copyWallets = list;
   if (!list.length) { log('copie : aucun portefeuille à suivre pour l’instant'); return; }
   copier = Copie.create({
@@ -852,7 +853,7 @@ async function onCreate(d) {
   expertWatch(tok);
   // 📰 Actu
   const hit = Actu.match(d.name, d.symbol);
-  if (hit && tok.devPct <= 10 && tok.launches24h <= 1 && !(Date.now() - (actuBought[hit.word] || 0) < 3600000)) {
+  if (!VARIANTS.actu.paused && hit && tok.devPct <= 10 && tok.launches24h <= 1 && !(Date.now() - (actuBought[hit.word] || 0) < 3600000)) {
     actuBought[hit.word] = Date.now();
     buyReal('actu', tok, `actu « ${hit.word} » : ${hit.title.slice(0, 80)}`);
   }
