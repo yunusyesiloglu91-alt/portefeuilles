@@ -739,7 +739,8 @@ function startCopy() {
   }
   try {
     const lt = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'research', 'longterme.json'), 'utf8'));
-    for (const x of lt.long || []) if (!list.some((w) => w.wallet === x.wallet)) list.push({ wallet: x.wallet, group: 'long' });
+    // Ancienne liste de départ : seulement si aucun portefeuille « long » n'est déjà choisi
+    if (!list.some((w) => w.group === 'long')) for (const x of lt.long || []) if (!list.some((w) => w.wallet === x.wallet)) list.push({ wallet: x.wallet, group: 'long' });
   } catch { /* pas encore de recherche long terme */ }
   st.copyWallets = list;
   if (!list.length) { log('copie : aucun portefeuille à suivre pour l’instant'); return; }
