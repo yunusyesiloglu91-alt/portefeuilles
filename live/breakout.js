@@ -15,7 +15,7 @@ const env = path.join(__dirname, '.env');
 const KEY = (fs.existsSync(env) && (fs.readFileSync(env, 'utf8').match(/^GMGN_API_KEY=(.+)$/m) || [])[1]) || 'gmgn_solbscbaseethmonadtron';
 const run = (cmd) => new Promise((res) => exec(cmd, { env: { ...process.env, GMGN_API_KEY: KEY.trim() }, timeout: 30000, maxBuffer: 20e6 }, (e, out) => { try { res(JSON.parse(out)); } catch { res(null); } }));
 
-const LEVELS = { 1: { stake: 5, sl: 0.9, step: 1 }, 2: { stake: 10, sl: 0.9, step: 0.25 }, 3: { stake: 15, sl: 0.8, step: 0.15 } };
+const LEVELS = { 1: { stake: 5, sl: 0.9, step: 1 }, 2: { stake: 8, sl: 0.9, step: 0.25 }, 3: { stake: 10, sl: 0.8, step: 0.15 } };
 const levelOf = (n) => (n >= 6 ? 3 : n >= 3 ? 2 : n >= 1 ? 1 : 0);
 
 function create({ st, id, log, dexPrices, buy, sell, maxOpen = 6 }) {
@@ -64,6 +64,7 @@ function create({ st, id, log, dexPrices, buy, sell, maxOpen = 6 }) {
     if (t.is_wash_trading) why.push('volume truqué (wash trading)');
     if (t.is_honeypot) why.push('honeypot');
     if (+t.rug_ratio > 0.35) why.push(`risque de rug ${(+t.rug_ratio).toFixed(2)}`);
+    if (+t.liquidity / mc < 0.25) why.push(`liquidité faible (${Math.round((+t.liquidity / mc) * 100)} % de la market cap)`);
     if (+t.bundler_rate > 0.4) why.push(`bundlers ${Math.round(+t.bundler_rate * 100)} %`);
     if (v.positions.filter((p) => p.breakout).length >= maxOpen) why.push('trop de positions ouvertes');
     if (v.cash < LEVELS[lvl || 1].stake) why.push('plus assez de cash');
@@ -91,7 +92,6 @@ function create({ st, id, log, dexPrices, buy, sell, maxOpen = 6 }) {
         const L = LEVELS[p.lvl];
         const m = p.last / p.entry;
         p.step = p.step || 0;
-        if (p.lvl > 1 && m >= 1.3) p.be = true;
         const stop = p.be ? 1.0 : L.sl;
         if (m <= stop) { await sell(p, 1, p.be ? 'stop au prix d’achat' : `stop −${Math.round((1 - L.sl) * 100)} %`); continue; }
         if (p.lvl === 1) { if (m >= 2) await sell(p, 1, 'objectif ×2 (niveau 1)'); }
