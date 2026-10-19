@@ -47,6 +47,9 @@ const VARIANTS = {
   copieLong: { name: '💎 Copie long terme', delay: 0, fast: true, real: true, copy: 'long', copyLong: true, maxMs: 14 * 24 * 3600000, stake: 5, maxOpen: 20 },
   // 📈 Cassure de l'ATH (live/breakout.js) : mise 5/10/15 $ selon le nombre de « smart money », sorties par paliers
   breakout: { name: '📈 Cassure ATH', delay: 0, fast: true, real: true, maxMs: 24 * 3600000, stake: 5, maxOpen: 6 },
+  // 🤝 Consensus : on n'achète que si au moins 2 portefeuilles suivis différents achètent le même token en 15 min.
+  // Un seul portefeuille peut se tromper ou être un robot ; deux qui se retrouvent sur le même token, c'est un signal plus fort.
+  consensus: { name: '🤝 Consensus', delay: 0, fast: true, real: true, copyLong: true, maxMs: 12 * 3600000, stake: 5, maxOpen: 8, stopLoss: 0.35 },
   copieCourt: { name: '👥 Copie court terme', delay: 0, fast: true, real: true, copy: 'court', copyLong: true, maxMs: 6 * 3600000, stake: 5, maxOpen: 20 },
   copieMoyen: { name: '👥 Copie moyen terme', delay: 0, fast: true, real: true, copy: 'moyen', copyLong: true, maxMs: 48 * 3600000, stake: 5, maxOpen: 20 },
   expert: { name: '🧠 Expert', paused: true /* arrêté le 16/10 : −55 % sur 20 trades */, delay: 0, fast: true, real: true, ladder: true, maxMs: 3 * 60 * MIN, stake: 10 },
@@ -621,6 +624,7 @@ async function dexLoop() {
     if (!p.dex || p.selling || p.breakout) continue;
     const d = await dexPrice(p.mint);
     if (d) { p.last = d.price; p.peak = Math.max(p.peak || 0, d.price); }
+    if (d && VARIANTS[id] && VARIANTS[id].stopLoss && p.last / p.entry <= 1 - VARIANTS[id].stopLoss) { await sellDex(id, v, p, 1, 'stop −' + Math.round(VARIANTS[id].stopLoss * 100) + ' %'); continue; }
     if (VARIANTS[id] && Date.now() - p.t >= (VARIANTS[id].maxMs || EXIT.maxMs)) await sellDex(id, v, p, 1, 'durée maximale atteinte');
   }
 }
@@ -635,8 +639,27 @@ async function tokenName(mint) {
   return shortA(mint);
 }
 function copyEvent(msg) { st.copyEvents = (st.copyEvents || []).concat([{ t: Date.now(), msg }]).slice(-40); log(`copie : ${msg}`); }
+const consBuys = new Map(); // mint -> { wallet -> heure d'achat }
+async function consensusEvent(e) {
+  const v = st.variants.consensus;
+  if (!v) return;
+  if (e.side === 'achat') {
+    const m = consBuys.get(e.mint) || new Map();
+    m.set(e.wallet, Date.now());
+    consBuys.set(e.mint, m);
+    const recent = [...m.entries()].filter(([, t]) => Date.now() - t < 15 * 60000).map(([w]) => w);
+    if (recent.length >= 2 && !v.positions.some((p) => p.mint === e.mint) && v.cash >= 5) {
+      copyEvent(`consensus : ${recent.length} portefeuilles suivis achètent ${shortA(e.mint)}`);
+      await buyDexStake('consensus', e.mint, `consensus : ${recent.map(shortA).join(' + ')} achètent le même token`, 5, { consensus: true, buyers: recent });
+    }
+  } else {
+    const p = v.positions.find((x) => x.mint === e.mint && (x.buyers || []).includes(e.wallet));
+    if (p && !p.selling && e.part >= 0.5) await sellDex('consensus', v, p, 1, `${shortA(e.wallet)} (un des acheteurs) vend ${Math.round(e.part * 100)} %`);
+  }
+}
 let copier = null;
 async function copyTrade(e) {
+  consensusEvent(e).catch(() => {});
   const id = COPY_ID[e.group];
   if (!id || VARIANTS[id].paused) return;
   const v = st.variants[id];

@@ -1,0 +1,73 @@
+{
+ "date": "2026-10-19T22:28:19.625Z",
+ "plan": {
+  "court": [
+   "45hgJN9s",
+   "KjaTNDsL",
+   "4Z62duZk"
+  ],
+  "moyen": [
+   "AZLv3bQM",
+   "2UriZPQV",
+   "GuJEd9xj"
+  ],
+  "long": [
+   "4ELJiHdo",
+   "Es8BKzJD",
+   "FixukbsK",
+   "4g2p34qF"
+  ]
+ },
+ "list": [
+  {
+   "wallet": "45hgJN9sUDun6H6N8ddJ8HgyYAgB6fXYaEpaPSBuXsu4",
+   "group": "court",
+   "source": "GMGN 20/10"
+  },
+  {
+   "wallet": "KjaTNDsL8AQEjaBbzv7PZXX2ENbHuJ6Lc9ShC3kpqqP",
+   "group": "court",
+   "source": "GMGN 20/10"
+  },
+  {
+   "wallet": "4Z62duZkB432aZfr13QcZ1G8unoX9Ly8gvbtbH8vXCoK",
+   "group": "court",
+   "source": "GMGN 20/10"
+  },
+  {
+   "wallet": "AZLv3bQM1X1r4tWzmzhz6jEUKrLBTZ3ujtWXuQWCGvRb",
+   "group": "moyen",
+   "source": "GMGN 20/10"
+  },
+  {
+   "wallet": "2UriZPQVjPLdCL4PuzE4b7RdLU4TYDAZkja7Lmpzz8RP",
+   "group": "moyen",
+   "source": "GMGN 20/10"
+  },
+  {
+   "wallet": "GuJEd9xjS4iVnYXvi9sLQo8sbGc5j5TKWknw7LH8N7jZ",
+   "group": "moyen",
+   "source": "GMGN 20/10"
+  },
+  {
+   "wallet": "4ELJiHdoF4jUdDyabEzPDAAqydfHUS9WyrDUVsv7MTMU",
+   "group": "long",
+   "source": "GMGN 20/10"
+  },
+  {
+   "wallet": "Es8BKzJDdcvaZrC3syZAZwtYJBLo1ETHJJx7uwYVJHNQ",
+   "group": "long",
+   "source": "GMGN 20/10"
+  },
+  {
+   "wallet": "FixukbsKfJZEr996ubcWvwTAt1b6QJ2SfP3FJsBSbH33",
+   "group": "long",
+   "source": "GMGN 20/10"
+  },
+  {
+   "wallet": "4g2p34qF4PYeKEHUqyEXwUnCGZMiwUQqY4sTyzUXbXZa",
+   "group": "long",
+   "source": "GMGN 20/10"
+  }
+ ]
+}
