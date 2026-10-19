@@ -3,6 +3,7 @@
 // achat / vente d'un token pump.fun et la part vendue. Il suit aussi l'argent : si un portefeuille suivi
 // envoie au moins 1 SOL vers une nouvelle adresse, cette adresse est suivie à son tour.
 const WS_URL = 'wss://api.mainnet-beta.solana.com';
+const IGNORE = new Set(['So11111111111111111111111111111111111111112', 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', 'Es9vMFrzaCERmJfrF4H2FYD4KCoNyFzTcFDhpGN6c3Jn']);
 
 function create({ rpc, onTrade, onNewWallet, log }) {
   let ws = null;
@@ -55,7 +56,7 @@ function create({ rpc, onTrade, onNewWallet, log }) {
     for (const b of t.meta.postTokenBalances || []) if (b.owner === addr) post[b.mint] = +b.uiTokenAmount.uiAmountString || 0;
     let traded = false;
     for (const mint of new Set([...Object.keys(pre), ...Object.keys(post)])) {
-      if (!/pump$/.test(mint)) continue;
+      if (IGNORE.has(mint) || Math.abs(sol) < 0.05) continue; // SOL / stablecoins et poussières
       const a = pre[mint] || 0, b = post[mint] || 0;
       if (Math.abs(b - a) < 1e-6) continue;
       traded = true;
