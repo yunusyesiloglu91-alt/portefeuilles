@@ -894,7 +894,7 @@ async function onMigration(d) {
   const m5 = (p.txns && p.txns.m5) || {};
   // Réseaux : DexScreener met du temps à les afficher, on lit aussi les métadonnées du token
   const meta = rc && rc.uri ? await metadata(rc.uri) : null;
-  const twitter = ((p.info && p.info.socials) || []).some((x) => x.type === 'twitter') || !!(meta && [meta.twitter, meta.extensions && meta.extensions.twitter].find((x) => typeof x === 'string' && /(x|twitter).com//i.test(x)));
+  const twitter = ((p.info && p.info.socials) || []).some((x) => x.type === 'twitter') || !!(meta && [meta.twitter, meta.extensions && meta.extensions.twitter].find((x) => typeof x === 'string' && /(x|twitter)\.com\//i.test(x)));
   let why = null;
   if (!rc) why = 'RugCheck indisponible';
   else if (rc.rugged || rc.danger.length) why = rc.rugged ? 'rug détecté' : rc.danger[0];
