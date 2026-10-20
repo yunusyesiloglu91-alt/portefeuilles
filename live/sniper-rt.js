@@ -348,7 +348,7 @@ function buyReal(id, tok, why) {
     v.fees = (v.fees || 0) + (q.feeSol + NET_SOL) * solUsd;
     const delay = Date.now() - tok.tRecv;
     const name = tok.symbol || tok.name;
-    v.positions.push({ mint: tok.mint, name, curve: tok.curve, t: Date.now(), entry, last, peak: last, qty: q.tokens, cost: stake, realized: 0, real: true, gap, delay });
+    v.positions.push({ mint: tok.mint, name, curve: tok.curve, t: Date.now(), entry, last, peak: last, qty: q.tokens, cost: stake, realized: 0, real: true, gap, delay, src: tok.src });
     const reason = `${why} · prix réel après ${(delay / 1000).toFixed(1)} s${hoped ? ` (${gap < 0 ? '' : '+'}${(gap * 100).toFixed(0)} % de jetons vs prix annoncé)` : ''}`;
     pushLive(id, { t: Date.now(), side: 'achat', name, mint: tok.mint, addr: tok.mint, curve: tok.curve, price: entry, usd: stake, qty: q.tokens, reason });
     v.trades.push({ t: Date.now(), side: 'achat', name, mint: tok.mint, price: entry, usd: stake, reason, gap, delay });
@@ -604,11 +604,17 @@ async function buyDexStake(id, mint, why, stake, extra) {
   pushLive(id, { ...t, addr: mint, qty });
   v.trades.push(t);
 }
+// Prix obtenable en vendant qty : impact sur la pool (côté SOL ≈ liquidité / 2). Pool vide → presque rien.
+function realPrice(price, liq, qty) {
+  const Q = (liq || 0) / 2, V = qty * price;
+  if (Q < 300) return price * 0.02;
+  return price * Q / (Q + V);
+}
 async function sellDex(id, v, p, part, reason) {
   p.selling = true;
   const d = await dexPrice(p.mint);
-  const price = d ? d.price : p.last * 0.95;
   const qty = p.qty * part;
+  const price = d ? realPrice(d.price, d.liq, qty) : p.last * 0.95;
   const usd = Math.max(0, qty * price * (1 - Courbe.FEE - DEX_SLIP) - NET_SOL * solUsd);
   v.fees = (v.fees || 0) + qty * price - usd;
   v.cash += usd; p.qty -= qty; p.realized += usd; p.selling = false;
@@ -619,11 +625,21 @@ async function sellDex(id, v, p, part, reason) {
   if (done) v.positions.splice(v.positions.indexOf(p), 1);
 }
 // Toutes les minutes : prix des positions hors courbe, et durée maximale
+let dexBusy = false;
 async function dexLoop() {
+  if (dexBusy) return;
+  dexBusy = true;
+  try { await dexLoopRun(); } finally { dexBusy = false; }
+}
+async function dexLoopRun() {
+  const mints = [];
+  for (const v of Object.values(st.variants)) for (const p of v.positions) if (p.dex && !p.breakout && !mints.includes(p.mint)) mints.push(p.mint);
+  if (!mints.length) return;
+  const prices = await dexPrices(mints);
   for (const [id, v] of Object.entries(st.variants)) for (const p of [...v.positions]) {
     if (!p.dex || p.selling || p.breakout) continue;
-    const d = await dexPrice(p.mint);
-    if (d) { p.last = d.price; p.peak = Math.max(p.peak || 0, d.price); }
+    const d = prices[p.mint];
+    if (d) { p.last = realPrice(d.price, d.liq, p.qty); p.liq = Math.round(d.liq); p.peak = Math.max(p.peak || 0, p.last); p.seen = Date.now(); }
     if (d && VARIANTS[id] && VARIANTS[id].stopLoss && p.last / p.entry <= 1 - VARIANTS[id].stopLoss) { await sellDex(id, v, p, 1, 'stop −' + Math.round(VARIANTS[id].stopLoss * 100) + ' %'); continue; }
     // Sécuriser : la moitié vendue à ×2, puis tout si on retombe de 40 % depuis le plus haut
     if (d && VARIANTS[id] && VARIANTS[id].takeHalf && !p.halfDone && p.last / p.entry >= 2) { p.halfDone = true; await sellDex(id, v, p, 0.5, '×2 : moitié sécurisée'); continue; }
@@ -660,6 +676,17 @@ async function consensusEvent(e) {
     if (p && !p.selling && e.part >= 0.5) await sellDex('consensus', v, p, 1, `${shortA(e.wallet)} (un des acheteurs) vend ${Math.round(e.part * 100)} %`);
   }
 }
+async function whaleCheck() {
+  for (const [id, v] of Object.entries(st.variants)) for (const p of [...v.positions]) {
+    if (!p.src || p.selling) continue;
+    const res = await Courbe.rpc('getTokenAccountsByOwner', [p.src, { mint: p.mint }, { encoding: 'jsonParsed' }]).catch(() => null);
+    if (!res || !res.value) continue;
+    const bal = res.value.reduce((a, x) => a + (+x.account.data.parsed.info.tokenAmount.uiAmountString || 0), 0);
+    if (p.srcBal == null) { p.srcBal = bal; continue; }
+    if (bal <= p.srcBal * 0.05 && p.srcBal > 0) { copyEvent(`${shortA(p.src)} n'a plus ${p.name} (vérifié sur la blockchain) : on vend`); await (p.dex ? sellDex : realSell)(id, v, p, 1, `${shortA(p.src)} n'a plus le token`); continue; }
+    p.srcBal = Math.max(p.srcBal, bal);
+  }
+}
 let copier = null;
 async function copyTrade(e) {
   consensusEvent(e).catch(() => {});
@@ -671,12 +698,12 @@ async function copyTrade(e) {
     const curve = PublicKey.findProgramAddressSync([Buffer.from('bonding-curve'), new PublicKey(e.mint).toBuffer()], PUMP_PROGRAM)[0].toBase58();
     const c = (await Courbe.read([curve]).catch(() => ({})))[curve];
     if (!c || c.complete) {
-      if (VARIANTS[id].copyLong) { copyEvent(`${shortA(e.wallet)} achète ${shortA(e.mint)} sur PumpSwap : on copie`); return buyDex(id, e.mint, `copie de ${shortA(e.wallet)} (${e.sol.toFixed(2)} SOL)`); }
+      if (VARIANTS[id].copyLong) { copyEvent(`${shortA(e.wallet)} achète ${shortA(e.mint)} sur PumpSwap : on copie`); await buyDex(id, e.mint, `copie de ${shortA(e.wallet)} (${e.sol.toFixed(2)} SOL)`); const np = v.positions.find((x) => x.mint === e.mint); if (np && !np.src) np.src = e.wallet; return; }
       copyEvent(`${shortA(e.wallet)} achète ${shortA(e.mint)} hors de la courbe pump.fun : pas copié (prix non calculable)`); return;
     }
     const name = await tokenName(e.mint);
     copyEvent(`${shortA(e.wallet)} achète ${name} (${e.sol.toFixed(2)} SOL) : on copie`);
-    buyReal(id, { mint: e.mint, curve, name, symbol: name, vT0: c.vT, vS0: c.vS, tRecv: Date.now() }, `copie de ${shortA(e.wallet)} (${e.sol.toFixed(2)} SOL)`);
+    buyReal(id, { mint: e.mint, curve, name, symbol: name, vT0: c.vT, vS0: c.vS, tRecv: Date.now(), src: e.wallet }, `copie de ${shortA(e.wallet)} (${e.sol.toFixed(2)} SOL)`);
   } else {
     const p = v.positions.find((x) => x.mint === e.mint);
     if (!p || p.selling) return;
@@ -798,9 +825,15 @@ async function realExits() {
       if (c.complete && VARIANTS[id].copyLong) { p.dex = true; continue; } // le long terme garde le token sur PumpSwap
       if (c.complete) { realSell(id, v, p, 1, 'token sorti de la courbe'); continue; }
       if (VARIANTS[id].copy) {
-        p.last = Courbe.mid(c) * solUsd;
+        // Valeur réelle = ce qu'on toucherait en vendant tout maintenant (impact de notre vente compris)
+        p.last = p.qty > 0 ? (Courbe.sellQuote(c, p.qty).sol * solUsd) / p.qty : Courbe.mid(c) * solUsd;
         p.peak = Math.max(p.peak, p.last);
-        if (Date.now() - p.t >= VARIANTS[id].maxMs) realSell(id, v, p, 1, 'durée maximale atteinte');
+        p.seen = Date.now();
+        const V = VARIANTS[id];
+        if (V.stopLoss && p.last <= p.entry * (1 - V.stopLoss)) realSell(id, v, p, 1, `stop −${Math.round(V.stopLoss * 100)} %`);
+        else if (V.takeHalf && !p.halfDone && p.last >= p.entry * 2) { p.halfDone = true; realSell(id, v, p, 0.5, '×2 : moitié sécurisée'); }
+        else if (p.halfDone && p.last <= p.peak * 0.6) realSell(id, v, p, 1, 'retombée de 40 % depuis le plus haut');
+        else if (Date.now() - p.t >= V.maxMs) realSell(id, v, p, 1, 'durée maximale atteinte');
         continue;
       }
       p.last = Courbe.mid(c) * solUsd;
@@ -1012,7 +1045,8 @@ async function start() {
   setInterval(realExits, 1000);
   Actu.start();
   startCopy();
-  setInterval(() => dexLoop().catch(() => {}), 60000);
+  setInterval(() => dexLoop().catch(() => {}), 3000);
+  setInterval(() => whaleCheck().catch(() => {}), 15000);
   // 📈 Cassure de l'ATH
   const Breakout = require('./breakout.js').create({
     st, id: 'breakout', log, dexPrices, maxOpen: VARIANTS.breakout.maxOpen,
