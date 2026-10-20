@@ -55,6 +55,20 @@ function create({ rpc, onTrade, onNewWallet, log }) {
     for (const b of t.meta.preTokenBalances || []) if (b.owner === addr) pre[b.mint] = +b.uiTokenAmount.uiAmountString || 0;
     for (const b of t.meta.postTokenBalances || []) if (b.owner === addr) post[b.mint] = +b.uiTokenAmount.uiAmountString || 0;
     let traded = false;
+    // 🐋 Baleine qui déplace ses tokens vers un autre portefeuille (sans SOL échangé) : on suit le nouveau portefeuille,
+    // pour copier ses ventes de là-bas (sinon on ne verrait jamais la vente).
+    if (Math.abs(sol) < 0.05) {
+      for (const mint of Object.keys(pre)) {
+        if (IGNORE.has(mint) || (post[mint] || 0) >= pre[mint] - 1e-6) continue;
+        const gain = {};
+        for (const b of t.meta.postTokenBalances || []) if (b.mint === mint && b.owner && b.owner !== addr) gain[b.owner] = +b.uiTokenAmount.uiAmountString || 0;
+        for (const b of t.meta.preTokenBalances || []) if (b.mint === mint && gain[b.owner] != null) gain[b.owner] -= +b.uiTokenAmount.uiAmountString || 0;
+        const moved = pre[mint] - (post[mint] || 0);
+        for (const [to, g] of Object.entries(gain)) {
+          if (g >= moved * 0.5 && !wallets.has(to)) { traded = true; onNewWallet({ from: addr, to, sol: 0, mint, tokens: true, group: wallets.get(addr) }); }
+        }
+      }
+    }
     for (const mint of new Set([...Object.keys(pre), ...Object.keys(post)])) {
       if (IGNORE.has(mint) || Math.abs(sol) < 0.05) continue; // SOL / stablecoins et poussières
       const a = pre[mint] || 0, b = post[mint] || 0;

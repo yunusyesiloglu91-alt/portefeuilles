@@ -44,14 +44,14 @@ const VARIANTS = {
   cerveauR: { name: '🧠 Cerveau', paused: true /* retiré le 16/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
   tiktok: { name: '📱 TikTok', paused: true /* retiré le 19/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 5, maxOpen: 20 },
   // 💎 Copie long terme : portefeuilles qui gardent leurs memecoins des jours (research/longterme.js)
-  copieLong: { name: '💎 Copie long terme', delay: 0, fast: true, real: true, copy: 'long', copyLong: true, maxMs: 14 * 24 * 3600000, stake: 5, maxOpen: 20 },
+  copieLong: { name: '💎 Copie long terme', delay: 0, fast: true, real: true, copy: 'long', copyLong: true, maxMs: 7 * 24 * 3600000, stake: 5, maxOpen: 12, stopLoss: 0.5, takeHalf: true },
   // 📈 Cassure de l'ATH (live/breakout.js) : mise 5/10/15 $ selon le nombre de « smart money », sorties par paliers
   breakout: { name: '📈 Cassure ATH', delay: 0, fast: true, real: true, maxMs: 24 * 3600000, stake: 5, maxOpen: 6 },
   // 🤝 Consensus : on n'achète que si au moins 2 portefeuilles suivis différents achètent le même token en 15 min.
   // Un seul portefeuille peut se tromper ou être un robot ; deux qui se retrouvent sur le même token, c'est un signal plus fort.
-  consensus: { name: '🤝 Consensus', delay: 0, fast: true, real: true, copyLong: true, maxMs: 12 * 3600000, stake: 5, maxOpen: 8, stopLoss: 0.35 },
-  copieCourt: { name: '👥 Copie court terme', delay: 0, fast: true, real: true, copy: 'court', copyLong: true, maxMs: 6 * 3600000, stake: 5, maxOpen: 20 },
-  copieMoyen: { name: '👥 Copie moyen terme', delay: 0, fast: true, real: true, copy: 'moyen', copyLong: true, maxMs: 48 * 3600000, stake: 5, maxOpen: 20 },
+  consensus: { name: '🤝 Consensus', delay: 0, fast: true, real: true, copyLong: true, maxMs: 12 * 3600000, stake: 5, maxOpen: 8, stopLoss: 0.35, takeHalf: true },
+  copieCourt: { name: '👥 Copie court terme', delay: 0, fast: true, real: true, copy: 'court', copyLong: true, maxMs: 3 * 3600000, stake: 5, maxOpen: 8, stopLoss: 0.3, takeHalf: true },
+  copieMoyen: { name: '👥 Copie moyen terme', delay: 0, fast: true, real: true, copy: 'moyen', copyLong: true, maxMs: 24 * 3600000, stake: 5, maxOpen: 10, stopLoss: 0.4, takeHalf: true },
   expert: { name: '🧠 Expert', paused: true /* arrêté le 16/10 : −55 % sur 20 trades */, delay: 0, fast: true, real: true, ladder: true, maxMs: 3 * 60 * MIN, stake: 10 },
   vague: { name: '🌊 Vague', paused: true /* retiré le 16/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
   actu: { name: '📰 Actu', paused: true /* retiré le 19/10 */, delay: 0, fast: true, real: true, maxMs: 60 * MIN, stake: 10 },
@@ -625,6 +625,9 @@ async function dexLoop() {
     const d = await dexPrice(p.mint);
     if (d) { p.last = d.price; p.peak = Math.max(p.peak || 0, d.price); }
     if (d && VARIANTS[id] && VARIANTS[id].stopLoss && p.last / p.entry <= 1 - VARIANTS[id].stopLoss) { await sellDex(id, v, p, 1, 'stop −' + Math.round(VARIANTS[id].stopLoss * 100) + ' %'); continue; }
+    // Sécuriser : la moitié vendue à ×2, puis tout si on retombe de 40 % depuis le plus haut
+    if (d && VARIANTS[id] && VARIANTS[id].takeHalf && !p.halfDone && p.last / p.entry >= 2) { p.halfDone = true; await sellDex(id, v, p, 0.5, '×2 : moitié sécurisée'); continue; }
+    if (d && p.halfDone && p.last <= p.peak * 0.6) { await sellDex(id, v, p, 1, 'retombée de 40 % depuis le plus haut'); continue; }
     if (VARIANTS[id] && Date.now() - p.t >= (VARIANTS[id].maxMs || EXIT.maxMs)) await sellDex(id, v, p, 1, 'durée maximale atteinte');
   }
 }
@@ -770,10 +773,10 @@ function startCopy() {
   copier = Copie.create({
     rpc: Courbe.rpc, log, onTrade: (e) => copyTrade(e).catch(() => {}),
     onNewWallet: (w) => {
-      if (st.copyWallets.filter((x) => x.group === w.group).length >= 8) return;
+      if (st.copyWallets.filter((x) => x.group === w.group).length >= 14) return;
       if (copier.add(w.to, w.group)) {
         st.copyWallets.push({ wallet: w.to, group: w.group, from: w.from });
-        copyEvent(`${shortA(w.from)} a envoyé ${w.sol.toFixed(1)} SOL vers ${shortA(w.to)} : nouvelle adresse suivie`);
+        copyEvent(w.tokens ? `🐋 ${shortA(w.from)} déplace ses tokens ${shortA(w.mint)} vers ${shortA(w.to)} : nouvelle adresse suivie` : `🐋 ${shortA(w.from)} a envoyé ${w.sol.toFixed(1)} SOL vers ${shortA(w.to)} : nouvelle adresse suivie`);
       }
     },
   });
