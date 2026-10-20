@@ -20,11 +20,16 @@ const MIN = 60000;
 const VARIANTS = {
   diplome: { name: "🎓 Diplômé + sécurité", delay: 0, filtered: true, maxMs: 6 * 3600000 },
   diplomeTemoin: { name: "🎓 Diplômé témoin", delay: 0, filtered: false, maxMs: 6 * 3600000 },
-  createur: { name: '🔍 Analyse créateur', delay: 0, filtered: true },
+  createur: { name: '🔍 Analyse créateur (prix théorique)', delay: 0, filtered: true },
   ia: { name: '🤖 IA Claude Opus 5.5', delay: 0, filtered: true },
-  seconde: { name: '⚡ Seconde filtrée', delay: 0, filtered: true },
+  seconde: { name: '⚡ Seconde filtrée (prix théorique)', delay: 0, filtered: true },
   confirme: { name: '⏱️ Confirmé 60 s', delay: 60000, filtered: true, confirm: true },
-  temoin: { name: '🎲 Tout acheter (témoin)', delay: 0, filtered: false },
+  temoin: { name: '🎲 Tout acheter (prix théorique)', delay: 0, filtered: false },
+  // 🧪 Jumeaux RÉALISTES : mêmes choix que Seconde / Créateur / Témoin, mais achat 1 bloc (0,4 s) après la décision,
+  // au prix exact de la courbe à ce moment-là (impact de notre ordre et des autres robots compris), vente au prix exact aussi.
+  secondeReel: { name: '🧪 Seconde filtrée (prix réel)', delay: 0, fast: true, real: true, latency: 400, stake: 5 },
+  createurReel: { name: '🧪 Analyse créateur (prix réel)', delay: 0, fast: true, real: true, latency: 400, stake: 5 },
+  temoinReel: { name: '🧪 Tout acheter (prix réel)', delay: 0, fast: true, real: true, latency: 400, stake: 5 },
   // TEST VIRTUEL « éclair » : achète dès la création, sans attendre les métadonnées ni RugCheck (ordre de ~0,1 s),
   // seulement si le créateur n'a pas acheté plus de 5 % de l'offre. Mêmes frais et même sortie que les autres.
   eclair: { name: '⚡ Éclair 0,1 s (test)', delay: 0, fast: true, real: true, maxMs: 30 * MIN, stake: 10 },
@@ -932,6 +937,7 @@ async function onCreate(d) {
   tok.launches24h = hist.length;
   // Témoin : achète tout, tout de suite
   buy('temoin', tok, 'création');
+  buyReal('temoinReel', tok, 'création (1 bloc après)');
   // Éclair (test virtuel) : achat immédiat si le créateur détient peu
   if (false && tok.devPct <= 5) buyReal('eclair', tok, 'création, créateur ' + tok.devPct.toFixed(1) + ' %');
   if (false && tok.devPct <= 1 && tok.launches24h <= 1 && !JUNK_IMITATION.test(d.name) && !JUNK_IMITATION.test(d.symbol)) buyReal('eclairS', tok, 'création stricte, créateur ' + tok.devPct.toFixed(1) + ' %, premier lancement');
@@ -959,8 +965,10 @@ async function onCreate(d) {
   if (st.recent.length > 200) st.recent = st.recent.slice(-200);
   if (!f.ok) { if (!Object.values(st.variants).some((v) => v.positions.some((p) => p.mint === d.mint))) tokens.delete(d.mint); return; }
   buy('seconde', tok, `${secs()}, ${f.why}`);
+  buyReal('secondeReel', tok, `${secs()}, ${f.why} (1 bloc après)`);
   if (fc.ok) {
     buy('createur', tok, `${secs()}, ${fc.why}`);
+    buyReal('createurReel', tok, `${secs()}, ${fc.why} (1 bloc après)`);
     const ai = await aiScore(tok);
     if (ai) {
       st.recent[st.recent.length - 1].ai = ai;
