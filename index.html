@@ -96,14 +96,15 @@
   </div>
   <div id="cards"></div>
   <div id="trio"></div>
+  <div id="rt"></div>
   <h2>Positions en cours</h2>
   <div id="positions"></div>
   <h2>Dernières opérations</h2>
   <div id="last"></div>
-  <h2>🧠 Le cerveau apprend</h2>
-  <div class="card" id="brain"></div>
-  <h2>📋 Rapports après chaque trade</h2>
-  <div id="reports"></div>
+  <h2 hidden>🧠 Le cerveau apprend</h2>
+  <div class="card" id="brain" hidden></div>
+  <h2 hidden>📋 Rapports après chaque trade</h2>
+  <div id="reports" hidden></div>
   <button class="big" id="detailsBtn" aria-expanded="false">Détails</button>
   <div id="details" hidden>
     <div class="card" id="recap"></div>
@@ -112,7 +113,7 @@
     <div id="allpos"></div>
     <div id="others"></div>
     <div id="lab"></div>
-    <div id="rt"></div>
+
     <h2>Historique complet</h2>
     <div class="seg" id="filter">
       <button data-f="all" aria-pressed="true">Tout</button>
@@ -338,35 +339,27 @@
         const val = vVal(x), cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
         return { id, name: LAB[id] || id, val, n: cl.length, win: cl.filter((t) => t.ret > 0).length, open: x.positions.length };
       }).sort((a, b) => b.val - a.val);
-      $('lab').innerHTML = `<h2>🧪 Laboratoire sniping</h2><div class="empty" style="padding-top:0">4 stratégies testées en même temps sur les mêmes lancements (100 $ chacune, 5 $ par trade). La carte 🎯 Sniper suit la « qualité ».</div>` +
+      if (false) $('lab').innerHTML = `<h2>🧪 Laboratoire sniping</h2><div class="empty" style="padding-top:0">4 stratégies testées en même temps sur les mêmes lancements (100 $ chacune, 5 $ par trade). La carte 🎯 Sniper suit la « qualité ».</div>` +
         board.map((r, k) => `<div class="row"><div class="ico" style="background:var(--bg);color:${k === 0 ? 'var(--amber)' : 'var(--muted)'}">${k + 1}</div>
           <div class="main"><div class="t">${r.name}</div><div class="s">${r.n ? `${r.win}/${r.n} trades gagnés` : 'aucun trade fermé'} · ${r.open} en cours</div></div>
           <div class="r"><b class="${cls(r.val / 100 - 1)}">${pct(r.val / 100 - 1)}</b><span>${num(r.val)} $</span></div></div>`).join('') +
         (sn.watch && sn.watch.length ? `<div class="empty" style="margin-top:8px">Derniers lancements analysés : ${sn.watch.map((w) => `${esc(w.name)} ${w.ok ? '✅' : `❌ <span style="opacity:.8">(${esc(w.why)})</span>`}`).join(' · ')}</div>` : '');
     }
 
-    // Sniper à la seconde (PC)
-    const rts = rt && (rt.variants.createur || rt.variants.seconde);
+    // 🧪 Comparatif : mêmes choix, prix théorique (ancien calcul) vs prix réel (1 bloc après, impact compris)
     let rtHtml = '';
-    if (rts) {
-      const v = rVal(rts), closed = rts.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
+    if (rt && rt.variants) {
       const alive = now - rt.lastRun < 6 * 60000;
-      rtHtml += card('🔍 Sniper créateur', alive ? 'PC EN LIGNE' : 'PC HORS LIGNE', alive ? 'var(--up)' : 'var(--down)', `${num(v)} $`, v / 100 - 1, `${rt.seen} créations vues`,
-        [...rts.history, [now, v]], 100, [
-          ['Positions', `${rts.positions.length} ouvertes`],
-          ['Cash', `${num(rts.cash)} $`],
-          ['Gagnés', closed.length ? `${closed.filter((t) => t.ret > 0).length} sur ${closed.length}` : 'aucun'],
-        ]);
-      const board = Object.entries(rt.variants).map(([id, x]) => {
-        const val = rVal(x), cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
-        return { name: (RTLAB[id] || id) + (id === 'ia' && !rt.aiEnabled ? ' — inactive (pas de clé API)' : ''), val, n: cl.length, win: cl.filter((t) => t.ret > 0).length, open: x.positions.length };
-      }).sort((a, b) => b.val - a.val);
-      rtHtml += `<h2>⚡ Laboratoire « à la seconde »</h2><div class="empty" style="padding-top:0">Le PC écoute chaque création pump.fun en temps réel et décide à la seconde (100 $ par stratégie, 5 $ par trade, 3 % de frais par ordre). Résultats envoyés toutes les 2 min${alive ? '' : ' — <b style="color:var(--down)">le PC ne répond plus</b>'}.</div>` +
-        board.map((r, k) => `<div class="row"><div class="ico" style="background:var(--bg);color:${k === 0 ? 'var(--amber)' : 'var(--muted)'}">${k + 1}</div>
-          <div class="main"><div class="t">${r.name}</div><div class="s">${r.n ? `${r.win}/${r.n} trades gagnés` : 'aucun trade fermé'} · ${r.open} en cours</div></div>
-          <div class="r"><b class="${cls(r.val / 100 - 1)}">${pct(r.val / 100 - 1)}</b><span>${num(r.val)} $</span></div></div>`).join('') +
-        (rt.recentGrad && rt.recentGrad.length ? `<div class="empty" style="margin-top:8px">Derniers diplômés (sortis de pump.fun) : ${rt.recentGrad.slice(-8).reverse().map((r) => `${esc(r.symbol || "?")} ${r.ok ? "✅" : `❌ <span style="opacity:.8">(${esc(r.why)})</span>`}`).join(" · ")}</div>` : `<div class="empty" style="margin-top:8px">🎓 ${rt.migrations || 0} diplômé(s) vu(s) pour l’instant (≈ 1 toutes les 10 min).</div>`) +
-        (rt.recent && rt.recent.length ? `<div class="empty" style="margin-top:8px">Dernières créations : ${rt.recent.slice(-10).reverse().map((r) => `${esc(r.symbol || '?')} ${r.ok ? '✅' + (r.ai ? ` <span style="opacity:.8">(IA ${r.ai.note}/10)</span>` : '') : `❌ <span style="opacity:.8">(${esc(r.why)})</span>`}`).join(' · ')}</div>` : '');
+      const st1 = (x) => {
+        if (!x) return null;
+        const cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
+        return { val: rVal(x), n: cl.length, win: cl.filter((t) => t.ret > 0).length, open: x.positions.length };
+      };
+      const cell = (s) => s ? `<b class="${cls(s.val / 100 - 1)}">${pct(s.val / 100 - 1)}</b><span>${num(s.val)} $ · ${s.n ? s.win + '/' + s.n + ' gagnés' : 'aucun fermé'} · ${s.open} ouv.</span>` : '<span>—</span>';
+      const pairs = [['⚡ Seconde filtrée', 'seconde', 'secondeReel'], ['🔍 Analyse créateur', 'createur', 'createurReel'], ['🎲 Tout acheter', 'temoin', 'temoinReel']];
+      rtHtml += `<h2>🧪 Prix théorique ou prix réel ?</h2><div class="empty" style="padding-top:0">Mêmes achats des deux côtés. <b>Théorique</b> = ancien calcul (prix affiché, sans impact de nos ordres). <b>Réel</b> = achat 1 bloc après (0,4 s) au prix exact, vente au prix vraiment obtenu. Seule la colonne « réel » compte${alive ? '' : ' — <b style="color:var(--down)">le PC ne répond plus</b>'}.</div>` +
+        `<div class="row" style="font-size:12px;opacity:.7"><div class="main">Stratégie</div><div class="r" style="min-width:34%">Théorique</div><div class="r" style="min-width:34%">Réel</div></div>` +
+        pairs.map(([n, t, r]) => `<div class="row"><div class="main"><div class="t">${n}</div></div><div class="r" style="min-width:34%;opacity:.55">${cell(st1(rt.variants[t]))}</div><div class="r" style="min-width:34%">${cell(st1(rt.variants[r]))}</div></div>`).join('');
     }
     $('rt').innerHTML = rtHtml;
 
