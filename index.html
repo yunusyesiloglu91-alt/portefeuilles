@@ -358,8 +358,8 @@
       const cell = (s) => s ? `<b class="${cls(s.val / 100 - 1)}">${pct(s.val / 100 - 1)}</b><span>${num(s.val)} $ · ${s.n ? s.win + '/' + s.n + ' gagnés' : 'aucun fermé'} · ${s.open} ouv.</span>` : '<span>—</span>';
       const pairs = [['⚡ Seconde filtrée', 'seconde', 'secondeReel'], ['🔍 Analyse créateur', 'createur', 'createurReel'], ['🎲 Tout acheter', 'temoin', 'temoinReel']];
       rtHtml += `<h2>🧪 Prix théorique ou prix réel ?</h2><div class="empty" style="padding-top:0">Mêmes achats des deux côtés. <b>Théorique</b> = ancien calcul (prix affiché, sans impact de nos ordres). <b>Réel</b> = achat 1 bloc après (0,4 s) au prix exact, vente au prix vraiment obtenu. Seule la colonne « réel » compte${alive ? '' : ' — <b style="color:var(--down)">le PC ne répond plus</b>'}.</div>` +
-        `<div class="row" style="font-size:12px;opacity:.7"><div class="main">Stratégie</div><div class="r" style="min-width:34%">Théorique</div><div class="r" style="min-width:34%">Réel</div></div>` +
-        pairs.map(([n, t, r]) => `<div class="row"><div class="main"><div class="t">${n}</div></div><div class="r" style="min-width:34%;opacity:.55">${cell(st1(rt.variants[t]))}</div><div class="r" style="min-width:34%">${cell(st1(rt.variants[r]))}</div></div>`).join('');
+        `<div class="row" style="font-size:12px;opacity:.7"><div style="flex:1">Théorique (faux)</div><div class="r" style="flex:1">Réel</div></div>` +
+        pairs.map(([n, t, r]) => `<div class="row" style="flex-wrap:wrap"><div class="t" style="width:100%;margin-bottom:6px">${n}</div><div class="r" style="flex:1;text-align:left;opacity:.55">${cell(st1(rt.variants[t]))}</div><div class="r" style="flex:1">${cell(st1(rt.variants[r]))}</div></div>`).join('');
     }
     $('rt').innerHTML = rtHtml;
 
