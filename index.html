@@ -137,7 +137,7 @@
   let sel = 'consensus';
   try { sel = localStorage.getItem('sniperChoisi') || 'consensus'; } catch { /* navigation privée */ }
   if (!['consensus', 'breakout', 'copieCourt', 'copieMoyen', 'copieLong'].includes(sel)) sel = 'consensus'; // seules les stratégies encore actives sont proposées
-  const SEL_NAME = { origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)', eclairS: '⚡ Éclair strict (test virtuel)', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', actu: '📰 Actu (token lié à une actualité)', vague: '🌊 Vague (le leader d’une vague de tokens)', expert: '🧠 Expert (repli + paliers de 25 %)', copieCourt: '👥 Copie court terme (portefeuilles gagnants)', copieMoyen: '👥 Copie moyen terme (portefeuilles gagnants)', tiktok: '📱 TikTok (alerte trader + contrôle avant d’entrer)', cerveauR: '🧠 Cerveau (règle apprise sur 2 356 tokens)', copieLong: '💎 Copie long terme (mains solides)' };
+  const SEL_NAME = { consensus: '🤝 Consensus', breakout: '📈 Cassure ATH', copieCourt: '⚡ Copie court terme', copieMoyen: '👥 Copie moyen terme', copieLong: '💎 Copie long terme', origine: '1️⃣ Anti-arnaque', qualite: '2️⃣ Anti-arnaque + 30 min', tres: '3️⃣ Jackpot ×5', eclair: '⚡ Éclair 0,1 s (test virtuel)', eclairQ: '⚡ Éclair sélectif (test virtuel)', eclairS: '⚡ Éclair strict (test virtuel)', eclairQ04: '🚀 Sélectif 0,4 s (bot pro)', eclairQ3: '🐢 Sélectif 3 s (bot ordinaire)', actu: '📰 Actu (token lié à une actualité)', vague: '🌊 Vague (le leader d’une vague de tokens)', expert: '🧠 Expert (repli + paliers de 25 %)', copieCourt: '👥 Copie court terme (portefeuilles gagnants)', copieMoyen: '👥 Copie moyen terme (portefeuilles gagnants)', tiktok: '📱 TikTok (alerte trader + contrôle avant d’entrer)', cerveauR: '🧠 Cerveau (règle apprise sur 2 356 tokens)', copieLong: '💎 Copie long terme (mains solides)' };
   const NOTIF = 'sniper-97f143460ae09334d6', CMD = 'sniper-97f143460ae09334d6-cmd', DATA = 'sniper-97f143460ae09334d6-data'; // messages via ntfy.sh
   // Market cap arrondie : 55 k$, 120 k$, 1,2 M$
   const mcap = (x) => (!x ? '?' : x >= 1e6 ? `${num(x / 1e6, 1)} M$` : `${Math.max(5, Math.round(x / 5e3) * 5)} k$`);
@@ -349,7 +349,7 @@
     // 🧪 Comparatif : mêmes choix, prix théorique (ancien calcul) vs prix réel (1 bloc après, impact compris)
     let rtHtml = '';
     if (rt && rt.variants) {
-      const alive = now - rt.lastRun < 6 * 60000;
+      const alive = now - rt.lastRun < 12 * 60000;
       const st1 = (x) => {
         if (!x) return null;
         const cl = x.trades.filter((t) => t.side === 'vente' && !/moitié/.test(t.reason || ''));
