@@ -3,6 +3,9 @@
 // achat / vente d'un token pump.fun et la part vendue. Il suit aussi l'argent : si un portefeuille suivi
 // envoie au moins 1 SOL vers une nouvelle adresse, cette adresse est suivie à son tour.
 const WS_URL = 'wss://api.mainnet-beta.solana.com';
+const { PublicKey } = require('@solana/web3.js');
+const WSOL = 'So11111111111111111111111111111111111111112';
+const onCurve = (a) => { try { return PublicKey.isOnCurve(new PublicKey(a).toBytes()); } catch { return false; } };
 const IGNORE = new Set(['So11111111111111111111111111111111111111112', 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', 'Es9vMFrzaCERmJfrF4H2FYD4KCoNyFzTcFDhpGN6c3Jn']);
 
 function create({ rpc, onTrade, onNewWallet, log }) {
@@ -50,10 +53,11 @@ function create({ rpc, onTrade, onNewWallet, log }) {
     const keys = t.transaction.message.accountKeys.map((k) => (typeof k === 'string' ? k : k.pubkey));
     if (keys[0] !== addr) return; // seulement les transactions signées par le portefeuille suivi
     const i = keys.indexOf(addr);
-    const sol = (t.meta.postBalances[i] - t.meta.preBalances[i]) / 1e9;
     const pre = {}, post = {};
     for (const b of t.meta.preTokenBalances || []) if (b.owner === addr) pre[b.mint] = +b.uiTokenAmount.uiAmountString || 0;
     for (const b of t.meta.postTokenBalances || []) if (b.owner === addr) post[b.mint] = +b.uiTokenAmount.uiAmountString || 0;
+    // SOL natif + SOL « emballé » (WSOL) : certaines ventes sont payées en WSOL
+    const sol = (t.meta.postBalances[i] - t.meta.preBalances[i]) / 1e9 + ((post[WSOL] || 0) - (pre[WSOL] || 0));
     let traded = false;
     // 🐋 Baleine qui déplace ses tokens vers un autre portefeuille (sans SOL échangé) : on suit le nouveau portefeuille,
     // pour copier ses ventes de là-bas (sinon on ne verrait jamais la vente).
@@ -65,7 +69,8 @@ function create({ rpc, onTrade, onNewWallet, log }) {
         for (const b of t.meta.preTokenBalances || []) if (b.mint === mint && gain[b.owner] != null) gain[b.owner] -= +b.uiTokenAmount.uiAmountString || 0;
         const moved = pre[mint] - (post[mint] || 0);
         for (const [to, g] of Object.entries(gain)) {
-          if (g >= moved * 0.5 && !wallets.has(to)) { traded = true; onNewWallet({ from: addr, to, sol: 0, mint, tokens: true, group: wallets.get(addr) }); }
+          // Seulement un vrai portefeuille (adresse « sur la courbe ») : jamais une pool ou un programme
+          if (g >= moved * 0.5 && !wallets.has(to) && onCurve(to)) { traded = true; onNewWallet({ from: addr, to, sol: 0, mint, tokens: true, group: wallets.get(addr) }); }
         }
       }
     }
@@ -81,7 +86,7 @@ function create({ rpc, onTrade, onNewWallet, log }) {
     if (!traded && sol <= -1) {
       for (const ins of t.transaction.message.instructions || []) {
         const p = ins.parsed;
-        if (ins.program === 'system' && p && p.type === 'transfer' && p.info.source === addr && p.info.lamports >= 1e9 && !wallets.has(p.info.destination)) {
+        if (ins.program === 'system' && p && p.type === 'transfer' && p.info.source === addr && p.info.lamports >= 1e9 && !wallets.has(p.info.destination) && onCurve(p.info.destination)) {
           onNewWallet({ from: addr, to: p.info.destination, sol: p.info.lamports / 1e9, group: wallets.get(addr) });
         }
       }
