@@ -6867,61 +6867,68 @@
    40.3,
    29.88,
    29.88
+  ],
+  [
+   1792617646991,
+   99.96,
+   40.26,
+   29.85,
+   29.85
   ]
  ],
  "watch": [
   {
-   "name": "MEW",
-   "score": 75,
-   "mcap": 44775786.5511066,
-   "ageDays": 939.3669782175926,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
    "name": "CATE",
    "score": 70,
-   "mcap": 54864076.4563973,
-   "ageDays": 86.9039805324074,
+   "mcap": 54404527.9308565,
+   "ageDays": 87.20004619212963,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "TROLL",
    "score": 70,
-   "mcap": 36397884.0748014,
-   "ageDays": 548.8222328472223,
+   "mcap": 33649078.9820893,
+   "ageDays": 549.1182985069445,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "STONK",
+   "name": "DOOD",
+   "score": 65,
+   "mcap": 19200252.981,
+   "ageDays": 530.3476387847222,
+   "ok": false,
+   "why": "rotation élevée (28 %/j)"
+  },
+  {
+   "name": "ANSEM",
    "score": 62,
-   "mcap": 98350180.5112958,
-   "ageDays": 70.14082081018519,
+   "mcap": 94626670.942313,
+   "ageDays": 127.01040498842593,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
-   "name": "DOOD",
+   "name": "PYBOBO",
    "score": 62,
-   "mcap": 34388902.4934,
-   "ageDays": 530.051573125,
+   "mcap": 19404835.4917317,
+   "ageDays": 335.19776609953703,
    "ok": false,
-   "why": "déjà +150 % sur 7 j"
+   "why": "liquidité très faible"
   },
   {
-   "name": "JEANPHIL",
-   "score": 50,
-   "mcap": 4176218.60743475,
-   "ageDays": 31.796850902777777,
+   "name": "SPCX",
+   "score": 32,
+   "mcap": 9412543.98230569,
+   "ageDays": 131.22471054398147,
    "ok": false,
-   "why": "pas à un nouveau record"
+   "why": "rotation 75 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1792592066918,
- "lastRun": 1792595343861,
+ "lastScan": 1792617646991,
+ "lastRun": 1792617646991,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -10947,31 +10954,59 @@
    [
     1792595343861,
     65.63
+   ],
+   [
+    1792617646991,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "PHP",
-    "mcap": 795281.621699998,
-    "ageDays": 0.41303079861111114,
-    "ch1": 1.8714199999999999,
-    "ch24": 17.73435,
-    "ok": true
-   },
-   {
-    "name": "Pokémon",
-    "mcap": 397499.541612795,
-    "ageDays": 2.6844428356481482,
-    "ch1": -0.26074,
-    "ch24": -0.65067,
+    "mcap": 602714.795399999,
+    "ageDays": 0.6711688773148148,
+    "ch1": 0.21468,
+    "ch24": 13.19807,
     "ok": false
    },
    {
-    "name": "USOE",
-    "mcap": 5651733.187,
-    "ageDays": 3.856306261574074,
-    "ch1": -0.0038,
-    "ch24": 0.0817,
+    "name": "KIMCHIBULL",
+    "mcap": 7731557.2171531,
+    "ageDays": 0.07880776620370371,
+    "ch1": 5.75202,
+    "ch24": 17.86087,
+    "ok": false
+   },
+   {
+    "name": "PULLBACK",
+    "mcap": 1156432.043,
+    "ageDays": 0.030381840277777777,
+    "ch1": 12.07962,
+    "ch24": 12.07962,
+    "ok": false
+   },
+   {
+    "name": "PANGEA",
+    "mcap": 1332892.70031035,
+    "ageDays": 0.1988887847222222,
+    "ch1": 2.22491,
+    "ch24": 266.82505000000003,
+    "ok": false
+   },
+   {
+    "name": "Pokémon",
+    "mcap": 390625.133372417,
+    "ageDays": 2.942580914351852,
+    "ch1": -0.10418,
+    "ch24": -0.73342,
+    "ok": false
+   },
+   {
+    "name": "KIMCHI",
+    "mcap": 599588.430777641,
+    "ageDays": 0.018043877314814816,
+    "ch1": 0.75362,
+    "ch24": 0.75362,
     "ok": false
    }
   ],
