@@ -4,13 +4,10 @@
  "sleeves": {
   "btc": {
    "symbol": "BTCUSDT",
-   "cash": 0,
-   "qty": 0.0005343817595940212,
-   "entry": {
-    "price": 83646.67243499999,
-    "usd": 44.744
-   },
-   "signal": "au-dessus de la moyenne 50 j"
+   "cash": 43.29616938820195,
+   "qty": 0,
+   "entry": null,
+   "signal": "sous la moyenne 50 j"
   },
   "sol": {
    "symbol": "SOLUSDT",
@@ -33,6 +30,16 @@
    "price": 83646.67243499999,
    "usd": 44.744,
    "reason": "prix au-dessus de sa moyenne 50 j"
+  },
+  {
+   "t": 1792715221123,
+   "sleeve": "btc",
+   "side": "vente",
+   "name": "BTC",
+   "price": 81102.14864,
+   "usd": 43.29616938820195,
+   "ret": -0.03235809520378252,
+   "reason": "prix passé sous sa moyenne 50 j"
   }
  ],
  "history": [
@@ -7672,61 +7679,68 @@
    38.7,
    29.87,
    29.87
+  ],
+  [
+   1792715221123,
+   98.25,
+   38.53,
+   29.86,
+   29.86
   ]
  ],
  "watch": [
   {
    "name": "MEW",
    "score": 80,
-   "mcap": 44196025.0222178,
-   "ageDays": 940.7382402662037,
+   "mcap": 45325756.1599955,
+   "ageDays": 940.7923741087963,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "CATE",
    "score": 70,
-   "mcap": 48256468.0887809,
-   "ageDays": 88.27524258101852,
+   "mcap": 48560413.3996864,
+   "ageDays": 88.32937642361111,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "TROLL",
    "score": 70,
-   "mcap": 32350387.2708274,
-   "ageDays": 550.1934948958333,
+   "mcap": 31949620.5488684,
+   "ageDays": 550.2476287384259,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "STONK",
    "score": 62,
-   "mcap": 89014449.4227185,
-   "ageDays": 71.51208285879629,
+   "mcap": 91841562.9214364,
+   "ageDays": 71.56621670138888,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 81710163.8027988,
-   "ageDays": 128.08560137731482,
+   "mcap": 80434662.4579695,
+   "ageDays": 128.1397352199074,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
-   "name": "Dacity",
-   "score": 25,
-   "mcap": 9251242.59754675,
-   "ageDays": 11.494501840277778,
+   "name": "ANTFUN",
+   "score": 60,
+   "mcap": 27917052.1406652,
+   "ageDays": 104.83129771990741,
    "ok": false,
-   "why": "rotation élevée (27 %/j)"
+   "why": "pas à un nouveau record"
   }
  ],
  "notes": [],
- "lastScan": 1792710543959,
- "lastRun": 1792710843714,
+ "lastScan": 1792715221123,
+ "lastRun": 1792715221123,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -12212,56 +12226,60 @@
    [
     1792710843714,
     65.63
+   ],
+   [
+    1792715221123,
+    65.63
    ]
   ],
   "watch": [
    {
+    "name": "ALLOX",
+    "mcap": 2889181.086,
+    "ageDays": 0.7232884606481481,
+    "ch1": 0.025019999999999997,
+    "ch24": 3.1795,
+    "ok": true
+   },
+   {
     "name": "Kimchi",
-    "mcap": 11312192.8129961,
-    "ageDays": 2.009580023148148,
-    "ch1": -0.20553999999999997,
-    "ch24": -0.5842499999999999,
+    "mcap": 13549566.0767776,
+    "ageDays": 2.0602444791666668,
+    "ch1": 0.1114,
+    "ch24": -0.44741,
     "ok": false
    },
    {
     "name": "OA",
-    "mcap": 19291123.938551,
-    "ageDays": 0.8433878935185185,
-    "ch1": 0.07573,
-    "ch24": 66.80563000000001,
+    "mcap": 17793486.3542732,
+    "ageDays": 0.894052349537037,
+    "ch1": -0.06714,
+    "ch24": 61.54164,
     "ok": false
    },
    {
     "name": "KIMCHIBULL",
-    "mcap": 652652.814463466,
-    "ageDays": 1.1574735416666666,
-    "ch1": 0.15158,
-    "ch24": -0.92554,
-    "ok": false
-   },
-   {
-    "name": "CITY",
-    "mcap": 535022.099130058,
-    "ageDays": 0.029869375,
-    "ch1": 7.04338,
-    "ch24": 7.04338,
-    "ok": false
+    "mcap": 635344.556136169,
+    "ageDays": 1.2081379976851851,
+    "ch1": 0.03864,
+    "ch24": -0.86858,
+    "ok": true
    },
    {
     "name": "PHP",
-    "mcap": 568255.676064564,
-    "ageDays": 1.7498346527777777,
-    "ch1": -0.04359,
-    "ch24": 0.7023999999999999,
+    "mcap": 383090.329761981,
+    "ageDays": 1.8004991087962963,
+    "ch1": -0.28573,
+    "ch24": -0.52729,
     "ok": false
    },
    {
     "name": "SHAVCOIN",
-    "mcap": 2966232.19250361,
-    "ageDays": 0.48289020833333335,
-    "ch1": -0.14642,
-    "ch24": 19.927880000000002,
-    "ok": false
+    "mcap": 3766520.156,
+    "ageDays": 0.5335546643518518,
+    "ch1": 0.09845000000000001,
+    "ch24": 25.19719,
+    "ok": true
    }
   ],
   "paused": true
