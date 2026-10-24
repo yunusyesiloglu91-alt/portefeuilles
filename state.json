@@ -8155,61 +8155,68 @@
    38.63,
    29.94,
    29.94
+  ],
+  [
+   1792883366183,
+   98.52,
+   38.63,
+   29.94,
+   29.94
   ]
  ],
  "watch": [
   {
+   "name": "neet",
+   "score": 75,
+   "mcap": 29701946.6949856,
+   "ageDays": 545.9244697106482,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
    "name": "CATE",
    "score": 70,
-   "mcap": 44911722.83028,
-   "ageDays": 89.40024305555555,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "ANTFUN",
-   "score": 65,
-   "mcap": 33611262.1022725,
-   "ageDays": 105.90216435185185,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "TROLL",
-   "score": 65,
-   "mcap": 29835376.6425258,
-   "ageDays": 551.3184953703703,
+   "mcap": 46743046.6565758,
+   "ageDays": 90.27549980324073,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "STONK",
    "score": 62,
-   "mcap": 90980582.2991939,
-   "ageDays": 72.63708333333334,
+   "mcap": 83976149.0430857,
+   "ageDays": 73.51234008101852,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 66798574.3554572,
-   "ageDays": 129.21060185185186,
+   "mcap": 71251930.8312951,
+   "ageDays": 130.08585859953703,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "BIRB",
    "score": 55,
-   "mcap": 46974386.2515,
-   "ageDays": 269.11123842592593,
+   "mcap": 24804096.44475,
+   "ageDays": 269.9864951736111,
    "ok": false,
-   "why": "rotation élevée (37 %/j)"
+   "why": "rotation 130 %/j : profil des tokens qui s'effondrent"
+  },
+  {
+   "name": "OTC",
+   "score": 50,
+   "mcap": 5740389.15836762,
+   "ageDays": 57.40017572916667,
+   "ok": false,
+   "why": "pas à un nouveau record"
   }
  ],
  "notes": [],
- "lastScan": 1792807744000,
- "lastRun": 1792809843968,
+ "lastScan": 1792883366183,
+ "lastRun": 1792883366183,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -12967,39 +12974,51 @@
    [
     1792809843968,
     65.63
+   ],
+   [
+    1792883366183,
+    65.63
    ]
   ],
   "watch": [
    {
-    "name": "ODIE",
-    "mcap": 1437779.02461035,
-    "ageDays": 0.5718051851851852,
-    "ch1": 0.16415,
-    "ch24": 14.22174,
+    "name": "SWORDOPE",
+    "mcap": 3143882.33728656,
+    "ageDays": 0.14236322916666666,
+    "ch1": 0.20301,
+    "ch24": 8.96276,
     "ok": false
    },
    {
-    "name": "Moustache",
-    "mcap": 525418.0856,
-    "ageDays": 0.21155055555555555,
-    "ch1": -0.25965,
-    "ch24": 11.617070000000002,
+    "name": "WRHND",
+    "mcap": 1430989.20319896,
+    "ageDays": 0.10834702546296296,
+    "ch1": -0.03068,
+    "ch24": 6.48149,
     "ok": false
    },
    {
-    "name": "Kimchi",
-    "mcap": 7816363.78621997,
-    "ageDays": 3.155416296296296,
-    "ch1": -0.06365,
-    "ch24": -0.40114,
+    "name": "███",
+    "mcap": 521674.1908,
+    "ageDays": 0.8221085995370371,
+    "ch1": -0.19007000000000002,
+    "ch24": 9.67402,
     "ok": false
    },
    {
-    "name": "MrBeast",
-    "mcap": 1822194.61364321,
-    "ageDays": 0.03506907407407407,
-    "ch1": 2.88474,
-    "ch24": 2.88474,
+    "name": "REMUS",
+    "mcap": 799416.625663511,
+    "ageDays": 0.999284525462963,
+    "ch1": 0.2101,
+    "ch24": 5.35478,
+    "ok": true
+   },
+   {
+    "name": "CATTLEAXE",
+    "mcap": 652546.734474155,
+    "ageDays": 0.14825443287037038,
+    "ch1": 0.15559,
+    "ch24": 0.64464,
     "ok": false
    }
   ],
