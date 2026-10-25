@@ -8225,61 +8225,68 @@
    38.63,
    29.94,
    29.94
+  ],
+  [
+   1792887064384,
+   98.51,
+   38.63,
+   29.94,
+   29.94
   ]
  ],
  "watch": [
   {
-   "name": "neet",
-   "score": 75,
-   "mcap": 29701946.6949856,
-   "ageDays": 545.9244697106482,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
    "name": "CATE",
    "score": 70,
-   "mcap": 46743046.6565758,
-   "ageDays": 90.27549980324073,
+   "mcap": 47957577.3450042,
+   "ageDays": 90.31830305555556,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "STONK",
    "score": 62,
-   "mcap": 83976149.0430857,
-   "ageDays": 73.51234008101852,
+   "mcap": 86648835.6775596,
+   "ageDays": 73.55514333333333,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 71251930.8312951,
-   "ageDays": 130.08585859953703,
+   "mcap": 71285051.867082,
+   "ageDays": 130.12866185185186,
+   "ok": false,
+   "why": "liquidité très faible"
+  },
+  {
+   "name": "BMT",
+   "score": 62,
+   "mcap": 26068254.4229487,
+   "ageDays": 305.5083377777778,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "BIRB",
-   "score": 55,
-   "mcap": 24804096.44475,
-   "ageDays": 269.9864951736111,
+   "score": 60,
+   "mcap": 32380582.2015,
+   "ageDays": 270.0292984259259,
    "ok": false,
-   "why": "rotation 130 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation 100 %/j : profil des tokens qui s'effondrent"
   },
   {
-   "name": "OTC",
-   "score": 50,
-   "mcap": 5740389.15836762,
-   "ageDays": 57.40017572916667,
+   "name": "UDR",
+   "score": 57,
+   "mcap": 79337771.9576369,
+   "ageDays": 0.40764333333333336,
    "ok": false,
-   "why": "pas à un nouveau record"
+   "why": "moins de 7 jours"
   }
  ],
  "notes": [],
- "lastScan": 1792883366183,
- "lastRun": 1792886045305,
+ "lastScan": 1792887064384,
+ "lastRun": 1792887064384,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -13077,48 +13084,60 @@
    [
     1792886045305,
     65.63
+   ],
+   [
+    1792887064384,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "SWORDOPE",
-    "mcap": 2726019.52219552,
-    "ageDays": 0.17337158564814814,
-    "ch1": 0.02497,
-    "ch24": 7.638579999999999,
-    "ok": false
-   },
-   {
-    "name": "WRHND",
-    "mcap": 1679532.39071054,
-    "ageDays": 0.13935538194444444,
-    "ch1": 0.27109,
-    "ch24": 7.78092,
+    "mcap": 2568631.81563154,
+    "ageDays": 0.1851664814814815,
+    "ch1": -0.18339,
+    "ch24": 7.14466,
     "ok": false
    },
    {
     "name": "███",
-    "mcap": 403068.9331,
-    "ageDays": 0.8531169560185186,
-    "ch1": -0.09615,
-    "ch24": 7.247229999999999,
+    "mcap": 480375.1102,
+    "ageDays": 0.8649118518518518,
+    "ch1": 0.01385,
+    "ch24": 8.829,
     "ok": false
    },
    {
     "name": "CATTLEAXE",
-    "mcap": 1411963.84682017,
-    "ageDays": 0.17926278935185186,
-    "ch1": 1.02528,
-    "ch24": 2.55862,
+    "mcap": 1301207.94769202,
+    "ageDays": 0.19105768518518518,
+    "ch1": 0.95377,
+    "ch24": 2.27948,
     "ok": false
    },
    {
     "name": "REMUS",
-    "mcap": 588100.739222127,
-    "ageDays": 1.0302928819444443,
-    "ch1": -0.26008,
-    "ch24": 2.7974599999999996,
+    "mcap": 715656.112077362,
+    "ageDays": 1.0420877777777777,
+    "ch1": -0.10487,
+    "ch24": 2.6899200000000003,
     "ok": false
+   },
+   {
+    "name": "Kimchi",
+    "mcap": 6485583.65340678,
+    "ageDays": 4.049171111111111,
+    "ch1": 0.08419,
+    "ch24": -0.25684999999999997,
+    "ok": false
+   },
+   {
+    "name": "mint",
+    "mcap": 512742.214220669,
+    "ageDays": 1.8222961111111111,
+    "ch1": 0.30925,
+    "ch24": 1.26613,
+    "ok": true
    }
   ],
   "paused": true
