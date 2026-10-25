@@ -9191,61 +9191,68 @@
    38.6,
    29.92,
    29.92
+  ],
+  [
+   1792956244940,
+   98.44,
+   38.6,
+   29.92,
+   29.92
   ]
  ],
  "watch": [
   {
    "name": "CATE",
    "score": 70,
-   "mcap": 49499760.9680327,
-   "ageDays": 90.86898878472222,
+   "mcap": 50675100.9781106,
+   "ageDays": 91.11900393518519,
    "ok": false,
    "why": "pas à un nouveau record"
-  },
-  {
-   "name": "ANTFUN",
-   "score": 70,
-   "mcap": 30094971.2067113,
-   "ageDays": 107.37091008101852,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "STONK",
-   "score": 62,
-   "mcap": 97367457.6202948,
-   "ageDays": 74.1058290625,
-   "ok": false,
-   "why": "liquidité très faible"
   },
   {
    "name": "BIRB",
-   "score": 45,
-   "mcap": 20812339.8216,
-   "ageDays": 270.5799841550926,
+   "score": 55,
+   "mcap": 22583714.184,
+   "ageDays": 270.82999930555553,
    "ok": false,
-   "why": "rotation 52 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation élevée (40 %/j)"
   },
   {
-   "name": "Dacity",
-   "score": 45,
-   "mcap": 7878801.76273277,
-   "ageDays": 14.088248043981482,
+   "name": "baton",
+   "score": 50,
+   "mcap": 6240434.59993751,
+   "ageDays": 45.95266134259259,
    "ok": false,
-   "why": "rotation élevée (30 %/j)"
+   "why": "pas à un nouveau record"
   },
   {
-   "name": "SPCX",
-   "score": 42,
-   "mcap": 9588986.62523278,
-   "ageDays": 134.89365313657407,
+   "name": "CLAUDIA",
+   "score": 50,
+   "mcap": 3892202.69958036,
+   "ageDays": 18.735821064814814,
    "ok": false,
-   "why": "rotation élevée (48 %/j)"
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "JEANPHIL",
+   "score": 50,
+   "mcap": 3127240.12105865,
+   "ageDays": 36.01187430555556,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "BTC",
+   "score": 35,
+   "mcap": 11330423.58,
+   "ageDays": 41.96790439814815,
+   "ok": false,
+   "why": "rotation 60 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1792934643631,
- "lastRun": 1792935843749,
+ "lastScan": 1792956244940,
+ "lastRun": 1792956244940,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -14595,47 +14602,59 @@
    [
     1792935843749,
     65.63
+   ],
+   [
+    1792956244940,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "SWORDOPE",
-    "mcap": 1454277.172,
-    "ageDays": 0.7497424652777778,
-    "ch1": 0.22702000000000003,
-    "ch24": 3.58978,
+    "mcap": 536551.270526554,
+    "ageDays": 0.9858673611111111,
+    "ch1": -0.04883,
+    "ch24": 0.70131,
     "ok": false
    },
    {
     "name": "CATTLEAXE",
-    "mcap": 2046380.21151075,
-    "ageDays": 0.7556336689814814,
-    "ch1": 0.19384,
-    "ch24": 4.16109,
-    "ok": true
+    "mcap": 1336530.72323504,
+    "ageDays": 0.9917585648148148,
+    "ch1": -0.12875999999999999,
+    "ch24": 2.37081,
+    "ok": false
    },
    {
     "name": "███",
-    "mcap": 786144.5007,
-    "ageDays": 1.4294878356481482,
-    "ch1": -0.03605,
-    "ch24": 11.797609999999999,
+    "mcap": 453802.0212,
+    "ageDays": 1.6656127314814815,
+    "ch1": -0.17544,
+    "ch24": 5.454890000000001,
+    "ok": false
+   },
+   {
+    "name": "NMS",
+    "mcap": 311543.376982275,
+    "ageDays": 0.02217523148148148,
+    "ch1": 6.07962,
+    "ch24": 6.07962,
     "ok": false
    },
    {
     "name": "REMUS",
-    "mcap": 915678.04962065,
-    "ageDays": 1.606663761574074,
-    "ch1": 0.00221,
-    "ch24": 0.72206,
-    "ok": true
+    "mcap": 716692.926175245,
+    "ageDays": 1.8427886574074075,
+    "ch1": -0.1329,
+    "ch24": 0.34366,
+    "ok": false
    },
    {
-    "name": "Bunnett",
-    "mcap": 306496.7172,
-    "ageDays": 1.9779716319444445,
-    "ch1": -0.07649,
-    "ch24": 14.98618,
+    "name": "LAUNCH",
+    "mcap": 3147847.8419571,
+    "ageDays": 0.0939113425925926,
+    "ch1": 0.54179,
+    "ch24": 2.7422699999999995,
     "ok": false
    }
   ],
