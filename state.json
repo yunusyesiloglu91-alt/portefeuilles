@@ -9359,61 +9359,68 @@
    38.53,
    29.86,
    29.86
+  ],
+  [
+   1792963443354,
+   98.26,
+   38.53,
+   29.86,
+   29.86
   ]
  ],
  "watch": [
   {
    "name": "CATE",
    "score": 70,
-   "mcap": 50383962.4132001,
-   "ageDays": 91.16065862268519,
+   "mcap": 49510012.8685836,
+   "ageDays": 91.20231891203704,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "TROLL",
    "score": 70,
-   "mcap": 30965037.8671202,
-   "ageDays": 553.0789109375,
+   "mcap": 30714252.8685741,
+   "ageDays": 553.1205712268519,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "Dacity",
-   "score": 60,
-   "mcap": 8701354.77255262,
-   "ageDays": 14.379917881944445,
+   "name": "ANSEM",
+   "score": 62,
+   "mcap": 68893422.9345313,
+   "ageDays": 131.01267770833334,
    "ok": false,
-   "why": "pas à un nouveau record"
+   "why": "liquidité très faible"
   },
   {
-   "name": "CLAUDIA",
+   "name": "JEANPHIL",
    "score": 50,
-   "mcap": 3677025.36356607,
-   "ageDays": 18.777475752314814,
+   "mcap": 3225599.41079364,
+   "ageDays": 36.09518928240741,
    "ok": false,
    "why": "pas à un nouveau record"
-  },
-  {
-   "name": "SPCX",
-   "score": 42,
-   "mcap": 9667151.44855112,
-   "ageDays": 135.18532297453703,
-   "ok": false,
-   "why": "rotation élevée (41 %/j)"
   },
   {
    "name": "BTC",
    "score": 35,
-   "mcap": 10008042.73,
-   "ageDays": 42.00955908564815,
+   "mcap": 10088065.27,
+   "ageDays": 42.051219375,
    "ok": false,
-   "why": "rotation 69 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation 70 %/j : profil des tokens qui s'effondrent"
+  },
+  {
+   "name": "CLAUDIA",
+   "score": 35,
+   "mcap": 3643337.61679032,
+   "ageDays": 18.819136041666667,
+   "ok": false,
+   "why": "rotation élevée (22 %/j)"
   }
  ],
  "notes": [],
- "lastScan": 1792959843905,
- "lastRun": 1792963143386,
+ "lastScan": 1792963443354,
+ "lastRun": 1792963443354,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -14859,55 +14866,59 @@
    [
     1792963143386,
     65.63
+   ],
+   [
+    1792963443354,
+    65.63
    ]
   ],
   "watch": [
    {
-    "name": "SWORDOPE",
-    "mcap": 1012727.74132789,
-    "ageDays": 1.065710486111111,
-    "ch1": 0.98895,
-    "ch24": -0.18187,
-    "ok": false
-   },
-   {
     "name": "CATTLEAXE",
-    "mcap": 1250631.89898146,
-    "ageDays": 1.0716016898148149,
-    "ch1": 0.029079999999999998,
-    "ch24": 0.85345,
+    "mcap": 1241163.61572252,
+    "ageDays": 1.0750735416666666,
+    "ch1": 0.07007,
+    "ch24": 1.02172,
     "ok": false
    },
    {
     "name": "NMS",
     "mcap": 520042.8301,
-    "ageDays": 0.045467430555555556,
-    "ch1": 4.3124400000000005,
+    "ageDays": 0.04893928240740741,
+    "ch1": 0.9534199999999999,
     "ch24": 6.9878599999999995,
     "ok": false
    },
    {
     "name": "███",
-    "mcap": 504855.9533,
-    "ageDays": 1.7454558564814815,
-    "ch1": 0.1387,
-    "ch24": 2.50952,
-    "ok": false
-   },
-   {
-    "name": "Kimchi",
-    "mcap": 12782570.0093271,
-    "ageDays": 4.92971511574074,
-    "ch1": 0.11635999999999999,
-    "ch24": 1.14776,
+    "mcap": 502296.0373,
+    "ageDays": 1.7489277083333334,
+    "ch1": 0.02878,
+    "ch24": 2.81726,
     "ok": true
    },
    {
+    "name": "Kimchi",
+    "mcap": 11849814.9254879,
+    "ageDays": 4.933186967592593,
+    "ch1": -0.04759,
+    "ch24": 0.98505,
+    "ok": false
+   },
+   {
     "name": "REMUS",
-    "mcap": 775435.388858511,
-    "ageDays": 1.9226317824074075,
-    "ch1": -0.04453,
-    "ch24": 0.27202000000000004,
+    "mcap": 809848.175858472,
+    "ageDays": 1.9261036342592592,
+    "ch1": 0.02114,
+    "ch24": 0.34656,
+    "ok": false
+   },
+   {
+    "name": "LAUNCH",
+    "mcap": 1974215.04081389,
+    "ageDays": 0.17722631944444445,
+    "ch1": 0.13069,
+    "ch24": 1.3470199999999999,
     "ok": false
    }
   ],
