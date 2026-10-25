@@ -8701,61 +8701,68 @@
    38.62,
    29.94,
    29.94
+  ],
+  [
+   1792907643544,
+   98.49,
+   38.62,
+   29.94,
+   29.94
   ]
  ],
  "watch": [
   {
+   "name": "ORE",
+   "score": 82,
+   "mcap": 86437754.1505429,
+   "ageDays": 359.66284194444444,
+   "ok": false,
+   "why": "liquidité très faible"
+  },
+  {
+   "name": "DOOD",
+   "score": 75,
+   "mcap": 11709299.511,
+   "ageDays": 533.7040803703703,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
    "name": "CATE",
    "score": 70,
-   "mcap": 46869829.711718,
-   "ageDays": 90.51829232638889,
+   "mcap": 46222759.1932855,
+   "ageDays": 90.55648777777778,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "STONK",
    "score": 62,
-   "mcap": 88487778.5143621,
-   "ageDays": 73.75513260416666,
+   "mcap": 88516036.4630059,
+   "ageDays": 73.79332805555556,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
-   "name": "BIRB",
-   "score": 55,
-   "mcap": 25959571.14675,
-   "ageDays": 270.2292876967593,
+   "name": "ANSEM",
+   "score": 62,
+   "mcap": 68165462.270548,
+   "ageDays": 130.36684657407406,
    "ok": false,
-   "why": "rotation 87 %/j : profil des tokens qui s'effondrent"
+   "why": "liquidité très faible"
   },
   {
-   "name": "OTC",
-   "score": 50,
-   "mcap": 6369191.13279142,
-   "ageDays": 57.642968252314816,
+   "name": "ANTFUN",
+   "score": 60,
+   "mcap": 29099098.7618892,
+   "ageDays": 107.05840907407408,
    "ok": false,
    "why": "pas à un nouveau record"
-  },
-  {
-   "name": "SPCX",
-   "score": 42,
-   "mcap": 9575014.50299632,
-   "ageDays": 134.54295667824073,
-   "ok": false,
-   "why": "rotation élevée (41 %/j)"
-  },
-  {
-   "name": "Dacity",
-   "score": 40,
-   "mcap": 8647858.01759148,
-   "ageDays": 13.737551585648148,
-   "ok": false,
-   "why": "rotation élevée (37 %/j)"
   }
  ],
  "notes": [],
- "lastScan": 1792904343457,
- "lastRun": 1792907343968,
+ "lastScan": 1792907643544,
+ "lastRun": 1792907643544,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -13825,55 +13832,59 @@
    [
     1792907343968,
     65.63
+   ],
+   [
+    1792907643544,
+    65.63
    ]
   ],
   "watch": [
    {
-    "name": "ALLOX",
-    "mcap": 1591602.385,
-    "ageDays": 0.3124764814814815,
-    "ch1": 0.12387000000000001,
-    "ch24": 0.97869,
-    "ok": true
-   },
-   {
     "name": "SWORDOPE",
-    "mcap": 1784704.528,
-    "ageDays": 0.4198838888888889,
-    "ch1": -0.19635999999999998,
-    "ch24": 4.63262,
-    "ok": false
-   },
-   {
-    "name": "WRHND",
-    "mcap": 569245.219398113,
-    "ageDays": 0.38586768518518516,
-    "ch1": -0.20799,
-    "ch24": 1.9761199999999999,
+    "mcap": 1778445.626,
+    "ageDays": 0.4233512037037037,
+    "ch1": -0.26664,
+    "ch24": 4.61287,
     "ok": false
    },
    {
     "name": "BILLIONS",
-    "mcap": 964521.1039,
-    "ageDays": 0.025636203703703703,
-    "ch1": 7.30237,
-    "ch24": 7.30237,
+    "mcap": 1106849.323,
+    "ageDays": 0.029103518518518518,
+    "ch1": 8.5275,
+    "ch24": 8.5275,
+    "ok": false
+   },
+   {
+    "name": "WRHND",
+    "mcap": 552499.418697132,
+    "ageDays": 0.389335,
+    "ch1": -0.18281,
+    "ch24": 1.88857,
     "ok": false
    },
    {
     "name": "CATTLEAXE",
-    "mcap": 2106745.63973812,
-    "ageDays": 0.4257750925925926,
-    "ch1": -0.03875,
-    "ch24": 4.31334,
+    "mcap": 2168543.32928656,
+    "ageDays": 0.42924240740740743,
+    "ch1": 0.01843,
+    "ch24": 4.46919,
+    "ok": true
+   },
+   {
+    "name": "BILLIONS",
+    "mcap": 603032.3135,
+    "ageDays": 0.017529444444444445,
+    "ch1": 5.477480000000001,
+    "ch24": 5.477480000000001,
     "ok": false
    },
    {
     "name": "MAYA",
-    "mcap": 1476119.67163174,
-    "ageDays": 0.2050575,
-    "ch1": -0.06194,
-    "ch24": 2.3689,
+    "mcap": 1499106.27892028,
+    "ageDays": 0.2085248148148148,
+    "ch1": -0.04202,
+    "ch24": 2.42136,
     "ok": false
    }
   ],
