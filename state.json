@@ -11431,61 +11431,68 @@
    38.86,
    30.12,
    30.12
+  ],
+  [
+   1793229546985,
+   98.86,
+   38.77,
+   30.05,
+   30.05
   ]
  ],
  "watch": [
   {
    "name": "CATE",
    "score": 70,
-   "mcap": 47039527.0377918,
-   "ageDays": 94.07037765046296,
+   "mcap": 47011988.9782465,
+   "ageDays": 94.28222204861112,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "TROLL",
+   "score": 70,
+   "mcap": 33606567.463487,
+   "ageDays": 556.2004743634259,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "GATO",
+   "score": 67,
+   "mcap": 4975601.63029027,
+   "ageDays": 64.45261556712963,
+   "ok": false,
+   "why": "mise en avant payante"
+  },
+  {
+   "name": "ANSEM",
+   "score": 62,
+   "mcap": 63042175.0781801,
+   "ageDays": 134.09258084490742,
+   "ok": false,
+   "why": "liquidité très faible"
+  },
+  {
+   "name": "baton",
+   "score": 55,
+   "mcap": 6829950.92223834,
+   "ageDays": 49.11587945601852,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "OTC",
    "score": 55,
-   "mcap": 5961784.52671887,
-   "ageDays": 61.19505357638889,
+   "mcap": 5812870.34563433,
+   "ageDays": 61.40689797453704,
    "ok": false,
    "why": "pas à un nouveau record"
-  },
-  {
-   "name": "Dacity",
-   "score": 52,
-   "mcap": 8751831.61020267,
-   "ageDays": 17.289636909722223,
-   "ok": false,
-   "why": "mise en avant payante"
-  },
-  {
-   "name": "JEANPHIL",
-   "score": 50,
-   "mcap": 3907633.82630088,
-   "ageDays": 38.96324802083333,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "IOF",
-   "score": 47,
-   "mcap": 5275261.9371741,
-   "ageDays": 37.71681283564815,
-   "ok": false,
-   "why": "ni site ni réseaux sociaux"
-  },
-  {
-   "name": "GTA6",
-   "score": 45,
-   "mcap": 7861705.49,
-   "ageDays": 61.956511909722224,
-   "ok": false,
-   "why": "rotation élevée (32 %/j)"
   }
  ],
  "notes": [],
- "lastScan": 1793211243629,
- "lastRun": 1793212143652,
+ "lastScan": 1793229546985,
+ "lastRun": 1793229546985,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -18115,55 +18122,59 @@
    [
     1793212143652,
     65.63
+   ],
+   [
+    1793229546985,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "DUBBLE",
-    "mcap": 2581408.12786279,
-    "ageDays": 0.14371125,
-    "ch1": 0.60468,
-    "ch24": 37.05447,
+    "mcap": 3202179.19791171,
+    "ageDays": 0.3451387152777778,
+    "ch1": 0.46594,
+    "ch24": 46.20572,
+    "ok": true
+   },
+   {
+    "name": "HOUSECOIN",
+    "mcap": 432394.971466622,
+    "ageDays": 0.19797436342592592,
+    "ch1": 0.04948,
+    "ch24": 9.13648,
     "ok": false
    },
    {
     "name": "INVERSE",
-    "mcap": 1439008.03,
-    "ageDays": 0.8705283796296296,
-    "ch1": 0.11859,
-    "ch24": 31.14935,
+    "mcap": 1433422.378,
+    "ageDays": 1.0719558449074074,
+    "ch1": -0.11034000000000001,
+    "ch24": 1.76111,
     "ok": false
    },
    {
-    "name": "MOGZ",
-    "mcap": 597104.1761,
-    "ageDays": 1.1214195833333334,
-    "ch1": 0.23370000000000002,
-    "ch24": 0.030270000000000002,
+    "name": "FLOAT",
+    "mcap": 1246004.61776824,
+    "ageDays": 0.044027604166666665,
+    "ch1": 5.10074,
+    "ch24": 7.725829999999999,
+    "ok": false
+   },
+   {
+    "name": "CATBOT",
+    "mcap": 2134734.77690376,
+    "ageDays": 0.10552065972222222,
+    "ch1": 1.22807,
+    "ch24": 7.55769,
     "ok": false
    },
    {
     "name": "███WIF",
-    "mcap": 1539018.834,
-    "ageDays": 1.8122876388888889,
-    "ch1": -0.18149,
-    "ch24": 0.64666,
-    "ok": false
-   },
-   {
-    "name": "Grokbot",
-    "mcap": 391849.1043,
-    "ageDays": 0.4829126388888889,
-    "ch1": -0.18983,
-    "ch24": -0.17332,
-    "ok": false
-   },
-   {
-    "name": "REMUS",
-    "mcap": 1428602.1339597,
-    "ageDays": 4.8045793055555555,
-    "ch1": -0.00905,
-    "ch24": 0.17788,
+    "mcap": 1064065.802,
+    "ageDays": 2.0137151041666668,
+    "ch1": -0.39526000000000006,
+    "ch24": 0.44831000000000004,
     "ok": false
    }
   ],
