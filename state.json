@@ -17,8 +17,20 @@
    "signal": "sous la moyenne 50 j"
   },
   "meme": {
-   "cash": 33.558,
-   "positions": []
+   "cash": 22.372,
+   "positions": [
+    {
+     "name": "BIRB",
+     "addr": "G7vQWurMkMMm2dU3iZpXYFTHT9Biio4F4gZCrwFpKNwG",
+     "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
+     "t": 1793383444043,
+     "entry": 0.09289595072836287,
+     "last": 0.09289595072836287,
+     "peak": 0.09289595072836287,
+     "qty": 119.21014762400034,
+     "cost": 11.186
+    }
+   ]
   }
  },
  "trades": [
@@ -40,6 +52,15 @@
    "usd": 43.29616938820195,
    "ret": -0.03235809520378252,
    "reason": "prix passé sous sa moyenne 50 j"
+  },
+  {
+   "t": 1793383444043,
+   "sleeve": "meme",
+   "side": "achat",
+   "name": "BIRB",
+   "price": 0.09289595072836287,
+   "usd": 11.186,
+   "reason": "note 80 : ≥ 10 M$, plus de 60 j, à son record"
   }
  ],
  "history": [
@@ -12698,61 +12719,68 @@
    38.54,
    29.87,
    29.87
+  ],
+  [
+   1793383444043,
+   98.19,
+   38.54,
+   29.87,
+   29.77
   ]
  ],
  "watch": [
   {
+   "name": "BIRB",
+   "score": 80,
+   "mcap": 26420369.0163,
+   "ageDays": 275.77443336805555,
+   "ok": true,
+   "why": "tous les critères remplis"
+  },
+  {
    "name": "HYPE",
    "score": 67,
-   "mcap": 65644066.5153482,
-   "ageDays": 377.63648549768516,
+   "mcap": 64795195.5037841,
+   "ageDays": 377.67468799768517,
    "ok": false,
    "why": "ni site ni réseaux sociaux"
   },
   {
    "name": "CATE",
    "score": 65,
-   "mcap": 38463232.4630858,
-   "ageDays": 96.02523549768519,
+   "mcap": 37079165.8852054,
+   "ageDays": 96.06343799768518,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "TROLL",
    "score": 65,
-   "mcap": 28733208.081116,
-   "ageDays": 557.9434878125,
+   "mcap": 28600937.0891351,
+   "ageDays": 557.9816903125,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "GTA6",
    "score": 65,
-   "mcap": 11739636.63,
-   "ageDays": 63.911369756944445,
+   "mcap": 13075108.76,
+   "ageDays": 63.94957225694444,
    "ok": false,
    "why": "déjà +150 % sur 7 j"
   },
   {
-   "name": "ORCA",
-   "score": 62,
-   "mcap": 96311868.2964224,
-   "ageDays": 1029.8444600347223,
+   "name": "Dacity",
+   "score": 60,
+   "mcap": 8418286.97905165,
+   "ageDays": 19.282697256944445,
    "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
-   "name": "ANSEM",
-   "score": 62,
-   "mcap": 46606743.5004805,
-   "ageDays": 124.44138133101852,
-   "ok": false,
-   "why": "liquidité très faible"
+   "why": "pas à un nouveau record"
   }
  ],
  "notes": [],
- "lastScan": 1793380143347,
- "lastRun": 1793383144014,
+ "lastScan": 1793383444043,
+ "lastRun": 1793383444043,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -20106,47 +20134,51 @@
    [
     1793383144014,
     65.63
+   ],
+   [
+    1793383444043,
+    65.63
    ]
   ],
   "watch": [
    {
-    "name": "HI",
-    "mcap": 923804.70007376,
-    "ageDays": 1.0546876620370371,
-    "ch1": 0.35884,
-    "ch24": 0.20251000000000002,
+    "name": "FRY",
+    "mcap": 1704354.37,
+    "ageDays": 0.7301393865740741,
+    "ch1": 0.06779,
+    "ch24": 3.03086,
     "ok": true
    },
    {
+    "name": "HI",
+    "mcap": 944244.397913029,
+    "ageDays": 1.0581602199074074,
+    "ch1": 0.3293,
+    "ch24": 0.22244,
+    "ok": false
+   },
+   {
     "name": "HYPERCHAN",
-    "mcap": 1599608.15779655,
-    "ageDays": 0.6075580324074074,
-    "ch1": 0.06026,
-    "ch24": 3.8515699999999997,
+    "mcap": 1598592.4077305,
+    "ageDays": 0.6110305902777777,
+    "ch1": 0.09813000000000001,
+    "ch24": 3.84849,
     "ok": false
    },
    {
     "name": "DESSA",
-    "mcap": 8926427.30981403,
-    "ageDays": 4.204004791666667,
-    "ch1": 0.06099,
-    "ch24": -0.054029999999999995,
+    "mcap": 9067293.60627543,
+    "ageDays": 4.2074773495370374,
+    "ch1": 0.07959,
+    "ch24": -0.11026,
     "ok": false
    },
    {
     "name": "PODCATWALK",
-    "mcap": 560660.677712392,
-    "ageDays": 0.07554414351851851,
-    "ch1": 0.816,
-    "ch24": 1.5227000000000002,
-    "ok": false
-   },
-   {
-    "name": "SPACEINU",
-    "mcap": 610722.932310843,
-    "ageDays": 0.04068303240740741,
-    "ch1": 12.02136,
-    "ch24": 12.02136,
+    "mcap": 323886.941355684,
+    "ageDays": 0.07901670138888889,
+    "ch1": -0.07364,
+    "ch24": 0.45732999999999996,
     "ok": false
    }
   ],
