@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.09075727396088681,
+     "last": 0.07686694058505911,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -13272,61 +13272,68 @@
    37.65,
    29.18,
    28.86
+  ],
+  [
+   1793577650665,
+   97.11,
+   38.79,
+   30.06,
+   28.25
   ]
  ],
  "watch": [
   {
-   "name": "BIRB",
-   "score": 80,
-   "mcap": 26440752.9516,
-   "ageDays": 276.0105398726852,
-   "ok": true,
-   "why": "tous les critères remplis"
+   "name": "neet",
+   "score": 75,
+   "mcap": 27629583.4507565,
+   "ageDays": 553.9601697337963,
+   "ok": false,
+   "why": "pas à un nouveau record"
   },
   {
-   "name": "ORE",
-   "score": 72,
-   "mcap": 72247539.7603498,
-   "ageDays": 365.4058986689815,
+   "name": "DOOD",
+   "score": 75,
+   "mcap": 15365080.1304,
+   "ageDays": 541.4587924189815,
    "ok": false,
-   "why": "liquidité très faible"
+   "why": "pas à un nouveau record"
   },
   {
    "name": "CATE",
    "score": 70,
-   "mcap": 38845638.5278075,
-   "ageDays": 96.29954450231482,
+   "mcap": 38137669.1297873,
+   "ageDays": 98.31119982638889,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "HYPE",
-   "score": 67,
-   "mcap": 64965318.243446,
-   "ageDays": 377.91079450231484,
+   "name": "ANTFUN",
+   "score": 70,
+   "mcap": 32832479.6205832,
+   "ageDays": 114.81312112268519,
    "ok": false,
-   "why": "ni site ni réseaux sociaux"
+   "why": "pas à un nouveau record"
   },
   {
    "name": "TROLL",
    "score": 65,
-   "mcap": 29633083.7285289,
-   "ageDays": 558.2177968171296,
+   "mcap": 29609978.2936583,
+   "ageDays": 560.2294521412038,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "GTA6",
-   "score": 65,
-   "mcap": 10959031,
-   "ageDays": 64.18567876157407,
+   "name": "STONK",
+   "score": 62,
+   "mcap": 94871729.1247544,
+   "ageDays": 81.54804010416666,
    "ok": false,
-   "why": "déjà +150 % sur 7 j"
+   "why": "liquidité très faible"
   }
  ],
  "notes": [],
- "lastScan": 1793403843645,
- "lastRun": 1793406843664,
+ "lastScan": 1793577650665,
+ "lastRun": 1793577650665,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -20996,47 +21003,59 @@
    [
     1793406843664,
     65.63
+   ],
+   [
+    1793577650665,
+    65.63
    ]
   ],
   "watch": [
    {
-    "name": "HYPERCHAN",
-    "mcap": 304049.808859562,
-    "ageDays": 0.881859537037037,
-    "ch1": -0.50169,
-    "ch24": -0.07783000000000001,
+    "name": "Anakin",
+    "mcap": 3471409.978,
+    "ageDays": 3.1888502893518518,
+    "ch1": 0.05651,
+    "ch24": 3.74019,
+    "ok": true
+   },
+   {
+    "name": "ANSEM",
+    "mcap": 343326.1807,
+    "ageDays": 1.333410474537037,
+    "ch1": -0.09616,
+    "ch24": 0.3019,
     "ok": false
    },
    {
-    "name": "iCoin",
-    "mcap": 968612.9188,
-    "ageDays": 0.10688268518518519,
-    "ch1": 0.21081,
-    "ch24": 20.566370000000003,
+    "name": "ANAKIN",
+    "mcap": 2227910.41188354,
+    "ageDays": 0.06411649305555556,
+    "ch1": 0.20176,
+    "ch24": 5.0055700000000005,
     "ok": false
    },
    {
-    "name": "AgenC",
-    "mcap": 1488212.57740243,
-    "ageDays": 0.2591396296296296,
-    "ch1": 1.54359,
-    "ch24": 7.03528,
+    "name": "Leverhedge",
+    "mcap": 760408.694785265,
+    "ageDays": 2.0136419560185184,
+    "ch1": -0.10876,
+    "ch24": -0.03759,
     "ok": false
    },
    {
-    "name": "HI",
-    "mcap": 722667.535797388,
-    "ageDays": 1.3289891666666667,
-    "ch1": -0.0349,
-    "ch24": 1.43546,
+    "name": "ANAKINCORE",
+    "mcap": 338687.414586129,
+    "ageDays": 0.09994982638888888,
+    "ch1": 0.15785,
+    "ch24": 0.78826,
     "ok": false
    },
    {
-    "name": "jeff",
-    "mcap": 1199224.09127682,
-    "ageDays": 2.9827507407407405,
-    "ch1": -0.20412,
-    "ch24": 2.37843,
+    "name": "PEAK",
+    "mcap": 802717.371037275,
+    "ageDays": 5.968097974537037,
+    "ch1": -0.24724000000000002,
+    "ch24": 1.13881,
     "ok": false
    }
   ],
