@@ -17,7 +17,7 @@
    "signal": "sous la moyenne 50 j"
   },
   "meme": {
-   "cash": 22.372,
+   "cash": 11.724901871932595,
    "positions": [
     {
      "name": "BIRB",
@@ -25,10 +25,21 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.08081173361199873,
+     "last": 0.0802724816211506,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
+    },
+    {
+     "name": "BTC",
+     "addr": "C5xph2yL6gMdxmuLGxJBkGpmuDFfyi5fqkBNhvL6pump",
+     "pool": "3M9sVgL4u6ATKaiExf3XhQqNfMB6ijvzk3meMcQaen1w",
+     "t": 1793743443801,
+     "entry": 0.011042180379923636,
+     "last": 0.011042180379923636,
+     "peak": 0.011042180379923636,
+     "qty": 954.5784241988289,
+     "cost": 10.647098128067405
     }
    ]
   }
@@ -61,6 +72,15 @@
    "price": 0.09289595072836287,
    "usd": 11.186,
    "reason": "note 80 : ≥ 10 M$, plus de 60 j, à son record"
+  },
+  {
+   "t": 1793743443801,
+   "sleeve": "meme",
+   "side": "achat",
+   "name": "BTC",
+   "price": 0.011042180379923636,
+   "usd": 10.647098128067405,
+   "reason": "note 67 : ≥ 10 M$, plus de 14 j, à son record"
   }
  ],
  "history": [
@@ -15015,61 +15035,68 @@
    38.64,
    29.95,
    28.57
+  ],
+  [
+   1793743443801,
+   97.01,
+   38.64,
+   29.95,
+   28.41
   ]
  ],
  "watch": [
   {
-   "name": "UMBRA",
-   "score": 75,
-   "mcap": 8760334.03080325,
-   "ageDays": 389.25423091435187,
-   "ok": false,
-   "why": "critères de taille/âge/volume non remplis"
-  },
-  {
    "name": "CATE",
    "score": 70,
-   "mcap": 34650869.4035493,
-   "ageDays": 100.19190452546296,
+   "mcap": 37150012.2309786,
+   "ageDays": 100.23010186342593,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "BTC",
+   "score": 67,
+   "mcap": 10986248.57,
+   "ageDays": 51.07900232638889,
+   "ok": true,
+   "why": "tous les critères remplis"
+  },
+  {
+   "name": "TROLL",
+   "score": 65,
+   "mcap": 28011846.7337403,
+   "ageDays": 562.1483541782408,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 41851911.9258013,
-   "ageDays": 140.00226332175927,
+   "mcap": 41427581.3819894,
+   "ageDays": 140.0404606597222,
    "ok": false,
    "why": "liquidité très faible"
+  },
+  {
+   "name": "SPCX",
+   "score": 62,
+   "mcap": 12769160.3755918,
+   "ageDays": 144.25476621527778,
+   "ok": false,
+   "why": "ni site ni réseaux sociaux"
   },
   {
    "name": "STONK",
    "score": 57,
-   "mcap": 94667832.6675479,
-   "ageDays": 83.42874480324075,
+   "mcap": 94532526.4310715,
+   "ageDays": 83.4669421412037,
    "ok": false,
    "why": "liquidité très faible"
-  },
-  {
-   "name": "baton",
-   "score": 50,
-   "mcap": 4452601.28794892,
-   "ageDays": 55.02556193287037,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "GATO",
-   "score": 47,
-   "mcap": 11201542.3960277,
-   "ageDays": 70.36229804398148,
-   "ok": false,
-   "why": "rotation élevée (26 %/j)"
   }
  ],
  "notes": [],
- "lastScan": 1793740143551,
- "lastRun": 1793743143636,
+ "lastScan": 1793743443801,
+ "lastRun": 1793743443801,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -23735,55 +23762,59 @@
    [
     1793743143636,
     65.63
+   ],
+   [
+    1793743443801,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "STONKS",
-    "mcap": 802649.4188,
-    "ageDays": 0.1662573611111111,
-    "ch1": 0.15193,
-    "ch24": 4.12113,
+    "mcap": 752545.7059,
+    "ageDays": 0.16973149305555554,
+    "ch1": -0.15130000000000002,
+    "ch24": 3.80145,
+    "ok": false
+   },
+   {
+    "name": "AMD",
+    "mcap": 1975484.417,
+    "ageDays": 0.023226863425925927,
+    "ch1": 39.670410000000004,
+    "ch24": 39.670410000000004,
     "ok": false
    },
    {
     "name": "ANONVOYAGE",
-    "mcap": 2330459.61751582,
-    "ageDays": 0.34542402777777775,
-    "ch1": 0.00908,
-    "ch24": 7.094729999999999,
-    "ok": true
+    "mcap": 2155900.57626685,
+    "ageDays": 0.3488981597222222,
+    "ch1": -0.13237,
+    "ch24": 6.48841,
+    "ok": false
    },
    {
     "name": "FLOAT",
-    "mcap": 1513218.94514458,
-    "ageDays": 5.988433287037037,
-    "ch1": -0.33082999999999996,
-    "ch24": -0.59224,
+    "mcap": 1583485.15453111,
+    "ageDays": 5.991907418981482,
+    "ch1": -0.29797,
+    "ch24": -0.60402,
     "ok": false
    },
    {
     "name": "CAPY",
-    "mcap": 348174.006234468,
-    "ageDays": 1.0946601388888888,
-    "ch1": 0.08559,
-    "ch24": -0.49502,
+    "mcap": 319123.354370037,
+    "ageDays": 1.0981342708333333,
+    "ch1": -0.07730000000000001,
+    "ch24": -0.51996,
     "ok": false
    },
    {
     "name": "MAMESUKE",
-    "mcap": 1728965.298,
-    "ageDays": 1.433410138888889,
-    "ch1": 0.021629999999999996,
-    "ch24": 1.67339,
-    "ok": false
-   },
-   {
-    "name": "GTA6",
-    "mcap": 11244249,
-    "ageDays": 5.335215694444445,
-    "ch1": 0.006889999999999999,
-    "ch24": -0.03546,
+    "mcap": 1634000.68,
+    "ageDays": 1.4368842708333334,
+    "ch1": -0.03615,
+    "ch24": 1.29079,
     "ok": false
    }
   ],
