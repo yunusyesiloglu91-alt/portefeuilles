@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.08100363823615493,
+     "last": 0.07987420428853186,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -14077,61 +14077,68 @@
    38.64,
    29.95,
    28.59
+  ],
+  [
+   1793702827884,
+   97.08,
+   38.65,
+   29.96,
+   28.47
   ]
  ],
  "watch": [
   {
-   "name": "SKR",
-   "score": 72,
-   "mcap": 86954954.8154228,
-   "ageDays": 286.14444203703704,
+   "name": "CATE",
+   "score": 70,
+   "mcap": 33163806.849199,
+   "ageDays": 99.76001023148149,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "ACT",
+   "score": 70,
+   "mcap": 8383761.66280582,
+   "ageDays": 744.9656120833333,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "ANSEM",
+   "score": 62,
+   "mcap": 40182833.7330653,
+   "ageDays": 139.5703690277778,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
-   "name": "ANSEM",
-   "score": 70,
-   "mcap": 37788226.1172498,
-   "ageDays": 139.07175685185186,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "CATE",
-   "score": 70,
-   "mcap": 34376393.8464866,
-   "ageDays": 99.26139805555556,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "TROLL",
-   "score": 65,
-   "mcap": 27794294.2765513,
-   "ageDays": 561.1796503703704,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
    "name": "STONK",
    "score": 57,
-   "mcap": 83150316.039093,
-   "ageDays": 82.49823833333333,
+   "mcap": 81910926.5138071,
+   "ageDays": 82.99685050925926,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "Dacity",
    "score": 45,
-   "mcap": 7244227.22051343,
-   "ageDays": 22.480657314814813,
+   "mcap": 7236118.35370544,
+   "ageDays": 22.97926949074074,
    "ok": false,
-   "why": "rotation élevée (31 %/j)"
+   "why": "rotation élevée (33 %/j)"
+  },
+  {
+   "name": "ZCAT",
+   "score": 39,
+   "mcap": 25097968.9289612,
+   "ageDays": 58.43668847222222,
+   "ok": false,
+   "why": "liquidité très faible"
   }
  ],
  "notes": [],
- "lastScan": 1793659747792,
- "lastRun": 1793661544719,
+ "lastScan": 1793702827884,
+ "lastRun": 1793702827884,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -22261,55 +22268,59 @@
    [
     1793661544719,
     65.63
+   ],
+   [
+    1793702827884,
+    65.63
    ]
   ],
   "watch": [
    {
-    "name": "PREDICT",
-    "mcap": 1852140.496,
-    "ageDays": 0.7910847106481481,
-    "ch1": 0.07799,
-    "ch24": 3.2306299999999997,
-    "ok": true
-   },
-   {
-    "name": "XTEN",
-    "mcap": 1187871.09,
-    "ageDays": 0.5140823958333334,
-    "ch1": 0.08619,
-    "ch24": 1.63957,
-    "ok": true
-   },
-   {
     "name": "MAMESUKE",
-    "mcap": 794764.4628,
-    "ageDays": 0.48897822916666667,
-    "ch1": 0.06793,
-    "ch24": 7.87146,
+    "mcap": 1340573.383,
+    "ageDays": 0.9667926388888889,
+    "ch1": 0.12180999999999999,
+    "ch24": 13.96398,
     "ok": true
-   },
-   {
-    "name": "FLOAT",
-    "mcap": 3399942.77575352,
-    "ageDays": 5.044001377314815,
-    "ch1": -0.09811,
-    "ch24": 2.68718,
-    "ok": false
-   },
-   {
-    "name": "GTA6",
-    "mcap": 10836082.2,
-    "ageDays": 4.390783784722222,
-    "ch1": -0.07200000000000001,
-    "ch24": -0.13004,
-    "ok": false
    },
    {
     "name": "CAPY",
-    "mcap": 446087.0975,
-    "ageDays": 0.15022822916666667,
-    "ch1": -0.36686,
-    "ch24": 2.35216,
+    "mcap": 639400.4455,
+    "ageDays": 0.6280426388888889,
+    "ch1": 0.09754,
+    "ch24": 3.80483,
+    "ok": false
+   },
+   {
+    "name": "FLOAT",
+    "mcap": 3199684.80175552,
+    "ageDays": 5.5218157870370375,
+    "ch1": -0.08054,
+    "ch24": 1.51406,
+    "ok": false
+   },
+   {
+    "name": "SPHERE",
+    "mcap": 806920.792493694,
+    "ageDays": 0.35543847222222225,
+    "ch1": 0.13477,
+    "ch24": 1.57683,
+    "ok": false
+   },
+   {
+    "name": "WASTED",
+    "mcap": 1422384.40583764,
+    "ageDays": 3.692741712962963,
+    "ch1": 0.02091,
+    "ch24": 1.18456,
+    "ok": true
+   },
+   {
+    "name": "Anakin",
+    "mcap": 1010373.689,
+    "ageDays": 4.6376606944444445,
+    "ch1": -0.0042,
+    "ch24": -0.67525,
     "ok": false
    }
   ],
