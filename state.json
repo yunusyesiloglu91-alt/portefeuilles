@@ -17,7 +17,7 @@
    "signal": "sous la moyenne 50 j"
   },
   "meme": {
-   "cash": 11.724901871932595,
+   "cash": 27.4397537484316,
    "positions": [
     {
      "name": "BIRB",
@@ -25,21 +25,10 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.08232177383642741,
+     "last": 0.08629677161123638,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
-    },
-    {
-     "name": "BTC",
-     "addr": "C5xph2yL6gMdxmuLGxJBkGpmuDFfyi5fqkBNhvL6pump",
-     "pool": "3M9sVgL4u6ATKaiExf3XhQqNfMB6ijvzk3meMcQaen1w",
-     "t": 1793743443801,
-     "entry": 0.011042180379923636,
-     "last": 0.011757623022407451,
-     "peak": 0.011042180379923636,
-     "qty": 954.5784241988289,
-     "cost": 10.647098128067405
     }
    ]
   }
@@ -81,6 +70,16 @@
    "price": 0.011042180379923636,
    "usd": 10.647098128067405,
    "reason": "note 67 : ≥ 10 M$, plus de 14 j, à son record"
+  },
+  {
+   "t": 1793804808445,
+   "sleeve": "meme",
+   "side": "vente",
+   "name": "BTC",
+   "price": 0.016628898529067418,
+   "usd": 15.714851876499004,
+   "ret": 0.4759751142963746,
+   "reason": "objectif +50 %"
   }
  ],
  "history": [
@@ -15301,61 +15300,68 @@
    38.48,
    29.82,
    29.12
+  ],
+  [
+   1793804808445,
+   101.76,
+   38.45,
+   29.8,
+   33.51
   ]
  ],
  "watch": [
   {
-   "name": "USOE",
-   "score": 72,
-   "mcap": 23955485.01,
-   "ageDays": 17.26255763888889,
-   "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
    "name": "CATE",
    "score": 70,
-   "mcap": 36401487.1857894,
-   "ageDays": 100.34815949074074,
+   "mcap": 39182379.8813169,
+   "ageDays": 100.94034079861112,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "BIRB",
+   "score": 70,
+   "mcap": 24612844.70955,
+   "ageDays": 280.65133616898146,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "TROLL",
    "score": 65,
-   "mcap": 28176212.7322903,
-   "ageDays": 562.2664118055555,
+   "mcap": 29338631.7345354,
+   "ageDays": 562.858593113426,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 44732303.7592888,
-   "ageDays": 140.15851828703703,
+   "mcap": 49222879.2244157,
+   "ageDays": 140.75069959490742,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
-   "name": "STONK",
-   "score": 57,
-   "mcap": 92508202.2255858,
-   "ageDays": 83.58499976851851,
+   "name": "GATO",
+   "score": 55,
+   "mcap": 11243633.005096,
+   "ageDays": 71.11073431712963,
    "ok": false,
-   "why": "liquidité très faible"
+   "why": "rotation élevée (22 %/j)"
   },
   {
-   "name": "BTC",
-   "score": 52,
-   "mcap": 11473210.5,
-   "ageDays": 51.1970599537037,
+   "name": "baton",
+   "score": 50,
+   "mcap": 4525069.4144182,
+   "ageDays": 55.77399820601852,
    "ok": false,
-   "why": "déjà +150 % sur 7 j"
+   "why": "pas à un nouveau record"
   }
  ],
  "notes": [],
- "lastScan": 1793753643980,
- "lastRun": 1793755144560,
+ "lastScan": 1793804808445,
+ "lastRun": 1793804808445,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -24173,56 +24179,60 @@
    [
     1793755144560,
     65.63
+   ],
+   [
+    1793804808445,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "AMD",
-    "mcap": 1573058.517,
-    "ageDays": 0.15865231481481482,
-    "ch1": -0.30563,
-    "ch24": 31.38544,
+    "mcap": 1375674.861,
+    "ageDays": 0.7334657986111112,
+    "ch1": 0.01199,
+    "ch24": 27.3218,
+    "ok": true
+   },
+   {
+    "name": "RAM",
+    "mcap": 485592.6959,
+    "ageDays": 4.4660583912037035,
+    "ch1": -0.16498000000000002,
+    "ch24": 9.867469999999999,
     "ok": false
    },
    {
     "name": "STONKS",
-    "mcap": 809436.8409,
-    "ageDays": 0.30515694444444447,
-    "ch1": 0.03158,
-    "ch24": 4.164429999999999,
-    "ok": false
-   },
-   {
-    "name": "ANONVOYAGE",
-    "mcap": 1416962.75988575,
-    "ageDays": 0.4843236111111111,
-    "ch1": -0.24922999999999998,
-    "ch24": 3.9217500000000003,
-    "ok": false
+    "mcap": 1027710.767,
+    "ageDays": 0.8799704282407408,
+    "ch1": 0.37827,
+    "ch24": 5.55708,
+    "ok": true
    },
    {
     "name": "FLOAT",
-    "mcap": 1738506.25057295,
-    "ageDays": 6.12733287037037,
-    "ch1": -0.01927,
-    "ch24": -0.45164000000000004,
-    "ok": false
+    "mcap": 2010804.6797273,
+    "ageDays": 6.702146354166667,
+    "ch1": 0.01543,
+    "ch24": -0.54792,
+    "ok": true
    },
    {
-    "name": "MAMESUKE",
-    "mcap": 1450734.253,
-    "ageDays": 1.5723097222222222,
-    "ch1": 0.038610000000000005,
-    "ch24": 0.67123,
-    "ok": false
+    "name": "SA",
+    "mcap": 863401.631331796,
+    "ageDays": 0.8889519097222223,
+    "ch1": 0.04732,
+    "ch24": 5.67375,
+    "ok": true
    },
    {
-    "name": "CAPY",
-    "mcap": 305647.389993903,
-    "ageDays": 1.2335597222222223,
-    "ch1": -0.11904999999999999,
-    "ch24": -0.56451,
-    "ok": false
+    "name": "VI",
+    "mcap": 974968.185667998,
+    "ageDays": 0.6085583912037037,
+    "ch1": 0.14987999999999999,
+    "ch24": 17.0035,
+    "ok": true
    }
   ],
   "paused": true
