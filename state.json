@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.10011814583117545,
+     "last": 0.10269957279218882,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -36,7 +36,7 @@
      "pool": "DhHVd5s4hqBGnTkFztsK98WGPtYUJjpUCqNnWaNLWb4F",
      "t": 1793880544081,
      "entry": 0.023179311745007942,
-     "last": 0.020003233450920265,
+     "last": 0.01988732264739412,
      "peak": 0.023179311745007942,
      "qty": 534.3524725739067,
      "cost": 12.511032872228675
@@ -17301,61 +17301,68 @@
    38.62,
    29.93,
    33.5
+  ],
+  [
+   1793941743392,
+   102.29,
+   38.63,
+   29.94,
+   33.72
   ]
  ],
  "watch": [
   {
-   "name": "ALCH",
-   "score": 80,
-   "mcap": 33412661.6746273,
-   "ageDays": 708.4286146527778,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "BIRB",
-   "score": 80,
-   "mcap": 28491066.50115,
-   "ageDays": 282.1980359490741,
-   "ok": true,
-   "why": "tous les critères remplis"
-  },
-  {
-   "name": "CATE",
-   "score": 70,
-   "mcap": 33173809.4005686,
-   "ageDays": 102.4870405787037,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "BTC",
-   "score": 67,
-   "mcap": 16814433.9,
-   "ageDays": 53.335941041666665,
-   "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
    "name": "TROLL",
    "score": 65,
-   "mcap": 27056079.8296406,
-   "ageDays": 564.4052928935185,
+   "mcap": 26860044.7426186,
+   "ageDays": 564.4434883333333,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "STONK",
    "score": 62,
-   "mcap": 84771931.0147559,
-   "ageDays": 85.72388085648149,
+   "mcap": 84583293.0626647,
+   "ageDays": 85.7620762962963,
    "ok": false,
    "why": "liquidité très faible"
+  },
+  {
+   "name": "ANSEM",
+   "score": 62,
+   "mcap": 43868217.7907295,
+   "ageDays": 142.3355948148148,
+   "ok": false,
+   "why": "liquidité très faible"
+  },
+  {
+   "name": "MASK",
+   "score": 52,
+   "mcap": 11161150.8674643,
+   "ageDays": 41.23391657407407,
+   "ok": false,
+   "why": "liquidité très faible"
+  },
+  {
+   "name": "baton",
+   "score": 50,
+   "mcap": 4859863.77731662,
+   "ageDays": 57.35889342592593,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "JEANPHIL",
+   "score": 50,
+   "mcap": 4289379.40862461,
+   "ageDays": 47.41810638888889,
+   "ok": false,
+   "why": "pas à un nouveau record"
   }
  ],
  "notes": [],
- "lastScan": 1793938443306,
- "lastRun": 1793941443449,
+ "lastScan": 1793941743392,
+ "lastRun": 1793941743392,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -27305,55 +27312,35 @@
    [
     1793941443449,
     65.63
+   ],
+   [
+    1793941743392,
+    65.63
    ]
   ],
   "watch": [
    {
-    "name": "PREDICT",
-    "mcap": 1138720.674,
-    "ageDays": 0.5125977893518519,
-    "ch1": 0.07217,
-    "ch24": 1.7483000000000002,
-    "ok": true
-   },
-   {
-    "name": "coin",
-    "mcap": 531485.7926,
-    "ageDays": 0.2183732523148148,
-    "ch1": -0.36884999999999996,
-    "ch24": 13.5031,
-    "ok": false
-   },
-   {
     "name": "HIGH",
-    "mcap": 1731094.33705609,
-    "ageDays": 2.4928292708333335,
-    "ch1": 0.05126,
-    "ch24": -0.1069,
+    "mcap": 1699361.35073519,
+    "ageDays": 2.496300833333333,
+    "ch1": 0.05995,
+    "ch24": -0.14279,
     "ok": false
    },
    {
     "name": "COGE",
-    "mcap": 2987560.97007328,
-    "ageDays": 0.38554917824074075,
-    "ch1": 0.11982,
-    "ch24": 22.984989999999996,
+    "mcap": 3110105.05072319,
+    "ageDays": 0.3890207407407407,
+    "ch1": 0.16468,
+    "ch24": 23.968809999999998,
     "ok": true
    },
    {
     "name": "AMD",
-    "mcap": 850257.052708116,
-    "ageDays": 0.10627834490740741,
-    "ch1": 0.50892,
-    "ch24": 5.30965,
-    "ok": false
-   },
-   {
-    "name": "AMD",
-    "mcap": 577727.879860343,
-    "ageDays": 2.3148894560185185,
-    "ch1": -0.10252,
-    "ch24": -0.14265,
+    "mcap": 588482.703409895,
+    "ageDays": 2.3183610185185186,
+    "ch1": -0.0799,
+    "ch24": -0.00209,
     "ok": false
    }
   ],
