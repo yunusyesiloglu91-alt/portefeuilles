@@ -21031,6 +21031,13 @@
    38.64,
    29.95,
    30.81
+  ],
+  [
+   1794239643481,
+   99.41,
+   38.64,
+   29.95,
+   30.81
   ]
  ],
  "watch": [
@@ -21083,9 +21090,11 @@
    "why": "liquidité très faible"
   }
  ],
- "notes": [],
+ "notes": [
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/simple/networks/solana/token_price/G7vQWurMkMMm2dU3iZpXYFTHT9Biio4F4gZCrwFpKNwG,y1AZt42vceCmStjW4zetK3VoNarC1VxJ5iDjpiupump,GJAFwWjJ3vnTsrQVabjBVK2TYB1YtRCQXRDfDgUnpump), positions conservées"
+ ],
  "lastScan": 1794238743327,
- "lastRun": 1794239343806,
+ "lastRun": 1794239643481,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -33154,6 +33163,10 @@
    ],
    [
     1794239343806,
+    65.63
+   ],
+   [
+    1794239643481,
     65.63
    ]
   ],
