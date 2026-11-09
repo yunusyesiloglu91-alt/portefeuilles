@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.09232958847005045,
+     "last": 0.09252096361459107,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -36,7 +36,7 @@
      "pool": "DhHVd5s4hqBGnTkFztsK98WGPtYUJjpUCqNnWaNLWb4F",
      "t": 1793880544081,
      "entry": 0.023179311745007942,
-     "last": 0.020882257049896935,
+     "last": 0.020792504835437608,
      "peak": 0.023179311745007942,
      "qty": 534.3524725739067,
      "cost": 12.511032872228675
@@ -21010,61 +21010,68 @@
    38.64,
    29.95,
    30.86
+  ],
+  [
+   1794238743327,
+   99.41,
+   38.63,
+   29.94,
+   30.83
   ]
  ],
  "watch": [
   {
-   "name": "HYPE",
-   "score": 72,
-   "mcap": 58881546.4173715,
-   "ageDays": 387.53233430555554,
-   "ok": false,
-   "why": "ni site ni réseaux sociaux"
-  },
-  {
    "name": "CATE",
    "score": 70,
-   "mcap": 30523011.023959,
-   "ageDays": 105.92108430555555,
+   "mcap": 31774110.0968033,
+   "ageDays": 105.96273526620371,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "SPCX",
-   "score": 62,
-   "mcap": 13842803.099193,
-   "ageDays": 150.0321722685185,
+   "name": "HYPE",
+   "score": 67,
+   "mcap": 60376580.4353649,
+   "ageDays": 387.5739852662037,
    "ok": false,
    "why": "ni site ni réseaux sociaux"
   },
   {
-   "name": "GATO",
-   "score": 62,
-   "mcap": 11445924.9843919,
-   "ageDays": 76.09147782407408,
+   "name": "TROLL",
+   "score": 65,
+   "mcap": 28637146.3186025,
+   "ageDays": 567.8809875810185,
    "ok": false,
-   "why": "mise en avant payante"
+   "why": "pas à un nouveau record"
   },
   {
-   "name": "ANSEM",
-   "score": 57,
-   "mcap": 52666431.3647073,
-   "ageDays": 145.73144310185185,
+   "name": "SPCXx",
+   "score": 64,
+   "mcap": 86390715.8235413,
+   "ageDays": 149.9814852662037,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
-   "name": "STONK",
-   "score": 50,
-   "mcap": 42909810.5278356,
-   "ageDays": 89.15792458333334,
+   "name": "ANSEM",
+   "score": 57,
+   "mcap": 54585112.7247698,
+   "ageDays": 145.7730940625,
    "ok": false,
-   "why": "rotation élevée (22 %/j)"
+   "why": "liquidité très faible"
+  },
+  {
+   "name": "DESSA",
+   "score": 54,
+   "mcap": 31022949.0922901,
+   "ageDays": 14.106774618055555,
+   "ok": false,
+   "why": "liquidité très faible"
   }
  ],
  "notes": [],
- "lastScan": 1794235144684,
- "lastRun": 1794238443439,
+ "lastScan": 1794238743327,
+ "lastRun": 1794238743327,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -33122,39 +33129,35 @@
    [
     1794238443439,
     65.63
+   ],
+   [
+    1794238743327,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "PUSSY",
-    "mcap": 2501496.829,
-    "ageDays": 0.7931185069444444,
-    "ch1": -0.00194,
-    "ch24": 17.93581,
-    "ok": false
-   },
-   {
-    "name": "PIRATE",
-    "mcap": 324638.064,
-    "ageDays": 4.5952365625,
-    "ch1": -0.22434,
-    "ch24": -0.59097,
-    "ok": false
+    "mcap": 2368208.085,
+    "ageDays": 0.7965894328703703,
+    "ch1": 0.00074,
+    "ch24": 16.92684,
+    "ok": true
    },
    {
     "name": "WEALTH",
-    "mcap": 761488.639515289,
-    "ageDays": 4.020491192129629,
-    "ch1": 0.11704,
-    "ch24": 0.16541,
+    "mcap": 762662.491480367,
+    "ageDays": 4.023962118055556,
+    "ch1": 0.14422000000000001,
+    "ch24": 0.23201,
     "ok": false
    },
    {
     "name": "Pepetide",
-    "mcap": 552995.0846,
-    "ageDays": 1.6384888773148147,
-    "ch1": -0.28224,
-    "ch24": 2.05883,
+    "mcap": 599746.5579,
+    "ageDays": 1.6419598032407408,
+    "ch1": -0.3446,
+    "ch24": 2.31743,
     "ok": false
    }
   ],
