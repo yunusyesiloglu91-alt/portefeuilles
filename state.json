@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.08031351168522495,
+     "last": 0.08049284250591067,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.010220520677359091,
+     "last": 0.01022737675490004,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -22557,61 +22557,68 @@
    38.81,
    30.08,
    29
+  ],
+  [
+   1794330246327,
+   97.91,
+   38.8,
+   30.08,
+   29.03
   ]
  ],
  "watch": [
   {
+   "name": "BIRB",
+   "score": 75,
+   "mcap": 22978031.0469,
+   "ageDays": 286.73279313657406,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "HYPE",
+   "score": 72,
+   "mcap": 56120329.2581671,
+   "ageDays": 388.63304776620373,
+   "ok": false,
+   "why": "ni site ni réseaux sociaux"
+  },
+  {
+   "name": "MEW",
+   "score": 67,
+   "mcap": 29816703.7511081,
+   "ageDays": 959.4847954513889,
+   "ok": false,
+   "why": "bien plus de vendeurs que d’acheteurs"
+  },
+  {
    "name": "STONK",
    "score": 65,
-   "mcap": 37067773.1696253,
-   "ageDays": 90.22041921296297,
+   "mcap": 37278390.9992658,
+   "ageDays": 90.25863804398148,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "CATE",
    "score": 65,
-   "mcap": 26465839.5690669,
-   "ageDays": 106.98357893518518,
+   "mcap": 25386787.9788338,
+   "ageDays": 107.0217977662037,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 48424162.9343586,
-   "ageDays": 146.7939377314815,
-   "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
-   "name": "hSOL",
-   "score": 47,
-   "mcap": 79776829.0318636,
-   "ageDays": 0.05626412037037037,
-   "ok": false,
-   "why": "moins de 7 jours"
-  },
-  {
-   "name": "SPCX",
-   "score": 47,
-   "mcap": 13477945.8910499,
-   "ageDays": 151.09466689814815,
-   "ok": false,
-   "why": "rotation élevée (29 %/j)"
-  },
-  {
-   "name": "GTA6",
-   "score": 47,
-   "mcap": 8898958.464,
-   "ageDays": 12.092166898148148,
+   "mcap": 47805660.7319024,
+   "ageDays": 146.8321565625,
    "ok": false,
    "why": "liquidité très faible"
   }
  ],
  "notes": [],
- "lastScan": 1794326944220,
- "lastRun": 1794329943824,
+ "lastScan": 1794330246327,
+ "lastRun": 1794330246327,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -35553,31 +35560,35 @@
    [
     1794329943824,
     65.63
+   ],
+   [
+    1794330246327,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "X",
-    "mcap": 371398.204509724,
-    "ageDays": 0.3417456481481482,
-    "ch1": 0.18841000000000002,
-    "ch24": 9.70475,
+    "mcap": 334161.547026597,
+    "ageDays": 0.3452468402777778,
+    "ch1": -0.03938,
+    "ch24": 8.63149,
     "ok": false
    },
    {
     "name": "LAMPORT",
-    "mcap": 372265.775,
-    "ageDays": 4.887995648148149,
-    "ch1": -0.34677,
-    "ch24": 9.63565,
+    "mcap": 403865.4916,
+    "ageDays": 4.891496840277778,
+    "ch1": -0.12875999999999999,
+    "ch24": 10.53846,
     "ok": false
    },
    {
     "name": "WEALTH",
-    "mcap": 790076.620556915,
-    "ageDays": 5.079523425925926,
-    "ch1": 0.025539999999999997,
-    "ch24": 0.19588999999999998,
+    "mcap": 790900.623644134,
+    "ageDays": 5.083024618055555,
+    "ch1": 0.0275,
+    "ch24": 0.18576,
     "ok": false
    }
   ],
