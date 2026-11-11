@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07614234067225774,
+     "last": 0.07597972011934014,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -36,7 +36,7 @@
      "pool": "DhHVd5s4hqBGnTkFztsK98WGPtYUJjpUCqNnWaNLWb4F",
      "t": 1793880544081,
      "entry": 0.023179311745007942,
-     "last": 0.01885612081075394,
+     "last": 0.018763945143648063,
      "peak": 0.023179311745007942,
      "qty": 534.3524725739067,
      "cost": 12.511032872228675
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009295572873880258,
+     "last": 0.009260615754309826,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -24384,61 +24384,68 @@
    39.01,
    30.23,
    28.41
+  ],
+  [
+   1794419044067,
+   97.55,
+   39,
+   30.23,
+   28.32
   ]
  ],
  "watch": [
   {
-   "name": "Pnut",
-   "score": 80,
-   "mcap": 33403012.0726291,
-   "ageDays": 741.0675618171297,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "ACT",
-   "score": 70,
-   "mcap": 8850499.44400296,
-   "ageDays": 753.2134877430556,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
    "name": "STONK",
    "score": 65,
-   "mcap": 38878732.7792737,
-   "ageDays": 91.24472616898149,
+   "mcap": 39236484.0082692,
+   "ageDays": 91.28638966435186,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 61478796.4468871,
-   "ageDays": 147.8182446875,
+   "mcap": 64125476.2809494,
+   "ageDays": 147.85990818287038,
    "ok": false,
    "why": "liquidité très faible"
+  },
+  {
+   "name": "ACT",
+   "score": 62,
+   "mcap": 8798886.20795659,
+   "ageDays": 753.2551512384259,
+   "ok": false,
+   "why": "bien plus de vendeurs que d’acheteurs"
   },
   {
    "name": "CATE",
    "score": 60,
-   "mcap": 25566089.1444676,
-   "ageDays": 108.0078858912037,
+   "mcap": 26260877.2037389,
+   "ageDays": 108.04954938657407,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "HYPE",
-   "score": 59,
-   "mcap": 58666961.9116565,
-   "ageDays": 381.10091829861113,
+   "name": "GATO",
+   "score": 57,
+   "mcap": 8521414.72129722,
+   "ageDays": 78.2199429050926,
    "ok": false,
-   "why": "liquidité très faible"
+   "why": "mise en avant payante"
+  },
+  {
+   "name": "FLOAT",
+   "score": 40,
+   "mcap": 7692688.03602512,
+   "ageDays": 13.811354942129629,
+   "ok": false,
+   "why": "déjà +150 % sur 7 j"
   }
  ],
  "notes": [],
- "lastScan": 1794415444341,
- "lastRun": 1794418744089,
+ "lastScan": 1794419044067,
+ "lastRun": 1794419044067,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -38424,23 +38431,27 @@
    [
     1794418744089,
     65.63
+   ],
+   [
+    1794419044067,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "HOLD",
-    "mcap": 488941.0934,
-    "ageDays": 0.8531028819444444,
-    "ch1": -0.2236,
-    "ch24": 12.2894,
+    "mcap": 588757.0074,
+    "ageDays": 0.856574849537037,
+    "ch1": -0.02568,
+    "ch24": 15.00239,
     "ok": false
    },
    {
     "name": "DACITY",
-    "mcap": 757345.386528859,
-    "ageDays": 0.9415982523148149,
-    "ch1": -0.33248,
-    "ch24": 2.84727,
+    "mcap": 680708.25189489,
+    "ageDays": 0.9450702199074074,
+    "ch1": -0.4092,
+    "ch24": 2.45796,
     "ok": false
    }
   ],
