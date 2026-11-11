@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07551560151376453,
+     "last": 0.07551216595365612,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009135723321792433,
+     "last": 0.009091093325964089,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -24706,6 +24706,13 @@
    39.01,
    30.24,
    28.15
+  ],
+  [
+   1794432843530,
+   97.36,
+   39.01,
+   30.24,
+   28.1
   ]
  ],
  "watch": [
@@ -24758,9 +24765,11 @@
    "why": "mise en avant payante"
   }
  ],
- "notes": [],
- "lastScan": 1794429244108,
- "lastRun": 1794432543571,
+ "notes": [
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/AHNN6JmvaGG6XUoSg7sEr38gRYDB2jTbUvqXVuqaRHpq/ohlcv/day), positions conservées"
+ ],
+ "lastScan": 1794432843530,
+ "lastRun": 1794432843530,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -38930,39 +38939,27 @@
    [
     1794432543571,
     65.63
+   ],
+   [
+    1794432843530,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Max",
-    "mcap": 2061409.36240664,
-    "ageDays": 0.019844571759259258,
-    "ch1": 46.28495,
-    "ch24": 46.28495,
+    "mcap": 8837341.98484289,
+    "ageDays": 0.023316319444444445,
+    "ch1": 201.7124,
+    "ch24": 201.7124,
     "ok": false
    },
    {
     "name": "HOLD",
-    "mcap": 446769.2451,
-    "ageDays": 1.0128191087962963,
-    "ch1": -0.022869999999999998,
-    "ch24": 10.88721,
-    "ok": false
-   },
-   {
-    "name": "Max",
-    "mcap": 545358.60353136,
-    "ageDays": 2.257923275462963,
-    "ch1": 0.1945,
-    "ch24": 0.1945,
-    "ok": true
-   },
-   {
-    "name": "DeepSeek",
-    "mcap": 305435.292561947,
-    "ageDays": 0.04507605324074074,
-    "ch1": 1.42834,
-    "ch24": 2.06556,
+    "mcap": 378048.1949,
+    "ageDays": 1.0162908564814814,
+    "ch1": -0.4264,
+    "ch24": 6.059880000000001,
     "ok": false
    }
   ],
