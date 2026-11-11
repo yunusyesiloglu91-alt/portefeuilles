@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07577757383446339,
+     "last": 0.0754887306519963,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -36,7 +36,7 @@
      "pool": "DhHVd5s4hqBGnTkFztsK98WGPtYUJjpUCqNnWaNLWb4F",
      "t": 1793880544081,
      "entry": 0.023179311745007942,
-     "last": 0.018576527488011384,
+     "last": 0.018588259278592135,
      "peak": 0.023179311745007942,
      "qty": 534.3524725739067,
      "cost": 12.511032872228675
@@ -24783,61 +24783,68 @@
    39,
    30.23,
    27.89
+  ],
+  [
+   1794436143684,
+   97.1,
+   39,
+   30.23,
+   27.87
   ]
  ],
  "watch": [
   {
-   "name": "ACT",
-   "score": 70,
-   "mcap": 8729382.8532585,
-   "ageDays": 753.3732072685185,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
    "name": "STONK",
    "score": 65,
-   "mcap": 38280297.7523078,
-   "ageDays": 91.40444569444445,
+   "mcap": 36729027.1322629,
+   "ageDays": 91.48430189814815,
    "ok": false,
    "why": "pas à un nouveau record"
-  },
-  {
-   "name": "SPCXx",
-   "score": 64,
-   "mcap": 83197283.6242293,
-   "ageDays": 152.18635541666666,
-   "ok": false,
-   "why": "liquidité très faible"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 62940867.4328938,
-   "ageDays": 147.97796421296297,
+   "mcap": 62271780.0163682,
+   "ageDays": 148.05782041666666,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "CATE",
    "score": 60,
-   "mcap": 25149742.6405109,
-   "ageDays": 108.16760541666666,
+   "mcap": 23213514.8092465,
+   "ageDays": 108.24746162037037,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "GATO",
-   "score": 57,
-   "mcap": 7940987.28138173,
-   "ageDays": 78.33799893518518,
+   "name": "SPCX",
+   "score": 37,
+   "mcap": 12818360.2422528,
+   "ageDays": 152.27212597222223,
    "ok": false,
-   "why": "mise en avant payante"
+   "why": "rotation 74 %/j : profil des tokens qui s'effondrent"
+  },
+  {
+   "name": "GATO",
+   "score": 32,
+   "mcap": 6920867.37724372,
+   "ageDays": 78.41785513888888,
+   "ok": false,
+   "why": "rotation élevée (21 %/j)"
+  },
+  {
+   "name": "DacityCoin",
+   "score": 30,
+   "mcap": 6456839.37553802,
+   "ageDays": 27.376304212962964,
+   "ok": false,
+   "why": "rotation 88 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1794432843530,
- "lastRun": 1794435843668,
+ "lastScan": 1794436143684,
+ "lastRun": 1794436143684,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -39051,23 +39058,27 @@
    [
     1794435843668,
     65.63
+   ],
+   [
+    1794436143684,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Max",
-    "mcap": 8777280.66871678,
-    "ageDays": 0.05804013888888889,
-    "ch1": 5.13832,
-    "ch24": 200.3347,
+    "mcap": 8725696.31823217,
+    "ageDays": 0.061512546296296294,
+    "ch1": -0.12032,
+    "ch24": 199.15145,
     "ok": false
    },
    {
     "name": "HOLD",
-    "mcap": 335213.3687,
-    "ageDays": 1.051014675925926,
-    "ch1": -0.30818999999999996,
-    "ch24": 0.66157,
+    "mcap": 357982.7738,
+    "ageDays": 1.0544870833333333,
+    "ch1": -0.1059,
+    "ch24": 0.40486,
     "ok": false
    }
   ],
