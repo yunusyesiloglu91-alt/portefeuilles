@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07615192012469427,
+     "last": 0.07619295798719497,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009449445073690615,
+     "last": 0.009295543962027579,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -24132,61 +24132,68 @@
    39,
    30.23,
    28.32
+  ],
+  [
+   1794408244286,
+   97.42,
+   39.01,
+   30.23,
+   28.18
   ]
  ],
  "watch": [
   {
    "name": "STONK",
    "score": 65,
-   "mcap": 40174079.9845467,
-   "ageDays": 91.12319462962962,
+   "mcap": 39512213.2641752,
+   "ageDays": 91.16139219907407,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 64869416.8581587,
-   "ageDays": 147.69671314814815,
+   "mcap": 64860404.2408371,
+   "ageDays": 147.73491071759258,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
+   "name": "ACT",
+   "score": 62,
+   "mcap": 8811341.47112102,
+   "ageDays": 753.1301537731481,
+   "ok": false,
+   "why": "bien plus de vendeurs que d’acheteurs"
+  },
+  {
    "name": "CATE",
    "score": 60,
-   "mcap": 25472072.1976836,
-   "ageDays": 107.88635435185185,
+   "mcap": 25286592.1273205,
+   "ageDays": 107.9245519212963,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "GATO",
    "score": 57,
-   "mcap": 9356192.81522558,
-   "ageDays": 78.05674787037037,
+   "mcap": 9612789.08136324,
+   "ageDays": 78.09494543981481,
    "ok": false,
    "why": "mise en avant payante"
   },
   {
-   "name": "FLOAT",
-   "score": 45,
-   "mcap": 5943280.61222371,
-   "ageDays": 13.648159907407408,
+   "name": "SPCX",
+   "score": 47,
+   "mcap": 12950797.4773315,
+   "ageDays": 152.03563988425927,
    "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "GTA6",
-   "score": 32,
-   "mcap": 6643259.438,
-   "ageDays": 12.994942314814814,
-   "ok": false,
-   "why": "rotation élevée (22 %/j)"
+   "why": "rotation élevée (32 %/j)"
   }
  ],
  "notes": [],
- "lastScan": 1794404944016,
- "lastRun": 1794407943918,
+ "lastScan": 1794408244286,
+ "lastRun": 1794408244286,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -38028,15 +38035,27 @@
    [
     1794407943918,
     65.63
+   ],
+   [
+    1794408244286,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "HOLD",
-    "mcap": 646893.7453,
-    "ageDays": 0.7281009027777777,
-    "ch1": -0.19777,
-    "ch24": 16.58255,
+    "mcap": 720182.7186,
+    "ageDays": 0.7315773842592592,
+    "ch1": -0.20486000000000001,
+    "ch24": 18.57454,
+    "ok": false
+   },
+   {
+    "name": "WEALTH",
+    "mcap": 662567.816258577,
+    "ageDays": 5.985778773148148,
+    "ch1": -0.02282,
+    "ch24": -0.19568000000000002,
     "ok": false
    }
   ],
