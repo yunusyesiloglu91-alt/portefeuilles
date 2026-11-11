@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07437640882629894,
+     "last": 0.07407723786886722,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009030344420814358,
+     "last": 0.009008057458674988,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -24860,61 +24860,68 @@
    38.98,
    30.21,
    27.57
+  ],
+  [
+   1794439445043,
+   96.7,
+   38.97,
+   30.21,
+   27.51
   ]
  ],
  "watch": [
   {
    "name": "STONK",
    "score": 65,
-   "mcap": 36729027.1322629,
-   "ageDays": 91.48430189814815,
+   "mcap": 35552163.8770592,
+   "ageDays": 91.52251207175927,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "CATE",
+   "score": 60,
+   "mcap": 22883852.3455238,
+   "ageDays": 108.28567179398148,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
-   "score": 62,
-   "mcap": 62271780.0163682,
-   "ageDays": 148.05782041666666,
+   "score": 57,
+   "mcap": 58759407.6919816,
+   "ageDays": 148.0960305902778,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
-   "name": "CATE",
-   "score": 60,
-   "mcap": 23213514.8092465,
-   "ageDays": 108.24746162037037,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
    "name": "SPCX",
    "score": 37,
-   "mcap": 12818360.2422528,
-   "ageDays": 152.27212597222223,
+   "mcap": 12545706.6858519,
+   "ageDays": 152.31033614583333,
    "ok": false,
-   "why": "rotation 74 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation 83 %/j : profil des tokens qui s'effondrent"
   },
   {
    "name": "GATO",
    "score": 32,
-   "mcap": 6920867.37724372,
-   "ageDays": 78.41785513888888,
+   "mcap": 6109868.47797433,
+   "ageDays": 78.4560653125,
    "ok": false,
-   "why": "rotation élevée (21 %/j)"
+   "why": "rotation élevée (24 %/j)"
   },
   {
    "name": "DacityCoin",
    "score": 30,
-   "mcap": 6456839.37553802,
-   "ageDays": 27.376304212962964,
+   "mcap": 7580111.54793178,
+   "ageDays": 27.414514386574073,
    "ok": false,
-   "why": "rotation 88 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation 79 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1794436143684,
- "lastRun": 1794439143697,
+ "lastScan": 1794439445043,
+ "lastRun": 1794439445043,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -39172,47 +39179,43 @@
    [
     1794439143697,
     65.63
+   ],
+   [
+    1794439445043,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Max",
-    "mcap": 5108134.64156341,
-    "ageDays": 0.09623491898148148,
-    "ch1": -0.35338,
-    "ch24": 116.17123,
+    "mcap": 4789794.99462952,
+    "ageDays": 0.0997227199074074,
+    "ch1": -0.44682,
+    "ch24": 108.8691,
     "ok": false
    },
    {
     "name": "HOLD",
-    "mcap": 306300.684,
-    "ageDays": 1.0892094560185186,
-    "ch1": -0.07105,
-    "ch24": 0.29937,
+    "mcap": 300793.1866,
+    "ageDays": 1.0926972569444444,
+    "ch1": -0.12279,
+    "ch24": 0.31531,
     "ok": false
    },
    {
     "name": "NVDA",
-    "mcap": 1056725.8615302,
-    "ageDays": 3.119915474537037,
-    "ch1": -0.056100000000000004,
-    "ch24": -0.07081,
+    "mcap": 1069272.92029134,
+    "ageDays": 3.123403275462963,
+    "ch1": -0.03351,
+    "ch24": -0.060110000000000004,
     "ok": false
    },
    {
     "name": "HUNG",
-    "mcap": 507359.3259,
-    "ageDays": 2.7963622337962963,
-    "ch1": 0.94191,
-    "ch24": 45.47741,
-    "ok": false
-   },
-   {
-    "name": "WEALTH",
-    "mcap": 539815.514519662,
-    "ageDays": 6.343410844907408,
-    "ch1": -0.14547000000000002,
-    "ch24": -0.34377,
+    "mcap": 441555.4215,
+    "ageDays": 2.799850034722222,
+    "ch1": 1.41832,
+    "ch24": 40.48774,
     "ok": false
    }
   ],
