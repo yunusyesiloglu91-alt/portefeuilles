@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07326686423484165,
+     "last": 0.07324604599027928,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009245969799785068,
+     "last": 0.009200283102001243,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -25987,63 +25987,68 @@
    39.02,
    30.25,
    27.32
+  ],
+  [
+   1794490444145,
+   96.53,
+   39.02,
+   30.24,
+   27.27
   ]
  ],
  "watch": [
   {
-   "name": "BIRB",
-   "score": 75,
-   "mcap": 21200248.3797,
-   "ageDays": 288.4897697685185,
+   "name": "HYPE",
+   "score": 67,
+   "mcap": 58124213.5070534,
+   "ageDays": 381.96897158564815,
    "ok": false,
-   "why": "pas à un nouveau record"
+   "why": "liquidité très faible"
   },
   {
    "name": "STONK",
    "score": 65,
-   "mcap": 36244871.7337928,
-   "ageDays": 92.01561467592593,
+   "mcap": 34666089.7170641,
+   "ageDays": 92.11277945601852,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "TROLL",
+   "score": 65,
+   "mcap": 28069299.322991,
+   "ageDays": 570.7941914930556,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "CATE",
    "score": 65,
-   "mcap": 23049998.4902426,
-   "ageDays": 108.77877439814814,
+   "mcap": 22785955.4903758,
+   "ageDays": 108.87593917824074,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 59331323.156924,
-   "ageDays": 148.58913319444446,
+   "mcap": 57163113.5813348,
+   "ageDays": 148.68629797453704,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "SPCX",
    "score": 37,
-   "mcap": 13484948.5471483,
-   "ageDays": 152.80343875,
+   "mcap": 13385368.1546131,
+   "ageDays": 152.90060353009258,
    "ok": false,
-   "why": "rotation 96 %/j : profil des tokens qui s'effondrent"
-  },
-  {
-   "name": "DacityCoin",
-   "score": 30,
-   "mcap": 6693704.21643456,
-   "ageDays": 27.907616990740742,
-   "ok": false,
-   "why": "rotation 95 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation 97 %/j : profil des tokens qui s'effondrent"
   }
  ],
- "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
- ],
- "lastScan": 1794482049108,
- "lastRun": 1794490145994,
+ "notes": [],
+ "lastScan": 1794490444145,
+ "lastRun": 1794490444145,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -40945,55 +40950,59 @@
    [
     1794490145994,
     65.63
+   ],
+   [
+    1794490444145,
+    65.63
    ]
   ],
   "watch": [
    {
-    "name": "PREDICT",
-    "mcap": 3614303.099,
-    "ageDays": 1.4188348263888888,
-    "ch1": 0.03467,
-    "ch24": 3.4080500000000002,
-    "ok": true
-   },
-   {
     "name": "Max",
-    "mcap": 2141036.60251616,
-    "ageDays": 0.5962538078703704,
-    "ch1": 0.011160000000000002,
-    "ch24": 48.111450000000005,
-    "ok": true
-   },
-   {
-    "name": "Shiqi",
-    "mcap": 14551637.72,
-    "ageDays": 0.0411959375,
-    "ch1": 1.07859,
-    "ch24": 1.1582,
+    "mcap": 2100035.16442303,
+    "ageDays": 0.6899901041666666,
+    "ch1": -0.19541,
+    "ch24": 47.170950000000005,
     "ok": false
    },
    {
     "name": "HUNG",
-    "mcap": 496123.5713,
-    "ageDays": 3.2963811226851853,
-    "ch1": 0.24839,
-    "ch24": 51.46075,
-    "ok": true
-   },
-   {
-    "name": "updog",
-    "mcap": 727517.1861,
-    "ageDays": 0.6697491782407408,
-    "ch1": 0.10817,
-    "ch24": 4.87003,
+    "mcap": 317297.0941,
+    "ageDays": 3.3901174189814816,
+    "ch1": -0.10242000000000001,
+    "ch24": 30.69073,
     "ok": false
    },
    {
     "name": "FLC",
-    "mcap": 341739.903,
-    "ageDays": 0.24158945601851853,
-    "ch1": -0.05978,
-    "ch24": 8.71595,
+    "mcap": 330270.8245,
+    "ageDays": 0.3353257523148148,
+    "ch1": 0.6920499999999999,
+    "ch24": 8.38987,
+    "ok": true
+   },
+   {
+    "name": "updog",
+    "mcap": 1021071.044,
+    "ageDays": 0.7634854745370371,
+    "ch1": 0.19693000000000002,
+    "ch24": 7.23859,
+    "ok": false
+   },
+   {
+    "name": "NOBUSHIBA",
+    "mcap": 868751.0825,
+    "ageDays": 1.5051405671296296,
+    "ch1": -0.18834,
+    "ch24": 3.02687,
+    "ok": false
+   },
+   {
+    "name": "WEALTH",
+    "mcap": 428266.470666986,
+    "ageDays": 6.937166030092593,
+    "ch1": -0.12009,
+    "ch24": -0.43864,
     "ok": false
    }
   ],
