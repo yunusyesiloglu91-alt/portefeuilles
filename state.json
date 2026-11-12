@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07318997556381701,
+     "last": 0.07286961926631666,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.008981098641773613,
+     "last": 0.008996991630716036,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -25070,6 +25070,13 @@
    38.98,
    30.21,
    27.43
+  ],
+  [
+   1794448444095,
+   96.61,
+   38.98,
+   30.21,
+   27.42
   ]
  ],
  "watch": [
@@ -25122,11 +25129,9 @@
    "why": "rotation 88 %/j : profil des tokens qui s'effondrent"
   }
  ],
- "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/simple/networks/solana/token_price/G7vQWurMkMMm2dU3iZpXYFTHT9Biio4F4gZCrwFpKNwG,y1AZt42vceCmStjW4zetK3VoNarC1VxJ5iDjpiupump,GJAFwWjJ3vnTsrQVabjBVK2TYB1YtRCQXRDfDgUnpump), positions conservées"
- ],
+ "notes": [],
  "lastScan": 1794446644451,
- "lastRun": 1794448144003,
+ "lastRun": 1794448444095,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -39504,23 +39509,43 @@
    [
     1794448144003,
     65.63
+   ],
+   [
+    1794448444095,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Max",
-    "mcap": 5809354.34327457,
-    "ageDays": 0.1830492013888889,
-    "ch1": -0.043890000000000005,
-    "ch24": 132.25592,
+    "mcap": 3258178.85331789,
+    "ageDays": 0.20387841435185186,
+    "ch1": -0.55433,
+    "ch24": 73.73664,
     "ok": false
    },
    {
-    "name": "HUNG",
-    "mcap": 640258.4677,
-    "ageDays": 2.8831765162037035,
-    "ch1": 0.32331000000000004,
-    "ch24": 54.350410000000004,
+    "name": "NIHAONOON",
+    "mcap": 310577.975514769,
+    "ageDays": 0.17647100694444445,
+    "ch1": 0.35802999999999996,
+    "ch24": 0.48517000000000005,
+    "ok": false
+   },
+   {
+    "name": "AIB",
+    "mcap": 520883.769916308,
+    "ageDays": 0.024341377314814814,
+    "ch1": 0.8443,
+    "ch24": 0.8443,
+    "ok": false
+   },
+   {
+    "name": "Rex",
+    "mcap": 625558.783618646,
+    "ageDays": 0.04612378472222222,
+    "ch1": 3.4384500000000005,
+    "ch24": 3.21643,
     "ok": false
    }
   ],
