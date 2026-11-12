@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07330653014501448,
+     "last": 0.07316584017199375,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009053976355633821,
+     "last": 0.009054884768869124,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -25196,61 +25196,68 @@
    39.08,
    30.29,
    27.41
+  ],
+  [
+   1794453844359,
+   96.74,
+   39.07,
+   30.28,
+   27.39
   ]
  ],
  "watch": [
   {
    "name": "STONK",
    "score": 65,
-   "mcap": 35887071.2693559,
-   "ageDays": 91.65097422453704,
+   "mcap": 35540976.9944682,
+   "ageDays": 91.68917082175926,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "SPCXx",
-   "score": 64,
-   "mcap": 81798788.0022611,
-   "ageDays": 152.43288394675926,
-   "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 58362290.057219,
-   "ageDays": 148.22449274305555,
+   "mcap": 58744040.7578133,
+   "ageDays": 148.26268934027777,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "CATE",
    "score": 60,
-   "mcap": 22946579.084994,
-   "ageDays": 108.41413394675926,
+   "mcap": 23146676.5278269,
+   "ageDays": 108.45233054398147,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "DESSA",
+   "score": 50,
+   "mcap": 8367914.30011102,
+   "ageDays": 16.596369895833334,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "SPCX",
    "score": 37,
-   "mcap": 13373446.6975564,
-   "ageDays": 152.43879829861112,
+   "mcap": 13329003.1903499,
+   "ageDays": 152.47699489583334,
    "ok": false,
-   "why": "rotation 89 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation 90 %/j : profil des tokens qui s'effondrent"
   },
   {
-   "name": "GATO",
-   "score": 32,
-   "mcap": 5504581.97306288,
-   "ageDays": 78.58452746527777,
+   "name": "DacityCoin",
+   "score": 30,
+   "mcap": 7609278.50728482,
+   "ageDays": 27.581173136574073,
    "ok": false,
-   "why": "rotation élevée (26 %/j)"
+   "why": "rotation 81 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1794450544173,
- "lastRun": 1794453544040,
+ "lastScan": 1794453844359,
+ "lastRun": 1794453844359,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -39700,39 +39707,51 @@
    [
     1794453544040,
     65.63
+   ],
+   [
+    1794453844359,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Max",
-    "mcap": 1648482.53079919,
-    "ageDays": 0.26290555555555556,
-    "ch1": 0.05382,
-    "ch24": 36.813159999999996,
-    "ok": false
+    "mcap": 1698311.66635561,
+    "ageDays": 0.2663814699074074,
+    "ch1": 0.05102,
+    "ch24": 37.95615,
+    "ok": true
    },
    {
     "name": "Max",
-    "mcap": 16628630.41,
-    "ageDays": 0.038877777777777775,
-    "ch1": 1.04303,
-    "ch24": 1.04303,
+    "mcap": 16154708.81,
+    "ageDays": 0.04235369212962963,
+    "ch1": 0.6481999999999999,
+    "ch24": 0.9848,
     "ok": false
    },
    {
     "name": "AIB",
-    "mcap": 616774.830225472,
-    "ageDays": 0.08336851851851852,
-    "ch1": 0.36979999999999996,
-    "ch24": 1.18383,
+    "mcap": 682221.278674789,
+    "ageDays": 0.08684443287037037,
+    "ch1": 0.69439,
+    "ch24": 1.41555,
     "ok": false
    },
    {
-    "name": "Rex",
-    "mcap": 376645.093686652,
-    "ageDays": 0.10515092592592593,
-    "ch1": -0.6906399999999999,
-    "ch24": 1.53868,
+    "name": "NOBUSHIBA",
+    "mcap": 950763.32322874,
+    "ageDays": 1.0815319328703703,
+    "ch1": 1.17625,
+    "ch24": 4.1265600000000004,
+    "ok": false
+   },
+   {
+    "name": "HATCH",
+    "mcap": 403703.0729,
+    "ageDays": 5.183545821759259,
+    "ch1": 0.55553,
+    "ch24": 11.658589999999998,
     "ok": false
    }
   ],
