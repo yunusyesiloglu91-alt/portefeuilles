@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07262619078057159,
+     "last": 0.07236294478183647,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -26302,6 +26302,13 @@
    39.13,
    30.33,
    27.37
+  ],
+  [
+   1794504543435,
+   96.81,
+   39.13,
+   30.33,
+   27.34
   ]
  ],
  "watch": [
@@ -26354,9 +26361,11 @@
    "why": "rotation 97 %/j : profil des tokens qui s'effondrent"
   }
  ],
- "notes": [],
- "lastScan": 1794500943553,
- "lastRun": 1794504243285,
+ "notes": [
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/FnzKY6x7entQ1eR3D225dQyT7ybfka4PskBMQhb8L3CC/ohlcv/day), positions conservées"
+ ],
+ "lastScan": 1794504543435,
+ "lastRun": 1794504543435,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -41438,40 +41447,44 @@
    [
     1794504243285,
     65.63
+   ],
+   [
+    1794504543435,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Max",
-    "mcap": 1701378.06719554,
-    "ageDays": 0.8497023726851852,
-    "ch1": -0.028300000000000002,
-    "ch24": 38.026489999999995,
+    "mcap": 1642126.2537198,
+    "ageDays": 0.8531763310185185,
+    "ch1": 0.014039999999999999,
+    "ch24": 36.66736,
     "ok": false
    },
    {
     "name": "HUNG",
-    "mcap": 354243.1138,
-    "ageDays": 3.5498296875,
-    "ch1": -0.21422,
-    "ch24": 27.14804,
+    "mcap": 302090.0299,
+    "ageDays": 3.553303645833333,
+    "ch1": -0.33634000000000003,
+    "ch24": 17.76941,
     "ok": false
    },
    {
     "name": "updog",
-    "mcap": 475440.5951,
-    "ageDays": 0.9231977430555556,
-    "ch1": 0.01485,
-    "ch24": 2.83613,
+    "mcap": 544148.6889,
+    "ageDays": 0.9266717013888889,
+    "ch1": 0.09957,
+    "ch24": 3.3905000000000003,
     "ok": false
    },
    {
     "name": "PUSSY",
-    "mcap": 590716.1447,
-    "ageDays": 3.869505613425926,
-    "ch1": -0.00244,
-    "ch24": -0.18086,
-    "ok": false
+    "mcap": 591582.7385,
+    "ageDays": 3.8729795717592594,
+    "ch1": 0.01199,
+    "ch24": -0.25834,
+    "ok": true
    }
   ],
   "paused": true
