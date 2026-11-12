@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07248458030926011,
+     "last": 0.07240553758645504,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -36,7 +36,7 @@
      "pool": "DhHVd5s4hqBGnTkFztsK98WGPtYUJjpUCqNnWaNLWb4F",
      "t": 1793880544081,
      "entry": 0.023179311745007942,
-     "last": 0.017501391482543815,
+     "last": 0.0176445433546803,
      "peak": 0.023179311745007942,
      "qty": 534.3524725739067,
      "cost": 12.511032872228675
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009137873498518523,
+     "last": 0.009092850621488516,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -26379,6 +26379,13 @@
    39.15,
    30.34,
    27.32
+  ],
+  [
+   1794507843533,
+   96.82,
+   39.14,
+   30.34,
+   27.33
   ]
  ],
  "watch": [
@@ -26431,9 +26438,11 @@
    "why": "rotation 97 %/j : profil des tokens qui s'effondrent"
   }
  ],
- "notes": [],
- "lastScan": 1794504543435,
- "lastRun": 1794507543544,
+ "notes": [
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/49iMatQtoyabsYAQc8GafVq6aeBFVDxSRH44oiatyyw6/ohlcv/day), positions conservées"
+ ],
+ "lastScan": 1794507843533,
+ "lastRun": 1794507843533,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -41559,39 +41568,43 @@
    [
     1794507543544,
     65.63
+   ],
+   [
+    1794507843533,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Max",
-    "mcap": 1799346.14503379,
-    "ageDays": 0.8878998148148148,
-    "ch1": 0.02418,
-    "ch24": 40.2737,
+    "mcap": 1806997.68211145,
+    "ageDays": 0.8913719097222222,
+    "ch1": 0.08984,
+    "ch24": 40.44921,
     "ok": false
    },
    {
     "name": "HUNG",
-    "mcap": 357538.1909,
-    "ageDays": 3.5880271296296296,
-    "ch1": 0.02642,
-    "ch24": 32.35764,
+    "mcap": 359293.8273,
+    "ageDays": 3.591499224537037,
+    "ch1": 0.04301,
+    "ch24": 32.44925,
     "ok": true
    },
    {
     "name": "updog",
-    "mcap": 479189.75,
-    "ageDays": 0.9613951851851852,
-    "ch1": -0.10632,
-    "ch24": 2.86638,
+    "mcap": 479036.0595,
+    "ageDays": 0.9648672800925926,
+    "ch1": -0.02954,
+    "ch24": 2.8651400000000002,
     "ok": false
    },
    {
     "name": "PUSSY",
-    "mcap": 617171.6036,
-    "ageDays": 3.9077030555555554,
-    "ch1": 0.02144,
-    "ch24": -0.3505,
+    "mcap": 623602.136,
+    "ageDays": 3.911175150462963,
+    "ch1": 0.05378,
+    "ch24": -0.28181,
     "ok": false
    }
   ],
