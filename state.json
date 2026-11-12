@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07452289100009842,
+     "last": 0.07438987681033628,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009394401847849709,
+     "last": 0.00939701440049403,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -25791,63 +25791,68 @@
    38.98,
    30.21,
    27.72
+  ],
+  [
+   1794482049108,
+   96.91,
+   38.98,
+   30.21,
+   27.71
   ]
  ],
  "watch": [
   {
-   "name": "AGT",
-   "score": 77,
-   "mcap": 61115631.57,
-   "ageDays": 16.79725232638889,
-   "ok": false,
-   "why": "ni site ni réseaux sociaux"
-  },
-  {
    "name": "BIRB",
    "score": 75,
-   "mcap": 20791328.43315,
-   "ageDays": 288.32998380787035,
+   "mcap": 21200248.3797,
+   "ageDays": 288.4897697685185,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "MPLX",
-   "score": 67,
-   "mcap": 31435610.2683004,
-   "ageDays": 387.4153194560185,
-   "ok": false,
-   "why": "ni site ni réseaux sociaux"
-  },
-  {
    "name": "STONK",
    "score": 65,
-   "mcap": 34698188.243137,
-   "ageDays": 91.85582871527778,
+   "mcap": 36244871.7337928,
+   "ageDays": 92.01561467592593,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "CATE",
+   "score": 65,
+   "mcap": 23049998.4902426,
+   "ageDays": 108.77877439814814,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 58038473.0685601,
-   "ageDays": 148.4293472337963,
+   "mcap": 59331323.156924,
+   "ageDays": 148.58913319444446,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
-   "name": "CATE",
-   "score": 60,
-   "mcap": 22820167.8452016,
-   "ageDays": 108.6189884375,
+   "name": "SPCX",
+   "score": 37,
+   "mcap": 13484948.5471483,
+   "ageDays": 152.80343875,
    "ok": false,
-   "why": "pas à un nouveau record"
+   "why": "rotation 96 %/j : profil des tokens qui s'effondrent"
+  },
+  {
+   "name": "DacityCoin",
+   "score": 30,
+   "mcap": 6693704.21643456,
+   "ageDays": 27.907616990740742,
+   "ok": false,
+   "why": "rotation 95 %/j : profil des tokens qui s'effondrent"
   }
  ],
- "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
- ],
- "lastScan": 1794478444027,
- "lastRun": 1794481744757,
+ "notes": [],
+ "lastScan": 1794482049108,
+ "lastRun": 1794482049108,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -40637,55 +40642,59 @@
    [
     1794481744757,
     65.63
+   ],
+   [
+    1794482049108,
+    65.63
    ]
   ],
   "watch": [
    {
+    "name": "PREDICT",
+    "mcap": 3579509.603,
+    "ageDays": 1.4154063425925927,
+    "ch1": 0.03859,
+    "ch24": 3.3719900000000003,
+    "ok": true
+   },
+   {
     "name": "Max",
-    "mcap": 2011737.67236131,
-    "ageDays": 0.5788769328703703,
-    "ch1": -0.07423,
-    "ch24": 45.14557,
+    "mcap": 2157797.97993258,
+    "ageDays": 0.5928253240740741,
+    "ch1": 0.09878,
+    "ch24": 48.49592,
+    "ok": true
+   },
+   {
+    "name": "Shiqi",
+    "mcap": 14121599.68,
+    "ageDays": 0.037767453703703706,
+    "ch1": 1.09442,
+    "ch24": 1.09442,
     "ok": false
    },
    {
     "name": "HUNG",
-    "mcap": 394723.367,
-    "ageDays": 3.2790042476851853,
-    "ch1": -0.02413,
-    "ch24": 38.50817,
-    "ok": false
-   },
-   {
-    "name": "Shiqi",
-    "mcap": 13711947.84,
-    "ageDays": 0.0238190625,
-    "ch1": 1.03367,
-    "ch24": 1.03367,
-    "ok": false
+    "mcap": 477055.2893,
+    "ageDays": 3.292952638888889,
+    "ch1": 0.14476,
+    "ch24": 49.444449999999996,
+    "ok": true
    },
    {
     "name": "updog",
-    "mcap": 658316.4524,
-    "ageDays": 0.6523723032407407,
-    "ch1": -0.05158,
-    "ch24": 4.31168,
+    "mcap": 726552.9821,
+    "ageDays": 0.6663206944444444,
+    "ch1": 0.10192999999999999,
+    "ch24": 4.86225,
     "ok": false
    },
    {
     "name": "FLC",
-    "mcap": 308602.0625,
-    "ageDays": 0.22421258101851851,
-    "ch1": 0.22556,
-    "ch24": 7.77381,
-    "ok": false
-   },
-   {
-    "name": "Woke",
-    "mcap": 392359.0005,
-    "ageDays": 0.02901582175925926,
-    "ch1": 6.1678,
-    "ch24": 6.1678,
+    "mcap": 327221.7417,
+    "ageDays": 0.2381609722222222,
+    "ch1": -0.05763,
+    "ch24": 8.30318,
     "ok": false
    }
   ],
