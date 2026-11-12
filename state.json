@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07334281863079896,
+     "last": 0.07310415870190255,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.008910173460864814,
+     "last": 0.00902122234959206,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -25119,63 +25119,68 @@
    39.01,
    30.24,
    27.29
+  ],
+  [
+   1794450544173,
+   96.62,
+   39.01,
+   30.24,
+   27.37
   ]
  ],
  "watch": [
   {
-   "name": "HYPE",
-   "score": 67,
-   "mcap": 57218700.4295788,
-   "ageDays": 381.4203654513889,
-   "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
    "name": "STONK",
    "score": 65,
-   "mcap": 35990597.5483478,
-   "ageDays": 91.56417332175926,
+   "mcap": 35887071.2693559,
+   "ageDays": 91.65097422453704,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
+   "name": "SPCXx",
+   "score": 64,
+   "mcap": 81798788.0022611,
+   "ageDays": 152.43288394675926,
+   "ok": false,
+   "why": "liquidité très faible"
+  },
+  {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 59114504.2858477,
-   "ageDays": 148.13769184027777,
+   "mcap": 58362290.057219,
+   "ageDays": 148.22449274305555,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "CATE",
    "score": 60,
-   "mcap": 23199582.8577122,
-   "ageDays": 108.32733304398148,
+   "mcap": 22946579.084994,
+   "ageDays": 108.41413394675926,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "SPCX",
    "score": 37,
-   "mcap": 12649512.8973191,
-   "ageDays": 152.43842100694445,
+   "mcap": 13373446.6975564,
+   "ageDays": 152.43879829861112,
    "ok": false,
-   "why": "rotation 51 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation 89 %/j : profil des tokens qui s'effondrent"
   },
   {
-   "name": "DacityCoin",
-   "score": 30,
-   "mcap": 6747698.8476106,
-   "ageDays": 27.456175636574073,
+   "name": "GATO",
+   "score": 32,
+   "mcap": 5504581.97306288,
+   "ageDays": 78.58452746527777,
    "ok": false,
-   "why": "rotation 88 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation élevée (26 %/j)"
   }
  ],
- "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/simple/networks/solana/token_price/G7vQWurMkMMm2dU3iZpXYFTHT9Biio4F4gZCrwFpKNwG,y1AZt42vceCmStjW4zetK3VoNarC1VxJ5iDjpiupump,GJAFwWjJ3vnTsrQVabjBVK2TYB1YtRCQXRDfDgUnpump), positions conservées"
- ],
- "lastScan": 1794446644451,
- "lastRun": 1794450244449,
+ "notes": [],
+ "lastScan": 1794450544173,
+ "lastRun": 1794450544173,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -39581,39 +39586,59 @@
    [
     1794450244449,
     65.63
+   ],
+   [
+    1794450544173,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Max",
-    "mcap": 3258178.85331789,
-    "ageDays": 0.20387841435185186,
-    "ch1": -0.55433,
-    "ch24": 73.73664,
+    "mcap": 1400071.32860719,
+    "ageDays": 0.2281848726851852,
+    "ch1": -0.76426,
+    "ch24": 31.11507,
     "ok": false
    },
    {
-    "name": "NIHAONOON",
-    "mcap": 310577.975514769,
-    "ageDays": 0.17647100694444445,
-    "ch1": 0.35802999999999996,
-    "ch24": 0.48517000000000005,
+    "name": "X",
+    "mcap": 511289.9529,
+    "ageDays": 0.04365940972222222,
+    "ch1": 0.59063,
+    "ch24": 1.1371,
+    "ok": false
+   },
+   {
+    "name": "Max",
+    "mcap": 16435455.47,
+    "ageDays": 0.03833533564814815,
+    "ch1": 1.02673,
+    "ch24": 1.02673,
     "ok": false
    },
    {
     "name": "AIB",
-    "mcap": 520883.769916308,
-    "ageDays": 0.024341377314814814,
-    "ch1": 0.8443,
-    "ch24": 0.8443,
+    "mcap": 398157.111623201,
+    "ageDays": 0.04864783564814815,
+    "ch1": 0.46326999999999996,
+    "ch24": 0.44525,
+    "ok": false
+   },
+   {
+    "name": "NIHAONOON",
+    "mcap": 353048.927036746,
+    "ageDays": 0.2007774652777778,
+    "ch1": 0.26647,
+    "ch24": 0.6882699999999999,
     "ok": false
    },
    {
     "name": "Rex",
-    "mcap": 625558.783618646,
-    "ageDays": 0.04612378472222222,
-    "ch1": 3.4384500000000005,
-    "ch24": 3.21643,
+    "mcap": 1052535.13431513,
+    "ageDays": 0.07043024305555555,
+    "ch1": 0.77417,
+    "ch24": 6.09436,
     "ok": false
    }
   ],
