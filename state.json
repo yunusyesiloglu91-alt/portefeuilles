@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.07260810790623429,
+     "last": 0.07244698320804929,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009089452084586046,
+     "last": 0.009095137742229448,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -25028,6 +25028,13 @@
    38.98,
    30.21,
    27.47
+  ],
+  [
+   1794446644451,
+   96.67,
+   38.98,
+   30.22,
+   27.47
   ]
  ],
  "watch": [
@@ -25081,10 +25088,10 @@
   }
  ],
  "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/HMzvsEEmtzHhvZNw9uwbaG85HCTmFnkbhzUx16cy7ca3/ohlcv/day), positions conservées"
  ],
- "lastScan": 1794443044575,
- "lastRun": 1794446343954,
+ "lastScan": 1794446644451,
+ "lastRun": 1794446644451,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -39438,31 +39445,27 @@
    [
     1794446343954,
     65.63
+   ],
+   [
+    1794446644451,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Max",
-    "mcap": 7050883.55403501,
-    "ageDays": 0.16569677083333334,
-    "ch1": 0.53424,
-    "ch24": 160.73432,
+    "mcap": 5809354.34327457,
+    "ageDays": 0.1830492013888889,
+    "ch1": -0.043890000000000005,
+    "ch24": 132.25592,
     "ok": false
    },
    {
-    "name": "NVDA",
-    "mcap": 1079067.27388935,
-    "ageDays": 1.1947939930555556,
-    "ch1": -0.01014,
-    "ch24": -0.06775,
-    "ok": false
-   },
-   {
-    "name": "COOK",
-    "mcap": 333402.232339019,
-    "ageDays": 0.041981493055555555,
-    "ch1": 7.84128,
-    "ch24": 7.84128,
+    "name": "HUNG",
+    "mcap": 640258.4677,
+    "ageDays": 2.8831765162037035,
+    "ch1": 0.32331000000000004,
+    "ch24": 54.350410000000004,
     "ok": false
    }
   ],
