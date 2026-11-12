@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.0734673647632949,
+     "last": 0.0734943542114402,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -25917,6 +25917,13 @@
    39.02,
    30.24,
    27.53
+  ],
+  [
+   1794487443935,
+   96.8,
+   39.02,
+   30.24,
+   27.53
   ]
  ],
  "watch": [
@@ -25973,7 +25980,7 @@
   "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
  ],
  "lastScan": 1794482049108,
- "lastRun": 1794487144486,
+ "lastRun": 1794487443935,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -40834,6 +40841,10 @@
    ],
    [
     1794487144486,
+    65.63
+   ],
+   [
+    1794487443935,
     65.63
    ]
   ],
