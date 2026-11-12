@@ -25,7 +25,7 @@
      "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
      "t": 1793383444043,
      "entry": 0.09289595072836287,
-     "last": 0.0731275480082769,
+     "last": 0.07324319682244858,
      "peak": 0.09289595072836287,
      "qty": 119.21014762400034,
      "cost": 11.186
@@ -36,7 +36,7 @@
      "pool": "DhHVd5s4hqBGnTkFztsK98WGPtYUJjpUCqNnWaNLWb4F",
      "t": 1793880544081,
      "entry": 0.023179311745007942,
-     "last": 0.017160842933085355,
+     "last": 0.0173952940179379,
      "peak": 0.023179311745007942,
      "qty": 534.3524725739067,
      "cost": 12.511032872228675
@@ -47,7 +47,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009152459466840185,
+     "last": 0.009139902894201194,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -26141,6 +26141,13 @@
    39.13,
    30.33,
    27.22
+  ],
+  [
+   1794497344367,
+   96.75,
+   39.11,
+   30.31,
+   27.33
   ]
  ],
  "watch": [
@@ -26194,10 +26201,10 @@
   }
  ],
  "notes": [
-  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/trending_pools), positions conservées"
+  "memecoins : données indisponibles à ce passage (indisponible : https://api.geckoterminal.com/api/v2/networks/solana/pools/49iMatQtoyabsYAQc8GafVq6aeBFVDxSRH44oiatyyw6/ohlcv/day), positions conservées"
  ],
- "lastScan": 1794493745262,
- "lastRun": 1794497044415,
+ "lastScan": 1794497344367,
+ "lastRun": 1794497344367,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -41187,47 +41194,59 @@
    [
     1794497044415,
     65.63
+   ],
+   [
+    1794497344367,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Max",
-    "mcap": 1672980.49774507,
-    "ageDays": 0.7559614814814815,
-    "ch1": -0.13574999999999998,
-    "ch24": 37.3751,
+    "mcap": 1731243.68850867,
+    "ageDays": 0.7698537847222222,
+    "ch1": -0.039169999999999996,
+    "ch24": 38.71155,
     "ok": false
    },
    {
     "name": "HUNG",
-    "mcap": 933989.7829,
-    "ageDays": 3.4560887962962963,
-    "ch1": 0.75878,
-    "ch24": 85.36893,
-    "ok": true
-   },
-   {
-    "name": "NVDA",
-    "mcap": 2134705.62642146,
-    "ageDays": 1.7850587037037038,
-    "ch1": 0.03257,
-    "ch24": -0.06977,
+    "mcap": 761121.4395,
+    "ageDays": 3.469981099537037,
+    "ch1": -0.17053000000000001,
+    "ch24": 69.66855,
     "ok": false
    },
    {
+    "name": "NVDA",
+    "mcap": 2197375.58860782,
+    "ageDays": 1.7989510069444445,
+    "ch1": 0.0947,
+    "ch24": -0.04755,
+    "ok": true
+   },
+   {
     "name": "updog",
-    "mcap": 622498.4346,
-    "ageDays": 0.8294568518518518,
-    "ch1": -0.20403,
-    "ch24": 4.02267,
+    "mcap": 555617.7798,
+    "ageDays": 0.8433491550925926,
+    "ch1": -0.16421,
+    "ch24": 3.48304,
+    "ok": false
+   },
+   {
+    "name": "Huang",
+    "mcap": 356469.398799999,
+    "ageDays": 0.03883526620370371,
+    "ch1": 9.70598,
+    "ch24": 9.70598,
     "ok": false
    },
    {
     "name": "PUSSY",
-    "mcap": 732400.4685,
-    "ageDays": 3.775764722222222,
-    "ch1": -0.41247,
-    "ch24": 0.29286,
+    "mcap": 626283.1421,
+    "ageDays": 3.789657025462963,
+    "ch1": -0.29794,
+    "ch24": 0.02752,
     "ok": false
    }
   ],
