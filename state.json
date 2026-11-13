@@ -25,7 +25,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009265956004243844,
+     "last": 0.009242462104036533,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -28162,61 +28162,68 @@
    39.25,
    30.42,
    26.9
+  ],
+  [
+   1794596943728,
+   96.55,
+   39.25,
+   30.42,
+   26.88
   ]
  ],
  "watch": [
   {
-   "name": "HYPE",
-   "score": 67,
-   "mcap": 58591055.3340908,
-   "ageDays": 383.15994041666664,
-   "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
    "name": "STONK",
    "score": 65,
-   "mcap": 36016995.3163446,
-   "ageDays": 93.30374828703704,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "TROLL",
-   "score": 65,
-   "mcap": 27046773.3658135,
-   "ageDays": 571.9851603240741,
+   "mcap": 36692172.1998033,
+   "ageDays": 93.34541351851851,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 50974856.6710026,
-   "ageDays": 149.87726680555556,
+   "mcap": 53306936.3437212,
+   "ageDays": 149.91893203703702,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "CATE",
    "score": 60,
-   "mcap": 18880323.3001487,
-   "ageDays": 110.06690800925927,
+   "mcap": 18714321.8794074,
+   "ageDays": 110.10857324074074,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "SPCX",
-   "score": 47,
-   "mcap": 12966311.5787676,
-   "ageDays": 154.0915723611111,
+   "name": "CLOUD",
+   "score": 59,
+   "mcap": 42672565.6630661,
+   "ageDays": 848.1194875925926,
    "ok": false,
-   "why": "rotation élevée (41 %/j)"
+   "why": "liquidité très faible"
+  },
+  {
+   "name": "GTA6",
+   "score": 52,
+   "mcap": 7293792.755,
+   "ageDays": 15.217161203703704,
+   "ok": false,
+   "why": "liquidité très faible"
+  },
+  {
+   "name": "TTWO",
+   "score": 50,
+   "mcap": 4054262.41563792,
+   "ageDays": 66.22080703703703,
+   "ok": false,
+   "why": "rotation 135 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1794593343852,
- "lastRun": 1794596643795,
+ "lastScan": 1794596943728,
+ "lastRun": 1794596943728,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -44362,31 +44369,35 @@
    [
     1794596643795,
     65.63
+   ],
+   [
+    1794596943728,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "FOOD",
-    "mcap": 1211484.19986606,
-    "ageDays": 0.8246041087962963,
-    "ch1": -0.07904,
-    "ch24": 32.29271,
-    "ok": false
+    "mcap": 1274600.63960872,
+    "ageDays": 0.8280755555555556,
+    "ch1": 0.01958,
+    "ch24": 34.02721,
+    "ok": true
    },
    {
     "name": "inuhao",
-    "mcap": 1659845.20553551,
-    "ageDays": 1.3665138310185185,
-    "ch1": -0.5508299999999999,
-    "ch24": 0.34142000000000006,
+    "mcap": 2144207.31473266,
+    "ageDays": 1.3699852777777777,
+    "ch1": -0.43471,
+    "ch24": 0.52833,
     "ok": false
    },
    {
     "name": "Max",
-    "mcap": 2226641.06637969,
-    "ageDays": 1.9191527199074074,
-    "ch1": 0.24396,
-    "ch24": 0.0415,
+    "mcap": 2352674.57136515,
+    "ageDays": 1.9226241666666666,
+    "ch1": 0.24213,
+    "ch24": 0.01795,
     "ok": false
    }
   ],
