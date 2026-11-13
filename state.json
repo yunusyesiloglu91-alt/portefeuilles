@@ -17,26 +17,15 @@
    "signal": "sous la moyenne 50 j"
   },
   "meme": {
-   "cash": 11.049443332302669,
+   "cash": 19.950404163050063,
    "positions": [
-    {
-     "name": "BIRB",
-     "addr": "G7vQWurMkMMm2dU3iZpXYFTHT9Biio4F4gZCrwFpKNwG",
-     "pool": "GUWFT7bbLphGrcpAPnnEnBbe1uErv9e6LLC2qPx2wZy1",
-     "t": 1793383444043,
-     "entry": 0.09289595072836287,
-     "last": 0.07511027958458777,
-     "peak": 0.09289595072836287,
-     "qty": 119.21014762400034,
-     "cost": 11.186
-    },
     {
      "name": "ACT",
      "addr": "GJAFwWjJ3vnTsrQVabjBVK2TYB1YtRCQXRDfDgUnpump",
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009138896959428627,
+     "last": 0.009190073551015985,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -119,6 +108,16 @@
    "usd": 8.41896808455949,
    "ret": -0.3270764955587746,
    "reason": "stop −30 %"
+  },
+  {
+   "t": 1794593343852,
+   "sleeve": "meme",
+   "side": "vente",
+   "name": "BIRB",
+   "price": 0.07542033715422859,
+   "usd": 8.900960830747394,
+   "ret": -0.20427670027289524,
+   "reason": "14 jours écoulés"
   }
  ],
  "history": [
@@ -28079,61 +28078,68 @@
    39.25,
    30.42,
    26.83
+  ],
+  [
+   1794593343852,
+   96.48,
+   39.24,
+   30.42,
+   26.83
   ]
  ],
  "watch": [
   {
-   "name": "neet",
-   "score": 75,
-   "mcap": 26729493.6590976,
-   "ageDays": 565.6776786689815,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
    "name": "HYPE",
    "score": 67,
-   "mcap": 58775713.1838568,
-   "ageDays": 391.63995876157406,
+   "mcap": 58591055.3340908,
+   "ageDays": 383.15994041666664,
    "ok": false,
-   "why": "ni site ni réseaux sociaux"
+   "why": "liquidité très faible"
   },
   {
    "name": "STONK",
    "score": 65,
-   "mcap": 36215244.710106,
-   "ageDays": 93.26554903935185,
+   "mcap": 36016995.3163446,
+   "ageDays": 93.30374828703704,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "TROLL",
+   "score": 65,
+   "mcap": 27046773.3658135,
+   "ageDays": 571.9851603240741,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 50904988.4183867,
-   "ageDays": 149.83906755787038,
+   "mcap": 50974856.6710026,
+   "ageDays": 149.87726680555556,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "CATE",
    "score": 60,
-   "mcap": 18054472.7651293,
-   "ageDays": 110.02870876157408,
+   "mcap": 18880323.3001487,
+   "ageDays": 110.06690800925927,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "CLOUD",
-   "score": 54,
-   "mcap": 44075366.9616401,
-   "ageDays": 848.0396231134259,
+   "name": "SPCX",
+   "score": 47,
+   "mcap": 12966311.5787676,
+   "ageDays": 154.0915723611111,
    "ok": false,
-   "why": "déjà +100 % sur 24 h"
+   "why": "rotation élevée (41 %/j)"
   }
  ],
  "notes": [],
- "lastScan": 1794590043437,
- "lastRun": 1794593043442,
+ "lastScan": 1794593343852,
+ "lastRun": 1794593343852,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -44231,39 +44237,43 @@
    [
     1794593043442,
     65.63
+   ],
+   [
+    1794593343852,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "FOOD",
-    "mcap": 1314775.79680839,
-    "ageDays": 0.7829333564814814,
-    "ch1": -0.18459,
-    "ch24": 35.131260000000005,
+    "mcap": 1285525.53839108,
+    "ageDays": 0.7864103240740741,
+    "ch1": -0.23202,
+    "ch24": 34.32743,
     "ok": false
    },
    {
     "name": "inuhao",
-    "mcap": 3400033.70591846,
-    "ageDays": 1.3248430787037038,
-    "ch1": -0.035769999999999996,
-    "ch24": 1.94906,
-    "ok": false
+    "mcap": 3847620.12010534,
+    "ageDays": 1.3283200462962963,
+    "ch1": 0.05595,
+    "ch24": 1.88927,
+    "ok": true
    },
    {
     "name": "Sakura",
-    "mcap": 395665.5545,
-    "ageDays": 0.41211159722222224,
-    "ch1": -0.10852,
-    "ch24": 13.84712,
+    "mcap": 429120.3834,
+    "ageDays": 0.4155885648148148,
+    "ch1": -0.01821,
+    "ch24": 15.10249,
     "ok": false
    },
    {
     "name": "Max",
-    "mcap": 1805336.17685736,
-    "ageDays": 1.8774819675925927,
-    "ch1": 0.07208,
-    "ch24": -0.04324,
+    "mcap": 1907306.58753964,
+    "ageDays": 1.8809589351851852,
+    "ch1": 0.13205,
+    "ch24": 0.01575,
     "ok": false
    }
   ],
