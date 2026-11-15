@@ -25,7 +25,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.008829811604506957,
+     "last": 0.008959298979527769,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -28771,61 +28771,68 @@
    39.29,
    30.45,
    26.51
+  ],
+  [
+   1794779426690,
+   96.43,
+   39.31,
+   30.47,
+   26.65
   ]
  ],
  "watch": [
   {
-   "name": "HYPE",
-   "score": 67,
-   "mcap": 55545085.0255951,
-   "ageDays": 383.55927100694447,
+   "name": "ZEC",
+   "score": 75,
+   "mcap": 98398887.0400089,
+   "ageDays": 392.76633900462963,
    "ok": false,
-   "why": "liquidité très faible"
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "Fartcoin",
+   "score": 70,
+   "mcap": 94590437.2504206,
+   "ageDays": 758.6532371527778,
+   "ok": false,
+   "why": "pas à un nouveau record"
   },
   {
    "name": "STONK",
+   "score": 70,
+   "mcap": 33511324.5491143,
+   "ageDays": 95.45748483796297,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "TROLL",
    "score": 65,
-   "mcap": 33882730.1871452,
-   "ageDays": 93.70307887731481,
+   "mcap": 23421158.0653109,
+   "ageDays": 574.138896875,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "CATE",
+   "score": 65,
+   "mcap": 16996780.8504755,
+   "ageDays": 112.22064456018518,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 47139654.7170164,
-   "ageDays": 150.27659739583333,
-   "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
-   "name": "CATE",
-   "score": 60,
-   "mcap": 17771097.9226713,
-   "ageDays": 110.46623859953704,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "CLOUD",
-   "score": 59,
-   "mcap": 37122456.3964833,
-   "ageDays": 848.4771529513889,
-   "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
-   "name": "ZCAT",
-   "score": 49,
-   "mcap": 14902881.0494085,
-   "ageDays": 69.14291684027778,
+   "mcap": 50159306.8051178,
+   "ageDays": 152.03100335648148,
    "ok": false,
    "why": "liquidité très faible"
   }
  ],
  "notes": [],
- "lastScan": 1794627846015,
- "lastRun": 1794629644637,
+ "lastScan": 1794779426690,
+ "lastRun": 1794779426690,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -45319,55 +45326,51 @@
    [
     1794629644637,
     65.63
+   ],
+   [
+    1794779426690,
+    65.63
    ]
   ],
   "watch": [
    {
-    "name": "ANTH",
-    "mcap": 790871.5598,
-    "ageDays": 0.37993792824074074,
-    "ch1": 0.07437,
-    "ch24": 1.1348099999999999,
+    "name": "bill",
+    "mcap": 326089.0763,
+    "ageDays": 1.0839431712962964,
+    "ch1": -0.10185000000000001,
+    "ch24": 0.60701,
+    "ok": false
+   },
+   {
+    "name": "rockstar",
+    "mcap": 738308.9339,
+    "ageDays": 0.4514894675925926,
+    "ch1": 0.17260999999999999,
+    "ch24": 1.48875,
     "ok": true
    },
    {
-    "name": "FOOD",
-    "mcap": 1015668.6067669,
-    "ageDays": 1.2065582986111112,
-    "ch1": -0.25446,
-    "ch24": -0.53098,
-    "ok": false
-   },
-   {
-    "name": "inuhao",
-    "mcap": 608936.298751343,
-    "ageDays": 1.7484680208333334,
-    "ch1": -0.1307,
-    "ch24": -0.73771,
-    "ok": false
-   },
-   {
-    "name": "AMC",
-    "mcap": 4162271.93088897,
-    "ageDays": 0.39868792824074073,
-    "ch1": 0.15365,
-    "ch24": 72.41832000000001,
+    "name": "BUTTHOLE",
+    "mcap": 424998.191,
+    "ageDays": 0.2602626157407407,
+    "ch1": -0.23471,
+    "ch24": -0.15034,
     "ok": false
    },
    {
     "name": "Max",
-    "mcap": 1744192.09313329,
-    "ageDays": 2.3011069097222223,
-    "ch1": 0.00657,
-    "ch24": -0.10241,
+    "mcap": 997444.17109402,
+    "ageDays": 4.0346954861111115,
+    "ch1": -0.01873,
+    "ch24": -0.028759999999999997,
     "ok": false
    },
    {
-    "name": "CSI",
-    "mcap": 560182.144952945,
-    "ageDays": 0.23386153935185186,
-    "ch1": -0.61667,
-    "ch24": 0.93683,
+    "name": "BJB",
+    "mcap": 866249.081124999,
+    "ageDays": 0.027751041666666667,
+    "ch1": 7.21215,
+    "ch24": 7.21215,
     "ok": false
    }
   ],
