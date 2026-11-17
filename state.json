@@ -30913,61 +30913,68 @@
    39.3,
    30.46,
    26.29
+  ],
+  [
+   1794899343923,
+   96.07,
+   39.31,
+   30.47,
+   26.3
   ]
  ],
  "watch": [
   {
+   "name": "jellyjelly",
+   "score": 72,
+   "mcap": 43306690.1453613,
+   "ageDays": 656.3159134606482,
+   "ok": false,
+   "why": "bien plus de vendeurs que d’acheteurs"
+  },
+  {
    "name": "STONK",
    "score": 70,
-   "mcap": 34178711.8191863,
-   "ageDays": 96.8072204050926,
+   "mcap": 34231047.1623469,
+   "ageDays": 96.84541577546297,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "ANTFUN",
+   "score": 65,
+   "mcap": 22197839.1603449,
+   "ageDays": 130.11049679398147,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "CATE",
    "score": 65,
-   "mcap": 17470878.3452628,
-   "ageDays": 113.57038012731482,
+   "mcap": 17254629.4963019,
+   "ageDays": 113.60857549768518,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "mihao",
-   "score": 65,
-   "mcap": 12481863.449838,
-   "ageDays": 22.5630653125,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "VINE",
    "score": 50,
-   "mcap": 7832105.86420234,
-   "ageDays": 663.2439912384259,
+   "mcap": 11371957.9903001,
+   "ageDays": 22.60126068287037,
    "ok": false,
-   "why": "rotation élevée (28 %/j)"
+   "why": "rotation élevée (20 %/j)"
   },
   {
    "name": "SPCX",
    "score": 45,
-   "mcap": 12635818.2122819,
-   "ageDays": 157.59504447916666,
+   "mcap": 12629888.3033121,
+   "ageDays": 157.63323984953703,
    "ok": false,
-   "why": "rotation 51 %/j : profil des tokens qui s'effondrent"
-  },
-  {
-   "name": "GTA6",
-   "score": 37,
-   "mcap": 15049485.84,
-   "ageDays": 18.678968090277777,
-   "ok": false,
-   "why": "rotation élevée (43 %/j)"
+   "why": "rotation 52 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1794896043843,
- "lastRun": 1794899043966,
+ "lastScan": 1794899343923,
+ "lastRun": 1794899343923,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -48685,56 +48692,60 @@
    [
     1794899043966,
     65.63
+   ],
+   [
+    1794899343923,
+    65.63
    ]
   ],
   "watch": [
    {
+    "name": "ANT",
+    "mcap": 915360.5054,
+    "ageDays": 0.5920129976851852,
+    "ch1": 0.08532000000000001,
+    "ch24": 1.77748,
+    "ok": true
+   },
+   {
     "name": "BAWSAQ",
-    "mcap": 482818.4249,
-    "ageDays": 0.39348340277777777,
-    "ch1": 0.0768,
-    "ch24": 15.17365,
+    "mcap": 538061.8775,
+    "ageDays": 0.3969551273148148,
+    "ch1": 0.19036999999999998,
+    "ch24": 17.02422,
     "ok": false
    },
    {
     "name": "BAWSAQ",
-    "mcap": 1185943.9973666,
-    "ageDays": 0.45857599537037036,
-    "ch1": 0.06471,
-    "ch24": 3.8813099999999996,
+    "mcap": 1246780.70020408,
+    "ageDays": 0.4620477199074074,
+    "ch1": 0.1162,
+    "ch24": 4.1317200000000005,
     "ok": false
    },
    {
     "name": "rockstar",
-    "mcap": 433468.6783,
-    "ageDays": 1.8359486805555556,
-    "ch1": 0.054029999999999995,
-    "ch24": -0.13765,
+    "mcap": 455841.1857,
+    "ageDays": 1.8394204050925926,
+    "ch1": 0.00728,
+    "ch24": -0.1009,
     "ok": false
    },
    {
     "name": "HOGE",
-    "mcap": 659335.2073,
-    "ageDays": 2.0054857175925926,
-    "ch1": 0.21767,
-    "ch24": 0.49465000000000003,
+    "mcap": 659572.9151,
+    "ageDays": 2.0089574421296295,
+    "ch1": 0.1359,
+    "ch24": 0.55299,
     "ok": false
    },
    {
     "name": "Bones",
     "mcap": 359334.3262,
-    "ageDays": 0.04362229166666667,
+    "ageDays": 0.0470940162037037,
     "ch1": 3.74384,
     "ch24": 4.463,
     "ok": false
-   },
-   {
-    "name": "LEOSTAR",
-    "mcap": 1189194.98739748,
-    "ageDays": 0.33443247685185185,
-    "ch1": 0.23787,
-    "ch24": 8.11362,
-    "ok": true
    }
   ],
   "paused": true
