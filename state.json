@@ -25,7 +25,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.008821270136699389,
+     "last": 0.008807873323149404,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -33888,61 +33888,68 @@
    39.4,
    30.54,
    26.58
+  ],
+  [
+   1795034344265,
+   96.52,
+   39.41,
+   30.54,
+   26.57
   ]
  ],
  "watch": [
   {
-   "name": "Fartcoin",
-   "score": 70,
-   "mcap": 86733711.9567351,
-   "ageDays": 761.5654759143519,
+   "name": "ZEC",
+   "score": 75,
+   "mcap": 99615994.8678755,
+   "ageDays": 395.71677390046295,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "ZEC",
-   "score": 67,
-   "mcap": 99263004.4284349,
-   "ageDays": 395.6785777662037,
+   "name": "STONK",
+   "score": 70,
+   "mcap": 31819242.1150626,
+   "ageDays": 98.40791973379629,
    "ok": false,
-   "why": "bien plus de vendeurs que d’acheteurs"
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "TROLL",
+   "score": 65,
+   "mcap": 22613718.7940595,
+   "ageDays": 577.0893317708334,
+   "ok": false,
+   "why": "pas à un nouveau record"
   },
   {
    "name": "CATE",
    "score": 60,
-   "mcap": 17794117.6469827,
-   "ageDays": 115.13288332175927,
+   "mcap": 17274879.3963655,
+   "ageDays": 115.17107945601852,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "SPCX",
    "score": 55,
-   "mcap": 12950903.2991328,
-   "ageDays": 159.24397128472222,
+   "mcap": 12882558.2689316,
+   "ageDays": 159.2821674189815,
    "ok": false,
    "why": "rotation élevée (37 %/j)"
   },
   {
    "name": "pippin",
    "score": 45,
-   "mcap": 18413574.9574002,
-   "ageDays": 738.969712025463,
+   "mcap": 17920886.5347365,
+   "ageDays": 739.0079081597222,
    "ok": false,
-   "why": "rotation 72 %/j : profil des tokens qui s'effondrent"
-  },
-  {
-   "name": "DCTY",
-   "score": 25,
-   "mcap": 10394623.46,
-   "ageDays": 29.694781469907408,
-   "ok": false,
-   "why": "rotation 294 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation 76 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1795031044119,
- "lastRun": 1795034043958,
+ "lastScan": 1795034344265,
+ "lastRun": 1795034344265,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -53360,47 +53367,51 @@
    [
     1795034043958,
     65.63
+   ],
+   [
+    1795034344265,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Apocrycoin",
-    "mcap": 455440.417408846,
-    "ageDays": 0.21124951388888888,
-    "ch1": -0.20684999999999998,
-    "ch24": 1.22711,
+    "mcap": 329595.196208537,
+    "ageDays": 0.21472528935185184,
+    "ch1": -0.47363999999999995,
+    "ch24": 0.6117199999999999,
     "ok": false
    },
    {
     "name": "VTC",
-    "mcap": 1824064.80569589,
-    "ageDays": 5.002754143518518,
-    "ch1": 0.14859,
-    "ch24": 7.126810000000001,
-    "ok": true
+    "mcap": 1618065.37811142,
+    "ageDays": 5.006229918981481,
+    "ch1": -0.05225,
+    "ch24": 6.200080000000001,
+    "ok": false
    },
    {
     "name": "SHIT",
-    "mcap": 2068935.02438989,
-    "ageDays": 0.8718050694444445,
-    "ch1": -0.04556,
-    "ch24": 15.982449999999998,
+    "mcap": 2103608.02069175,
+    "ageDays": 0.8752808449074074,
+    "ch1": -0.01518,
+    "ch24": 16.2126,
     "ok": false
    },
    {
     "name": "HOGE",
-    "mcap": 1369887.569,
-    "ageDays": 3.567985625,
-    "ch1": -0.11913,
-    "ch24": 1.24274,
+    "mcap": 1373404.956,
+    "ageDays": 3.571461400462963,
+    "ch1": -0.13477,
+    "ch24": 1.22593,
     "ok": false
    },
    {
     "name": "Max",
-    "mcap": 1228802.21718595,
-    "ageDays": 6.981654606481482,
-    "ch1": 0.05901,
-    "ch24": 0.35924999999999996,
+    "mcap": 1227377.11157854,
+    "ageDays": 6.985130381944445,
+    "ch1": 0.10316,
+    "ch24": 0.3267,
     "ok": false
    }
   ],
