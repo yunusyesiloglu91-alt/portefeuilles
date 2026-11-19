@@ -25,7 +25,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.009027331569901794,
+     "last": 0.008971584623141144,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -34413,61 +34413,68 @@
    39.35,
    30.5,
    26.74
+  ],
+  [
+   1795094344869,
+   96.54,
+   39.35,
+   30.5,
+   26.69
   ]
  ],
  "watch": [
   {
-   "name": "NOS",
-   "score": 72,
-   "mcap": 37595312.9515422,
-   "ageDays": 359.99768618055555,
+   "name": "CATE",
+   "score": 65,
+   "mcap": 16943761.9778556,
+   "ageDays": 115.8655308912037,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "ANSEM",
+   "score": 62,
+   "mcap": 41637482.9948433,
+   "ageDays": 155.6758896875,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
-   "name": "CATE",
-   "score": 65,
-   "mcap": 17954941.1568441,
-   "ageDays": 115.82732738425926,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
    "name": "CLAUDIA",
    "score": 60,
-   "mcap": 5918650.42408997,
-   "ageDays": 43.44414451388889,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "CBUCKS",
-   "score": 60,
-   "mcap": 3496322.45000122,
-   "ageDays": 43.74595006944445,
+   "mcap": 5987844.97476835,
+   "ageDays": 43.482348020833335,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "pippin",
    "score": 55,
-   "mcap": 17767400.5695443,
-   "ageDays": 739.664156087963,
+   "mcap": 17940966.6458353,
+   "ageDays": 739.7023595949074,
    "ok": false,
-   "why": "rotation élevée (45 %/j)"
+   "why": "rotation élevée (43 %/j)"
   },
   {
-   "name": "DCTY",
+   "name": "mihao",
    "score": 35,
-   "mcap": 18004620.47,
-   "ageDays": 30.38922553240741,
+   "mcap": 6881292.72285203,
+   "ageDays": 24.85821607638889,
    "ok": false,
-   "why": "rotation 342 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation élevée (43 %/j)"
+  },
+  {
+   "name": "TTWO",
+   "score": 35,
+   "mcap": 6538279.10839649,
+   "ageDays": 34.98235959490741,
+   "ok": false,
+   "why": "rotation 1575 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1795091044086,
- "lastRun": 1795094044661,
+ "lastScan": 1795094344869,
+ "lastRun": 1795094344869,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -54185,47 +54192,51 @@
    [
     1795094044661,
     65.63
+   ],
+   [
+    1795094344869,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "GTASZN",
-    "mcap": 944468.55713138,
-    "ageDays": 0.5630400578703704,
-    "ch1": -0.46194,
-    "ch24": 8.363909999999999,
+    "mcap": 1043627.95807082,
+    "ageDays": 0.5665146875,
+    "ch1": -0.47396,
+    "ch24": 9.34702,
     "ok": false
    },
    {
     "name": "HOGE",
-    "mcap": 1357296.688,
-    "ageDays": 4.262438206018518,
-    "ch1": 0.14598,
-    "ch24": -0.17981000000000003,
+    "mcap": 1408488.249,
+    "ageDays": 4.265912835648148,
+    "ch1": 0.1226,
+    "ch24": -0.01163,
     "ok": false
    },
    {
     "name": "Leonida",
-    "mcap": 2398656.35419818,
-    "ageDays": 1.4943016319444444,
-    "ch1": 0.7406100000000001,
-    "ch24": 0.6130599999999999,
+    "mcap": 2397968.4976214,
+    "ageDays": 1.4977762615740742,
+    "ch1": 0.4727,
+    "ch24": 0.49381,
     "ok": true
    },
    {
     "name": "PIPI",
-    "mcap": 676365.3615,
-    "ageDays": 0.0473571875,
-    "ch1": 0.9633400000000001,
-    "ch24": 0.9633400000000001,
+    "mcap": 787968.3721,
+    "ageDays": 0.05083181712962963,
+    "ch1": 1.2872999999999999,
+    "ch24": 1.2872999999999999,
     "ok": false
    },
    {
     "name": "OGTA",
-    "mcap": 1532278.62804065,
-    "ageDays": 0.04894283564814815,
-    "ch1": 5.540209999999999,
-    "ch24": 7.44361,
+    "mcap": 1529026.00889002,
+    "ageDays": 0.052417465277777776,
+    "ch1": 3.70299,
+    "ch24": 7.42568,
     "ok": false
    }
   ],
