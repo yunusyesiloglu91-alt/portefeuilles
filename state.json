@@ -25,7 +25,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.008853409724724825,
+     "last": 0.008820639772623384,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -34896,61 +34896,68 @@
    39.4,
    30.54,
    26.61
+  ],
+  [
+   1795115343894,
+   96.55,
+   39.41,
+   30.55,
+   26.59
   ]
  ],
  "watch": [
   {
    "name": "ZEC",
-   "score": 75,
-   "mcap": 99682425.8780562,
-   "ageDays": 396.6126113078704,
+   "score": 67,
+   "mcap": 99190656.8663345,
+   "ageDays": 391.7652418287037,
    "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "VINE",
-   "score": 70,
-   "mcap": 10753498.6700235,
-   "ageDays": 665.740527974537,
-   "ok": false,
-   "why": "pas à un nouveau record"
+   "why": "ni site ni réseaux sociaux"
   },
   {
    "name": "CATE",
    "score": 65,
-   "mcap": 17036907.9190953,
-   "ageDays": 116.06691686342593,
+   "mcap": 16681190.0571507,
+   "ageDays": 116.10857516203704,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "CLAUDIA",
+   "score": 60,
+   "mcap": 6005463.70787134,
+   "ageDays": 43.725392291666665,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "pippin",
    "score": 55,
-   "mcap": 17954751.1984999,
-   "ageDays": 739.9037455671296,
+   "mcap": 18136990.2409956,
+   "ageDays": 739.9454038657408,
    "ok": false,
-   "why": "rotation élevée (32 %/j)"
+   "why": "rotation élevée (26 %/j)"
   },
   {
-   "name": "SPCX",
+   "name": "VINE",
    "score": 55,
-   "mcap": 12699832.298717,
-   "ageDays": 160.09158121527778,
+   "mcap": 10607720.0990004,
+   "ageDays": 665.7821862731481,
    "ok": false,
-   "why": "rotation élevée (27 %/j)"
+   "why": "rotation élevée (20 %/j)"
   },
   {
    "name": "DCTY",
    "score": 50,
-   "mcap": 11860330.6,
-   "ageDays": 30.628815011574073,
+   "mcap": 11883579.54,
+   "ageDays": 30.670473310185184,
    "ok": false,
-   "why": "rotation 364 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation 353 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1795111744617,
- "lastRun": 1795115043991,
+ "lastScan": 1795115343894,
+ "lastRun": 1795115343894,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -54944,39 +54951,43 @@
    [
     1795115043991,
     65.63
+   ],
+   [
+    1795115343894,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "PIPI",
-    "mcap": 314217.9824,
-    "ageDays": 0.29040498842592594,
-    "ch1": -0.10354,
-    "ch24": -0.08789999999999999,
+    "mcap": 307720.0275,
+    "ageDays": 0.29387608796296294,
+    "ch1": -0.10552,
+    "ch24": -0.10676000000000001,
     "ok": false
    },
    {
     "name": "CATMARIO",
-    "mcap": 305535.023275143,
-    "ageDays": 0.1065739699074074,
-    "ch1": -0.19025999999999998,
-    "ch24": 5.63879,
+    "mcap": 326825.701877918,
+    "ageDays": 0.11004506944444445,
+    "ch1": -0.0031,
+    "ch24": 6.1014,
     "ok": false
    },
    {
     "name": "Leonida",
-    "mcap": 2150235.93246205,
-    "ageDays": 1.7373494328703705,
-    "ch1": -0.1637,
-    "ch24": 0.5241,
+    "mcap": 2101454.0508812,
+    "ageDays": 1.7408205324074073,
+    "ch1": -0.12438,
+    "ch24": 0.49651,
     "ok": false
    },
    {
     "name": "OGTA",
-    "mcap": 641613.712378978,
-    "ageDays": 0.022384155092592593,
-    "ch1": 6.0690599999999995,
-    "ch24": 6.0690599999999995,
+    "mcap": 717181.608407168,
+    "ageDays": 0.02585525462962963,
+    "ch1": 6.9016399999999996,
+    "ch24": 6.9016399999999996,
     "ok": false
    }
   ],
