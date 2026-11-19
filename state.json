@@ -34728,61 +34728,68 @@
    39.41,
    30.55,
    26.6
+  ],
+  [
+   1795108143958,
+   96.58,
+   39.42,
+   30.55,
+   26.61
   ]
  ],
  "watch": [
   {
-   "name": "neet",
-   "score": 75,
-   "mcap": 25160529.6071233,
-   "ageDays": 571.636009849537,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
    "name": "VINE",
    "score": 70,
-   "mcap": 7191559.97075052,
-   "ageDays": 665.6606510532407,
+   "mcap": 10831091.6876106,
+   "ageDays": 665.6988536805555,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "CATE",
    "score": 65,
-   "mcap": 16700277.7678372,
-   "ageDays": 115.98703994212963,
+   "mcap": 16608855.234864,
+   "ageDays": 116.02524256944444,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "ANSEM",
-   "score": 62,
-   "mcap": 43447335.8774687,
-   "ageDays": 155.79739873842593,
+   "name": "HYPE",
+   "score": 64,
+   "mcap": 53948639.7589084,
+   "ageDays": 389.05413145833336,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
+   "name": "CLAUDIA",
+   "score": 60,
+   "mcap": 6251217.40814536,
+   "ageDays": 43.642059699074075,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
    "name": "pippin",
    "score": 55,
-   "mcap": 17884526.5003186,
-   "ageDays": 739.8238686458334,
+   "mcap": 17722088.9007905,
+   "ageDays": 739.8620712731481,
    "ok": false,
-   "why": "rotation élevée (37 %/j)"
+   "why": "rotation élevée (36 %/j)"
   },
   {
    "name": "DCTY",
    "score": 50,
-   "mcap": 15245849.88,
-   "ageDays": 30.548938090277776,
+   "mcap": 14117217.32,
+   "ageDays": 30.587140717592593,
    "ok": false,
-   "why": "rotation 368 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation 318 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1795104843251,
- "lastRun": 1795107843739,
+ "lastScan": 1795108143958,
+ "lastRun": 1795108143958,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -54680,47 +54687,59 @@
    [
     1795107843739,
     65.63
+   ],
+   [
+    1795108143958,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "PIPI",
-    "mcap": 425192.0761,
-    "ageDays": 0.20706873842592594,
-    "ch1": -0.32151,
-    "ch24": 0.23424,
+    "mcap": 387455.7495,
+    "ageDays": 0.21054349537037037,
+    "ch1": -0.37593000000000004,
+    "ch24": 0.1247,
     "ok": false
    },
    {
     "name": "CATMARIO",
-    "mcap": 444534.220490854,
-    "ageDays": 0.023237719907407407,
-    "ch1": 8.65902,
-    "ch24": 8.65902,
+    "mcap": 361528.040610451,
+    "ageDays": 0.026712476851851852,
+    "ch1": 6.85543,
+    "ch24": 6.85543,
     "ok": false
    },
    {
     "name": "SHIT",
-    "mcap": 1134351.73113393,
-    "ageDays": 1.725969201388889,
-    "ch1": 0.08904,
-    "ch24": -0.40793,
+    "mcap": 1099726.03123938,
+    "ageDays": 1.7294439583333334,
+    "ch1": 0.06913,
+    "ch24": -0.43422,
     "ok": false
    },
    {
     "name": "Leonida",
-    "mcap": 2599196.54162015,
-    "ageDays": 1.6540131828703704,
-    "ch1": 0.18314,
-    "ch24": 0.39202,
+    "mcap": 2712807.33182986,
+    "ageDays": 1.6574879398148148,
+    "ch1": 0.1991,
+    "ch24": 0.41062,
     "ok": true
    },
    {
     "name": "HOGE",
-    "mcap": 1137456.349,
-    "ageDays": 4.422149756944444,
-    "ch1": -0.22012,
-    "ch24": -0.32529,
+    "mcap": 1149799.369,
+    "ageDays": 4.425624513888889,
+    "ch1": -0.17772,
+    "ch24": -0.28906,
+    "ok": false
+   },
+   {
+    "name": "Mandy",
+    "mcap": 379908.354345029,
+    "ageDays": 1.1920944212962963,
+    "ch1": -0.10861000000000001,
+    "ch24": 0.5587599999999999,
     "ok": false
    }
   ],
