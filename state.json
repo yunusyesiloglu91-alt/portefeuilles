@@ -25,7 +25,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.008996155405241266,
+     "last": 0.00892932899573922,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -34252,61 +34252,68 @@
    39.41,
    30.54,
    26.75
+  ],
+  [
+   1795087449412,
+   96.44,
+   39.32,
+   30.48,
+   26.63
   ]
  ],
  "watch": [
   {
-   "name": "MPLX",
-   "score": 72,
-   "mcap": 30032959.4351738,
-   "ageDays": 394.12714912037035,
-   "ok": false,
-   "why": "ni site ni réseaux sociaux"
-  },
-  {
    "name": "STONK",
    "score": 70,
-   "mcap": 31596640.147725,
-   "ageDays": 98.56765837962963,
+   "mcap": 32036326.4520166,
+   "ageDays": 99.02256263888889,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "ZEC",
-   "score": 67,
-   "mcap": 99431933.9217969,
-   "ageDays": 390.9874847685185,
+   "name": "BIRB",
+   "score": 70,
+   "mcap": 20366920.1274,
+   "ageDays": 295.49671773148145,
    "ok": false,
-   "why": "bien plus de vendeurs que d’acheteurs"
+   "why": "pas à un nouveau record"
   },
   {
    "name": "CATE",
    "score": 65,
-   "mcap": 16800987.9213244,
-   "ageDays": 115.33081810185185,
+   "mcap": 17962001.8584905,
+   "ageDays": 115.78572236111111,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "SPCX",
+   "name": "pippin",
    "score": 55,
-   "mcap": 13064690.079836,
-   "ageDays": 159.3554824537037,
+   "mcap": 17732885.1618308,
+   "ageDays": 739.6225510648148,
    "ok": false,
-   "why": "rotation élevée (34 %/j)"
+   "why": "rotation élevée (48 %/j)"
   },
   {
-   "name": "pippin",
-   "score": 45,
-   "mcap": 18106957.5026157,
-   "ageDays": 739.1676468055556,
+   "name": "SPCX",
+   "score": 47,
+   "mcap": 13252949.5863696,
+   "ageDays": 159.89681032407407,
    "ok": false,
-   "why": "rotation 78 %/j : profil des tokens qui s'effondrent"
+   "why": "rotation élevée (39 %/j)"
+  },
+  {
+   "name": "mihao",
+   "score": 35,
+   "mcap": 7285228.5399257,
+   "ageDays": 24.778407546296297,
+   "ok": false,
+   "why": "rotation élevée (41 %/j)"
   }
  ],
  "notes": [],
- "lastScan": 1795048145684,
- "lastRun": 1795049946682,
+ "lastScan": 1795087449412,
+ "lastRun": 1795087449412,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -53932,55 +53939,59 @@
    [
     1795049946682,
     65.63
+   ],
+   [
+    1795087449412,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "ANT",
-    "mcap": 1521430.652,
-    "ageDays": 0.9851352083333333,
-    "ch1": 0.05479,
-    "ch24": 3.4171899999999997,
+    "mcap": 2284634.138,
+    "ageDays": 1.4191945833333333,
+    "ch1": 0.01381,
+    "ch24": 2.04412,
     "ok": true
    },
    {
-    "name": "PAPA",
-    "mcap": 328904.652721684,
-    "ageDays": 0.09776252314814815,
-    "ch1": -0.023610000000000003,
-    "ch24": 3.51916,
+    "name": "Apocrycoin",
+    "mcap": 344704.160032839,
+    "ageDays": 0.8293681944444444,
+    "ch1": -0.32626,
+    "ch24": 0.6856,
     "ok": false
    },
    {
-    "name": "VTC",
-    "mcap": 836660.903975381,
-    "ageDays": 5.186813449074074,
-    "ch1": -0.23567,
-    "ch24": 4.66607,
-    "ok": false
-   },
-   {
-    "name": "GTA6",
-    "mcap": 355423.046175562,
-    "ageDays": 1.242600486111111,
-    "ch1": 0.00711,
-    "ch24": 0.037970000000000004,
+    "name": "GTASZN",
+    "mcap": 845486.844700157,
+    "ageDays": 0.4867061574074074,
+    "ch1": -0.12719,
+    "ch24": 7.38256,
     "ok": false
    },
    {
     "name": "HOGE",
-    "mcap": 1384496.535,
-    "ageDays": 3.7520449305555554,
-    "ch1": 0.03999,
-    "ch24": 1.31257,
+    "mcap": 1360582.93,
+    "ageDays": 4.186104305555555,
+    "ch1": 0.11384,
+    "ch24": 2.31435,
     "ok": false
    },
    {
     "name": "SHIT",
-    "mcap": 2961881.54960296,
-    "ageDays": 1.055864375,
-    "ch1": -0.14376,
-    "ch24": 3.34735,
+    "mcap": 1648122.53627107,
+    "ageDays": 1.48992375,
+    "ch1": -0.059640000000000006,
+    "ch24": 0.26474,
+    "ok": false
+   },
+   {
+    "name": "Leonida",
+    "mcap": 1602776.77410363,
+    "ageDays": 1.4179677314814816,
+    "ch1": 0.04962,
+    "ch24": 0.84006,
     "ok": false
    }
   ],
