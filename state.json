@@ -34336,61 +34336,68 @@
    39.36,
    30.51,
    26.7
+  ],
+  [
+   1795091044086,
+   96.59,
+   39.37,
+   30.51,
+   26.71
   ]
  ],
  "watch": [
   {
-   "name": "STONK",
-   "score": 70,
-   "mcap": 32036326.4520166,
-   "ageDays": 99.02256263888889,
+   "name": "NOS",
+   "score": 72,
+   "mcap": 37595312.9515422,
+   "ageDays": 359.99768618055555,
    "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "BIRB",
-   "score": 70,
-   "mcap": 20366920.1274,
-   "ageDays": 295.49671773148145,
-   "ok": false,
-   "why": "pas à un nouveau record"
+   "why": "liquidité très faible"
   },
   {
    "name": "CATE",
    "score": 65,
-   "mcap": 17962001.8584905,
-   "ageDays": 115.78572236111111,
+   "mcap": 17954941.1568441,
+   "ageDays": 115.82732738425926,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "CLAUDIA",
+   "score": 60,
+   "mcap": 5918650.42408997,
+   "ageDays": 43.44414451388889,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "CBUCKS",
+   "score": 60,
+   "mcap": 3496322.45000122,
+   "ageDays": 43.74595006944445,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "pippin",
    "score": 55,
-   "mcap": 17732885.1618308,
-   "ageDays": 739.6225510648148,
+   "mcap": 17767400.5695443,
+   "ageDays": 739.664156087963,
    "ok": false,
-   "why": "rotation élevée (48 %/j)"
+   "why": "rotation élevée (45 %/j)"
   },
   {
-   "name": "SPCX",
-   "score": 47,
-   "mcap": 13252949.5863696,
-   "ageDays": 159.89681032407407,
-   "ok": false,
-   "why": "rotation élevée (39 %/j)"
-  },
-  {
-   "name": "mihao",
+   "name": "DCTY",
    "score": 35,
-   "mcap": 7285228.5399257,
-   "ageDays": 24.778407546296297,
+   "mcap": 18004620.47,
+   "ageDays": 30.38922553240741,
    "ok": false,
-   "why": "rotation élevée (41 %/j)"
+   "why": "rotation 342 %/j : profil des tokens qui s'effondrent"
   }
  ],
  "notes": [],
- "lastScan": 1795087449412,
- "lastRun": 1795090743833,
+ "lastScan": 1795091044086,
+ "lastRun": 1795091044086,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -54064,40 +54071,52 @@
    [
     1795090743833,
     65.63
+   ],
+   [
+    1795091044086,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Apocrycoin",
-    "mcap": 430378.066845605,
-    "ageDays": 0.8674980671296296,
-    "ch1": 0.20588,
-    "ch24": 1.10455,
-    "ok": true
+    "mcap": 359118.337305975,
+    "ageDays": 0.8709732175925926,
+    "ch1": -0.00751,
+    "ch24": 0.7560899999999999,
+    "ok": false
    },
    {
     "name": "GTASZN",
-    "mcap": 1903006.76112041,
-    "ageDays": 0.5248360300925926,
-    "ch1": 1.30798,
-    "ch24": 17.86731,
+    "mcap": 2285169.38925576,
+    "ageDays": 0.5283111805555556,
+    "ch1": 1.6795900000000001,
+    "ch24": 21.656260000000003,
     "ok": true
    },
    {
     "name": "HOGE",
-    "mcap": 1275038.553,
-    "ageDays": 4.22423417824074,
-    "ch1": -0.07496,
-    "ch24": 2.11281,
+    "mcap": 1227422.68,
+    "ageDays": 4.227709328703703,
+    "ch1": -0.08669,
+    "ch24": 2.1438900000000003,
     "ok": false
    },
    {
     "name": "Leonida",
-    "mcap": 1645566.97830007,
-    "ageDays": 1.4560976041666667,
-    "ch1": 0.02848,
-    "ch24": 0.13557,
+    "mcap": 1596239.65639484,
+    "ageDays": 1.4595727546296295,
+    "ch1": 0.00607,
+    "ch24": 0.012920000000000001,
     "ok": true
+   },
+   {
+    "name": "OGTA",
+    "mcap": 314400.673697805,
+    "ageDays": 0.014213958333333334,
+    "ch1": 0.7325,
+    "ch24": 0.7325,
+    "ok": false
    }
   ],
   "paused": true
