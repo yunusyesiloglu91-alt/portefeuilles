@@ -25,7 +25,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.00885525881268918,
+     "last": 0.00883945994920682,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -35876,61 +35876,68 @@
    39.45,
    30.58,
    26.65
+  ],
+  [
+   1795200543970,
+   96.7,
+   39.47,
+   30.59,
+   26.64
   ]
  ],
  "watch": [
   {
-   "name": "jellyjelly",
-   "score": 80,
-   "mcap": 39177901.2539997,
-   "ageDays": 659.7638256944444,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "HYPE",
-   "score": 75,
-   "mcap": 50935608.5864671,
-   "ageDays": 398.6677377314815,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
    "name": "USELESS",
    "score": 70,
-   "mcap": 79238582.9691299,
-   "ageDays": 559.1463604166667,
+   "mcap": 78551941.8714602,
+   "ageDays": 559.184559837963,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "neet",
+   "name": "TROLL",
    "score": 65,
-   "mcap": 20874253.9571847,
-   "ageDays": 572.7054576388889,
+   "mcap": 21015292.685539,
+   "ageDays": 579.0129394675926,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "CATE",
+   "score": 65,
+   "mcap": 15976461.7259425,
+   "ageDays": 117.09468715277778,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
    "score": 62,
-   "mcap": 31903919.8495098,
-   "ageDays": 156.86684652777777,
+   "mcap": 33147476.8070604,
+   "ageDays": 145.5108329861111,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "STONK",
    "score": 60,
-   "mcap": 24064311.3890259,
-   "ageDays": 100.29332800925926,
+   "mcap": 23644950.3480157,
+   "ageDays": 100.33152743055555,
    "ok": false,
    "why": "pas à un nouveau record"
+  },
+  {
+   "name": "ZEC",
+   "score": 57,
+   "mcap": 82944800.0106712,
+   "ageDays": 392.75135381944443,
+   "ok": false,
+   "why": "bien plus de vendeurs que d’acheteurs"
   }
  ],
  "notes": [],
- "lastScan": 1795197243540,
- "lastRun": 1795200243548,
+ "lastScan": 1795200543970,
+ "lastRun": 1795200543970,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -56484,31 +56491,35 @@
    [
     1795200243548,
     65.63
+   ],
+   [
+    1795200543970,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "FIONA",
-    "mcap": 1520125.25,
-    "ageDays": 0.9101220833333333,
-    "ch1": 0.0676,
-    "ch24": 47.20975000000001,
+    "mcap": 1544826.598,
+    "ageDays": 0.9135991898148148,
+    "ch1": -0.00198,
+    "ch24": 47.993140000000004,
     "ok": false
    },
    {
     "name": "Leonida",
-    "mcap": 1263746.59856075,
-    "ageDays": 2.7234554166666665,
-    "ch1": -0.01866,
-    "ch24": -0.41256,
+    "mcap": 1288601.40647127,
+    "ageDays": 2.726932523148148,
+    "ch1": -0.024009999999999997,
+    "ch24": -0.40242,
     "ok": false
    },
    {
     "name": "Huss",
-    "mcap": 345943.5623,
-    "ageDays": 4.052425324074074,
-    "ch1": 0.13466,
-    "ch24": 1.26171,
+    "mcap": 407893.7681,
+    "ageDays": 4.055902430555555,
+    "ch1": 0.31889,
+    "ch24": 1.45981,
     "ok": false
    }
   ],
