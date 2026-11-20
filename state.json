@@ -25,7 +25,7 @@
      "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
      "t": 1794041643930,
      "entry": 0.011600213314770498,
-     "last": 0.008625060461774765,
+     "last": 0.008628856861019473,
      "peak": 0.011600213314770498,
      "qty": 1049.5723519732555,
      "cost": 12.298245628459744
@@ -36037,61 +36037,68 @@
    39.46,
    30.58,
    26.43
+  ],
+  [
+   1795207443974,
+   96.47,
+   39.46,
+   30.58,
+   26.43
   ]
  ],
  "watch": [
   {
-   "name": "USELESS",
-   "score": 70,
-   "mcap": 77012604.6398986,
-   "ageDays": 559.2262213888889,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
    "name": "Fartcoin",
    "score": 70,
-   "mcap": 76578855.0031614,
-   "ageDays": 763.5689412962963,
+   "mcap": 75967673.0318754,
+   "ageDays": 763.6071409027778,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "HYPE",
    "score": 67,
-   "mcap": 51553074.8745673,
-   "ageDays": 390.22938111111114,
+   "mcap": 51609952.0273298,
+   "ageDays": 390.2675807175926,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
    "name": "ZEC",
    "score": 65,
-   "mcap": 83187680.9304276,
-   "ageDays": 392.79301537037037,
+   "mcap": 81366782.9173461,
+   "ageDays": 392.83121497685187,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "TROLL",
    "score": 65,
-   "mcap": 20971843.8829157,
-   "ageDays": 579.0546010185185,
+   "mcap": 20517775.5407347,
+   "ageDays": 579.092800625,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "CATE",
    "score": 65,
-   "mcap": 15523306.8910593,
-   "ageDays": 117.1363487037037,
+   "mcap": 15394462.9826785,
+   "ageDays": 117.17454831018519,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "STONK",
+   "score": 60,
+   "mcap": 23424827.9459593,
+   "ageDays": 100.41138858796296,
    "ok": false,
    "why": "pas à un nouveau record"
   }
  ],
  "notes": [],
- "lastScan": 1795204143528,
- "lastRun": 1795207143564,
+ "lastScan": 1795207443974,
+ "lastRun": 1795207443974,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -56737,23 +56744,19 @@
    [
     1795207143564,
     65.63
+   ],
+   [
+    1795207443974,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "FIONA",
-    "mcap": 1450618.974,
-    "ageDays": 0.9899833796296297,
-    "ch1": -0.00447,
-    "ch24": 45.005410000000005,
-    "ok": false
-   },
-   {
-    "name": "PATRICK",
-    "mcap": 319994.0698,
-    "ageDays": 0.5713375462962963,
-    "ch1": -0.03828,
-    "ch24": 10.0936,
+    "mcap": 1477180.365,
+    "ageDays": 0.9934603472222222,
+    "ch1": 0.049699999999999994,
+    "ch24": 45.84778,
     "ok": false
    }
   ],
