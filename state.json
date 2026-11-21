@@ -17,20 +17,8 @@
    "signal": "sous la moyenne 50 j"
   },
   "meme": {
-   "cash": 19.950404163050063,
-   "positions": [
-    {
-     "name": "ACT",
-     "addr": "GJAFwWjJ3vnTsrQVabjBVK2TYB1YtRCQXRDfDgUnpump",
-     "pool": "B4PHSkL6CeZbxVqm1aUPQuVpc5ERFcaZj7u9dhtphmVX",
-     "t": 1794041643930,
-     "entry": 0.011600213314770498,
-     "last": 0.008716482007285219,
-     "peak": 0.011600213314770498,
-     "qty": 1049.5723519732555,
-     "cost": 12.298245628459744
-    }
-   ]
+   "cash": 28.63409768870247,
+   "positions": []
   }
  },
  "trades": [
@@ -117,6 +105,16 @@
    "price": 0.07542033715422859,
    "usd": 8.900960830747394,
    "ret": -0.20427670027289524,
+   "reason": "14 jours écoulés"
+  },
+  {
+   "t": 1795258204066,
+   "sleeve": "meme",
+   "side": "vente",
+   "name": "ACT",
+   "price": 0.008357125247419443,
+   "usd": 8.683693525652409,
+   "ret": -0.29390794524731156,
    "reason": "14 jours écoulés"
   }
  ],
@@ -36499,61 +36497,68 @@
    39.45,
    30.58,
    26.52
+  ],
+  [
+   1795258204066,
+   96.26,
+   39.51,
+   30.62,
+   26.13
   ]
  ],
  "watch": [
   {
-   "name": "CATE",
-   "score": 65,
-   "mcap": 15868716.4942919,
-   "ageDays": 117.3724711574074,
+   "name": "USELESS",
+   "score": 70,
+   "mcap": 77034551.1109773,
+   "ageDays": 559.8519220601852,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
-   "name": "Buttcoin",
+   "name": "pippin",
+   "score": 70,
+   "mcap": 17130250.6748601,
+   "ageDays": 741.5988780787037,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "ZEC",
    "score": 65,
-   "mcap": 7772607.56653577,
-   "ageDays": 315.4950984722222,
+   "mcap": 81503924.4462028,
+   "ageDays": 393.41871604166664,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "CATE",
+   "score": 65,
+   "mcap": 16101135.844035,
+   "ageDays": 117.762049375,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "VINE",
+   "score": 65,
+   "mcap": 7297604.947245,
+   "ageDays": 667.4356604861111,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "STONK",
    "score": 60,
-   "mcap": 24952378.4440912,
-   "ageDays": 100.60931143518519,
+   "mcap": 25470626.7408511,
+   "ageDays": 100.99888965277778,
    "ok": false,
    "why": "pas à un nouveau record"
-  },
-  {
-   "name": "pippin",
-   "score": 55,
-   "mcap": 18236047.8340803,
-   "ageDays": 741.2092998611112,
-   "ok": false,
-   "why": "rotation élevée (32 %/j)"
-  },
-  {
-   "name": "SPCX",
-   "score": 55,
-   "mcap": 13018215.3696432,
-   "ageDays": 161.39713550925927,
-   "ok": false,
-   "why": "rotation élevée (36 %/j)"
-  },
-  {
-   "name": "hSOL",
-   "score": 54,
-   "mcap": 68775399.2935852,
-   "ageDays": 10.445156342592593,
-   "ok": false,
-   "why": "liquidité très faible"
   }
  ],
  "notes": [],
- "lastScan": 1795224544508,
- "lastRun": 1795227544632,
+ "lastScan": 1795258204066,
+ "lastRun": 1795258204066,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -57463,47 +57468,59 @@
    [
     1795227544632,
     65.63
+   ],
+   [
+    1795258204066,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "ANT",
-    "mcap": 1059887.648,
-    "ageDays": 0.6721253703703703,
-    "ch1": 0.08307,
-    "ch24": 2.18385,
-    "ok": true
+    "mcap": 1217333.151,
+    "ageDays": 1.0269799305555556,
+    "ch1": -0.21574000000000002,
+    "ch24": 2.30048,
+    "ok": false
    },
    {
     "name": "FIONA",
-    "mcap": 1036933.764,
-    "ageDays": 1.2261068518518519,
-    "ch1": -0.10872,
-    "ch24": -0.36751,
+    "mcap": 1040966.739,
+    "ageDays": 1.580961412037037,
+    "ch1": 0.19696000000000002,
+    "ch24": -0.63186,
     "ok": false
    },
    {
     "name": "JENSEN",
-    "mcap": 1770637.137449,
-    "ageDays": 0.09558601851851851,
-    "ch1": 0.00179,
-    "ch24": 4.59421,
+    "mcap": 882974.005006167,
+    "ageDays": 0.4504405787037037,
+    "ch1": 0.03485,
+    "ch24": 1.7897,
     "ok": false
    },
    {
-    "name": "Huss",
-    "mcap": 314655.1078,
-    "ageDays": 4.368410092592592,
-    "ch1": -0.06202,
-    "ch24": 0.45237,
+    "name": "SHIT",
+    "mcap": 581364.73283848,
+    "ageDays": 3.466250763888889,
+    "ch1": -0.10629,
+    "ch24": -0.31495,
     "ok": false
    },
    {
-    "name": "BTC",
-    "mcap": 351796.271212524,
-    "ageDays": 0.2318475925925926,
-    "ch1": 0.13047,
-    "ch24": 5.77766,
+    "name": "PUNANI",
+    "mcap": 2309645.71085212,
+    "ageDays": 0.266424375,
+    "ch1": -0.24206,
+    "ch24": 8.96943,
+    "ok": false
+   },
+   {
+    "name": "MAYA",
+    "mcap": 3084300.58650108,
+    "ageDays": 0.2378479861111111,
+    "ch1": 0.0003,
+    "ch24": 11.726310000000002,
     "ok": false
    }
   ],
