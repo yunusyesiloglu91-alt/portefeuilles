@@ -38821,61 +38821,68 @@
    39.47,
    30.6,
    26.11
+  ],
+  [
+   1795357743310,
+   96.18,
+   39.47,
+   30.6,
+   26.11
   ]
  ],
  "watch": [
   {
-   "name": "pippin",
+   "name": "ANTFUN",
    "score": 75,
-   "mcap": 16584840.5613034,
-   "ageDays": 742.7092979861111,
+   "mcap": 20099015.740018,
+   "ageDays": 135.41604525462964,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "pippin",
+   "score": 70,
+   "mcap": 16702335.874827,
+   "ageDays": 742.7509526620371,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "STONK",
    "score": 65,
-   "mcap": 27250870.6317319,
-   "ageDays": 102.10930956018518,
+   "mcap": 27297040.5637328,
+   "ageDays": 102.15096423611111,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "TROLL",
    "score": 65,
-   "mcap": 21181839.5612625,
-   "ageDays": 580.7907215972223,
+   "mcap": 21341358.3943306,
+   "ageDays": 580.8323762731482,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "hSOL",
    "score": 64,
-   "mcap": 71914334.8482656,
-   "ageDays": 72.83480724537037,
+   "mcap": 71836631.8155933,
+   "ageDays": 72.8764619212963,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
-   "name": "ANSEM",
+   "name": "ZEC",
    "score": 62,
-   "mcap": 37953479.5064457,
-   "ageDays": 158.6828280787037,
+   "mcap": 86650397.6332396,
+   "ageDays": 394.570790625,
    "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
-   "name": "CATE",
-   "score": 60,
-   "mcap": 18612646.433288,
-   "ageDays": 118.87246928240741,
-   "ok": false,
-   "why": "pas à un nouveau record"
+   "why": "ni site ni réseaux sociaux"
   }
  ],
  "notes": [],
- "lastScan": 1795354144346,
- "lastRun": 1795357443533,
+ "lastScan": 1795357743310,
+ "lastRun": 1795357743310,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -61113,40 +61120,44 @@
    [
     1795357443533,
     65.63
+   ],
+   [
+    1795357743310,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "Singularity",
-    "mcap": 985663.163145046,
-    "ageDays": 1.7622515393518519,
-    "ch1": 0.07528,
-    "ch24": 8.93162,
+    "mcap": 1032913.96288635,
+    "ageDays": 1.7657211805555555,
+    "ch1": 0.14868,
+    "ch24": 9.78881,
     "ok": true
    },
    {
     "name": "snowball",
-    "mcap": 306085.193079303,
-    "ageDays": 0.40873302083333335,
-    "ch1": -0.08028,
-    "ch24": 11.281030000000001,
+    "mcap": 312763.325480304,
+    "ageDays": 0.41220266203703704,
+    "ch1": -0.19105,
+    "ch24": 11.548969999999999,
     "ok": false
    },
    {
     "name": "FIONA",
-    "mcap": 1651185.63490045,
-    "ageDays": 2.729566354166667,
-    "ch1": -0.0083,
-    "ch24": 0.47673000000000004,
+    "mcap": 1583914.64842058,
+    "ageDays": 2.7330359953703702,
+    "ch1": -0.006840000000000001,
+    "ch24": 0.39993,
     "ok": false
    },
    {
     "name": "PushCoin",
-    "mcap": 1408420.32429382,
-    "ageDays": 0.5200293171296296,
-    "ch1": 0.11137000000000001,
-    "ch24": 8.41182,
-    "ok": false
+    "mcap": 1714616.7273877,
+    "ageDays": 0.5234989583333334,
+    "ch1": 0.42951,
+    "ch24": 10.45799,
+    "ok": true
    }
   ],
   "paused": true
