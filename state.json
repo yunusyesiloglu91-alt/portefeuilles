@@ -40578,61 +40578,68 @@
    39.46,
    30.58,
    26.1
+  ],
+  [
+   1795433343465,
+   96.13,
+   39.46,
+   30.58,
+   26.1
   ]
  ],
  "watch": [
   {
-   "name": "BIRB",
-   "score": 75,
-   "mcap": 16069806.14805,
-   "ageDays": 299.45846484953705,
+   "name": "HYPE",
+   "score": 72,
+   "mcap": 52309625.97033,
+   "ageDays": 401.4003757523148,
    "ok": false,
-   "why": "pas à un nouveau record"
+   "why": "ni site ni réseaux sociaux"
   },
   {
-   "name": "pippin",
-   "score": 67,
-   "mcap": 17999330.7142618,
-   "ageDays": 743.5842981828704,
-   "ok": false,
-   "why": "bien plus de vendeurs que d’acheteurs"
-  },
-  {
-   "name": "STONK",
-   "score": 65,
-   "mcap": 28481986.1082596,
-   "ageDays": 102.98430975694444,
+   "name": "USELESS",
+   "score": 70,
+   "mcap": 79868159.9201929,
+   "ageDays": 561.8789984375,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "TROLL",
    "score": 65,
-   "mcap": 22157707.2129086,
-   "ageDays": 581.6657217939814,
+   "mcap": 22405597.7044433,
+   "ageDays": 581.7073780671296,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "CATE",
    "score": 65,
-   "mcap": 17586552.4391935,
-   "ageDays": 119.74746947916667,
+   "mcap": 17839686.4702422,
+   "ageDays": 119.78912575231482,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ZEC",
    "score": 62,
-   "mcap": 87157510.8218956,
-   "ageDays": 395.4041361458333,
+   "mcap": 86369658.0383013,
+   "ageDays": 395.44579241898145,
    "ok": false,
    "why": "ni site ni réseaux sociaux"
+  },
+  {
+   "name": "pippin",
+   "score": 62,
+   "mcap": 18066026.5882204,
+   "ageDays": 743.6259544560185,
+   "ok": false,
+   "why": "bien plus de vendeurs que d’acheteurs"
   }
  ],
  "notes": [],
- "lastScan": 1795429744363,
- "lastRun": 1795433043251,
+ "lastScan": 1795433343465,
+ "lastRun": 1795433343465,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -63874,55 +63881,59 @@
    [
     1795433043251,
     65.63
+   ],
+   [
+    1795433343465,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "MINELIUS",
-    "mcap": 12778360.93,
-    "ageDays": 0.5789496643518518,
-    "ch1": -0.15066000000000002,
-    "ch24": 38.4068,
+    "mcap": 12732559,
+    "ageDays": 0.582424363425926,
+    "ch1": -0.14989,
+    "ch24": 38.26556,
     "ok": false
    },
    {
     "name": "UCASH",
-    "mcap": 753173.030609661,
-    "ageDays": 1.0062529050925926,
-    "ch1": -0.1243,
-    "ch24": 1.22868,
+    "mcap": 734904.91349679,
+    "ageDays": 1.0097276041666667,
+    "ch1": -0.11152,
+    "ch24": 0.47119999999999995,
     "ok": false
    },
    {
     "name": "OpenIndex",
-    "mcap": 363691.6824,
-    "ageDays": 0.7462760532407408,
-    "ch1": -0.03248,
-    "ch24": 11.92824,
+    "mcap": 366856.1535,
+    "ageDays": 0.7497507523148148,
+    "ch1": -0.052329999999999995,
+    "ch24": 12.040730000000002,
     "ok": false
    },
    {
     "name": "FSDV15",
-    "mcap": 1632971.72509384,
-    "ageDays": 0.5686487384259259,
-    "ch1": -0.41012,
-    "ch24": 15.72548,
+    "mcap": 1682306.03285866,
+    "ageDays": 0.5721234375,
+    "ch1": -0.2904,
+    "ch24": 16.23078,
     "ok": false
    },
    {
     "name": "MCAT",
-    "mcap": 370373.5625,
-    "ageDays": 0.7547019791666667,
-    "ch1": -0.06414,
-    "ch24": 2.52608,
+    "mcap": 369843.0249,
+    "ageDays": 0.7581766782407408,
+    "ch1": -0.09193,
+    "ch24": 2.52103,
     "ok": false
    },
    {
     "name": "Singularity",
-    "mcap": 431218.813242581,
-    "ageDays": 2.637248275462963,
-    "ch1": -0.01145,
-    "ch24": -0.35536999999999996,
+    "mcap": 429149.750011052,
+    "ageDays": 2.640722974537037,
+    "ch1": -0.03326,
+    "ch24": -0.48567,
     "ok": false
    }
   ],
