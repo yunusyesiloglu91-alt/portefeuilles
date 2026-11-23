@@ -41061,61 +41061,68 @@
    39.73,
    30.8,
    26.28
+  ],
+  [
+   1795454044040,
+   96.8,
+   39.73,
+   30.79,
+   26.27
   ]
  ],
  "watch": [
   {
-   "name": "pippin",
-   "score": 72,
-   "mcap": 18780346.4053038,
-   "ageDays": 743.8273475694444,
-   "ok": false,
-   "why": "bien plus de vendeurs que d’acheteurs"
-  },
-  {
-   "name": "TROLL",
-   "score": 65,
-   "mcap": 22857357.5560256,
-   "ageDays": 581.9087711805555,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
    "name": "ZEC",
-   "score": 64,
-   "mcap": 93112739.5967421,
-   "ageDays": 400.5362133101852,
+   "score": 72,
+   "mcap": 91812360.2089197,
+   "ageDays": 400.5744101851852,
    "ok": false,
    "why": "liquidité très faible"
   },
   {
+   "name": "STONK",
+   "score": 65,
+   "mcap": 29729531.3253893,
+   "ageDays": 103.26555601851852,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "TROLL",
+   "score": 65,
+   "mcap": 22248770.2425013,
+   "ageDays": 581.9469680555555,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "pippin",
+   "score": 62,
+   "mcap": 18267797.5770273,
+   "ageDays": 743.8655444444445,
+   "ok": false,
+   "why": "bien plus de vendeurs que d’acheteurs"
+  },
+  {
    "name": "CATE",
    "score": 60,
-   "mcap": 18073888.4409673,
-   "ageDays": 119.99051886574074,
+   "mcap": 17989831.612988,
+   "ageDays": 120.02871574074074,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "hSOL",
    "score": 59,
-   "mcap": 74355958.170653,
-   "ageDays": 73.9528568287037,
-   "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
-   "name": "HYPE",
-   "score": 59,
-   "mcap": 54049880.5006801,
-   "ageDays": 393.08355127314815,
+   "mcap": 73462271.7477799,
+   "ageDays": 73.9910537037037,
    "ok": false,
    "why": "liquidité très faible"
   }
  ],
  "notes": [],
- "lastScan": 1795450743830,
- "lastRun": 1795453743929,
+ "lastScan": 1795454044040,
+ "lastRun": 1795454044040,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -64633,55 +64640,59 @@
    [
     1795453743929,
     65.63
+   ],
+   [
+    1795454044040,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "UCASH",
-    "mcap": 1960761.06733611,
-    "ageDays": 1.245844085648148,
-    "ch1": -0.21117,
-    "ch24": 1.82578,
+    "mcap": 1835604.20604211,
+    "ageDays": 1.2493175925925926,
+    "ch1": -0.19978,
+    "ch24": 2.0533,
     "ok": false
    },
    {
     "name": "JENSEN",
     "mcap": 462543.899637,
-    "ageDays": 0.04561260416666667,
+    "ageDays": 0.04908611111111111,
     "ch1": 0.25829,
     "ch24": 0.9921,
     "ok": false
    },
    {
     "name": "OpenIndex",
-    "mcap": 313223.3904,
-    "ageDays": 0.9858672337962963,
-    "ch1": 0.14814,
-    "ch24": 10.13423,
+    "mcap": 300507.5864,
+    "ageDays": 0.9893407407407407,
+    "ch1": 0.1414,
+    "ch24": 9.68222,
     "ok": false
    },
    {
     "name": "FSDV15",
-    "mcap": 761464.313975021,
-    "ageDays": 0.8082399189814815,
-    "ch1": -0.07699,
-    "ch24": 6.799189999999999,
+    "mcap": 667762.361128799,
+    "ageDays": 0.8117134259259259,
+    "ch1": -0.15960000000000002,
+    "ch24": 5.83946,
     "ok": false
    },
    {
     "name": "HUANG",
-    "mcap": 368555.63431187,
-    "ageDays": 0.02411954861111111,
-    "ch1": 6.39993,
-    "ch24": 6.39993,
+    "mcap": 331955.957243519,
+    "ageDays": 0.027593055555555555,
+    "ch1": 5.665069999999999,
+    "ch24": 5.665069999999999,
     "ok": false
    },
    {
     "name": "PumpMeme",
-    "mcap": 1130612.2573702,
-    "ageDays": 0.48945519675925925,
-    "ch1": -0.12644,
-    "ch24": 3.1176600000000003,
+    "mcap": 1076628.8556963,
+    "ageDays": 0.49292870370370373,
+    "ch1": -0.00309,
+    "ch24": 2.9210599999999998,
     "ok": false
    }
   ],
