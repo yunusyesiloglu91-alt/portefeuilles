@@ -17,8 +17,20 @@
    "signal": "sous la moyenne 50 j"
   },
   "meme": {
-   "cash": 28.63409768870247,
-   "positions": []
+   "cash": 19.089398459134983,
+   "positions": [
+    {
+     "name": "jobcoin",
+     "addr": "AyrQpt5xsVYiN4BqgZdd2tZJAWswT9yLUZmP1jKqpump",
+     "pool": "8yzZgcvzk353JqUbTHeHUUA5kJhZb1EimJwCcXLCM4LH",
+     "t": 1795641843832,
+     "entry": 0.012440454752755205,
+     "last": 0.012440454752755205,
+     "peak": 0.012440454752755205,
+     "qty": 759.5584265260942,
+     "cost": 9.54469922956749
+    }
+   ]
   }
  },
  "trades": [
@@ -116,6 +128,15 @@
    "usd": 8.683693525652409,
    "ret": -0.29390794524731156,
    "reason": "14 jours écoulés"
+  },
+  {
+   "t": 1795641843832,
+   "sleeve": "meme",
+   "side": "achat",
+   "name": "jobcoin",
+   "price": 0.012440454752755205,
+   "usd": 9.54469922956749,
+   "reason": "note 85 : ≥ 10 M$, plus de 60 j, volume calme, à son record"
   }
  ],
  "history": [
@@ -44918,61 +44939,68 @@
    39.41,
    30.54,
    26.06
+  ],
+  [
+   1795641843832,
+   95.94,
+   39.41,
+   30.55,
+   25.98
   ]
  ],
  "watch": [
   {
-   "name": "pippin",
-   "score": 80,
-   "mcap": 18684187.0909562,
-   "ageDays": 745.9974900347222,
-   "ok": false,
-   "why": "pas à un nouveau record"
+   "name": "jobcoin",
+   "score": 85,
+   "mcap": 12502195.8056377,
+   "ageDays": 589.9644193518518,
+   "ok": true,
+   "why": "tous les critères remplis"
   },
   {
-   "name": "hSOL",
-   "score": 67,
-   "mcap": 40831778.8793951,
-   "ageDays": 15.233346516203703,
+   "name": "pippin",
+   "score": 80,
+   "mcap": 18755860.9309657,
+   "ageDays": 746.0391531481481,
    "ok": false,
-   "why": "ni site ni réseaux sociaux"
+   "why": "pas à un nouveau record"
   },
   {
    "name": "CATE",
    "score": 65,
-   "mcap": 16749585.835508,
-   "ageDays": 122.16066133101852,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "USELESS",
-   "score": 62,
-   "mcap": 69951092.2293516,
-   "ageDays": 563.9723164236111,
-   "ok": false,
-   "why": "liquidité très faible"
-  },
-  {
-   "name": "STONK",
-   "score": 60,
-   "mcap": 23973175.6647856,
-   "ageDays": 105.39750160879629,
+   "mcap": 16284191.1151216,
+   "ageDays": 122.20232444444444,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "ANSEM",
    "score": 60,
-   "mcap": 18902893.2106702,
-   "ageDays": 161.9710201273148,
+   "mcap": 18630279.9405274,
+   "ageDays": 162.01268324074073,
    "ok": false,
    "why": "pas à un nouveau record"
+  },
+  {
+   "name": "HYPE",
+   "score": 59,
+   "mcap": 53146567.8749664,
+   "ageDays": 395.29535685185186,
+   "ok": false,
+   "why": "liquidité très faible"
+  },
+  {
+   "name": "hSOL",
+   "score": 59,
+   "mcap": 41480396.8759596,
+   "ageDays": 76.1646624074074,
+   "ok": false,
+   "why": "liquidité très faible"
   }
  ],
  "notes": [],
- "lastScan": 1795638244139,
- "lastRun": 1795641543560,
+ "lastScan": 1795641843832,
+ "lastRun": 1795641843832,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -70694,39 +70722,43 @@
    [
     1795641543560,
     65.63
+   ],
+   [
+    1795641843832,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "BASKET",
-    "mcap": 680082.6861,
-    "ageDays": 0.6916847222222222,
-    "ch1": -0.01893,
-    "ch24": 8.92029,
+    "mcap": 605026.3774,
+    "ageDays": 0.6951600925925926,
+    "ch1": -0.13577,
+    "ch24": 7.8254600000000005,
     "ok": false
    },
    {
     "name": "JIMMY",
-    "mcap": 874268.060050035,
-    "ageDays": 2.0054694444444445,
-    "ch1": -0.21162,
-    "ch24": -0.22663,
+    "mcap": 897610.045626518,
+    "ageDays": 2.008944814814815,
+    "ch1": -0.18975999999999998,
+    "ch24": -0.12047000000000001,
     "ok": false
    },
    {
     "name": "FIONA",
-    "mcap": 2647100.03986993,
-    "ageDays": 6.017761111111111,
-    "ch1": -0.041479999999999996,
-    "ch24": -0.12625999999999998,
+    "mcap": 2641303.03530164,
+    "ageDays": 6.021236481481481,
+    "ch1": -0.039169999999999996,
+    "ch24": -0.17158,
     "ok": false
    },
    {
     "name": "Pompompurin",
-    "mcap": 867475.563346429,
-    "ageDays": 0.04168472222222222,
-    "ch1": 2.19882,
-    "ch24": 12.56916,
+    "mcap": 943303.587577762,
+    "ageDays": 0.04516009259259259,
+    "ch1": 1.88289,
+    "ch24": 13.755270000000001,
     "ok": false
    }
   ],
