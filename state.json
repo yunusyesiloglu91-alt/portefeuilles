@@ -17,7 +17,7 @@
    "signal": "sous la moyenne 50 j"
   },
   "meme": {
-   "cash": 19.089398459134983,
+   "cash": 9.703677994705869,
    "positions": [
     {
      "name": "jobcoin",
@@ -25,10 +25,21 @@
      "pool": "8yzZgcvzk353JqUbTHeHUUA5kJhZb1EimJwCcXLCM4LH",
      "t": 1795641843832,
      "entry": 0.012440454752755205,
-     "last": 0.011944314192291574,
+     "last": 0.011938203326404473,
      "peak": 0.012440454752755205,
      "qty": 759.5584265260942,
      "cost": 9.54469922956749
+    },
+    {
+     "name": "pippin",
+     "addr": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
+     "pool": "8WwcNqdZjCY5Pt7AkhupAFknV2txca9sq6YBkGzLbvdt",
+     "t": 1795668544363,
+     "entry": 0.019380173554952453,
+     "last": 0.019380173554952453,
+     "peak": 0.019380173554952453,
+     "qty": 479.45201488716083,
+     "cost": 9.385720464429115
     }
    ]
   }
@@ -137,6 +148,15 @@
    "price": 0.012440454752755205,
    "usd": 9.54469922956749,
    "reason": "note 85 : ≥ 10 M$, plus de 60 j, volume calme, à son record"
+  },
+  {
+   "t": 1795668544363,
+   "sleeve": "meme",
+   "side": "achat",
+   "name": "pippin",
+   "price": 0.019380173554952453,
+   "usd": 9.385720464429115,
+   "reason": "note 80 : ≥ 10 M$, plus de 60 j, à son record"
   }
  ],
  "history": [
@@ -45268,61 +45288,68 @@
    39.45,
    30.58,
    25.66
+  ],
+  [
+   1795668544363,
+   95.61,
+   39.46,
+   30.58,
+   25.57
   ]
  ],
  "watch": [
   {
    "name": "pippin",
    "score": 80,
-   "mcap": 18997420.1108568,
-   "ageDays": 746.3099897685186,
-   "ok": false,
-   "why": "pas à un nouveau record"
+   "mcap": 19384852.5761229,
+   "ageDays": 746.3481870717593,
+   "ok": true,
+   "why": "tous les critères remplis"
   },
   {
-   "name": "ANTFUN",
-   "score": 75,
-   "mcap": 18443974.4648636,
-   "ageDays": 138.9750823611111,
-   "ok": false,
-   "why": "pas à un nouveau record"
-  },
-  {
-   "name": "MOODENG",
+   "name": "BIRB",
    "score": 70,
-   "mcap": 28491135.9791352,
-   "ageDays": 806.3756494907408,
+   "mcap": 16431222.8703,
+   "ageDays": 302.2223537384259,
    "ok": false,
    "why": "pas à un nouveau record"
-  },
-  {
-   "name": "ZEC",
-   "score": 67,
-   "mcap": 84222139.3725973,
-   "ageDays": 398.1298277314815,
-   "ok": false,
-   "why": "ni site ni réseaux sociaux"
   },
   {
    "name": "TROLL",
    "score": 65,
-   "mcap": 22409223.1219924,
-   "ageDays": 584.3914133796296,
+   "mcap": 22868907.9036534,
+   "ageDays": 584.4296106828704,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "CATE",
+   "score": 65,
+   "mcap": 17071255.6916657,
+   "ageDays": 122.51135836805555,
+   "ok": false,
+   "why": "pas à un nouveau record"
+  },
+  {
+   "name": "VINE",
+   "score": 65,
+   "mcap": 9089373.7897527,
+   "ageDays": 672.1849694791666,
    "ok": false,
    "why": "pas à un nouveau record"
   },
   {
    "name": "STONK",
    "score": 60,
-   "mcap": 24258746.3187513,
-   "ageDays": 105.71000134259259,
+   "mcap": 24002765.614739,
+   "ageDays": 105.74819864583333,
    "ok": false,
    "why": "pas à un nouveau record"
   }
  ],
  "notes": [],
- "lastScan": 1795665244116,
- "lastRun": 1795668243946,
+ "lastScan": 1795668544363,
+ "lastRun": 1795668544363,
  "casino": {
   "start": 1791871130814,
   "cash": 65.63241193926822,
@@ -71232,47 +71259,59 @@
    [
     1795668243946,
     65.63
+   ],
+   [
+    1795668544363,
+    65.63
    ]
   ],
   "watch": [
    {
     "name": "BASKET",
-    "mcap": 676879.465,
-    "ageDays": 1.0007169675925927,
-    "ch1": -0.08233,
-    "ch24": 5.31112,
+    "mcap": 683978.0796,
+    "ageDays": 1.0041940162037037,
+    "ch1": -0.13086,
+    "ch24": 4.16369,
     "ok": false
    },
    {
     "name": "Zero",
-    "mcap": 482822.758270652,
-    "ageDays": 0.1879854861111111,
-    "ch1": -0.06366,
-    "ch24": 15.81918,
+    "mcap": 450683.339642202,
+    "ageDays": 0.19146253472222222,
+    "ch1": -0.00889,
+    "ch24": 14.6996,
     "ok": false
    },
    {
     "name": "JIMMY",
-    "mcap": 684988.943632241,
-    "ageDays": 2.314501689814815,
-    "ch1": -0.19442,
-    "ch24": -0.57786,
+    "mcap": 678040.889194388,
+    "ageDays": 2.317978738425926,
+    "ch1": -0.17653,
+    "ch24": -0.60095,
+    "ok": false
+   },
+   {
+    "name": "MONEY",
+    "mcap": 698594.913392176,
+    "ageDays": 0.20900883101851853,
+    "ch1": -0.34182,
+    "ch24": 1.16066,
     "ok": false
    },
    {
     "name": "Grodia",
-    "mcap": 1109005.98491515,
-    "ageDays": 0.2619206712962963,
-    "ch1": 0.026389999999999997,
-    "ch24": 6.60999,
+    "mcap": 1040006.8911126,
+    "ageDays": 0.2653977199074074,
+    "ch1": -0.04534,
+    "ch24": 6.12335,
     "ok": false
    },
    {
     "name": "FIONA",
-    "mcap": 1953576.58987103,
-    "ageDays": 6.326793356481481,
-    "ch1": 0.03853,
-    "ch24": -0.20105,
+    "mcap": 1959879.04326967,
+    "ageDays": 6.330270405092593,
+    "ch1": 0.03338,
+    "ch24": -0.19332999999999997,
     "ok": false
    }
   ],
